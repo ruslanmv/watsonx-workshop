@@ -1,0 +1,7 @@
+corpus_dir: ./corpus
+clean_dir: ./data/clean
+chunk_dir: ./data/chunks
+chunking:
+  target_chars: 800
+  overlap_chars: 150
+  min_chars: 200

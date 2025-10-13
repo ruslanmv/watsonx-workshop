@@ -1,0 +1,14 @@
+# Customization using sample packages. Replace with your customizations.
+
+channels:
+  - defaults  
+
+dependencies:
+  - xarray=2023.6.0
+  - pip # keep this conda dependency when installing packages via pip: below
+  - pip:
+    - ibm-watsonx-ai  # most recent WML Python client
+    - colored==1.4.2 
+    - pymilvus==2.5.11
+    - scikit-learn==1.6.1
+    - top2vec==1.0.36

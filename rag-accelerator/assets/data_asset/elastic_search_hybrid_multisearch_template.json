@@ -1,0 +1,29 @@
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "multi_match": {
+            "query": "{{model_text}}",
+            "type": "most_fields",
+            "fields": [
+              "metadata.title",
+              "text"
+            ],
+            "boost": 1.0
+          }
+        },
+        {
+          "text_expansion": {
+            "vector.tokens": {
+              "model_id": "{{model_id}}",
+              "model_text": "{{model_text}}",
+              "boost": 1.0
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  }
+}

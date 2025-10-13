@@ -1,0 +1,104 @@
+# mkdocs.yml
+
+# Project information
+site_name: watsonx Workshop Series
+site_url: https://ruslanmv.github.io/watsonx-workshop
+site_author: Ruslan Magana
+
+# Repository
+repo_name: watsonx-workshop
+repo_url: https://github.com/ruslanmv/watsonx-workshop
+edit_uri: edit/main/docs
+
+# Navigation
+nav:
+  - Welcome: index.md
+  - Tracks:
+    - Granite:
+      - Lab 0. Pre-work: tracks/granite/labs/pre-work.md
+      - Lab 1. Granite Overview & Playground: tracks/granite/labs/lab-1-overview-playground.md
+      - Lab 2. Granite via Hugging Face & Ollama: tracks/granite/labs/lab-2-local-hf-ollama.md
+      - Lab 3. Granite on watsonx.ai (Studio + SDK): tracks/granite/labs/lab-3-studio-sdk.md
+      - Lab 3B. Prompt Templates & Deployment: tracks/granite/labs/lab-3b-prompt-templates.md
+      - Bonus:
+        - Text-to-SQL (Granite Code): tracks/granite/bonus/granite-text2sql.md
+        - Time Series (TTM): tracks/granite/bonus/time-series-ttm.md
+    - RAG:
+      - Labs:
+        - Pre-work: tracks/rag/labs/pre-work.md
+        - Lab 1 — RAG Accelerator: tracks/rag/labs/lab-1-accelerator.md
+        - Lab 2A — ES + LangChain: tracks/rag/labs/lab-2a-elastic-langchain.md
+        - Lab 2B — ES Python SDK: tracks/rag/labs/lab-2b-elastic-python-sdk.md
+        - Lab 2C — Chroma + LangChain: tracks/rag/labs/lab-2c-chroma-langchain.md
+        - Lab 3 — Packaging & Evaluation: tracks/rag/labs/lab-3-packaging-eval.md
+        - Code Assistant Vector Stores: tracks/rag/labs/code-assistant-vectorstores.md
+    - Agents:
+      - Lab 2. Governed HR Assistant (LangGraph + Catalog): tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md
+      - Lab 3. Evaluation Studio (watsonx.governance): tracks/agents/labs/lab-3-evaluation-studio.md
+    - Orchestrate:
+      - Full Workshop: tracks/orchestrate/orchestrate-workshop.md
+  - Resources: resources.md
+
+# Extra (RAG track social link)
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-org/your-repo
+
+## DO NOT CHANGE BELOW THIS LINE
+
+# Copyright
+copyright: Copyright © 2025 — Ruslan Magana
+
+# Theme
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.footer
+    - content.code.copy
+
+# Plugins
+plugins:
+  - search
+  - social
+  - macros:
+      on_undefined: strict
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde

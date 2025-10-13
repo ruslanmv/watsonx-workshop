@@ -1,248 +1,200 @@
-# Use watsonx, Chroma, and LangChain to answer questions (RAG) — Notebook
+# Lab 2C — Use watsonx, Chroma & LangChain for RAG
 
-**Track:** RAG → Lab 2  
-**Why:** Vendor-agnostic vector store alternative.  
-**Converted on:** 2025-10-13
+**Goal:** Build a Retrieval-Augmented Generation (RAG) workflow using **IBM watsonx.ai** for LLM + embeddings, **LangChain** for orchestration, and a **local Chroma** vector database for fast similarity search. You’ll ingest a small corpus, chunk → embed → index in Chroma, then answer questions with sources.
+
+**What you’ll learn**
+* Preparing & chunking content for RAG
+* Creating a **persistent** Chroma vector store
+* Using **watsonx.ai** LLM + Embeddings with LangChain
+* Retrieval strategies (similarity, MMR) and optional **hybrid** (BM25 + vector)
+* A tiny evaluation harness and practical troubleshooting
 
 ---
 
-![image](https://raw.githubusercontent.com/IBM/watson-machine-learning-samples/master/cloud/notebooks/headers/watsonx-Prompt_Lab-Notebook.png)
-# Use watsonx Granite Model Series, Chroma, and LangChain to answer questions (RAG)
+## 0) Prerequisites
 
-#### Disclaimers
+* IBM Cloud account with **watsonx.ai** enabled and a **Project** created
+* Python 3.10+ (3.11 recommended)
 
-- Use only Projects and Spaces that are available in watsonx context.
+---
 
-## Notebook content
-This notebook contains the steps and code to demonstrate support of Retrieval Augumented Generation in watsonx.ai. It introduces commands for data retrieval, knowledge base building & querying, and model testing.
+## 1) Environment setup
 
-Some familiarity with Python is helpful. This notebook uses Python 3.11.
-
-### About Retrieval Augmented Generation
-Retrieval Augmented Generation (RAG) is a versatile pattern that can unlock a number of use cases requiring factual recall of information, such as querying a knowledge base in natural language.
-
-In its simplest form, RAG requires 3 steps:
-
-- Index knowledge base passages (once)
-- Retrieve relevant passage(s) from knowledge base (for every user query)
-- Generate a response by feeding retrieved passage into a large language model (for every user query)
-
-## Contents
-
-This notebook contains the following parts:
-
-- [Setup](#setup)
-- [Document data loading](#data)
-- [Build up knowledge base](#build_base)
-- [Foundation Models on watsonx](#models)
-- [Generate a retrieval-augmented response to a question](#predict)
-- [Summary and next steps](#summary)
-
-
-<a id="setup"></a>
-##  Set up the environment
-
-Before you use the sample code in this notebook, you must perform the following setup tasks:
-
--  Create a <a href="https://cloud.ibm.com/catalog/services/watson-machine-learning" target="_blank" rel="noopener no referrer">Watson Machine Learning (WML) Service</a> instance (a free plan is offered and information about how to create the instance can be found <a href="https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/wml-plans.html?context=wx&audience=wdp" target="_blank" rel="noopener no referrer">here</a>).
-
-
-### Install and import the dependecies
-
-```python
-!pip install wget | tail -n 1
-!pip install -U "langchain>=0.3,<0.4" | tail -n 1
-!pip install -U "ibm_watsonx_ai>=1.1.22" | tail -n 1
-!pip install -U "langchain_ibm>=0.3,<0.4" | tail -n 1
-!pip install -U "langchain_chroma>=0.1,<0.2" | tail -n 1
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install   ibm-watsonx-ai   langchain langchain-community langchain-ibm   chromadb>=0.5.3   pypdf unstructured[all-docs] beautifulsoup4 lxml   python-dotenv tiktoken numpy pandas
 ```
 
-```python
-import os, getpass
+Create `.env`:
+
+```ini
+WATSONX_API_KEY=YOUR_WATSONX_API_KEY
+WATSONX_URL=https://us-south.ml.cloud.ibm.com
+WATSONX_PROJECT_ID=YOUR_WATSONX_PROJECT_ID
+WX_LLM_MODEL_ID=ibm/granite-13b-instruct-v2
+WX_EMBEDDINGS_MODEL_ID=ibm/granite-embedding-278m
+CHROMA_PERSIST_DIR=.chroma_store
+CHROMA_COLLECTION=rag_workshop_chroma
 ```
 
-### watsonx API connection
-This cell defines the credentials required to work with watsonx API for Foundation
-Model inferencing.
+---
 
-**Action:** Provide the IBM Cloud user API key. For details, see <a href="https://cloud.ibm.com/docs/account?topic=account-userapikey&interface=ui" target="_blank" rel="noopener no referrer">documentation</a>.
+## 2) Helper utils (save as `rag_chroma_utils.py`)
 
 ```python
-from ibm_watsonx_ai import Credentials
+import os
+from typing import List, Optional
+from dotenv import load_dotenv
+from langchain_community.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_community.retrievers import BM25Retriever
+from langchain.retrievers import EnsembleRetriever
+from langchain_ibm import WatsonxEmbeddings, WatsonxLLM
 
-credentials = Credentials(
-    url="https://us-south.ml.cloud.ibm.com",
-    api_key=getpass.getpass("Please enter your WML api key (hit enter): "),
-)
-```
+load_dotenv()
 
-### Defining the project id
-The API requires project id that provides the context for the call. We will obtain the id from the project in which this notebook runs. Otherwise, please provide the project id.
+WATSONX_URL = os.getenv("WATSONX_URL")
+WATSONX_API_KEY = os.getenv("WATSONX_API_KEY")
+WATSONX_PROJECT_ID = os.getenv("WATSONX_PROJECT_ID")
+WX_LLM_MODEL_ID = os.getenv("WX_LLM_MODEL_ID", "ibm/granite-13b-instruct-v2")
+WX_EMBEDDINGS_MODEL_ID = os.getenv("WX_EMBEDDINGS_MODEL_ID", "ibm/granite-embedding-278m")
+CHROMA_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", ".chroma_store")
+CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "rag_workshop_chroma")
 
-**Hint**: You can find the `project_id` as follows. Open the prompt lab in watsonx.ai. At the very top of the UI, there will be `Projects / <project name> /`. Click on the `<project name>` link. Then get the `project_id` from Project's Manage tab (Project -> Manage -> General -> Details).
+def load_docs(corpus_dir="data/corpus"):
+    docs = []
+    tloader = DirectoryLoader(corpus_dir, glob="**/*.md", loader_cls=TextLoader, show_progress=True)
+    docs.extend(tloader.load())
+    try:
+        pdf_loader = DirectoryLoader(corpus_dir, glob="**/*.pdf", loader_cls=PyPDFLoader, show_progress=True)
+        docs.extend(pdf_loader.load())
+    except Exception:
+        pass
+    return docs
 
+def chunk_docs(docs, chunk_size=800, chunk_overlap=120):
+    splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    return splitter.split_documents(docs)
 
-```python
-try:
-    project_id = os.environ["PROJECT_ID"]
-except KeyError:
-    project_id = input("Please enter your project_id (hit enter): ")
-```
-
-Create an instance of APIClient with authentication details.
-
-```python
-from ibm_watsonx_ai import APIClient
-
-api_client = APIClient(credentials=credentials, project_id=project_id)
-```
-
-<a id="data"></a>
-## Document data loading
-
-Download the file with State of the Union.
-
-```python
-import wget
-
-filename = 'state_of_the_union.txt'
-url = 'https://raw.github.com/IBM/watson-machine-learning-samples/master/cloud/data/foundation_models/state_of_the_union.txt'
-
-if not os.path.isfile(filename):
-    wget.download(url, out=filename)
-```
-
-<a id="build_base"></a>
-## Build up knowledge base
-
-The most common approach in RAG is to create dense vector representations of the knowledge base in order to calculate the semantic similarity to a given user query.
-
-In this basic example, we take the State of the Union speech content (filename), split it into chunks, embed it using an open-source embedding model, load it into <a href="https://www.trychroma.com/" target="_blank" rel="noopener no referrer">Chroma</a>, and then query it.
-
-```python
-from langchain.document_loaders import TextLoader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_chroma import Chroma
-
-loader = TextLoader(filename)
-documents = loader.load()
-text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-texts = text_splitter.split_documents(documents)
-```
-
-The dataset we are using is already split into self-contained passages that can be ingested by Chroma.
-
-### Create an embedding function
-
-Note that you can feed a custom embedding function to be used by chromadb. The performance of Chroma db may differ depending on the embedding model used. In following example we use watsonx.ai Embedding service. We can check available embedding models using `get_embedding_model_specs`
-
-```python
-api_client.foundation_models.EmbeddingModels.show()
-```
-
-    {'SLATE_125M_ENGLISH_RTRVR': 'ibm/slate-125m-english-rtrvr', 'SLATE_125M_ENGLISH_RTRVR_V2': 'ibm/slate-125m-english-rtrvr-v2', 'SLATE_30M_ENGLISH_RTRVR': 'ibm/slate-30m-english-rtrvr', 'SLATE_30M_ENGLISH_RTRVR_V2': 'ibm/slate-30m-english-rtrvr-v2', 'MULTILINGUAL_E5_LARGE': 'intfloat/multilingual-e5-large', 'ALL_MINILM_L12_V2': 'sentence-transformers/all-minilm-l12-v2', 'ALL_MINILM_L6_V2': 'sentence-transformers/all-minilm-l6-v2'}
-
-
-```python
-from langchain_ibm import WatsonxEmbeddings
-
-embeddings = WatsonxEmbeddings(
-    model_id="ibm/slate-30m-english-rtrvr",
-    url=credentials["url"],
-    apikey=credentials["apikey"],
-    project_id=project_id
+def build_embeddings():
+    return WatsonxEmbeddings(
+        model_id=WX_EMBEDDINGS_MODEL_ID,
+        url=WATSONX_URL,
+        api_key=WATSONX_API_KEY,
+        project_id=WATSONX_PROJECT_ID,
     )
-docsearch = Chroma.from_documents(texts, embeddings)
+
+def build_or_load_chroma(splits: Optional[list]=None, embeddings=None, reset=False):
+    import shutil, os
+    if reset and os.path.isdir(CHROMA_PERSIST_DIR):
+        shutil.rmtree(CHROMA_PERSIST_DIR, ignore_errors=True)
+
+    if splits is None:
+        return Chroma(collection_name=CHROMA_COLLECTION, persist_directory=CHROMA_PERSIST_DIR,
+                      embedding_function=embeddings or build_embeddings())
+
+    vectordb = Chroma.from_documents(
+        documents=splits,
+        embedding=embeddings or build_embeddings(),
+        collection_name=CHROMA_COLLECTION,
+        persist_directory=CHROMA_PERSIST_DIR,
+    )
+    vectordb.persist()
+    return vectordb
+
+def build_llm():
+    return WatsonxLLM(
+        model_id=WX_LLM_MODEL_ID,
+        url=WATSONX_URL,
+        api_key=WATSONX_API_KEY,
+        project_id=WATSONX_PROJECT_ID,
+        params={"decoding_method": "greedy", "max_new_tokens": 350, "repetition_penalty": 1.05}
+    )
+
+def chroma_retriever(vectordb, k=5, search_type="similarity"):
+    if search_type == "mmr":
+        return vectordb.as_retriever(search_type="mmr", search_kwargs={"k": k, "fetch_k": 20, "lambda_mult": 0.5})
+    return vectordb.as_retriever(search_kwargs={"k": k})
+
+def hybrid_ensemble_retriever(vectordb, docs_for_bm25, k=5, alpha=0.5):
+    bm25 = BM25Retriever.from_documents(docs_for_bm25); bm25.k = k
+    vec = chroma_retriever(vectordb, k=k, search_type="similarity")
+    return EnsembleRetriever(retrievers=[bm25, vec], weights=[alpha, 1.0 - alpha])
 ```
 
-#### Compatibility watsonx.ai Embeddings with LangChain
+---
 
- LangChain retrievals use `embed_documents` and `embed_query` under the hood to generate embedding vectors for uploaded documents and user query respectively.
+## 3) Index
 
 ```python
-help(WatsonxEmbeddings)
+from rag_chroma_utils import load_docs, chunk_docs, build_embeddings, build_or_load_chroma
+
+docs = load_docs("data/corpus")
+splits = chunk_docs(docs, 800, 120)
+emb = build_embeddings()
+vectordb = build_or_load_chroma(splits=splits, embeddings=emb, reset=True)
+print("Chroma collection ready.")
 ```
 
-<a id="models"></a>
-## Foundation Models on `watsonx.ai`
+---
 
-IBM watsonx foundation models are among the <a href="https://python.langchain.com/docs/integrations/llms/watsonxllm" target="_blank" rel="noopener no referrer">list of LLM models supported by Langchain</a>. This example shows how to communicate with <a href="https://newsroom.ibm.com/2023-09-28-IBM-Announces-Availability-of-watsonx-Granite-Model-Series,-Client-Protections-for-IBM-watsonx-Models" target="_blank" rel="noopener no referrer">Granite Model Series</a> using <a href="https://python.langchain.com/docs/get_started/introduction" target="_blank" rel="noopener no referrer">Langchain</a>.
-
-### Defining model
-You need to specify `model_id` that will be used for inferencing:
+## 4) QA
 
 ```python
-from ibm_watsonx_ai.foundation_models.utils.enums import ModelTypes
-
-model_id = ModelTypes.GRANITE_13B_CHAT_V2
-```
-
-### Defining the model parameters
-We need to provide a set of model parameters that will influence the result:
-
-```python
-from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
-from ibm_watsonx_ai.foundation_models.utils.enums import DecodingMethods
-
-parameters = {
-    GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
-    GenParams.MIN_NEW_TOKENS: 1,
-    GenParams.MAX_NEW_TOKENS: 100,
-    GenParams.STOP_SEQUENCES: ["<|endoftext|>"]
-}
-```
-
-### LangChain CustomLLM wrapper for watsonx model
-Initialize the `WatsonxLLM` class from Langchain with defined parameters and `ibm/granite-13b-chat-v2`. 
-
-```python
-from langchain_ibm import WatsonxLLM
-
-watsonx_granite = WatsonxLLM(
-    model_id=model_id.value,
-    url=credentials.get("url"),
-    apikey=credentials.get("apikey"),
-    project_id=project_id,
-    params=parameters
-)
-```
-
-<a id="predict"></a>
-## Generate a retrieval-augmented response to a question
-
-Build the `RetrievalQA` (question answering chain) to automate the RAG task.
-
-```python
+from rag_chroma_utils import build_llm, build_or_load_chroma, chroma_retriever
 from langchain.chains import RetrievalQA
 
-qa = RetrievalQA.from_chain_type(llm=watsonx_granite, chain_type="stuff", retriever=docsearch.as_retriever())
+vectordb = build_or_load_chroma()
+retriever = chroma_retriever(vectordb, k=5, search_type="similarity")
+llm = build_llm()
+
+qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, chain_type="stuff", return_source_documents=True)
+
+print(qa({"query": "What is IBM Granite?"})["result"])
 ```
-
-### Select questions
-
-Get questions from the previously loaded test dataset.
-
-```python
-query = "What did the president say about Ketanji Brown Jackson"
-qa.invoke(query)
-```
-
-
-
-
-    {'query': 'What did the president say about Ketanji Brown Jackson',
-     'result': ' The president said, "One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence." This statement was made in reference to Ketanji Brown Jackson, who was nominated by the president to serve on the United States Supreme Court.'}
-
-
 
 ---
 
-<a id="summary"></a>
-## Summary and next steps
+## 5) Hybrid (optional)
 
- You successfully completed this notebook!.
- 
- You learned how to answer question using RAG using watsonx and LangChain.
- 
-Check out our _<a href="https://ibm.github.io/watsonx-ai-python-sdk/samples.html" target="_blank" rel="noopener no referrer">Online Documentation</a>_ for more samples, tutorials, documentation, how-tos, and blog posts. 
+```python
+from rag_chroma_utils import load_docs, build_llm, build_or_load_chroma, hybrid_ensemble_retriever
+from langchain.chains import RetrievalQA
 
+raw_docs = load_docs("data/corpus")
+vectordb = build_or_load_chroma()
+retriever = hybrid_ensemble_retriever(vectordb, raw_docs, k=5, alpha=0.5)
+llm = build_llm()
+qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True)
+print(qa({"query": "Describe watsonx projects and prompt template assets."})["result"])
+```
+
+---
+
+## 6) Eval mini-harness
+
+```python
+from rag_chroma_utils import build_llm, build_or_load_chroma, chroma_retriever
+from langchain.chains import RetrievalQA
+
+evalset = [
+    ("What is watsonx.ai used for?", ["faq_watsonx.md"]),
+    ("Summarize Granite in one sentence.", ["granite_overview.md"]),
+]
+
+vectordb = build_or_load_chroma()
+qa = RetrievalQA.from_chain_type(llm=build_llm(), retriever=chroma_retriever(vectordb, 5), return_source_documents=True)
+
+ok = 0
+for q, expected in evalset:
+    out = qa({"query": q})
+    cites = [d.metadata.get("source") or "" for d in out["source_documents"]]
+    hit = any(any(e in c for c in cites) for e in expected)
+    ok += int(hit)
+    print("Q:", q, "hit:", hit, "cites:", cites)
+
+print(f"Pass rate: {ok}/{len(evalset)}")
+```

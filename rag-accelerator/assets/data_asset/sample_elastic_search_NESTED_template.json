@@ -1,0 +1,20 @@
+{
+  "nested": {
+    "path": "passages",
+    "query": {
+      "text_expansion": {
+        "passages.sparse.tokens": {
+          "model_id": "{{model_id}}",
+          "model_text": "{{model_text}}"
+        }
+      }
+    },
+    "inner_hits": {
+      "_source": {
+        "excludes": [
+          "passages.sparse"
+        ]
+      }
+    }
+  }
+}

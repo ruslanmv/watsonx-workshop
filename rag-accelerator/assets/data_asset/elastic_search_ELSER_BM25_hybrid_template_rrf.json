@@ -1,0 +1,31 @@
+{
+  "sub_searches": [
+    {
+      "query": {
+        "match": {
+          "text": {
+            "query": "{{model_text}}",
+            "boost": 1
+          }
+        }
+      }
+    },
+    {
+      "query": {
+        "text_expansion": {
+          "vector.tokens": {
+            "model_id": "{{model_id}}",
+            "model_text": "{{model_text}}",
+            "boost": 1
+          }
+        }
+      }
+    }
+  ],
+  "rank": {
+    "rrf": {
+      "window_size": 50,
+      "rank_constant": 20
+    }
+  }
+}

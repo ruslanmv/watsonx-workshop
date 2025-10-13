@@ -1,0 +1,616 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "version": "1.0 (2023/12/14)",
+    "title": "Watson Machine Learning Prediction API",
+    "x-alternate-name": "watson_machine_learning_prediction",
+    "description": "IBM Watson Machine Learning (WML) Prediction API\nEndpoint reference can be found [here](https://cloud.ibm.com/apidocs/machine-learning#deployments-compute-predictions).",
+    "x-last-updated": "2023-12-18"
+  },
+  "servers": [
+    {
+      "description": "WML API Endpoint - Dallas",
+      "url": "https://us-south.ml.cloud.ibm.com"
+    },
+    {
+      "description": "WML API Endpoint - London",
+      "url": "https://eu-gb.ml.cloud.ibm.com"
+    },
+    {
+      "description": "WML API Endpoint - Frankfurt",
+      "url": "https://eu-de.ml.cloud.ibm.com"
+    },
+    {
+      "description": "WML API Endpoint - Tokyo",
+      "url": "https://jp-tok.ml.cloud.ibm.com"
+    },
+    {
+      "description": "WML API Endpoint - Tornoto",
+      "url": "https://ca-tor.ml.cloud.ibm.com"
+    },
+    {
+      "description": "WML API Endpoint - watsonx.ai Software",
+      "url": "https://route.apps.my.server.com"
+    }
+  ],
+  "security": [
+    {
+      "oAuth2": []
+    },
+    {
+      "basicAuth": []
+    },
+    {
+      "bearerAuth": []
+    },
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "oAuth2": {
+        "description": "IAM access (token)",
+        "type": "oauth2",
+        "flows": {
+          "x-apikey": {
+            "tokenUrl": "https://iam.cloud.ibm.com/identity/token",
+            "grantType": "urn:ibm:params:oauth:grant-type:apikey",
+            "secretKeys": [
+              "apikey"
+            ],
+            "paramKeys": [],
+            "scopes": {}
+          }
+        }
+      },
+      "basicAuth": {
+        "description": "User id and password/user api key",
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "description": "Bearer token",
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "apiKeyAuth": {
+        "description": "ZenApiKey",
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+    "parameters": {
+      "version": {
+        "name": "version",
+        "description": "The version date for the API of the form `YYYY-MM-DD`.\n",
+        "example": "2022-08-01",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "format": "date",
+          "default": "2021-05-01"
+        },
+        "required": true,
+        "x-sdk-global-param": true
+      }
+    },
+    "schemas": {
+      "sync_scoring_data_qna": {
+        "type": "object",
+        "description": "Scoring data.\n",
+        "required": [
+          "question"
+        ],
+        "properties": {
+          "question": {
+            "title": "question",
+            "type": "string",
+            "description": "The record.\n"
+          }
+        }
+      },
+      "sync_scoring_data_feedback_logging": {
+        "type": "object",
+        "description": "Feedback data.\n",
+        "required": [
+          "log_id",
+          "value",
+          "comment"
+        ],
+        "properties": {
+          "log_id": {
+            "title": "log_id",
+            "type": "string",
+            "description": "The record.\n"
+          },
+          "value": {
+            "title": "feedback_value",
+            "type": "string",
+            "description": "The record.\n"
+          },
+          "comment": {
+            "title": "feedback_comment",
+            "type": "string",
+            "description": "The record.\n"
+          }
+        }
+      },
+      "sync_scoring_data_autocomplete": {
+        "type": "object",
+        "description": "Autocomplete data.\n",
+        "required": [
+          "_question_prefix",
+          "limit"
+        ],
+        "properties": {
+          "_question_prefix": {
+            "title": "Question Prefix",
+            "type": "string",
+            "description": "The record.\n"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "string",
+            "description": "The record.\n"
+          }
+        }
+      },
+      "sync_scoring_data_expert_recommendation": {
+        "type": "object",
+        "description": "Expert Recommendation data.\n",
+        "required": [
+          "log_id"
+        ],
+        "properties": {
+          "log_id": {
+            "title": "log_id",
+            "type": "string",
+            "description": "Log id.\n"
+          }
+        }
+      },
+      "sync_scoring_data_results_qna": {
+        "$ref": "#/components/schemas/scoring_payload"
+      },
+      "sync_scoring_data_results_feedback_logging": {
+        "$ref": "#/components/schemas/scoring_payload"
+      },
+      "sync_scoring_data_results_autocomplete": {
+        "$ref": "#/components/schemas/scoring_payload_autocomplete"
+      },
+      "sync_scoring_data_results_expert_recommendation": {
+        "$ref": "#/components/schemas/scoring_payload_experts"
+      },
+      "scoring_payload": {
+        "type": "object",
+        "description": "The payload for scoring qna.\n",
+        "properties": {
+          "type": {
+            "description": "If specified, the `values` represents the ground truth data (the label information) for the input data provided.\nThis information will be used for computing machine learning metrics.\n",
+            "type": "string",
+            "enum": [
+              "target"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "description": "The relative path to the endpoint.\n"
+          },
+          "query": {
+            "type": "string",
+            "description": "The input question.\n"
+          },
+          "result": {
+            "title": "result",
+            "description": "The response.\n",
+            "type": "object"
+          },
+          "targets": {
+            "description": "Used when performing evaluation. This contains the groud truths for the input data.\n",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "scoring_payload_experts": {
+        "type": "object",
+        "description": "The payload for expert recommendation.\n",
+        "properties": {
+          "type": {
+            "description": "If specified, the `values` represents the ground truth data (the label information) for the input data provided.\nThis information will be used for computing machine learning metrics.\n",
+            "type": "string",
+            "enum": [
+              "target"
+            ]
+          },
+          "expert_status": {
+            "type": "string",
+            "description": "The expert record retrieval status.\n"
+          },
+          "recommended_top_experts": {
+            "type": "object",
+            "description": "The recommended experts data.\n"
+          },
+          "targets": {
+            "description": "Used when performing evaluation. This contains the groud truths for the input data.\n",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "scoring_payload_autocomplete": {
+        "type": "object",
+        "description": "The payload for autocompletion.\n",
+        "properties": {
+          "type": {
+            "description": "If specified, the `values` represents the ground truth data (the label information) for the input data provided.\nThis information will be used for computing machine learning metrics.\n",
+            "type": "string",
+            "enum": [
+              "target"
+            ]
+          },
+          "path_suffix": {
+            "type": "string",
+            "description": "The relative path to the endpoint.\n"
+          },
+          "options": {
+            "type": "object",
+            "description": "The autocompleted question/response pair.\n"
+          },
+          "status": {
+            "type": "string",
+            "description": "The autocompletion response status.\n"
+          },
+          "targets": {
+            "description": "Used when performing evaluation. This contains the groud truths for the input data.\n",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "error": {
+        "title": "error",
+        "description": "The data returned when an error is encountered.\n",
+        "properties": {
+          "trace": {
+            "type": "string",
+            "example": "w7vrpmm9479z2o0hxhex0ttgat4qv9ev",
+            "description": "An identifier that can be used to trace the request.\n"
+          },
+          "errors": {
+            "type": "array",
+            "description": "The list of errors.\n",
+            "items": {
+              "$ref": "#/components/schemas/error_item"
+            }
+          }
+        },
+        "required": [
+          "trace",
+          "errors"
+        ]
+      },
+      "error_item": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "missing_field",
+            "description": "A simple code that should convey the general sense of the error.\n"
+          },
+          "message": {
+            "type": "string",
+            "example": "The 'name' field is required.",
+            "description": "The message that describes the error.\n"
+          },
+          "more_info": {
+            "type": "string",
+            "example": "https://cloud.ibm.com/apidocs/machine-learning#models-get",
+            "description": "A reference to a more detailed explanation when available.\n"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request, the response body should contain the reason.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden, an authentication error including trying to access a forbidden space.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/ml/v4/deployments/{deployment_id}/ai_service/qna": {
+      "post": {
+        "operationId": "deployments_compute_predictions",
+        "tags": [
+          "Deployments"
+        ],
+        "summary": "Execute a synchronous deployment prediction for QnA RAG",
+        "description": "Execute a synchronous prediction for QnA RAG for the deployment with the specified identifier.\nIf a `serving_name` is used then it must match the `serving_name` that is returned in the `inference` field.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The `deployment_id` can be either the `deployment_id` that identifies the deployment or a `serving_name` that allows a predefined URL to be used to post a prediction.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The scoring input request data.\n",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sync_scoring_data_qna"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Scoring response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sync_scoring_data_results_qna"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/ml/v4/deployments/{deployment_id}/ai_service/log_feedback": {
+      "post": {
+        "operationId": "deployments_compute_predictions",
+        "tags": [
+          "Deployments"
+        ],
+        "summary": "Execute a synchronous deployment prediction for Feedback Logging",
+        "description": "Execute a synchronous prediction for Feedback Logging for the deployment with the specified identifier.\nIf a `serving_name` is used then it must match the `serving_name` that is returned in the `inference` field.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The `deployment_id` can be either the `deployment_id` that identifies the deployment or a `serving_name` that allows a predefined URL to be used to post a prediction.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Input request body for looging feedback.\n",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sync_scoring_data_feedback_logging"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback status response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sync_scoring_data_results_feedback_logging"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/ml/v4/deployments/{deployment_id}/ai_service/auto_complete": {
+      "post": {
+        "operationId": "deployments_compute_predictions",
+        "tags": [
+          "Deployments"
+        ],
+        "summary": "Execute a synchronous deployment prediction for Autocomplete",
+        "description": "Execute a synchronous prediction for Autocomplete for the deployment with the specified identifier.\nIf a `serving_name` is used then it must match the `serving_name` that is returned in the `inference` field.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The `deployment_id` can be either the `deployment_id` that identifies the deployment or a `serving_name` that allows a predefined URL to be used to post a prediction.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Input request body for autocompletion.\n",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sync_scoring_data_autocomplete"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Autocompletion response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sync_scoring_data_results_autocomplete"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/ml/v4/deployments/{deployment_id}/ai_service/recommended_experts": {
+      "post": {
+        "operationId": "deployments_compute_predictions",
+        "tags": [
+          "Deployments"
+        ],
+        "summary": "Execute a synchronous deployment prediction for Expert Recommendation",
+        "description": "Execute a synchronous prediction for Expert Recommendation for the deployment with the specified identifier.\nIf a `serving_name` is used then it must match the `serving_name` that is returned in the `inference` field.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "name": "deployment_id",
+            "in": "path",
+            "description": "The `deployment_id` can be either the `deployment_id` that identifies the deployment or a `serving_name` that allows a predefined URL to be used to post a prediction.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Input request body for getting recommended expert.\n",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sync_scoring_data_expert_recommendation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Recommended Expert response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sync_scoring_data_results_expert_recommendation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    }
+  }
+}

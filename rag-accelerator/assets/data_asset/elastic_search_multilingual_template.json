@@ -1,0 +1,9 @@
+{
+  "query": {
+    "knn": {
+      "field": "vector.tokens",
+      "query_vector": "{{query_vector}}",
+      "num_candidates": 100
+    }
+  }
+}

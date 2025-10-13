@@ -498,6 +498,4 @@ evaluator.compare_ai_experiments(
 )
 ```
 
-**Author**: Sowmya Kollipara, software engineer at WatsonX Governance
 
-Copyright © 2025 IBM. This notebook and its source code are released under the terms of the MIT License.

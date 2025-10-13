@@ -1,0 +1,10 @@
+{
+  "query": {
+    "text_expansion": {
+      "vector.tokens": {
+        "model_id": "{{model_id}}",
+        "model_text": "{{model_text}}"
+      }
+    }
+  }
+}

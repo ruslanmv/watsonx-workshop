@@ -1,0 +1,165 @@
+# -------------------------------
+# watsonx-workshop — .gitignore
+# -------------------------------
+
+# MkDocs build artifacts
+site/
+.site_check/
+.mkdocs-cache/
+# Some plugins create caches here
+.cache/
+
+# Python bytecode & caches
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+venv.bak/
+env.bak/
+
+# Python packaging / build
+.build/
+dist/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.spec
+*.manifest
+
+# Pip / Poetry / PDM
+pip-wheel-metadata/
+pip-log.txt
+pip-delete-this-directory.txt
+# .python-version is often user-specific; ignore if you use pyenv
+.python-version
+
+# Testing & coverage
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.hypothesis/
+*.cover
+*.py,cover
+coverage.xml
+nosetests.xml
+mutmut-cache/
+.mutmut-cache/
+
+# Type checking / formatters
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+.pyright/
+ruff_cache/
+
+# Jupyter
+**/.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# IDE / editor
+.vscode/
+.vscode-insiders/
+.idea/
+*.code-workspace
+
+# OS-specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+# Temp files
+*.swp
+*.swo
+*.tmp
+*.temp
+*~
+.~lock.*
+
+# Logs
+*.log
+logs/
+log/
+
+# Node (occasionally used by tooling; keep lockfiles tracked)
+node_modules/
+.pnpm-store/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Data & large artifacts (keep examples small in repo)
+data/
+datasets/
+*.sqlite
+*.sqlite3
+*.db
+*.parquet
+*.feather
+*.arrow
+*.orc
+*.csv
+*.tsv
+*.xlsx
+*.xls
+
+
+# Secrets & local configs
+.env
+.env.*
+*.env
+*.secret
+*.secrets
+secrets/
+.secrets/
+credentials
+credentials.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.csr
+token
+token.*
+apikey
+apikey.*
+config.local.*
+*_private.*
+
+# Generated images (from mkdocs-material[imaging], cairosvg, etc.)
+# If you intentionally pre-generate assets, remove these lines.
+assets/generated/
+images/generated/
+
+# OS crash dumps
+*.dSYM/
+*.stackdump
+*.crash
+/rag-accelerator/assets/.METADATA

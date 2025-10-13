@@ -1,0 +1,12 @@
+python-dotenv
+ibm-watsonx-ai>=1.1.22
+ibm-watsonx-governance>=1.0.0
+langchain>=0.3,<0.4
+langchain-ibm>=0.3,<0.4
+langchain-elasticsearch>=0.3,<0.4
+langchain-huggingface>=0.1,<0.2
+sentence-transformers
+elasticsearch
+langchain-chroma>=0.1,<0.2
+fastapi
+uvicorn

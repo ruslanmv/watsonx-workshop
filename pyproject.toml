@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "watsonx-workshop"
+version = "0.1.0"
+description = "Internal MkDocs site for watsonx Workshop Series (Granite, RAG, Agents, Orchestrate)"
+readme = "README.md"
+requires-python = ">=3.11"
+
+# Core runtime deps for your docs site
+dependencies = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material[imaging]>=9.5.0",   # pulls cairosvg + Pillow for `social` plugin
+  "mkdocs-macros-plugin>=1.0.5"
+]
+
+[project.optional-dependencies]
+# If you want to keep an extra for local dev tooling later
+dev = [
+  "watchdog>=4.0.0"
+]
+
+[tool.setuptools]
+# no packages to install; this just lets `pip install -e .` manage deps
+packages = []

@@ -1,10 +1,4 @@
-# Inferencing with Granite Text-to-SQL Models — Notebook
-
-**Track:** Granite (Bonus module)  
-**Why:** NLQ→SQL pipeline (schema linking + SQL generation).  
-**Converted on:** 2025-10-13
-
----
+# Granite Text-to-SQL — GoSales Demo
 
 ```python
 import os
@@ -47,7 +41,6 @@ try:
 
 except:
     IBM_CLOUD_API_KEY = os.getenv("WATSONX_APIKEY", None)
-
 ```
 
 ```python
@@ -98,7 +91,6 @@ try:
     SPACE_ID = input('Enter watsonx.ai space id: ')
 except:
     SPACE_ID = os.getenv("WATSONX_SPACE_ID", None)
-
 ```
 
 ```python
@@ -125,7 +117,7 @@ def create_model_asset(model_id, space_id, access_token, asset_name=None):
                        "space_id": space_id,
                        "foundation_model": {"model_id": model_id}
                       }
-    
+
     asset_response = requests.post(asset_url, headers=asset_headers, json=asset_payload)
     return asset_response.json()
 ```
@@ -144,14 +136,6 @@ sl_asset_id = sl_asset_response["metadata"]["id"] # TODO: override if asset had 
 sql_gen_asset_id = sql_gen_asset_response["metadata"]["id"] # TODO: override if asset had already been created
 sl_asset_id, sql_gen_asset_id
 ```
-
-
-
-
-    ('deee5205-9cf0-41f8-9826-7cdb5d2d5393',
-     'f6af013a-4645-42c4-b9d6-1dcd39fa0f5c')
-
-
 
 ```python
 # sl_deploy_response # uncomment to see detailed response
@@ -188,7 +172,7 @@ def deploy_model(asset_id, serving_name, access_token, deployment_name="", descr
                           "name": deployment_name,
                           "space_id": SPACE_ID
                         }
-    
+
     response = requests.post(deploy_url, headers=deploy_headers, json=deploy_payload)
     return response.json()
 
@@ -197,7 +181,7 @@ def get_deployment_info(deploy_id, space_id, access_token):
     deploy_headers = {"Content-Type": "application/json",
                   "Authorization": f"Bearer {access_token}"}
 
-    
+
     return requests.get(deploy_url, headers=deploy_headers).json()
 
 def is_deployment_ready(deploy_id, space_id, access_token):
@@ -214,7 +198,6 @@ def delete_deployment(deploy_id, space_id, access_token):
         requests.delete(deploy_url, headers=deploy_headers)
     except:
         pass
-
 ```
 
 ```python
@@ -254,14 +237,6 @@ else:
 SL_DEPLOYMENT_ID, SQL_GEN_DEPLOYMENT_ID
 ```
 
-
-
-
-    ('f95334ab-25f1-42dd-a506-5e0a7157edbc',
-     'a87bf110-2ea6-42ad-971d-d7d28788c358')
-
-
-
 ```python
 # define inference URLs
 SL_PROD_URL = f"{CLOUD_HOSTNAME}/ml/v1/deployments/{SL_DEPLOYMENT_ID}/text/generation?version=2024-01-29"
@@ -298,38 +273,6 @@ A portion of the Gosales JSON schema:
 ```python
 print("\n".join(json.dumps(db_json_schema, indent=2).split("\n")[:30]))
 ```
-
-    {
-      "name": "GOSALES",
-      "tables": {
-        "inventory_levels": {
-          "name": "inventory_levels",
-          "columns": [
-            {
-              "name": "inventory_year",
-              "type": "SMALLINT",
-              "primary_key": true,
-              "foreign_key": null,
-              "value_samples": [
-                "2007",
-                "2004",
-                "2005",
-                "2006"
-              ]
-            },
-            {
-              "name": "inventory_month",
-              "type": "SMALLINT",
-              "primary_key": true,
-              "foreign_key": null,
-              "value_samples": [
-                "9",
-                "12",
-                "11"
-              ]
-            },
-            {
-
 
 **Note:** To run this notebook with a new JSON Database schema, the input JSON Database schema must follow the following format.
 
@@ -435,7 +378,6 @@ def create_sl_prompt(question, schema, evidence: Union[List[str],str]=""):
                          question + \
                          '\nWe need columns:\n'
     return schema_link_query
-
 ```
 
 Create a prompt for the Schema Linking model.
@@ -450,107 +392,6 @@ Display the created prompt.
 print(sl_prompt)
 ```
 
-    Note:
-    
-    Consider:
-    Show me production cost of products in orders with quantity greater than 10
-    
-    CREATE TABLE inventory_levels (
-     inventory_year SMALLINT PRIMARY KEY,
-     inventory_month SMALLINT PRIMARY KEY,
-     warehouse_branch_code INTEGER PRIMARY KEY,
-     product_number INTEGER PRIMARY KEY,
-     opening_inventory INTEGER,
-     quantity_shipped INTEGER,
-     additions INTEGER,
-     unit_cost DECIMAL(19, 2),
-     closing_inventory INTEGER,
-     average_unit_cost DECIMAL(19, 2),
-     FOREIGN KEY(product_number) REFERENCES product(product_number)
-    );
-    
-    inventory_levels.inventory_year: 2007, 2004, 2005, 2006
-    inventory_levels.inventory_month: 9, 12, 11
-    inventory_levels.warehouse_branch_code: 40, 28, 30
-    inventory_levels.product_number: 125130, 122150, 149110
-    inventory_levels.opening_inventory: 2, 2152, 2148
-    inventory_levels.quantity_shipped: 2, 1999, 1928
-    inventory_levels.additions: 1129, 1787, 1770
-    inventory_levels.unit_cost: 4.45, 5.03, 5.02
-    inventory_levels.closing_inventory: 2, 2192, 2152
-    inventory_levels.average_unit_cost: 2.15, 2.75, 2.31
-    
-    CREATE TABLE order_details (
-     order_detail_code INTEGER PRIMARY KEY,
-     order_number INTEGER,
-     ship_date TIMESTAMP,
-     product_number INTEGER,
-     promotion_code INTEGER,
-     quantity INTEGER,
-     unit_cost DECIMAL(19, 2),
-     unit_price DECIMAL(19, 2),
-     unit_sale_price DECIMAL(19, 2),
-     FOREIGN KEY(product_number) REFERENCES product(product_number)
-    );
-    
-    order_details.order_detail_code: 1000001, 1000016, 1000015
-    order_details.order_number: 100015, 100073, 100072
-    order_details.ship_date: 2004-03-05 00:00:00, 2004-08-06 00:00:00, 2004-08-04 00:00:00
-    order_details.product_number: 125130, 149110, 123130
-    order_details.promotion_code: 10203, 10223, 10213
-    order_details.quantity: 1532, 1777, 1771
-    order_details.unit_cost: 43.73, 31.24, 73.96
-    order_details.unit_price: 72.0, 98.0, 34.8
-    order_details.unit_sale_price: 12.52, 96.44, 94.8
-    
-    CREATE TABLE product (
-     product_number INTEGER PRIMARY KEY,
-     base_product_number INTEGER,
-     introduction_date TIMESTAMP,
-     discontinued_date TIMESTAMP,
-     product_type_code INTEGER,
-     product_color_code INTEGER,
-     product_size_code INTEGER,
-     product_brand_code INTEGER,
-     production_cost DECIMAL(19, 2),
-     gross_margin DOUBLE,
-     product_image VARCHAR(60),
-    );
-    
-    product.product_number: 1110, 6110, 5110
-    product.base_product_number: 1, 6, 5
-    product.introduction_date: 1999-06-12 00:00:00, 2004-01-15 00:00:00, 2004-01-13 00:00:00
-    product.discontinued_date: 2005-02-28 00:00:00, 2006-05-31 00:00:00, 2006-03-31 00:00:00
-    product.product_type_code: 970, 956, 971
-    product.product_color_code: 900, 924, 921
-    product.product_size_code: 801, 812, 810
-    product.product_brand_code: 703, 714, 715
-    product.production_cost: 1.0, 11.43, 9.22
-    product.gross_margin: 0.3, 0.7, 0.41
-    product.product_image: 'P01CE1CG1.jpg', 'P06CE1CG1.jpg', 'P05CE1CG1.jpg'
-    
-    CREATE TABLE product_name_lookup (
-     product_number INTEGER PRIMARY KEY,
-     product_language VARCHAR(30) PRIMARY KEY,
-     product_name VARCHAR(150),
-     product_description VARCHAR(765),
-     FOREIGN KEY(product_number) REFERENCES product(product_number)
-    );
-    
-    product_name_lookup.product_number: 1110, 6110, 5110
-    product_name_lookup.product_language: 'CS', 'ES', 'EN'
-    product_name_lookup.product_name: '"Вечный свет" - Бутановый', '"Мухо-Щит" Аэрозоль', '"Мухо-Щит" - Супер'
-    product_name_lookup.product_description
-    
-    Note:
-    
-    
-    To answer:
-    Show me production cost of products in orders with quantity greater than 10
-    We need columns:
-    
-
-
 ## Perform an inference on the Schema Linking model using the watsonx.ai endpoint
 <a id="schemainference"></a>
 
@@ -564,9 +405,6 @@ while not (is_deployment_ready(deploy_id=SL_DEPLOYMENT_ID, space_id=SPACE_ID, ac
     pass
 print("SL model deployment is ready!")
 ```
-
-    SL model deployment is ready!
-
 
 ### Perform SL inference
 
@@ -601,7 +439,7 @@ def wxai_generate(payload, wxai_url, wxai_headers, num_samples=5, allow_duplicat
         num_request += 1
 
     all_outputs = sorted(all_outputs, key=lambda x: x["score"], reverse=True)
-    return all_outputs      
+    return all_outputs
 ```
 
 Store the top-scoring outputs.
@@ -625,28 +463,11 @@ sl_inference_payload = {
     }
 }
 all_sl_outputs = wxai_generate(payload=sl_inference_payload, wxai_url=SL_PROD_URL, wxai_headers=PROD_HEADERS, num_samples=5)
-
 ```
 
 ```python
 all_sl_outputs
 ```
-
-
-
-
-    [{'score': -0.015094118463691152,
-      'text': 'order_details.product_number, order_details.quantity, product.product_number, product.production_cost'},
-     {'score': -0.015094118463691152,
-      'text': 'order_details.product_number, order_details.quantity, product.product_number, product.production_cost'},
-     {'score': -0.015094118463691152,
-      'text': 'order_details.product_number, order_details.quantity, product.product_number, product.production_cost'},
-     {'score': -0.015094118463691152,
-      'text': 'order_details.product_number, order_details.quantity, product.product_number, product.production_cost'},
-     {'score': -0.22286841453048314,
-      'text': 'inventory_levels.product_number, order_details.order_number, order_details.product_number, order_details.quantity, product.product_number, product.production_cost'}]
-
-
 
 ## Post the process of the Schema Linking model output
 <a id="schemapost"></a>
@@ -665,12 +486,12 @@ def filter_generative_schema_links(
     schema_linker_output = []  #List[Tuple[str, float]]
     for k, v in schema_linker_output_dict.items():
         schema_linker_output.append((k, v))
-        
+
     schema_linker_output.sort(key=lambda x: x[1], reverse=True)
     # links above threshold or at least top_k_min, but at most top_k_max
     schema_links_filtered = [qc for qc, score in schema_linker_output if score >= threshold]
     score_filtered = [score for qc, score in schema_linker_output if score >= threshold]
-    
+
     # filter column
     if len(schema_links_filtered) < schema_top_k_min:
         schema_links_filtered = [qc for qc, score in schema_linker_output][:schema_top_k_min]
@@ -678,13 +499,13 @@ def filter_generative_schema_links(
     elif len(schema_links_filtered) > schema_top_k_max:
         schema_links_filtered = schema_links_filtered[:schema_top_k_max]
         score_filtered = score_filtered[:schema_top_k_max]
-    
+
     # re-create qualified tables
     qualified_tables_set = set() 
     for col in schema_links_filtered:
         table_name = col.split(".")[-2]
         qualified_tables_set.add(table_name)
-    
+
     return schema_links_filtered, score_filtered, sorted(list(qualified_tables_set))
 
 def process_generative_sl_api_outputs(col_predictions, threshold=1, schema_name=None):
@@ -701,7 +522,7 @@ for sample in all_sl_outputs:
     for sp in sample_preds:
         if sp in all_valid_columns:
             scored_preds[sp] += 1
-            
+
 
 col_predictions = {}
 for vc in all_valid_columns:
@@ -710,38 +531,6 @@ for vc in all_valid_columns:
 col_predictions_sorted = {k: v for k, v in sorted(col_predictions.items(), key=lambda item: item[1], reverse=True)}
 print("\n".join(json.dumps(col_predictions_sorted, indent=2).split("\n")[:30]))
 ```
-
-    {
-      "order_details.product_number": 5,
-      "order_details.quantity": 5,
-      "product.product_number": 5,
-      "product.production_cost": 5,
-      "inventory_levels.product_number": 1,
-      "order_details.order_number": 1,
-      "inventory_levels.inventory_year": -10,
-      "inventory_levels.inventory_month": -10,
-      "inventory_levels.warehouse_branch_code": -10,
-      "inventory_levels.opening_inventory": -10,
-      "inventory_levels.quantity_shipped": -10,
-      "inventory_levels.additions": -10,
-      "inventory_levels.unit_cost": -10,
-      "inventory_levels.closing_inventory": -10,
-      "inventory_levels.average_unit_cost": -10,
-      "order_details.order_detail_code": -10,
-      "order_details.ship_date": -10,
-      "order_details.promotion_code": -10,
-      "order_details.unit_cost": -10,
-      "order_details.unit_price": -10,
-      "order_details.unit_sale_price": -10,
-      "product.base_product_number": -10,
-      "product.introduction_date": -10,
-      "product.discontinued_date": -10,
-      "product.product_type_code": -10,
-      "product.product_color_code": -10,
-      "product.product_size_code": -10,
-      "product.product_brand_code": -10,
-      "product.gross_margin": -10,
-
 
 ```python
 col_predictions = process_generative_sl_api_outputs(col_predictions=col_predictions)
@@ -780,64 +569,6 @@ sql_gen_prompt = create_sql_gen_prompt(question=nl_question, schema=db_json_sche
 print(sql_gen_prompt)
 ```
 
-    Note:
-    Show me production cost of products in orders with quantity greater than 10
-    
-    CREATE TABLE inventory_levels (
-     product_number INTEGER PRIMARY KEY,
-     FOREIGN KEY(product_number) REFERENCES product(product_number)
-    );
-    
-    inventory_levels.inventory_year: 2007, 2004, 2005, 2006
-    inventory_levels.inventory_month: 9, 12, 11
-    inventory_levels.warehouse_branch_code: 40, 28, 30
-    inventory_levels.product_number: 125130, 122150, 149110
-    inventory_levels.opening_inventory: 2, 2152, 2148
-    inventory_levels.quantity_shipped: 2, 1999, 1928
-    inventory_levels.additions: 1129, 1787, 1770
-    inventory_levels.unit_cost: 4.45, 5.03, 5.02
-    inventory_levels.closing_inventory: 2, 2192, 2152
-    inventory_levels.average_unit_cost: 2.15, 2.75, 2.31
-    
-    CREATE TABLE order_details (
-     order_number INTEGER,
-     product_number INTEGER,
-     quantity INTEGER,
-     FOREIGN KEY(product_number) REFERENCES product(product_number)
-    );
-    
-    order_details.order_detail_code: 1000001, 1000016, 1000015
-    order_details.order_number: 100015, 100073, 100072
-    order_details.ship_date: 2004-03-05 00:00:00, 2004-08-06 00:00:00, 2004-08-04 00:00:00
-    order_details.product_number: 125130, 149110, 123130
-    order_details.promotion_code: 10203, 10223, 10213
-    order_details.quantity: 1532, 1777, 1771
-    order_details.unit_cost: 43.73, 31.24, 73.96
-    order_details.unit_price: 72.0, 98.0, 34.8
-    order_details.unit_sale_price: 12.52, 96.44, 94.8
-    
-    CREATE TABLE product (
-     product_number INTEGER PRIMARY KEY,
-     production_cost DECIMAL(19, 2),
-    );
-    
-    product.product_number: 1110, 6110, 5110
-    product.base_product_number: 1, 6, 5
-    product.introduction_date: 1999-06-12 00:00:00, 2004-01-15 00:00:00, 2004-01-13 00:00:00
-    product.discontinued_date: 2005-02-28 00:00:00, 2006-05-31 00:00:00, 2006-03-31 00:00:00
-    product.product_type_code: 970, 956, 971
-    product.product_color_code: 900, 924, 921
-    product.product_size_code: 801, 812, 810
-    product.product_brand_code: 703, 714, 715
-    product.production_cost: 1.0, 11.43, 9.22
-    product.gross_margin: 0.3, 0.7, 0.41
-    product.product_image: 'P01CE1CG1.jpg', 'P06CE1CG1.jpg', 'P05CE1CG1.jpg'
-    
-    Note:
-    Show me production cost of products in orders with quantity greater than 10
-    Generate SQL:
-
-
 ### Check SQL Gen Model Deployment
 
 ```python
@@ -846,9 +577,6 @@ while not (is_deployment_ready(deploy_id=SQL_GEN_DEPLOYMENT_ID, space_id=SPACE_I
     pass
 print("SQL gen model deployment is ready!")
 ```
-
-    SQL gen model deployment is ready!
-
 
 ## Perform an inference on the SQL Generation model using the watsonx.ai endpoint
 <a id="sqlinference"></a>
@@ -874,93 +602,15 @@ all_sql_gen_outputs = wxai_generate(payload=sql_gen_inference_payload, wxai_url=
 all_sql_gen_outputs
 ```
 
-
-
-
-    [{'score': -0.02310277242189,
-      'text': ' SELECT product.production_cost FROM order_details JOIN product ON order_details.product_number = product.product_number WHERE order_details.quantity > 10'},
-     {'score': -0.05095982284078461,
-      'text': ' SELECT product.production_cost FROM product JOIN order_details ON product.product_number = order_details.product_number WHERE order_details.quantity > 10'},
-     {'score': -0.09621994493760405,
-      'text': ' SELECT product.production_cost FROM order_details JOIN product ON product.product_number = order_details.product_number WHERE order_details.quantity > 10'}]
-
-
-
 # Delete deployment
 
 ```python
 get_deployment_info(deploy_id=SL_DEPLOYMENT_ID, space_id=SPACE_ID, access_token=ACCESS_TOKEN)
 ```
 
-
-
-
-    {'entity': {'asset': {'id': 'deee5205-9cf0-41f8-9826-7cdb5d2d5393'},
-      'base_model_id': 'ibm/granite-20b-code-base-schema-linking-curated',
-      'custom': {},
-      'deployed_asset_type': 'curated_foundation_model',
-      'hardware_request': {'num_nodes': 1, 'size': 'gpu_s'},
-      'name': 'schema-linking-deployment',
-      'online': {'parameters': {'serving_name': 'granite20b_schema_linking'}},
-      'space_id': '21b7ac7b-fd1f-4a97-9927-65121d937dae',
-      'status': {'inference': [{'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite20b_schema_linking/text/generation',
-         'uses_serving_name': True},
-        {'sse': True,
-         'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite20b_schema_linking/text/generation_stream',
-         'uses_serving_name': True},
-        {'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/f95334ab-25f1-42dd-a506-5e0a7157edbc/text/generation'},
-        {'sse': True,
-         'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/f95334ab-25f1-42dd-a506-5e0a7157edbc/text/generation_stream'}],
-       'serving_urls': ['https://us-south.ml.cloud.ibm.com/ml/v1/deployments/f95334ab-25f1-42dd-a506-5e0a7157edbc/text/generation',
-        'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/f95334ab-25f1-42dd-a506-5e0a7157edbc/text/generation_stream',
-        'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite20b_schema_linking/text/generation',
-        'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite20b_schema_linking/text/generation_stream'],
-       'state': 'ready'}},
-     'metadata': {'created_at': '2024-12-10T18:34:26.035Z',
-      'id': 'f95334ab-25f1-42dd-a506-5e0a7157edbc',
-      'modified_at': '2024-12-10T18:34:26.035Z',
-      'name': 'schema-linking-deployment',
-      'owner': 'IBMid-6630033MST',
-      'space_id': '21b7ac7b-fd1f-4a97-9927-65121d937dae'}}
-
-
-
 ```python
 get_deployment_info(deploy_id=SQL_GEN_DEPLOYMENT_ID, space_id=SPACE_ID, access_token=ACCESS_TOKEN)
 ```
-
-
-
-
-    {'entity': {'asset': {'id': 'f6af013a-4645-42c4-b9d6-1dcd39fa0f5c'},
-      'base_model_id': 'ibm/granite-20b-code-base-sql-gen-curated',
-      'custom': {},
-      'deployed_asset_type': 'curated_foundation_model',
-      'hardware_request': {'num_nodes': 1, 'size': 'gpu_s'},
-      'name': 'sql-gen-deployment',
-      'online': {'parameters': {'serving_name': 'granite_20b_sql_gen'}},
-      'space_id': '21b7ac7b-fd1f-4a97-9927-65121d937dae',
-      'status': {'inference': [{'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite_20b_sql_gen/text/generation',
-         'uses_serving_name': True},
-        {'sse': True,
-         'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite_20b_sql_gen/text/generation_stream',
-         'uses_serving_name': True},
-        {'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/a87bf110-2ea6-42ad-971d-d7d28788c358/text/generation'},
-        {'sse': True,
-         'url': 'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/a87bf110-2ea6-42ad-971d-d7d28788c358/text/generation_stream'}],
-       'serving_urls': ['https://us-south.ml.cloud.ibm.com/ml/v1/deployments/a87bf110-2ea6-42ad-971d-d7d28788c358/text/generation',
-        'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/a87bf110-2ea6-42ad-971d-d7d28788c358/text/generation_stream',
-        'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite_20b_sql_gen/text/generation',
-        'https://us-south.ml.cloud.ibm.com/ml/v1/deployments/granite_20b_sql_gen/text/generation_stream'],
-       'state': 'ready'}},
-     'metadata': {'created_at': '2024-12-10T18:34:27.935Z',
-      'id': 'a87bf110-2ea6-42ad-971d-d7d28788c358',
-      'modified_at': '2024-12-10T18:34:27.935Z',
-      'name': 'sql-gen-deployment',
-      'owner': 'IBMid-6630033MST',
-      'space_id': '21b7ac7b-fd1f-4a97-9927-65121d937dae'}}
-
-
 
 ```python
 # delete 2 deployments
@@ -972,27 +622,9 @@ delete_deployment(deploy_id=SQL_GEN_DEPLOYMENT_ID, space_id=SPACE_ID, access_tok
 get_deployment_info(deploy_id=SL_DEPLOYMENT_ID, space_id=SPACE_ID, access_token=ACCESS_TOKEN)
 ```
 
-
-
-
-    {'trace': 'ca13682a8ef1df103aa8e3fdc5f30147',
-     'errors': [{'code': 'deployment_does_not_exist',
-       'message': "Deployment with id 'f95334ab-25f1-42dd-a506-5e0a7157edbc' does not exist. Re-try with a valid deployment id."}]}
-
-
-
 ```python
 get_deployment_info(deploy_id=SQL_GEN_DEPLOYMENT_ID, space_id=SPACE_ID, access_token=ACCESS_TOKEN)
 ```
-
-
-
-
-    {'trace': '98981c3fd5310682aaa10d4ac82cdced',
-     'errors': [{'code': 'deployment_does_not_exist',
-       'message': "Deployment with id 'a87bf110-2ea6-42ad-971d-d7d28788c358' does not exist. Re-try with a valid deployment id."}]}
-
-
 
 ## Summary
 

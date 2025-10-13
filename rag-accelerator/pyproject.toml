@@ -1,0 +1,5 @@
+[project]
+name='rag-accelerator'
+version='0.1.0'
+requires-python='>=3.10'
+dependencies=['python-dotenv','pydantic','pydantic-settings','pyyaml','tqdm','orjson','pypdf','beautifulsoup4','lxml','html2text','unstructured','nltk','sentence-transformers','chromadb','elasticsearch','ibm-watsonx-ai','fastapi','uvicorn[standard]','streamlit','rank-bm25']
