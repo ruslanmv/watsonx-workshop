@@ -45,25 +45,34 @@ nav:
       - Watsonx Orchestrate: tracks/orchestrate/orchestrate-workshop.md
   - Resources: resources.md
 
-# Extra (RAG track social link)
+# Extra (wallpaper + social)
 extra:
+  hero_wallpaper: assets/images/watsonx-wallpaper.jpg
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/your-org/your-repo
-
-## DO NOT CHANGE BELOW THIS LINE
+      link: https://github.com/ruslanmv/watsonx-workshop
 
 # Copyright
-copyright: Copyright © 2025 — Ruslan Magana
+copyright: "Copyright © 2025 — Ruslan Magana"
 
 # Theme
 theme:
   name: material
+  custom_dir: docs/.overrides
   features:
     - navigation.tabs
     - navigation.footer
+    - navigation.instant
     - content.code.copy
-    - content.tabs.link        # optional: deep-link active tab in URL
+    - content.tabs.link
+
+# Assets
+extra_css:
+  - assets/css/wx-hero.css
+extra_javascript:
+  - assets/js/wx-hero.js
+  # Mermaid for the diagram in index.md
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
 
 # Plugins
 plugins:
@@ -72,7 +81,7 @@ plugins:
   - macros:
       on_undefined: strict
 
-# Extensions
+# Markdown extensions
 markdown_extensions:
   - abbr
   - admonition
@@ -83,13 +92,6 @@ markdown_extensions:
   - meta
   - toc:
       permalink: true
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg

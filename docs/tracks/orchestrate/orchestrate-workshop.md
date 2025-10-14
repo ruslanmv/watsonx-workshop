@@ -1,4 +1,4 @@
-# watsonx Orchestrate Workshop Documentation
+# watsonx Orchestrate
 
 **Workshop Focus:** Building AI Agents with watsonx Orchestrate  
 **Target Audience:** Technical professionals, developers, and architects  

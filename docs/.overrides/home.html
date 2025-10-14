@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% set hero_path = config.extra.hero_wallpaper or 'assets/images/watsonx-wallpaper.jpg' %}
+{% set hero_url  = hero_path | url %}
+
+{% block extrahead %}
+  <link rel="preload" as="image" href="{{ hero_url }}">
+  <style>
+    /* Custom styles for the split hero layout */
+    .wx-hero {
+      align-items: stretch; /* Allow inner container to fill height */
+    }
+    .wx-hero__inner.md-grid {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Pushes content to top and bottom */
+      align-items: flex-start;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: clamp(2.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+      box-sizing: border-box;
+    }
+    .wx-hero__bottom-content {
+      max-width: 60ch; /* Improves readability of the text block */
+    }
+  </style>
+{% endblock %}
+
+{% block tabs %}
+  {{ super() }}
+
+  <!-- Full-bleed hero lives here -->
+  <section class="wx-hero" style="--wx-hero-img: url('{{ hero_url }}');">
+    <div class="wx-hero__bg" aria-hidden="true"></div>
+    <canvas id="wx-bubbles" class="wx-hero__canvas" aria-hidden="true"></canvas>
+
+    <!-- Keep inner content constrained to the grid -->
+    <div class="wx-hero__inner md-grid">
+      <!-- Top Left Content -->
+      <div class="md-typeset">
+        <h1 class="wx-hero__title">watsonx Workshop Series</h1>
+      </div>
+
+      <!-- Bottom Left Content -->
+      <div class="md-typeset wx-hero__bottom-content">
+        <p class="wx-hero__tag">Unlock the Power of Enterprise AI</p>
+        <p>
+          Dive into hands-on labs covering Granite, RAG, Agents, and Orchestrate. 
+          Build real-world skills with IBM's next-generation AI and data platform.
+        </p>
+        <div class="wx-cta">
+          <a href="{{ 'tracks/granite/labs/pre-work/' | url }}" class="md-button md-button--primary">
+            Start the First Lab
+          </a>
+          <a href="#welcome" class="md-button">
+            Read the Welcome Guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+{% endblock %}
+

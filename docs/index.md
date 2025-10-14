@@ -1,15 +1,27 @@
-# watsonx Workshop Series
+---
+template: home.html
+title: watsonx Workshop Series
+description: Hands-on labs for Granite, RAG, Agents, and Orchestrate — built with MkDocs Material.
+---
 
 <p align="center">
-  <a href="https://www.ibm.com/products/watsonx-ai" target="_blank"><img src="https://img.shields.io/badge/built%20for-watsonx.ai-0b62a3?logo=ibm&logoColor=white" alt="watsonx.ai"></a>
-  <a href="https://www.python.org" target="_blank"><img src="https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white" alt="Python 3.11+"></a>
-  <a href="https://www.docker.com/" target="_blank"><img src="https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker Ready"></a>
-  <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank"><img src="https://img.shields.io/badge/docs-MkDocs%20Material-000000?logo=markdown" alt="MkDocs Material"></a>
+  <a href="https://www.ibm.com/products/watsonx-ai" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/badge/built%20for-watsonx.ai-0b62a3?logo=ibm&logoColor=white" alt="watsonx.ai">
+  </a>
+  <a href="https://www.python.org" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white" alt="Python 3.11+">
+  </a>
+  <a href="https://ruslanmv.com/watsonx-workshop/" target="_blank" rel="noopener">
+    <img src="https://img.shields.io/badge/docs-MkDocs%20Material-000000?logo=markdown" alt="MkDocs Material">
+  </a>
 </p>
 <div align="center">
-  <a href="https://www.python.org" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="54" height="54"/></a>
-  <a href="https://www.docker.com/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="Docker" width="64" height="64"/></a>
-  <a href="https://jupyter.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jupyter/jupyter-original-wordmark.svg" alt="Jupyter" width="64" height="64"/></a>
+  <a href="https://www.python.org" target="_blank" rel="noopener">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="54" height="54"/>
+  </a>
+  <a href="https://jupyter.org/" target="_blank" rel="noopener">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jupyter/jupyter-original-wordmark.svg" alt="Jupyter" width="64" height="64"/>
+  </a>
 </div>
 
 ---
@@ -18,12 +30,12 @@
 
 The **watsonx Workshop Series** is a hands-on collection of tracks that teach you how to build with IBM watsonx:
 
-* **Granite** — model capabilities, prompting, local runs, and the watsonx.ai SDK
-* **RAG** — retrieval-augmented generation from zero to production packaging
-* **Agents** — governed, tool-using agents and evaluation workflows
-* **Orchestrate** — end-to-end applied lab tying concepts together
+- **Granite** — model capabilities, prompting, local runs, and the watsonx.ai SDK  
+- **RAG** — retrieval-augmented generation from zero to production packaging  
+- **Agents** — governed, tool-using agents and evaluation workflows  
+- **Orchestrate** — end-to-end applied lab tying concepts together
 
-> **Note:** This bundle is 100% **Markdown-first**. Notebooks are included only as references under `labs-src/` so that `mkdocs build --strict` passes cleanly.
+> **Note:** Everything is **Markdown-first**. Notebooks live under `labs-src/` just as references so `mkdocs build --strict` stays clean.
 
 ---
 
@@ -31,9 +43,9 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
 === "Browse the Docs"
 
-    1.  Use the left sidebar to select a **Track**.
-    2.  Each track is organized as a sequence of **Labs** with copy-paste runnable code blocks.
-    3.  Start with **Granite** if you’re new to watsonx, or jump straight to **RAG**.
+    1. Use the left sidebar to select a **Track**.
+    2. Each track is organized as a sequence of **Labs** with copy-paste runnable code.
+    3. Start with **Granite** if you’re new to watsonx, or jump straight to **RAG**.
 
 === "Run the RAG App Locally"
 
@@ -55,21 +67,20 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 ## Choose a Track
 
 <div class="grid cards" markdown="1">
+
 * :material-fire: **Granite**
 
     ^^^
 
-    Explore Granite model families, prompting patterns, local HF/Ollama, and watsonx.ai SDK. <br><br>
-
+    Explore Granite model families, prompting patterns, local HF/Ollama, and the watsonx.ai SDK. <br><br>
     [:octicons-arrow-right-16: Open »](tracks/granite/labs/pre-work.md){ .md-button .md-button--primary }
 
 * :material-magnify-expand: **RAG**
 
     ^^^
 
-    Build a grounded Q&A app: ingest → chunk → embed → **Elasticsearch/Chroma** → LLM on **watsonx.ai**.
+    Build a grounded Q&A app: ingest → chunk → embed → **Elasticsearch/Chroma** → LLM on **watsonx.ai**.  
     Package a CLI/API and compare runs in **Evaluation Studio**. <br><br>
-
     [:octicons-arrow-right-16: Open »](tracks/rag/labs/pre-work.md){ .md-button .md-button--primary }
 
 * :material-robot-outline: **Agents**
@@ -77,7 +88,6 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
     ^^^
 
     Tool-using, governed assistants with LangGraph and watsonx.governance; evaluate for quality and risk. <br><br>
-
     [:octicons-arrow-right-16: Open »](tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md){ .md-button .md-button--primary }
 
 * :material-cube-outline: **Orchestrate**
@@ -85,27 +95,24 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
     ^^^
 
     A full applied workshop combining components into a cohesive solution. <br><br>
-
     [:octicons-arrow-right-16: Open »](tracks/orchestrate/orchestrate-workshop.md){ .md-button .md-button--primary }
+
 </div>
 
 ---
 
 ## RAG Track at a Glance
 
-* **Pre-work**: environment, credentials, and sample data
-* **Lab 1**: end-to-end accelerator (HTML/PDF → vectors → API + Streamlit)
-* **Lab 2** *(pick one or compare)*:
-    * 2A: **Elasticsearch + LangChain**
-    * 2B: **Elasticsearch Python SDK** (no LangChain)
-    * 2C: **Chroma + LangChain** (local/dev)
-* **Lab 3**: **Packaging & Evaluation** with watsonx.governance
+- **Pre-work**: environment, credentials, and sample data  
+- **Lab 1**: end-to-end accelerator (HTML/PDF → vectors → API + Streamlit)  
+- **Lab 2** *(pick one or compare)*:
+  - 2A: **Elasticsearch + LangChain**
+  - 2B: **Elasticsearch Python SDK** (no LangChain)
+  - 2C: **Chroma + LangChain** (local/dev)
+- **Lab 3**: **Packaging & Evaluation** with watsonx.governance
 
 ```mermaid
 flowchart TD
-  %% Improved appearance with subgraphs, color classes, and clearer shapes
-  %% Now vertical (top → bottom)
-
   %% Ingestion
   subgraph ING[Ingestion]
     direction TB
@@ -149,7 +156,6 @@ flowchart TD
   class E store;
   class H model;
   class I output;
-
 ```
 
 ---
@@ -168,5 +174,5 @@ Each lab is designed to be followed directly from the page. Copy-paste commands 
 ## Next steps
 
 [Next → Granite Pre-work](tracks/granite/labs/pre-work.md){ .md-button .md-button--primary }
+[Resources](resources.md){ .md-button }
 
-[Resources](resources.md){ .md-button .md-button--primary }

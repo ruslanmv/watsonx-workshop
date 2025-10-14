@@ -1,0 +1,140 @@
+/* docs/assets/css/wx-hero.css */
+/* Watsonx WOW — lightweight animated hero + polished buttons
+   Wallpaper image is applied from home.html via:
+   style="--wx-hero-img: url('{{ hero | url }}')"
+   This avoids CSS-relative URL issues and works on GitHub Pages subpaths. */
+
+/* Brand tint for primary buttons and accent visuals */
+:root {
+  --wx-blue: #0b62a3; /* primary tint */
+}
+
+/* Global primary button tint */
+.md-button.md-button--primary {
+  background: var(--wx-blue);
+  border-color: var(--wx-blue);
+  color: #fff;
+}
+.md-button.md-button--primary:hover { filter: brightness(1.06); }
+
+/* HERO: full "first page" feel */
+.wx-hero {
+  position: relative;
+  overflow: hidden;                /* keep effects contained */
+  min-height: clamp(60vh, 72vh, 88vh);
+  margin: 0 0 1.5rem 0;
+  border-radius: .75rem;
+  display: flex;
+  align-items: center;
+  isolation: isolate;              /* prevent bleed of mix-blend etc */
+  box-shadow: var(--md-shadow-z2, 0 6px 18px rgba(0,0,0,.12));
+}
+
+/* Background: wallpaper (from CSS var) + animated glows + overlay + vignette
+   NOTE: the wallpaper URL is injected inline; we just read it here with var() */
+.wx-hero__bg {
+  position: absolute;
+  inset: -20% -10% -10% -10%;
+  z-index: 0;
+
+  /* Animation control points for glow centers (animated via @keyframes) */
+  --x1: 20%; --y1: 40%;
+  --x2: 80%; --y2: 20%;
+
+  /* Overlay tuning (opacity tweaked per color scheme below) */
+  --overlay-a: .65; /* Increased from .55 to subdue the background more */
+  --overlay-from: rgba(11, 98, 163, var(--overlay-a));
+  --overlay-to:   rgba(63, 81, 181, var(--overlay-a));
+
+  /* IMPORTANT: first layer is the wallpaper coming from the template variable.
+     There must be NO hardcoded url(assets/...) here. */
+  background-image:
+    linear-gradient(135deg, var(--overlay-from), var(--overlay-to)),
+    radial-gradient(80rem 50rem at var(--x1) var(--y1), rgba(255, 255, 255, 0.2), transparent 60%), /* Made glow whiter */
+    radial-gradient(60rem 50rem at var(--x2) var(--y2), rgba(255, 255, 255, 0.22), transparent 65%), /* Made glow whiter */
+    var(--wx-hero-img, none);
+  background-size: 100% 100%, 100% 100%, 100% 100%, cover;
+  background-position: center, center, center, center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay, screen, screen, normal;
+
+  /* Gentle vignette to improve legibility over busy images */
+  box-shadow:
+    inset 0 0 120px rgba(0,0,0,.18),
+    inset 0 -40px 120px rgba(0,0,0,.12);
+
+  /* Motion & perf */
+  filter: saturate(1.06);
+  animation: wx-shift 20s ease-in-out infinite alternate; /* Slowed down from 12s */
+  will-change: transform, background-position;
+  transform: translateZ(0);
+  pointer-events: none; /* keeps hero content clickable */
+
+  /* Soft fade at very top/bottom (Safari-friendly) */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  mask-image:         linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+
+/* Subtle glow animation */
+@keyframes wx-shift {
+  0%   { --x1: 20%; --y1: 40%; --x2: 75%; --y2: 25%; }
+  100% { --x1: 80%; --y1: 60%; --x2: 30%; --y2: 80%; }
+}
+
+/* Reduced motion: freeze background glows and hide bubbles */
+@media (prefers-reduced-motion: reduce) {
+  .wx-hero__bg { animation: none; }
+  .wx-hero__canvas { display: none; }
+}
+
+/* Dark mode: slightly lower overlay intensity + stronger vignette */
+@media (prefers-color-scheme: dark) {
+  .wx-hero__bg {
+    --overlay-a: .42;
+    box-shadow:
+      inset 0 0 140px rgba(0,0,0,.35),
+      inset 0 -40px 120px rgba(0,0,0,.28);
+    filter: saturate(1.04) brightness(0.96);
+  }
+}
+
+/* Optional sparkles canvas */
+.wx-hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: .85; /* Increased opacity for brighter particles */
+}
+
+/* Foreground content */
+.wx-hero__inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 4vw, 3rem) 1.25rem;
+}
+@media (min-width: 76rem) {
+  .wx-hero__inner { padding: 4.5rem 0; }
+}
+
+.wx-hero__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 .25rem 0;
+}
+
+.wx-hero__tag {
+  font-size: 1.05rem;
+  opacity: .9;
+  margin: 0 0 1rem 0;
+}
+
+.wx-cta .md-button {
+  margin-right: .5rem;
+  margin-bottom: .5rem;
+}
+
+/* Card grid spacing tweaks */
+.grid.cards .card .md-button { margin-top: .25rem; }
+
