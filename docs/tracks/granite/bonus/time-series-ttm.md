@@ -6,10 +6,4 @@ This is the Granite foundation models AI time-series workshop hosted on GitHub P
 
 <https://ibm-granite-community.github.io/granite-timeseries-workshop/>
 
-## License & Authors
 
-See the [LICENSE](./LICENSE) file for the details of the license.
-
-- Authors:
-  - [Joe Sepi](https://github.com/joesepi)
-  - [Mo McElaney](https://github.com/mmcelaney)

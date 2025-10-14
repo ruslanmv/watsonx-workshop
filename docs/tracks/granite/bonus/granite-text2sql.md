@@ -629,14 +629,3 @@ get_deployment_info(deploy_id=SQL_GEN_DEPLOYMENT_ID, space_id=SPACE_ID, access_t
 ## Summary
 
 Congratulations, you completed this notebook! You learned how to work with the two Text2SQL pipeline components, the Schema Linking model (SL) and SQL Generation model (SQL Gen).
-
-## Authors
-
-- **Long Vu** lhvu@us.ibm.com
-- **Nhan Pham** nhp@ibm.com
-- **Michael Glass** mrglass@us.ibm.com
-- **Shankar Subramanian** dharmash@us.ibm.com
-
-IBM TJ Watson Research Center, New York, United States of America
-
-Copyright © 2024 IBM. This notebook and its source code are released under the terms of the MIT License.
