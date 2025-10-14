@@ -46,8 +46,8 @@ Throughout, you’ll see **industry best practices**: configuration hygiene, rep
 
 | | |
 |---|---|
-| 🔥 **Granite**<br>*Models & Prompting*<br><br>Explore Granite model families, prompting techniques, and the watsonx.ai SDK. Learn safe defaults, context windows, and token budgeting.<br><br>[**➡️ Open »**](https://www.google.com/search?q=docs/tracks/granite/labs/pre-work.md) | 🔎 **RAG**<br>*Grounded Q\&A from your data*<br><br>Build a clean ingestion pipeline for HTML/PDF, create embeddings, index in **Elasticsearch/Chroma**, and serve grounded answers with **Granite** on watsonx.ai.<br><br>[**➡️ Open »**](https://www.google.com/search?q=docs/tracks/rag/labs/pre-work.md) |
-| 🤖 **Agents**<br>*Governed, tool-using agents*<br><br>Use LangGraph and **watsonx.governance** to build agents that call tools safely. Compare runs in **Evaluation Studio**.<br><br>[**➡️ Open »**](https://www.google.com/search?q=docs/tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md) | ⚙️ **Orchestrate**<br>*Multi-agent solutions*<br><br>Combine multiple agents, RAG backends, and services into cohesive workflows with robust configuration.<br><br>[**➡️ Open »**](https://www.google.com/search?q=docs/tracks/orchestrate/orchestrate-workshop.md) |
+| 🔥 **Granite**<br>*Models & Prompting*<br><br>Explore Granite model families, prompting techniques, and the watsonx.ai SDK. Learn safe defaults, context windows, and token budgeting.<br><br>[**➡️ Open »**](docs/tracks/granite/labs/pre-work.md) | 🔎 **RAG**<br>*Grounded Q\&A from your data*<br><br>Build a clean ingestion pipeline for HTML/PDF, create embeddings, index in **Elasticsearch/Chroma**, and serve grounded answers with **Granite** on watsonx.ai.<br><br>[**➡️ Open »**](docs/tracks/rag/labs/pre-work.md) |
+| 🤖 **Agents**<br>*Governed, tool-using agents*<br><br>Use LangGraph and **watsonx.governance** to build agents that call tools safely. Compare runs in **Evaluation Studio**.<br><br>[**➡️ Open »**](docs/tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md) | ⚙️ **Orchestrate**<br>*Multi-agent solutions*<br><br>Combine multiple agents, RAG backends, and services into cohesive workflows with robust configuration.<br><br>[**➡️ Open »**](docs/tracks/orchestrate/orchestrate-workshop.md) |
 
 -----
 
@@ -126,7 +126,7 @@ Issues and improvements are welcome. Please open a discussion or PR with a clear
 
 ## License
 
-This project is distributed under an open‑source license. See **[LICENSE](https://www.google.com/search?q=LICENSE)** for details.
+This project is distributed under an open‑source license. See **[LICENSE](LICENSE)** for details.
 
 > IBM, watsonx, and other product names are trademarks or registered trademarks of IBM or their respective owners. Use of marks in this repository is solely for identification and does not imply endorsement.
 
