@@ -28,7 +28,6 @@ env.bak/
 dist/
 build/
 develop-eggs/
-downloads/
 eggs/
 .eggs/
 sdist/
@@ -131,7 +130,6 @@ datasets/
 
 # Secrets & local configs
 .env
-.env.*
 *.env
 *.secret
 *.secrets

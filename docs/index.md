@@ -61,7 +61,7 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
     Explore Granite model families, prompting patterns, local HF/Ollama, and watsonx.ai SDK. <br><br>
 
-    [:octicons-arrow-right-16: Open »](tracks/granite/labs/pre-work.md){ .md-button }
+    [:octicons-arrow-right-16: Open »](tracks/granite/labs/pre-work.md){ .md-button .md-button--primary }
 
 * :material-magnify-expand: **RAG**
 
@@ -70,7 +70,7 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
     Build a grounded Q&A app: ingest → chunk → embed → **Elasticsearch/Chroma** → LLM on **watsonx.ai**.
     Package a CLI/API and compare runs in **Evaluation Studio**. <br><br>
 
-    [:octicons-arrow-right-16: Start RAG »](tracks/rag/labs/pre-work.md){ .md-button .md-button--primary }
+    [:octicons-arrow-right-16: Open »](tracks/rag/labs/pre-work.md){ .md-button .md-button--primary }
 
 * :material-robot-outline: **Agents**
 
@@ -78,7 +78,7 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
     Tool-using, governed assistants with LangGraph and watsonx.governance; evaluate for quality and risk. <br><br>
 
-    [:octicons-arrow-right-16: Open »](tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md){ .md-button }
+    [:octicons-arrow-right-16: Open »](tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md){ .md-button .md-button--primary }
 
 * :material-cube-outline: **Orchestrate**
 
@@ -86,7 +86,7 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
     A full applied workshop combining components into a cohesive solution. <br><br>
 
-    [:octicons-arrow-right-16: Open »](tracks/orchestrate/orchestrate-workshop.md){ .md-button }
+    [:octicons-arrow-right-16: Open »](tracks/orchestrate/orchestrate-workshop.md){ .md-button .md-button--primary }
 </div>
 
 ---
@@ -102,34 +102,71 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 * **Lab 3**: **Packaging & Evaluation** with watsonx.governance
 
 ```mermaid
-flowchart LR
-  A[Docs: HTML/PDF] --> B[Extractor & Cleaner]
-  B --> C[Chunker]
-  C --> D[Embeddings]
-  D -->|dense vectors| E{Vector Store (ES/Chroma)}
-  E -->|top-k| F[Reranker (optional)]
-  F --> G[Prompt Composer]
-  G --> H[LLM on watsonx.ai]
-  H --> I[Answer + Citations]
-  I --> J[FastAPI /ask]
-  J --> K[Streamlit Chat UI]
+flowchart TD
+  %% Improved appearance with subgraphs, color classes, and clearer shapes
+  %% Now vertical (top → bottom)
+
+  %% Ingestion
+  subgraph ING[Ingestion]
+    direction TB
+    A[Docs: HTML • PDF] --> B[Extractor & Cleaner]
+    B --> C[Chunker]
+  end
+
+  %% Retrieval
+  subgraph RET[Retrieval]
+    direction TB
+    C --> D[Embeddings]
+    D -->|dense vectors| E[(Vector Store ES/Chroma)]
+    E -->|top-k| F[Reranker optional]
+  end
+
+  %% Generation
+  subgraph GEN[Generation]
+    direction TB
+    F --> G[Prompt Composer]
+    G --> H[LLM on watsonx.ai]
+    H --> I[Answer + Citations]
+  end
+
+  %% Serving
+  subgraph SRV[Serving]
+    direction TB
+    I --> J[FastAPI /ask]
+    J --> K[Streamlit Chat UI]
+  end
+
+  %% Style definitions
+  classDef source fill:#E3F2FD,stroke:#1E88E5,color:#0D47A1,stroke-width:1px;
+  classDef process fill:#F1F8E9,stroke:#7CB342,color:#2E7D32,stroke-width:1px;
+  classDef store fill:#FFF3E0,stroke:#FB8C00,color:#E65100,stroke-width:1px;
+  classDef model fill:#F3E5F5,stroke:#8E24AA,color:#4A148C,stroke-width:1px;
+  classDef output fill:#E0F7FA,stroke:#00ACC1,color:#006064,stroke-width:1px;
+
+  %% Class assignments
+  class A source;
+  class B,C,D,F,G,J,K process;
+  class E store;
+  class H model;
+  class I output;
+
 ```
 
------
+---
 
 ## What’s Included
 
-  * **Production-ready samples** (FastAPI + Streamlit, CLI, Dockerfiles)
-  * **Reproducible configs** (`.env.sample`, `requirements.txt` / `pyproject.toml`)
-  * **Evaluation workflows** with **Evaluation Studio** to compare models & parameters
+* **Production-ready samples** (FastAPI + Streamlit, CLI, Dockerfiles)
+* **Reproducible configs** (`.env.sample`, `requirements.txt` / `pyproject.toml`)
+* **Evaluation workflows** with **Evaluation Studio** to compare models & parameters
 
-\!\!\! tip "Everything is Markdown"
+!!! tip "Everything is Markdown"
 Each lab is designed to be followed directly from the page. Copy-paste commands and code blocks; notebooks are optional references only.
 
------
+---
 
 ## Next steps
 
-[Next → RAG Pre-work](tracks/rag/labs/pre-work.md){ .md-button .md-button--primary }
-[Skip to Lab 1](tracks/rag/labs/lab-1-accelerator.md){ .md-button }
-[Resources](resources.md){ .md-button }
+[Next → Granite Pre-work](tracks/granite/labs/pre-work.md){ .md-button .md-button--primary }
+
+[Resources](resources.md){ .md-button .md-button--primary }

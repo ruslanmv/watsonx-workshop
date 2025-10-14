@@ -1,4 +1,3 @@
-\
 # Lab 1 — Q&A with **RAG Accelerator** (End-to-End)
 
 > **Goal:** convert a small corpus of **HTML/PDF** into a working **Q&A app** that retrieves passages and drafts grounded answers with an LLM.
@@ -27,7 +26,7 @@ flowchart LR
   B --> C[Chunker]
   C --> D[Embeddings]
   D -->|dense vectors| E{Vector Store}
-  E -->|top-k docs| F[Reranker (optional)]
+  E -->|top-k docs| F[Reranker optional]
   F --> G[Prompt Composer]
   G --> H[LLM on watsonx.ai]
   H --> I[Answer + Citations]
