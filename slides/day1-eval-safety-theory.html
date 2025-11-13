@@ -39,6 +39,7 @@ display: block;
 .reveal .sourceCode { 
 overflow: visible;
 }
+
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -53,8 +54,9 @@ margin: 0 0.8em 0.2em -1.6em;
 vertical-align: middle;
 }
 
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -670,8 +672,8 @@ Model</h4>
 <div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_input_safety(user_input: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Screen user input for harmful content&quot;&quot;&quot;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    harmful_patterns <span class="op">=</span> [</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;how to (hack|crack|steal)&#39;</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;(bomb|weapon) (instructions|recipe)&#39;</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;how to </span><span class="kw">(</span><span class="vs">hack</span><span class="cf">|</span><span class="vs">crack</span><span class="cf">|</span><span class="vs">steal</span><span class="kw">)</span><span class="vs">&#39;</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;</span><span class="kw">(</span><span class="vs">bomb</span><span class="cf">|</span><span class="vs">weapon</span><span class="kw">)</span><span class="vs"> </span><span class="kw">(</span><span class="vs">instructions</span><span class="cf">|</span><span class="vs">recipe</span><span class="kw">)</span><span class="vs">&#39;</span>,</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ... more patterns</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    ]</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -684,7 +686,7 @@ Model</h4>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_output_safety(response: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Screen LLM output for harmful content&quot;&quot;&quot;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check for PII patterns</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> re.search(<span class="vs">r&#39;\d</span><span class="sc">{3}</span><span class="vs">-\d</span><span class="sc">{2}</span><span class="vs">-\d</span><span class="sc">{4}</span><span class="vs">&#39;</span>, response):  <span class="co"># SSN pattern</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> re.search(<span class="vs">r&#39;</span><span class="dv">\d</span><span class="op">{3}</span><span class="vs">-</span><span class="dv">\d</span><span class="op">{2}</span><span class="vs">-</span><span class="dv">\d</span><span class="op">{4}</span><span class="vs">&#39;</span>, response):  <span class="co"># SSN pattern</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check for hate speech indicators</span></span>
@@ -837,7 +839,7 @@ clarity, style)</li>
 <h3 id="example-output-dataframe">Example Output (DataFrame)</h3>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>prompt</th>
 <th>backend</th>
 <th>answer</th>
@@ -847,7 +849,7 @@ clarity, style)</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>“Summarize AI…”</td>
 <td>ollama</td>
 <td>“AI is…”</td>
@@ -855,7 +857,7 @@ clarity, style)</li>
 <td>5</td>
 <td>4</td>
 </tr>
-<tr class="even">
+<tr>
 <td>“Summarize AI…”</td>
 <td>watsonx</td>
 <td>“Artificial…”</td>
@@ -863,7 +865,7 @@ clarity, style)</li>
 <td>5</td>
 <td>5</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>“Extract emails…”</td>
 <td>ollama</td>
 <td>“john@…”</td>
