@@ -58,6 +58,7 @@ for entry in "${DECKS[@]}"; do
   REVEAL_TRANSITION="${REVEAL_TRANSITION}" \
   HIGHLIGHT_STYLE="${HIGHLIGHT_STYLE}" \
   ENABLE_MATH="${ENABLE_MATH}" \
+  CUSTOM_CSS="${CUSTOM_CSS:-}" \
     bash "${ROOT}/scripts/generate_slides.sh"
 done
 

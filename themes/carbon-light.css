@@ -1,0 +1,288 @@
+/**
+ * IBM Carbon Design System - Light Theme
+ * Official IBM design language
+ * Perfect for technical documentation and enterprise training
+ */
+
+:root {
+  /* Carbon Color Tokens (Light Theme) */
+  --cds-background: #ffffff;
+  --cds-layer-01: #f4f4f4;
+  --cds-layer-02: #e0e0e0;
+  --cds-layer-03: #c6c6c6;
+  --cds-field-01: #f4f4f4;
+  --cds-field-02: #ffffff;
+  
+  --cds-text-primary: #161616;
+  --cds-text-secondary: #525252;
+  --cds-text-tertiary: #8d8d8d;
+  --cds-text-helper: #6f6f6f;
+  
+  --cds-link-primary: #0f62fe;
+  --cds-link-visited: #8a3ffc;
+  
+  --cds-icon-primary: #161616;
+  --cds-icon-secondary: #525252;
+  
+  --cds-border-subtle: #e0e0e0;
+  --cds-border-strong: #8d8d8d;
+  
+  --cds-interactive: #0f62fe;
+  --cds-interactive-hover: #0043ce;
+  
+  /* IBM Plex Fonts */
+  --cds-font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --cds-font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+.reveal {
+  background: var(--cds-background);
+  font-family: var(--cds-font-sans);
+  color: var(--cds-text-primary);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Carbon Type Scale */
+.reveal h1 {
+  color: var(--cds-text-primary);
+  font-weight: 300;
+  font-size: 3.5rem;
+  line-height: 1.25;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.02em;
+}
+
+.reveal h2 {
+  color: var(--cds-text-primary);
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 1.3;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.reveal h3 {
+  color: var(--cds-text-secondary);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+
+.reveal h4 {
+  color: var(--cds-text-secondary);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+/* Links */
+.reveal a {
+  color: var(--cds-link-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.reveal a:hover {
+  border-bottom-color: var(--cds-link-primary);
+}
+
+.reveal a:visited {
+  color: var(--cds-link-visited);
+}
+
+/* Code - Carbon styling */
+.reveal pre {
+  background: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 0;
+  margin: 1em 0;
+  padding: 1em;
+  box-shadow: none;
+}
+
+.reveal code {
+  background: var(--cds-layer-01);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0;
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-mono);
+  font-size: 0.875em;
+}
+
+.reveal pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Lists */
+.reveal ul, .reveal ol {
+  line-height: 1.5;
+  margin: 1em 0;
+}
+
+.reveal li {
+  margin: 0.5em 0;
+  padding-left: 0.5em;
+}
+
+.reveal ul li::marker {
+  color: var(--cds-text-secondary);
+}
+
+/* Emphasis */
+.reveal strong {
+  color: var(--cds-text-primary);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--cds-text-secondary);
+  font-style: italic;
+}
+
+/* Blockquotes - Carbon style */
+.reveal blockquote {
+  background: var(--cds-layer-01);
+  border-left: 4px solid var(--cds-border-strong);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  box-shadow: none;
+  font-style: normal;
+  color: var(--cds-text-secondary);
+}
+
+/* Tables - Carbon data table styling */
+.reveal table {
+  border-collapse: collapse;
+  margin: 1em auto;
+  border: 1px solid var(--cds-border-subtle);
+  width: 100%;
+}
+
+.reveal table th {
+  background: var(--cds-layer-01);
+  color: var(--cds-text-primary);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--cds-border-strong);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reveal table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--cds-border-subtle);
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.reveal table tr:hover {
+  background: var(--cds-layer-01);
+}
+
+/* Progress bar */
+.reveal .progress {
+  background: var(--cds-layer-02);
+  height: 2px;
+}
+
+.reveal .progress span {
+  background: var(--cds-interactive);
+}
+
+/* Controls */
+.reveal .controls {
+  color: var(--cds-interactive);
+}
+
+/* Slide numbers */
+.reveal .slide-number {
+  background: var(--cds-interactive);
+  color: white;
+  font-weight: 400;
+  border-radius: 0;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--cds-font-mono);
+  font-size: 0.75rem;
+}
+
+/* Carbon UI Shell style divider */
+.reveal hr {
+  border: none;
+  border-top: 1px solid var(--cds-border-subtle);
+  margin: 2em 0;
+}
+
+/* Carbon notification style */
+.carbon-notification {
+  background: var(--cds-layer-01);
+  border-left: 3px solid var(--cds-interactive);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.carbon-notification::before {
+  content: 'ℹ️';
+  margin-right: 0.75em;
+  font-size: 1.25em;
+}
+
+/* Carbon button style */
+.carbon-button {
+  background: var(--cds-interactive);
+  color: white;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 0;
+  font-family: var(--cds-font-sans);
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.carbon-button:hover {
+  background: var(--cds-interactive-hover);
+}
+
+/* Carbon grid helper */
+.carbon-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1em 0;
+}
+
+.carbon-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.carbon-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.carbon-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Carbon tag */
+.carbon-tag {
+  display: inline-block;
+  background: var(--cds-layer-01);
+  color: var(--cds-text-primary);
+  padding: 0.25em 0.5em;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.25em;
+  border: 1px solid var(--cds-border-subtle);
+}

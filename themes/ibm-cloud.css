@@ -1,0 +1,227 @@
+/**
+ * IBM Cloud Theme for Reveal.js
+ * Clean, professional light theme with IBM Blue
+ * Perfect for IBM Cloud, infrastructure, and enterprise courses
+ */
+
+:root {
+  /* IBM Cloud Blue Palette */
+  --ibm-blue: #0f62fe;
+  --ibm-blue-light: #4589ff;
+  --ibm-blue-lighter: #78a9ff;
+  --ibm-blue-dark: #0043ce;
+  
+  /* IBM Teal accents */
+  --ibm-teal: #1192e8;
+  --ibm-cyan: #08bdba;
+  
+  /* Neutral colors */
+  --text-primary: #161616;
+  --text-secondary: #525252;
+  --text-tertiary: #8d8d8d;
+  --bg-white: #ffffff;
+  --bg-light: #f4f4f4;
+  --border-subtle: #e0e0e0;
+}
+
+.reveal {
+  background: var(--bg-white);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-primary);
+  font-size: 38px;
+}
+
+/* Headers */
+.reveal h1 {
+  color: var(--ibm-blue);
+  font-weight: 600;
+  text-transform: none;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+.reveal h2 {
+  color: var(--ibm-blue-dark);
+  font-weight: 500;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.reveal h3 {
+  color: var(--ibm-teal);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.reveal h4 {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Links */
+.reveal a {
+  color: var(--ibm-blue);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.reveal a:hover {
+  border-bottom-color: var(--ibm-blue);
+}
+
+/* Code blocks */
+.reveal pre {
+  background: var(--bg-light);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--ibm-blue);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 1em 0;
+  padding: 1em;
+}
+
+.reveal code {
+  background: var(--bg-light);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  color: var(--ibm-blue-dark);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.reveal pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--text-primary);
+}
+
+/* Lists */
+.reveal ul, .reveal ol {
+  line-height: 1.6;
+}
+
+.reveal li {
+  margin: 0.4em 0;
+}
+
+.reveal ul li::marker {
+  color: var(--ibm-blue);
+}
+
+/* Emphasis */
+.reveal strong {
+  color: var(--ibm-blue-dark);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--ibm-teal);
+  font-style: italic;
+}
+
+/* Blockquotes */
+.reveal blockquote {
+  background: var(--bg-light);
+  border-left: 4px solid var(--ibm-blue);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-style: normal;
+}
+
+/* Tables */
+.reveal table {
+  border-collapse: collapse;
+  margin: 1em auto;
+  border: 1px solid var(--border-subtle);
+}
+
+.reveal table th {
+  background: var(--ibm-blue);
+  color: white;
+  font-weight: 500;
+  padding: 0.75em 1em;
+  text-align: left;
+}
+
+.reveal table td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.reveal table tr:nth-child(even) {
+  background: var(--bg-light);
+}
+
+/* Progress bar */
+.reveal .progress {
+  background: var(--border-subtle);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: linear-gradient(90deg, var(--ibm-blue), var(--ibm-teal));
+}
+
+/* Controls */
+.reveal .controls {
+  color: var(--ibm-blue);
+}
+
+/* Slide numbers */
+.reveal .slide-number {
+  background: var(--ibm-blue);
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+/* IBM Cloud Badge */
+.ibm-cloud-badge {
+  display: inline-block;
+  background: var(--ibm-blue);
+  color: white;
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.5em;
+}
+
+/* Clean section dividers */
+.reveal hr {
+  border: none;
+  border-top: 2px solid var(--ibm-blue);
+  margin: 1.5em 0;
+  opacity: 0.3;
+}
+
+/* Highlight boxes */
+.ibm-highlight {
+  background: rgba(15, 98, 254, 0.05);
+  border-left: 4px solid var(--ibm-blue);
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 4px;
+}
+
+/* Professional grid layout helper */
+.ibm-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin: 1em 0;
+}
+
+.ibm-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  margin: 1em 0;
+}

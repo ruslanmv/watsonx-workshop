@@ -1,5 +1,6 @@
 # Makefile for watsonx Workshop Series (ruslanmv)
 # Enhanced with Professional Slide Generation (Reveal.js + PDF)
+# Default theme: watsonx (Purple/Pink Gen AI)
 
 SHELL := /usr/bin/env bash
 
@@ -32,10 +33,11 @@ PDF_SLIDES     ?= 1-100
 LOAD_PAUSE     ?= 8000
 PAUSE          ?= 2000
 
-# Slide Theming
-REVEAL_THEME      ?= black
+# Slide Theming - DEFAULT TO WATSONX
+REVEAL_THEME      ?= simple
 REVEAL_TRANSITION ?= convex
-HIGHLIGHT_STYLE   ?= zenburn
+HIGHLIGHT_STYLE   ?= tango
+CUSTOM_CSS        ?= themes/watsonx.css
 
 # MathJax Support (set to "yes" to enable LaTeX math, "no" to disable)
 ENABLE_MATH       ?= yes
@@ -54,6 +56,9 @@ PDF_MERGE ?= pdfunite
         clean clean-venv clean-slides clean-all \
         gh-deploy \
         slides slides-one slides-dark slides-light slides-tech slides-creative slides-all \
+        slides-ibm-cloud slides-watsonx slides-carbon-light slides-carbon-dark \
+        slides-enterprise slides-modern-purple slides-premium-teal slides-minimal-white \
+        slides-udemy-help \
         pdf pdf-one pdf-debug pdf-all pdf-days \
         info
 
@@ -62,11 +67,12 @@ help:
 	@echo ""
 	@echo "================================================================"
 	@echo "  IBM watsonx Workshop - MkDocs + Reveal.js Slides"
+	@echo "  Default Theme: watsonx (Purple/Pink Gen AI) ⭐"
 	@echo "================================================================"
 	@echo ""
 	@echo "QUICK START:"
 	@echo "  make install         - Install Python deps + external tools"
-	@echo "  make slides          - Generate ALL HTML slides (black theme)"
+	@echo "  make slides          - Generate ALL slides (watsonx theme) ⭐"
 	@echo "  make pdf             - Export PDFs for ALL slide decks"
 	@echo "  make pdf-days        - Merge per-deck PDFs into one PDF per day"
 	@echo "  make serve-with-slides - Rebuild slides then preview site"
@@ -79,14 +85,23 @@ help:
 	@echo "  make gh-deploy       - Deploy to GitHub Pages"
 	@echo ""
 	@echo "SLIDE GENERATION:"
-	@echo "  make slides          - Generate slides for ALL workshop content"
-	@echo "  make slides-all      - Same as 'make slides'"
+	@echo "  make slides          - Generate slides with watsonx theme (default) ⭐"
+	@echo "  make slides-all      - Generate with current theme settings"
 	@echo "  make slides-one SOURCE_MD=path/to/file.md"
 	@echo "                       - Generate slides from a single Markdown file"
-	@echo "  make slides-dark     - All slides in dark theme"
-	@echo "  make slides-light    - All slides in light theme"
-	@echo "  make slides-tech     - All slides in technical dark theme"
-	@echo "  make slides-creative - All slides in vibrant sky theme"
+	@echo ""
+	@echo "PROFESSIONAL THEMES:"
+	@echo "  make slides-watsonx      - Purple/pink Gen AI theme ⭐ (DEFAULT)"
+	@echo "  make slides-ibm-cloud    - Professional IBM Blue"
+	@echo "  make slides-carbon-light - IBM Carbon Design System"
+	@echo "  make slides-modern-purple- Soft lavender gradients"
+	@echo "  make slides-premium-teal - Professional teal/cyan"
+	@echo "  make slides-dark         - Classic dark theme"
+	@echo "  make slides-light        - Classic light theme"
+	@echo "  make slides-tech         - Technical dark theme"
+	@echo "  make slides-creative     - Vibrant sky theme"
+	@echo ""
+	@echo "  make slides-udemy-help   - Show theme recommendations"
 	@echo ""
 	@echo "SINGLE FILE GENERATION:"
 	@echo "  make slides-one SOURCE_MD=docs/tracks/day1-llm/llm-concepts.md"
@@ -117,6 +132,7 @@ help:
 	@echo ""
 	@echo "CONFIGURATION:"
 	@echo "  REVEAL_THEME=$(REVEAL_THEME) REVEAL_TRANSITION=$(REVEAL_TRANSITION)"
+	@echo "  CUSTOM_CSS=$(CUSTOM_CSS)"
 	@echo "  PDF_SLIDES=$(PDF_SLIDES) LOAD_PAUSE=$(LOAD_PAUSE)ms PAUSE=$(PAUSE)ms"
 	@echo "  ENABLE_MATH=$(ENABLE_MATH)"
 	@echo "  DECKTAPE_IMAGE=$(DECKTAPE_IMAGE)"
@@ -170,9 +186,10 @@ check-tools:
 	@echo "================================================================"
 
 # =============== Slide Generation ===============
-# 'slides' ≡ 'slides-all'
+# 'slides' now defaults to watsonx theme
 slides:
-	@$(MAKE) slides-all
+	@echo "→ Using watsonx theme (default) ⭐"
+	@$(MAKE) slides-watsonx
 
 # Single-file slide generation (optional helper)
 slides-one:
@@ -188,15 +205,18 @@ slides-one:
 	REVEAL_TRANSITION="$(REVEAL_TRANSITION)" \
 	HIGHLIGHT_STYLE="$(HIGHLIGHT_STYLE)" \
 	ENABLE_MATH="$(ENABLE_MATH)" \
+	CUSTOM_CSS="$(CUSTOM_CSS)" \
 	bash scripts/generate_slides.sh
 
 slides-all:
 	@echo "→ Generating all workshop slides..."
+	@echo "   Theme: $(REVEAL_THEME) | Custom CSS: $(CUSTOM_CSS)"
 	@if [ -f scripts/generate_all_slides.sh ]; then \
 		REVEAL_THEME="$(REVEAL_THEME)" \
 		REVEAL_TRANSITION="$(REVEAL_TRANSITION)" \
 		HIGHLIGHT_STYLE="$(HIGHLIGHT_STYLE)" \
 		ENABLE_MATH="$(ENABLE_MATH)" \
+		CUSTOM_CSS="$(CUSTOM_CSS)" \
 		bash scripts/generate_all_slides.sh; \
 	else \
 		echo "❌ scripts/generate_all_slides.sh not found"; \
@@ -204,12 +224,114 @@ slides-all:
 		exit 1; \
 	fi
 
+# ═══════════════════════════════════════════════════════════════════════
+# PROFESSIONAL ENTERPRISE THEMES (IBM Cloud & watsonx.ai)
+# ═══════════════════════════════════════════════════════════════════════
+
+slides-watsonx:
+	@echo "→ Generating WATSONX.AI theme (Purple Gradient) for ALL decks..."
+	@echo "   Colors: Purple (#8a3ffc), Pink (#ee5396), Soft gradients"
+	@echo "   Custom CSS: themes/watsonx.css"
+	@REVEAL_THEME=simple \
+	 REVEAL_TRANSITION=convex \
+	 HIGHLIGHT_STYLE=tango \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS=themes/watsonx.css \
+	 $(MAKE) slides-all
+	@echo "✅ watsonx.ai theme: Elegant purple/pink gradient for Gen AI content"
+
+slides-ibm-cloud:
+	@echo "→ Generating IBM CLOUD Professional theme (Light Blue) for ALL decks..."
+	@echo "   Colors: IBM Blue (#0f62fe), Clean white background"
+	@echo "   Custom CSS: themes/ibm-cloud.css"
+	@REVEAL_THEME=simple \
+	 REVEAL_TRANSITION=slide \
+	 HIGHLIGHT_STYLE=pygments \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS=themes/ibm-cloud.css \
+	 $(MAKE) slides-all
+	@echo "✅ IBM Cloud theme: Professional light theme with IBM Blue accents"
+
+slides-carbon-light:
+	@echo "→ Generating IBM CARBON Light theme for ALL decks..."
+	@echo "   Colors: Carbon Gray (#161616 text), White (#ffffff bg)"
+	@echo "   Custom CSS: themes/carbon-light.css"
+	@REVEAL_THEME=white \
+	 REVEAL_TRANSITION=fade \
+	 HIGHLIGHT_STYLE=pygments \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS=themes/carbon-light.css \
+	 $(MAKE) slides-all
+	@echo "✅ Carbon Light: IBM's official design system (light mode)"
+
+slides-carbon-dark:
+	@echo "→ Generating IBM CARBON Dark theme for ALL decks..."
+	@echo "   Colors: Carbon Gray (#f4f4f4 text), Dark (#161616 bg)"
+	@REVEAL_THEME=black \
+	 REVEAL_TRANSITION=slide \
+	 HIGHLIGHT_STYLE=monokai \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS=themes/carbon-dark.css \
+	 $(MAKE) slides-all
+	@echo "✅ Carbon Dark: IBM's official design system (dark mode)"
+
+slides-enterprise:
+	@echo "→ Generating ENTERPRISE Professional theme for ALL decks..."
+	@echo "   Colors: Soft beige, minimal, corporate-friendly"
+	@REVEAL_THEME=beige \
+	 REVEAL_TRANSITION=fade \
+	 HIGHLIGHT_STYLE=pygments \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS="" \
+	 $(MAKE) slides-all
+	@echo "✅ Enterprise: Clean minimal theme for corporate training"
+
+slides-modern-purple:
+	@echo "→ Generating MODERN PURPLE theme (like Gen AI visual) for ALL decks..."
+	@echo "   Colors: Lavender (#c8b7ff), Pink (#ffb3d9), Soft gradients"
+	@echo "   Custom CSS: themes/modern-purple.css"
+	@REVEAL_THEME=simple \
+	 REVEAL_TRANSITION=convex \
+	 HIGHLIGHT_STYLE=tango \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS=themes/modern-purple.css \
+	 $(MAKE) slides-all
+	@echo "✅ Modern Purple: Soft lavender gradients matching Gen AI branding"
+
+slides-premium-teal:
+	@echo "→ Generating PREMIUM TEAL theme for ALL decks..."
+	@echo "   Colors: IBM Teal (#1192e8), Cyan (#08bdba)"
+	@echo "   Custom CSS: themes/premium-teal.css"
+	@REVEAL_THEME=simple \
+	 REVEAL_TRANSITION=zoom \
+	 HIGHLIGHT_STYLE=tango \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS=themes/premium-teal.css \
+	 $(MAKE) slides-all
+	@echo "✅ Premium Teal: Professional cyan/teal accents with excellent readability"
+
+slides-minimal-white:
+	@echo "→ Generating MINIMAL WHITE theme (Ultra Clean) for ALL decks..."
+	@echo "   Colors: Pure white (#ffffff), IBM Blue accents"
+	@REVEAL_THEME=white \
+	 REVEAL_TRANSITION=fade \
+	 HIGHLIGHT_STYLE=pygments \
+	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS="" \
+	 $(MAKE) slides-all
+	@echo "✅ Minimal White: Ultra-clean, maximum professionalism"
+
+# ═══════════════════════════════════════════════════════════════════════
+# CLASSIC THEMES (No Custom CSS)
+# ═══════════════════════════════════════════════════════════════════════
+
 slides-dark:
 	@echo "→ Generating DARK theme slides for ALL decks..."
 	@REVEAL_THEME=black \
 	 REVEAL_TRANSITION=convex \
 	 HIGHLIGHT_STYLE=zenburn \
 	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS="" \
 	 $(MAKE) slides-all
 
 slides-light:
@@ -218,6 +340,7 @@ slides-light:
 	 REVEAL_TRANSITION=fade \
 	 HIGHLIGHT_STYLE=pygments \
 	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS="" \
 	 $(MAKE) slides-all
 
 slides-tech:
@@ -226,6 +349,7 @@ slides-tech:
 	 REVEAL_TRANSITION=slide \
 	 HIGHLIGHT_STYLE=zenburn \
 	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS="" \
 	 $(MAKE) slides-all
 
 slides-creative:
@@ -234,7 +358,61 @@ slides-creative:
 	 REVEAL_TRANSITION=zoom \
 	 HIGHLIGHT_STYLE=tango \
 	 ENABLE_MATH="$(ENABLE_MATH)" \
+	 CUSTOM_CSS="" \
 	 $(MAKE) slides-all
+
+# ═══════════════════════════════════════════════════════════════════════
+# UDEMY COURSE RECOMMENDATIONS
+# ═══════════════════════════════════════════════════════════════════════
+
+slides-udemy-help:
+	@echo ""
+	@echo "════════════════════════════════════════════════════════════════"
+	@echo "🎓 RECOMMENDED THEMES FOR UDEMY COURSES"
+	@echo "════════════════════════════════════════════════════════════════"
+	@echo ""
+	@echo "🏆 TOP CHOICES FOR WATSONX.AI / IBM CLOUD COURSES:"
+	@echo ""
+	@echo "1️⃣  make slides-watsonx (DEFAULT) ⭐"
+	@echo "    → Purple/pink Gen AI aesthetic (matches your uploaded image)"
+	@echo "    → Perfect for watsonx.ai, generative AI content"
+	@echo "    → Modern, engaging, professional"
+	@echo "    → Custom CSS: themes/watsonx.css"
+	@echo ""
+	@echo "2️⃣  make slides-ibm-cloud"
+	@echo "    → Clean IBM Blue professional look"
+	@echo "    → Best for IBM Cloud, enterprise IT content"
+	@echo "    → Highly readable, corporate-approved"
+	@echo "    → Custom CSS: themes/ibm-cloud.css"
+	@echo ""
+	@echo "3️⃣  make slides-carbon-light"
+	@echo "    → IBM's official Carbon Design System"
+	@echo "    → Maximum professionalism and consistency"
+	@echo "    → Great for technical documentation"
+	@echo "    → Custom CSS: themes/carbon-light.css"
+	@echo ""
+	@echo "📊 OTHER PROFESSIONAL OPTIONS:"
+	@echo ""
+	@echo "   make slides-modern-purple  → Soft lavender (themes/modern-purple.css)"
+	@echo "   make slides-premium-teal   → Professional teal (themes/premium-teal.css)"
+	@echo "   make slides-enterprise     → Minimal corporate beige"
+	@echo "   make slides-minimal-white  → Ultra-clean white"
+	@echo ""
+	@echo "════════════════════════════════════════════════════════════════"
+	@echo "💡 QUICK START:"
+	@echo "   make slides                → Uses watsonx theme (default) ⭐"
+	@echo "   make slides-ibm-cloud      → For IBM Cloud courses"
+	@echo "   make pdf                   → Export to PDF"
+	@echo "════════════════════════════════════════════════════════════════"
+	@echo ""
+	@echo "📁 Theme Files Location: themes/"
+	@echo "   themes/watsonx.css"
+	@echo "   themes/ibm-cloud.css"
+	@echo "   themes/carbon-light.css"
+	@echo "   themes/modern-purple.css"
+	@echo "   themes/premium-teal.css"
+	@echo "════════════════════════════════════════════════════════════════"
+	@echo ""
 
 # =============== PDF Export ===============
 # pdf = "export all decks" (pdf-all)
@@ -305,7 +483,6 @@ pdf-days: pdf
 	done; \
 	echo "✅ All day-level PDFs generated in docs/slides/"
 
-
 pdf-debug:
 	@echo "→ Generating PDF with debug screenshots..."
 	@mkdir -p debug-slides
@@ -330,8 +507,8 @@ serve:
 	@echo "→ Starting dev server (Ctrl+C to stop) ..."
 	@$(MKDOCS) serve --strict
 
-serve-with-slides: slides-all
-	@echo "→ Rebuilt slides, starting dev server..."
+serve-with-slides: slides
+	@echo "→ Rebuilt slides with watsonx theme, starting dev server..."
 	@$(MKDOCS) serve --strict
 
 serve-noslides:
@@ -343,15 +520,16 @@ build:
 	@echo "→ Building static site to $(SITE_DIR)..."
 	@$(MKDOCS) build --strict --verbose
 
-build-complete: slides-all pdf
+build-complete: slides pdf
 	@echo "================================================================"
 	@echo "Building complete site (docs + slides + PDF)..."
+	@echo "  Using watsonx theme (default) ⭐"
 	@echo "================================================================"
 	@$(MKDOCS) build --strict --verbose
 	@echo "✅ Complete build finished!"
 
-build-quick: slides-all
-	@echo "→ Quick build (docs + slides, skip PDF)..."
+build-quick: slides
+	@echo "→ Quick build (docs + slides with watsonx theme, skip PDF)..."
 	@$(MKDOCS) build --strict --verbose
 	@echo "✅ Quick build finished!"
 
@@ -397,7 +575,8 @@ info:
 	fi
 	@echo ""
 	@echo "Slide Generation:"
-	@echo "  Theme:         $(REVEAL_THEME)"
+	@echo "  Theme:         $(REVEAL_THEME) (base)"
+	@echo "  Custom CSS:    $(CUSTOM_CSS)"
 	@echo "  Transition:    $(REVEAL_TRANSITION)"
 	@echo "  Code Style:    $(HIGHLIGHT_STYLE)"
 	@echo "  Math Support:  $(ENABLE_MATH)"
@@ -413,6 +592,7 @@ info:
 	@echo "Paths:"
 	@echo "  Site Dir:      $(SITE_DIR)"
 	@echo "  Config:        $(CONFIG)"
+	@echo "  Theme Dir:     themes/"
 	@echo ""
 	@echo "Generated Files:"
 	@if ls docs/slides/*.html >/dev/null 2>&1; then \
@@ -424,6 +604,18 @@ info:
 		echo "  PDF Slides:    ✅ Present in docs/slides/"; \
 	else \
 		echo "  PDF Slides:    ⚠️  Not generated (run 'make pdf')"; \
+	fi
+	@echo ""
+	@echo "Custom Theme Files:"
+	@if [ -f themes/watsonx.css ]; then \
+		echo "  ✅ themes/watsonx.css"; \
+	else \
+		echo "  ⚠️  themes/watsonx.css (missing)"; \
+	fi
+	@if [ -f themes/ibm-cloud.css ]; then \
+		echo "  ✅ themes/ibm-cloud.css"; \
+	else \
+		echo "  ⚠️  themes/ibm-cloud.css (missing)"; \
 	fi
 	@echo "================================================================"
 

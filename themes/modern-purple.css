@@ -1,0 +1,295 @@
+/**
+ * Modern Purple Theme for Reveal.js
+ * Soft lavender/pink gradients inspired by the Gen AI visual
+ * Perfect for creative, modern, and engaging presentations
+ */
+
+:root {
+  /* Soft Purple/Pink Palette (like the uploaded image) */
+  --purple-soft: #c8b7ff;
+  --purple-medium: #b19dff;
+  --purple-vibrant: #9b7fff;
+  --pink-soft: #ffb3d9;
+  --pink-medium: #ff99cc;
+  --lavender: #e8d9ff;
+  --lavender-light: #f8f4ff;
+  
+  /* Accent colors */
+  --accent-purple: #8a3ffc;
+  --accent-teal: #1192e8;
+  
+  /* Text colors */
+  --text-dark: #2d2640;
+  --text-medium: #5a4f73;
+  --text-light: #8d7fa6;
+  --bg-white: #ffffff;
+}
+
+.reveal {
+  background: linear-gradient(135deg, 
+    #fdfbff 0%,
+    #f8f4ff 20%,
+    #f0e6ff 40%,
+    #e8d9ff 50%,
+    #f0e6ff 60%,
+    #f8f4ff 80%,
+    #fdfbff 100%);
+  background-attachment: fixed;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+  font-size: 38px;
+}
+
+/* Elegant headers */
+.reveal h1 {
+  color: var(--text-dark);
+  font-weight: 300;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5em;
+  text-shadow: 2px 2px 8px rgba(155, 127, 255, 0.2);
+  line-height: 1.2;
+}
+
+.reveal h2 {
+  color: var(--accent-purple);
+  font-weight: 400;
+  font-size: 2.5rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.reveal h3 {
+  color: var(--text-medium);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+
+.reveal h4 {
+  color: var(--text-light);
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+/* Links */
+.reveal a {
+  color: var(--accent-teal);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.reveal a:hover {
+  color: var(--accent-purple);
+  border-bottom-color: var(--accent-purple);
+}
+
+/* Code blocks with soft purple background */
+.reveal pre {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--purple-soft);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(155, 127, 255, 0.15);
+  margin: 1em 0;
+  padding: 1em;
+}
+
+.reveal code {
+  background: rgba(200, 183, 255, 0.25);
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+  color: var(--accent-purple);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.reveal pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--text-dark);
+}
+
+/* Lists */
+.reveal ul, .reveal ol {
+  line-height: 1.7;
+}
+
+.reveal li {
+  margin: 0.5em 0;
+}
+
+.reveal ul li::marker {
+  color: var(--accent-purple);
+}
+
+/* Emphasis */
+.reveal strong {
+  color: var(--accent-purple);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--text-medium);
+  font-style: italic;
+}
+
+/* Elegant blockquotes */
+.reveal blockquote {
+  background: rgba(255, 255, 255, 0.95);
+  border-left: 5px solid var(--purple-vibrant);
+  padding: 1.25em 1.75em;
+  margin: 1.5em 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(155, 127, 255, 0.12);
+  font-style: italic;
+  color: var(--text-medium);
+}
+
+.reveal blockquote::before {
+  content: '"';
+  font-size: 3em;
+  color: var(--purple-soft);
+  opacity: 0.5;
+  position: absolute;
+  margin-left: -0.5em;
+  margin-top: -0.3em;
+}
+
+/* Tables with gradient headers */
+.reveal table {
+  border-collapse: collapse;
+  margin: 1em auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(155, 127, 255, 0.15);
+}
+
+.reveal table th {
+  background: linear-gradient(135deg, 
+    var(--purple-vibrant), 
+    var(--accent-purple));
+  color: white;
+  font-weight: 500;
+  padding: 0.75em 1em;
+  text-align: left;
+}
+
+.reveal table td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--purple-soft);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.reveal table tr:nth-child(even) td {
+  background: rgba(232, 217, 255, 0.3);
+}
+
+/* Progress bar with gradient */
+.reveal .progress {
+  background: rgba(200, 183, 255, 0.3);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: linear-gradient(90deg, 
+    var(--accent-purple), 
+    var(--accent-teal));
+}
+
+/* Controls */
+.reveal .controls {
+  color: var(--accent-purple);
+}
+
+/* Slide numbers */
+.reveal .slide-number {
+  background: linear-gradient(135deg, 
+    var(--accent-purple), 
+    var(--purple-vibrant));
+  color: white;
+  font-weight: 500;
+  border-radius: 20px;
+  padding: 5px 12px;
+  box-shadow: 0 2px 8px rgba(138, 63, 252, 0.3);
+}
+
+/* Dividers */
+.reveal hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--purple-soft), 
+    transparent);
+  margin: 2em 0;
+}
+
+/* Custom highlight box */
+.purple-highlight {
+  background: rgba(232, 217, 255, 0.4);
+  border-left: 4px solid var(--accent-purple);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(155, 127, 255, 0.1);
+}
+
+/* Badge with gradient */
+.modern-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, 
+    var(--accent-purple), 
+    var(--purple-vibrant));
+  color: white;
+  padding: 0.4em 1em;
+  border-radius: 25px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0.5em;
+  box-shadow: 0 4px 12px rgba(138, 63, 252, 0.3);
+}
+
+/* Fragment highlight */
+.reveal .fragment.highlight-purple {
+  opacity: 1;
+}
+
+.reveal .fragment.highlight-purple.visible {
+  color: var(--accent-purple);
+  font-weight: 600;
+}
+
+/* Soft shadow for images */
+.reveal img {
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(155, 127, 255, 0.2);
+}
+
+/* Grid layouts */
+.modern-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin: 1em 0;
+}
+
+.modern-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  margin: 1em 0;
+}
+
+/* Section background */
+.reveal .slides section {
+  text-align: left;
+}
+
+.reveal .slides section.center {
+  text-align: center;
+}

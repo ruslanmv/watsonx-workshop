@@ -1,0 +1,334 @@
+/**
+ * Premium Teal Theme for Reveal.js
+ * Professional cyan/teal colors with excellent readability
+ * Perfect for technical and professional presentations
+ */
+
+:root {
+  /* Teal/Cyan Palette */
+  --teal-primary: #1192e8;
+  --teal-light: #33b1ff;
+  --teal-lighter: #82cfff;
+  --cyan-primary: #08bdba;
+  --cyan-light: #3ddbd9;
+  
+  /* Supporting colors */
+  --blue-accent: #0f62fe;
+  --purple-accent: #8a3ffc;
+  
+  /* Neutral colors */
+  --text-dark: #161616;
+  --text-medium: #525252;
+  --text-light: #8d8d8d;
+  --bg-white: #ffffff;
+  --bg-light: #f4f4f4;
+  --border-subtle: #e0e0e0;
+}
+
+.reveal {
+  background: var(--bg-white);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+  font-size: 38px;
+  line-height: 1.6;
+}
+
+/* Headers with teal accents */
+.reveal h1 {
+  color: var(--teal-primary);
+  font-weight: 600;
+  font-size: 3.5rem;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(17, 146, 232, 0.1);
+}
+
+.reveal h2 {
+  color: var(--teal-primary);
+  font-weight: 500;
+  font-size: 2.5rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.reveal h3 {
+  color: var(--cyan-primary);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+
+.reveal h4 {
+  color: var(--text-medium);
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+/* Links */
+.reveal a {
+  color: var(--blue-accent);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.reveal a:hover {
+  color: var(--teal-primary);
+  border-bottom-color: var(--teal-primary);
+}
+
+/* Code blocks */
+.reveal pre {
+  background: var(--bg-light);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--teal-primary);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(17, 146, 232, 0.1);
+  margin: 1em 0;
+  padding: 1em;
+}
+
+.reveal code {
+  background: rgba(17, 146, 232, 0.08);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  color: var(--teal-primary);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.reveal pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--text-dark);
+}
+
+/* Lists */
+.reveal ul, .reveal ol {
+  line-height: 1.7;
+}
+
+.reveal li {
+  margin: 0.5em 0;
+}
+
+.reveal ul li::marker {
+  color: var(--teal-primary);
+  font-weight: 600;
+}
+
+/* Emphasis */
+.reveal strong {
+  color: var(--teal-primary);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--cyan-primary);
+  font-style: italic;
+}
+
+/* Blockquotes */
+.reveal blockquote {
+  background: var(--bg-light);
+  border-left: 5px solid var(--teal-primary);
+  padding: 1.25em 1.75em;
+  margin: 1.5em 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(17, 146, 232, 0.08);
+  color: var(--text-medium);
+}
+
+/* Tables with teal headers */
+.reveal table {
+  border-collapse: collapse;
+  margin: 1em auto;
+  border: 1px solid var(--border-subtle);
+  width: 100%;
+}
+
+.reveal table th {
+  background: linear-gradient(135deg, 
+    var(--teal-primary), 
+    var(--cyan-primary));
+  color: white;
+  font-weight: 500;
+  padding: 0.75em 1em;
+  text-align: left;
+  font-size: 0.95em;
+}
+
+.reveal table td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.reveal table tr:nth-child(even) {
+  background: rgba(17, 146, 232, 0.03);
+}
+
+.reveal table tr:hover {
+  background: rgba(17, 146, 232, 0.06);
+}
+
+/* Progress bar */
+.reveal .progress {
+  background: var(--border-subtle);
+  height: 3px;
+}
+
+.reveal .progress span {
+  background: linear-gradient(90deg, 
+    var(--teal-primary), 
+    var(--cyan-primary));
+}
+
+/* Controls */
+.reveal .controls {
+  color: var(--teal-primary);
+}
+
+/* Slide numbers */
+.reveal .slide-number {
+  background: linear-gradient(135deg, 
+    var(--teal-primary), 
+    var(--cyan-primary));
+  color: white;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+/* Dividers */
+.reveal hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--teal-light), 
+    transparent);
+  margin: 2em 0;
+}
+
+/* Premium callout box */
+.teal-callout {
+  background: rgba(17, 146, 232, 0.06);
+  border: 2px solid var(--teal-light);
+  border-left: 5px solid var(--teal-primary);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(17, 146, 232, 0.1);
+}
+
+.teal-callout h3 {
+  margin-top: 0;
+  color: var(--teal-primary);
+}
+
+/* Info box */
+.teal-info {
+  background: white;
+  border: 2px solid var(--teal-lighter);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.teal-info::before {
+  content: 'ℹ️';
+  font-size: 1.5em;
+  margin-right: 0.75em;
+  flex-shrink: 0;
+}
+
+/* Badge */
+.teal-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, 
+    var(--teal-primary), 
+    var(--cyan-primary));
+  color: white;
+  padding: 0.35em 0.9em;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.5em;
+  box-shadow: 0 2px 6px rgba(17, 146, 232, 0.3);
+}
+
+/* Grid layouts */
+.teal-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin: 1em 0;
+}
+
+.teal-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  margin: 1em 0;
+}
+
+/* Cards */
+.teal-card {
+  background: white;
+  border: 1px solid var(--border-subtle);
+  border-top: 4px solid var(--teal-primary);
+  padding: 1.5em;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.teal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(17, 146, 232, 0.15);
+}
+
+.teal-card h3 {
+  margin-top: 0;
+  color: var(--teal-primary);
+}
+
+/* Fragment animations */
+.reveal .fragment.highlight-teal {
+  opacity: 1;
+}
+
+.reveal .fragment.highlight-teal.visible {
+  color: var(--teal-primary);
+  font-weight: 600;
+}
+
+/* Images */
+.reveal img {
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button style */
+.teal-button {
+  display: inline-block;
+  background: var(--teal-primary);
+  color: white;
+  padding: 0.75em 1.5em;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.teal-button:hover {
+  background: var(--cyan-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(17, 146, 232, 0.3);
+}

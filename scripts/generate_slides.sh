@@ -24,6 +24,10 @@ OUT_DIR="${OUT_DIR:-${ROOT}/docs/slides}"
 DECK_NAME="${DECK_NAME:-$(basename "${SOURCE_MD%.*}")}"
 HTML_OUT="${OUT_DIR}/${DECK_NAME}.html"
 
+# Optional custom CSS (passed from Makefile / caller)
+# Example: CUSTOM_CSS="themes/watsonx.css"
+CUSTOM_CSS="${CUSTOM_CSS:-}"
+
 # Check Pandoc installation
 command -v pandoc >/dev/null 2>&1 || {
   echo "ERROR: Pandoc not found. Install from: https://pandoc.org/installing.html"
@@ -70,7 +74,13 @@ else
   echo "[OK] Using Reveal v3 CDN (${REVEAL_URL}) with Pandoc ${PANDOC_VER}"
 fi
 
-echo "Theme: ${REVEAL_THEME} | Transition: ${REVEAL_TRANSITION} | Highlight: ${HIGHLIGHT_STYLE}"
+if [ -n "${CUSTOM_CSS}" ]; then
+  echo "Theme: ${REVEAL_THEME} | Transition: ${REVEAL_TRANSITION} | Highlight: ${HIGHLIGHT_STYLE}"
+  echo "Custom CSS: ${CUSTOM_CSS}"
+else
+  echo "Theme: ${REVEAL_THEME} | Transition: ${REVEAL_TRANSITION} | Highlight: ${HIGHLIGHT_STYLE}"
+  echo "Custom CSS: (none)"
+fi
 
 # Show math status
 if [ "${ENABLE_MATH}" = "yes" ]; then
@@ -89,6 +99,22 @@ if ver_ge "${PANDOC_VER}" "3.8"; then
 else
   # Old option for older pandoc versions
   SYNTAX_HIGHLIGHT_OPT=(--highlight-style="${HIGHLIGHT_STYLE}")
+fi
+
+# Build CSS options for Pandoc (-c file.css)
+CSS_ARGS=()
+if [ -n "${CUSTOM_CSS}" ]; then
+  # Support one or more CSS files separated by spaces or commas
+  # Example: "themes/watsonx.css themes/extra.css"
+  IFS=', ' read -r -a _css_list <<< "${CUSTOM_CSS}"
+  for css in "${_css_list[@]}"; do
+    [ -z "${css}" ] && continue
+    if [ -f "${css}" ]; then
+      CSS_ARGS+=(-c "${css}")
+    else
+      echo "⚠️  CUSTOM_CSS file not found: ${css} (skipping)" >&2
+    fi
+  done
 fi
 
 # ========== BUILD PANDOC OPTIONS ==========
@@ -114,6 +140,7 @@ PANDOC_OPTS=(
   --variable maxScale=2.0
   --variable minScale=0.2
   "${SYNTAX_HIGHLIGHT_OPT[@]}"
+  "${CSS_ARGS[@]}"
   --metadata=pagetitle:"${DECK_NAME}"
 )
 

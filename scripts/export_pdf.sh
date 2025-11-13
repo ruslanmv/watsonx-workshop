@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # scripts/export_pdf.sh
 # Robust DeckTape export for Reveal.js slides — production-ready
+# NOTE: CSS & themes are already embedded in the HTML produced by Pandoc
+# (via --embed-resources and -c themes/*.css), so the PDF will have
+# exactly the same look as your watsonx / IBM themes.
+
 set -euo pipefail
 
 # ---- Config (env-overridable) -----------------------------------------------
@@ -12,6 +16,10 @@ SLIDES_RANGE="${SLIDES_RANGE:-1-100}"   # Explicit range for better compatibilit
 # CRITICAL: Timing parameters - INCREASED for full HD slides
 LOAD_PAUSE="${LOAD_PAUSE:-8000}"     # Initial load: 8 seconds
 PAUSE="${PAUSE:-2000}"               # Between slides: 2 seconds
+
+# Optional theme info for logging (comes from environment if set)
+REVEAL_THEME="${REVEAL_THEME:-unknown}"
+CUSTOM_CSS="${CUSTOM_CSS:-embedded in HTML}"   # we don't need it here, just for info
 
 # Default Docker flags
 # IMPORTANT:
@@ -79,6 +87,8 @@ echo "  Slides range:  ${SLIDES_RANGE}"
 echo "  Size:          ${SLIDE_SIZE}"
 echo "  Load pause:    ${LOAD_PAUSE}ms"
 echo "  Slide pause:   ${PAUSE}ms"
+echo "  Theme (info):  ${REVEAL_THEME}"
+echo "  CSS (info):    ${CUSTOM_CSS}"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # NOTE: `reveal` must come BEFORE other options
