@@ -457,7 +457,7 @@ pdf-all:
 	@echo "✅ All slide decks exported to PDF"
 
 # Merge per-deck PDFs into one PDF per "day" prefix (day0, day1, day2, day3, capstone)
-pdf-days: pdf
+pdf-days:
 	@echo "→ Building day-level merged PDFs in docs/slides/..."
 
 	@command -v $(PDF_MERGE) >/dev/null 2>&1 || { \
@@ -471,7 +471,8 @@ pdf-days: pdf
 	cd docs/slides; \
 	all_pdfs=$$(ls *.pdf 2>/dev/null | grep -E '^(day[0-9]+|capstone)-' || true); \
 	if [ -z "$$all_pdfs" ]; then \
-		echo "⚠️  No per-deck PDFs found. Run 'make pdf' first."; \
+		echo "⚠️  No per-deck PDFs found."; \
+		echo "   Run 'make pdf' first to generate per-deck PDFs."; \
 		exit 0; \
 	fi; \
 	days=$$(printf '%s\n' $$all_pdfs | sed 's/-.*//' | sort -u); \
