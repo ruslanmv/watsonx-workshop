@@ -281,6 +281,14 @@ pdf-all:
 # Merge per-deck PDFs into one PDF per "day" prefix (day0, day1, day2, day3, capstone)
 pdf-days: pdf
 	@echo "→ Building day-level merged PDFs in docs/slides/..."
+
+	@command -v $(PDF_MERGE) >/dev/null 2>&1 || { \
+		echo "❌ $(PDF_MERGE) not found. Install it first:"; \
+		echo "   • macOS (Homebrew):  brew install poppler"; \
+		echo "   • Ubuntu/Debian:     sudo apt-get install poppler-utils"; \
+		exit 127; \
+	}
+
 	@set -e; \
 	cd docs/slides; \
 	all_pdfs=$$(ls *.pdf 2>/dev/null | grep -E '^(day[0-9]+|capstone)-' || true); \
@@ -296,6 +304,7 @@ pdf-days: pdf
 		$(PDF_MERGE) $$files "$$out"; \
 	done; \
 	echo "✅ All day-level PDFs generated in docs/slides/"
+
 
 pdf-debug:
 	@echo "→ Generating PDF with debug screenshots..."
