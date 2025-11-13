@@ -1,7 +1,7 @@
 ---
 template: home.html
 title: watsonx Workshop Series
-description: Hands-on labs for Granite, RAG, Agents, and Orchestrate — built with MkDocs Material.
+description: Hands-on labs for LLMs, RAG, Agents, and Orchestrate — built with MkDocs Material.
 ---
 
 <p align="center">
@@ -28,14 +28,16 @@ description: Hands-on labs for Granite, RAG, Agents, and Orchestrate — built w
 
 ## Welcome
 
-The **watsonx Workshop Series** is a hands-on collection of tracks that teach you how to build with IBM watsonx:
+The **watsonx Workshop Series** is a hands-on set of tracks that show how to build with IBM watsonx:
 
-- **Granite** — model capabilities, prompting, local runs, and the watsonx.ai SDK  
-- **RAG** — retrieval-augmented generation from zero to production packaging  
-- **Agents** — governed, tool-using agents and evaluation workflows  
-- **Orchestrate** — end-to-end applied lab tying concepts together
+- **Day 0 – Environment** — local & cloud setup for the whole week  
+- **Day 1 – LLMs & Prompting** — Granite concepts, patterns, and safe prompting  
+- **Day 2 – RAG** — retrieval-augmented generation from zero to API & UI  
+- **Day 3 – Orchestrate & Agents** — tool-using agents and governance, end-to-end
 
-> **Note:** Everything is **Markdown-first**. Notebooks live under `labs-src/` just as references so `mkdocs build --strict` stays clean.
+> **Note:** Everything is **Markdown-first** for clean builds. Day-specific notebooks live under:
+> - `labs-src/` (governance & RAG examples)
+> - `docs/assets/notebooks/day3/` (agent notebooks reference)
 
 ---
 
@@ -43,23 +45,23 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
 === "Browse the Docs"
 
-    1. Use the left sidebar to select a **Track**.
-    2. Each track is organized as a sequence of **Labs** with copy-paste runnable code.
-    3. Start with **Granite** if you’re new to watsonx, or jump straight to **RAG**.
+    1. Use the left sidebar to pick a **Day**.
+    2. Follow the pages top-to-bottom; theory first, then labs with solutions.
+    3. Start at **Day 0** to prepare both environments.
 
-=== "Run the RAG App Locally"
+=== "Run the Accelerator (RAG) Locally"
 
     ```bash
-    # Lab 1 (Accelerator) — minimal local run
+    # Minimal end-to-end run
     cd accelerator
     python -m venv .venv
     source .venv/bin/activate         # Windows: .venv\Scripts\activate
     pip install -U pip && pip install -e .
-    cp .env.sample .env               # fill in watsonx + vector backend settings
+    cp .env.sample .env               # fill watsonx + vector backend settings
     make all                          # extract → chunk → index
     make api                          # FastAPI at http://localhost:8001/health
     # in a second terminal:
-    make ui                           # Streamlit UI at http://localhost:8501
+    make ui                           # Streamlit at http://localhost:8501
     ```
 
 ---
@@ -68,35 +70,40 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
 <div class="grid cards" markdown="1">
 
-* :material-fire: **Granite**
+* :material-laptop-account: **Day 0 – Environment Setup**
 
     ^^^
 
-    Explore Granite model families, prompting patterns, local HF/Ollama, and the watsonx.ai SDK. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/granite/labs/pre-work.md){ .md-button .md-button--primary }
+    Prepare **simple-ollama** and **simple-watsonx** envs; verify both. <br><br>
+    [:octicons-arrow-right-16: Open »](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
 
-* :material-magnify-expand: **RAG**
-
-    ^^^
-
-    Build a grounded Q&A app: ingest → chunk → embed → **Elasticsearch/Chroma** → LLM on **watsonx.ai**.  
-    Package a CLI/API and compare runs in **Evaluation Studio**. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/rag/labs/pre-work.md){ .md-button .md-button--primary }
-
-* :material-robot-outline: **Agents**
+* :material-brain: **Day 1 – LLMs & Prompting**
 
     ^^^
 
-    Tool-using, governed assistants with LangGraph and watsonx.governance; evaluate for quality and risk. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md){ .md-button .md-button--primary }
+    LLM concepts, prompt patterns & templates, lightweight eval & safety. <br><br>
+    [:octicons-arrow-right-16: Open »](tracks/day1-llm/llm-concepts.md){ .md-button .md-button--primary }
 
-* :material-cube-outline: **Orchestrate**
+* :material-magnify-expand: **Day 2 – RAG**
 
     ^^^
 
-    A full applied workshop combining components into a cohesive solution. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/orchestrate/orchestrate-workshop.md){ .md-button .md-button--primary }
+    Build a grounded Q&A app (Elasticsearch/Chroma + watsonx.ai), package and evaluate. <br><br>
+    [:octicons-arrow-right-16: START HERE »](tracks/day2-rag/START_HERE.md){ .md-button .md-button--primary }
 
+* :material-robot-outline: **Day 3 – Orchestrate & Agents**
+
+    ^^^
+
+    Agentic AI: CrewAI/LangGraph patterns → **watsonx Orchestrate** with governance. <br><br>
+    [:octicons-arrow-right-16: Open »](tracks/day3-orchestrate/agentic-ai-overview.md){ .md-button .md-button--primary }
+
+* :material-rocket-launch-outline: **Capstone (Optional)**
+
+    ^^^
+
+    Team up to ship a mini project using the accelerator & governance workflow. <br><br>
+    [:octicons-arrow-right-16: Open »](tracks/capstone/capstone-overview.md){ .md-button }
 </div>
 
 ---
@@ -105,7 +112,7 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
 - **Pre-work**: environment, credentials, and sample data  
 - **Lab 1**: end-to-end accelerator (HTML/PDF → vectors → API + Streamlit)  
-- **Lab 2** *(pick one or compare)*:
+- **Lab 2** *(choose or compare)*:
   - 2A: **Elasticsearch + LangChain**
   - 2B: **Elasticsearch Python SDK** (no LangChain)
   - 2C: **Chroma + LangChain** (local/dev)
@@ -113,50 +120,45 @@ The **watsonx Workshop Series** is a hands-on collection of tracks that teach yo
 
 ```mermaid
 flowchart TD
-  %% Ingestion
   subgraph ING[Ingestion]
     direction TB
     A[Docs: HTML • PDF] --> B[Extractor & Cleaner]
     B --> C[Chunker]
   end
-
-  %% Retrieval
   subgraph RET[Retrieval]
     direction TB
     C --> D[Embeddings]
     D -->|dense vectors| E[(Vector Store ES/Chroma)]
     E -->|top-k| F[Reranker optional]
   end
-
-  %% Generation
   subgraph GEN[Generation]
     direction TB
     F --> G[Prompt Composer]
     G --> H[LLM on watsonx.ai]
     H --> I[Answer + Citations]
   end
-
-  %% Serving
   subgraph SRV[Serving]
     direction TB
     I --> J[FastAPI /ask]
     J --> K[Streamlit Chat UI]
   end
-
-  %% Style definitions
   classDef source fill:#E3F2FD,stroke:#1E88E5,color:#0D47A1,stroke-width:1px;
   classDef process fill:#F1F8E9,stroke:#7CB342,color:#2E7D32,stroke-width:1px;
   classDef store fill:#FFF3E0,stroke:#FB8C00,color:#E65100,stroke-width:1px;
   classDef model fill:#F3E5F5,stroke:#8E24AA,color:#4A148C,stroke-width:1px;
   classDef output fill:#E0F7FA,stroke:#00ACC1,color:#006064,stroke-width:1px;
+  class A source; class B,C,D,F,G,J,K process; class E store; class H model; class I output;
+````
 
-  %% Class assignments
-  class A source;
-  class B,C,D,F,G,J,K process;
-  class E store;
-  class H model;
-  class I output;
-```
+---
+
+## Day 3 Agent Notebooks (Reference)
+
+* `docs/assets/notebooks/day3/agent_crewai.ipynb`
+* `docs/assets/notebooks/day3/agent_langgraph.ipynb`
+* `docs/assets/notebooks/day3/agent_watsonx.ipynb`
+
+> Use these alongside **Lab 3.1**: [Agent + Accelerator API](tracks/day3-orchestrate/lab-1-agent-watsonx.md).
 
 ---
 
@@ -164,15 +166,17 @@ flowchart TD
 
 * **Production-ready samples** (FastAPI + Streamlit, CLI, Dockerfiles)
 * **Reproducible configs** (`.env.sample`, `requirements.txt` / `pyproject.toml`)
-* **Evaluation workflows** with **Evaluation Studio** to compare models & parameters
+* **Evaluation workflows** with **watsonx.governance** to compare models & parameters
 
 !!! tip "Everything is Markdown"
-Each lab is designed to be followed directly from the page. Copy-paste commands and code blocks; notebooks are optional references only.
+All labs are follow-along pages. Copy-paste commands and code blocks; notebooks are optional helpers.
 
 ---
 
-## Next steps
+## Next Steps
 
-[Next → Granite Pre-work](tracks/granite/labs/pre-work.md){ .md-button .md-button--primary }
+[Start → Day 0 Prereqs](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
+[Jump to Day 1 START HERE](tracks/day1-llm/README.md){ .md-button }
 [Resources](resources.md){ .md-button }
+
 

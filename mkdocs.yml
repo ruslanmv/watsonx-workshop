@@ -4,45 +4,43 @@ site_url: https://ruslanmv.github.io/watsonx-workshop
 site_author: Ruslan Magana
 
 # Repository
-repo_name: watsonx-workshop
+repo_name: ruslanmv/watsonx-workshop
 repo_url: https://github.com/ruslanmv/watsonx-workshop
-edit_uri: edit/main/docs
+edit_uri: edit/main/docs/
 
 # Navigation
 nav:
   - Welcome: index.md
-  - Tracks:
-    - Granite:
-      - Lab 0. Pre-work: tracks/granite/labs/pre-work.md
-      - Lab 1. Granite Overview & Playground: tracks/granite/labs/lab-1-overview-playground.md
-      - Lab 2. Granite via Hugging Face & Ollama: tracks/granite/labs/lab-2-local-hf-ollama.md
-      - Lab 3. Granite on watsonx.ai (Studio + SDK): tracks/granite/labs/lab-3-studio-sdk.md
-      - Lab 3B. Prompt Templates & Deployment: tracks/granite/labs/lab-3b-prompt-templates.md
-      - Bonus:
-        - Text-to-SQL (Granite Code): tracks/granite/bonus/granite-text2sql.md
-        - Time Series (TTM): tracks/granite/bonus/time-series-ttm.md
-      - Solutions:
-        - Pre-work — Solution: tracks/granite/solutions/pre-work-solution.md
-        - Lab 1 — Solution: tracks/granite/solutions/lab-1-overview-playground-solution.md
-        - Lab 2 — Solution: tracks/granite/solutions/lab-2-local-hf-ollama-solution.md
-        - Lab 3 — Solution: tracks/granite/solutions/lab-3-studio-sdk-solution.md
-        - Lab 3B — Solution: tracks/granite/solutions/lab-3b-prompt-templates-solution.md
-        - Bonus — Text-to-SQL Solution: tracks/granite/solutions/granite-text2sql-solution.md
-        - Bonus — Time Series (TTM) Solution: tracks/granite/solutions/time-series-ttm-solution.md
-    - RAG:
-      - Labs:
-        - Pre-work: tracks/rag/labs/pre-work.md
-        - Lab 1 — RAG Accelerator: tracks/rag/labs/lab-1-accelerator.md
-        - Lab 2A — ES + LangChain: tracks/rag/labs/lab-2a-elastic-langchain.md
-        - Lab 2B — ES Python SDK: tracks/rag/labs/lab-2b-elastic-python-sdk.md
-        - Lab 2C — Chroma + LangChain: tracks/rag/labs/lab-2c-chroma-langchain.md
-        - Lab 3 — Packaging & Evaluation: tracks/rag/labs/lab-3-packaging-eval.md
-        - Code Assistant Vector Stores: tracks/rag/labs/code-assistant-vectorstores.md
-    - Agents:
-      - Lab 2. Governed HR Assistant (LangGraph + Catalog): tracks/agents/labs/lab-2-hr-assistant-governed-catalog.md
-      - Lab 3. Evaluation Studio (watsonx.governance): tracks/agents/labs/lab-3-evaluation-studio.md
-    - Orchestrate:
-      - Watsonx Orchestrate: tracks/orchestrate/orchestrate-workshop.md
+  - Workshop:
+    - "Day 0 – Environment Setup (Optional, Monday)":
+      - "0.1 Prerequisites & Accounts": tracks/day0-env/prereqs-and-accounts.md
+      - "0.2 Setup simple-ollama-environment": tracks/day0-env/setup-simple-ollama-environment.md
+      - "0.3 Setup simple-watsonx-enviroment": tracks/day0-env/setup-simple-watsonx-enviroment.md
+      - "0.4 Verify Both Environments": tracks/day0-env/verify-environments.md
+    - "Day 1 – LLMs & Prompting (Ollama vs watsonx)":
+      - "1.0 LLM Concepts & Architecture": tracks/day1-llm/llm-concepts.md
+      - "Lab 1.1 – Quickstart in Both Environments": tracks/day1-llm/lab-1-quickstart-two-envs.md
+      - "1.2 Prompt Patterns & Templates": tracks/day1-llm/prompt-patterns-theory.md
+      - "Lab 1.2 – Prompt Templates in Ollama & watsonx": tracks/day1-llm/lab-2-prompt-templates.md
+      - "1.3 Lightweight Evaluation & Safety": tracks/day1-llm/eval-safety-theory.md
+      - "Lab 1.3 – Micro-Evaluation Exercise": tracks/day1-llm/lab-3-micro-eval.md
+    - "Day 2 – Retrieval-Augmented Generation (RAG)":
+      - "2.0 RAG Architecture Overview": tracks/day2-rag/Theory_01_RAG_Architecture_Overview.md
+      - "2.x START HERE": tracks/day2-rag/START_HERE.md
+      - "2.x Supplementary Quick Start": tracks/day2-rag/SUPPLEMENTARY_QUICK_START.md
+      - "2.x Workshop README": tracks/day2-rag/Day2_RAG_Workshop_README.md
+      - "2.x Instructor Guide": tracks/day2-rag/Day2_RAG_Instructor_Guide.md
+      - "2.x Complete Solutions Guide": tracks/day2-rag/Day2_RAG_Complete_Solutions_Guide.md
+      - "2.x Accelerator & IBM Tooling (Supplementary)": tracks/day2-rag/Day2_Supplementary_Material_Accelerator_IBM_Tooling.md
+    - "Day 3 – Orchestration, Agents & Recap":
+      - "3.0 Orchestration & Agents Overview": tracks/day3-orchestrate/agentic-ai-overview.md
+      - "Lab 3.1 – Agent in simple-watsonx-enviroment + Accelerator API": tracks/day3-orchestrate/lab-1-agent-watsonx.md
+      - "3.2 Bridge to watsonx Orchestrate & Governance": tracks/day3-orchestrate/bridge-orchestrate-governance.md
+      - "3.3 watsonx Orchestrate Labs (ADK)": tracks/day3-orchestrate/watsonx-orchestrate-labs.md
+      - "3.4 Recap & Next Steps (2h Discussion)": tracks/day3-orchestrate/recap-and-next-steps.md
+    - "Optional – Capstone Projects (Friday)":
+      - "Capstone Overview": tracks/capstone/capstone-overview.md
+      - "Capstone Project Ideas": tracks/capstone/capstone-project-ideas.md
   - Resources: resources.md
 
 # Extra (wallpaper + social)
@@ -58,20 +56,38 @@ copyright: "Copyright © 2025 — Ruslan Magana"
 # Theme
 theme:
   name: material
+  language: en
   custom_dir: docs/.overrides
+  logo: assets/images/watsonx-wallpaper.jpg      # <-- switched to valid JPG
+  favicon: assets/images/watsonx-wallpaper.jpg   # <-- switched to valid JPG
   features:
     - navigation.tabs
+    - navigation.sections
     - navigation.footer
     - navigation.instant
+    - navigation.tracking
+    - toc.integrate
     - content.code.copy
     - content.tabs.link
+  palette:
+    - scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
 
 # Assets
 extra_css:
   - assets/css/wx-hero.css
 extra_javascript:
   - assets/js/wx-hero.js
-  # Mermaid for the diagram in index.md
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
 
 # Plugins
