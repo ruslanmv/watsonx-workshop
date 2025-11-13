@@ -1,81 +1,86 @@
-name: Docs (MkDocs → GitHub Pages)
+name: deploy-mkdocs
 
 on:
   push:
-    branches: [ main, master ]
-    paths:
-      - "docs/**"
-      - "mkdocs.yml"
-      - "README.md"
-      - ".github/workflows/docs.yml"
-  pull_request:
-    branches: [ main, master ]
-    paths:
-      - "docs/**"
-      - "mkdocs.yml"
-      - "README.md"
+    branches: [ 'master' ]
   workflow_dispatch:
 
-# Required permissions for GitHub Pages deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Prevent concurrent deployments to Pages
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  build:
-    name: Build MkDocs site
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # ---------------------------
+      # 1) Checkout source
+      # ---------------------------
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Python
+      # ---------------------------
+      # 2) Python (3.11 to match Makefile)
+      # ---------------------------
+      - name: Setup Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-          cache: "pip"
+          python-version: '3.11'
 
-      - name: Install doc dependencies
+      # ---------------------------
+      # 3) System tools: Pandoc + pdfunite (for pdf-days)
+      # ---------------------------
+      - name: Install system tools (Pandoc, pdfunite)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc poppler-utils
+
+      # Optional: verify Docker is available for DeckTape
+      - name: Check Docker
+        run: docker --version
+
+      # ---------------------------
+      # 4) Python dependencies
+      #    (use your pyproject if present, otherwise minimal deps)
+      # ---------------------------
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install \
-            mkdocs \
-            "mkdocs-material[imaging]" \
-            mkdocs-macros-plugin \
-            pymdown-extensions \
-            mkdocs-mermaid2-plugin
+          if [ -f "pyproject.toml" ]; then
+            pip install -e .
+          else
+            pip install mkdocs-material mkdocs-macros-plugin
+          fi
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Build site (mkdocs)
+      # ---------------------------
+      # 5) Generate Reveal.js HTML slides
+      #    (Makefile → scripts/generate_all_slides.sh → scripts/generate_slides.sh)
+      # ---------------------------
+      - name: Generate HTML slides (all decks)
         run: |
-          mkdocs --version
-          mkdocs build --strict
+          make slides
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      # ---------------------------
+      # 6) Export PDFs (per deck + per day)
+      #    make pdf   -> DeckTape for each HTML in docs/slides/
+      #    make pdf-days -> merge into day0.pdf, day1.pdf, etc.
+      # ---------------------------
+      - name: Export slide decks to PDF (per deck + per day)
+        run: |
+          make pdf
+          make pdf-days
+
+      # ---------------------------
+      # 7) Build MkDocs site
+      #    docs/slides/*.html + *.pdf will be copied into site/slides/
+      # ---------------------------
+      - name: Build MkDocs site
+        run: mkdocs build --strict --verbose
+
+      # ---------------------------
+      # 8) Deploy to GitHub Pages
+      # ---------------------------
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./site
-
-  deploy:
-    name: Deploy to GitHub Pages
-    # Only deploy on push to default branch or manual dispatch; skip for PRs
-    if: ${{ github.event_name != 'pull_request' }}
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

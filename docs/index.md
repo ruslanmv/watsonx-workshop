@@ -4,6 +4,7 @@ title: watsonx Workshop Series
 description: Hands-on labs for LLMs, RAG, Agents, and Orchestrate — built with MkDocs Material.
 ---
 
+
 <p align="center">
   <a href="https://www.ibm.com/products/watsonx-ai" target="_blank" rel="noopener">
     <img src="https://img.shields.io/badge/built%20for-watsonx.ai-0b62a3?logo=ibm&logoColor=white" alt="watsonx.ai">
@@ -15,6 +16,7 @@ description: Hands-on labs for LLMs, RAG, Agents, and Orchestrate — built with
     <img src="https://img.shields.io/badge/docs-MkDocs%20Material-000000?logo=markdown" alt="MkDocs Material">
   </a>
 </p>
+
 <div align="center">
   <a href="https://www.python.org" target="_blank" rel="noopener">
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="54" height="54"/>
@@ -35,9 +37,11 @@ The **watsonx Workshop Series** is a hands-on set of tracks that show how to bui
 - **Day 2 – RAG** — retrieval-augmented generation from zero to API & UI  
 - **Day 3 – Orchestrate & Agents** — tool-using agents and governance, end-to-end
 
-> **Note:** Everything is **Markdown-first** for clean builds. Day-specific notebooks live under:
-> - `labs-src/` (governance & RAG examples)
-> - `docs/assets/notebooks/day3/` (agent notebooks reference)
+!!! note "Markdown-First Approach"
+    Everything is **Markdown-first** for clean builds. Day-specific notebooks live under:
+    
+    - `labs-src/` (governance & RAG examples)
+    - `docs/assets/notebooks/day3/` (agent notebooks reference)
 
 ---
 
@@ -68,43 +72,104 @@ The **watsonx Workshop Series** is a hands-on set of tracks that show how to bui
 
 ## Choose a Track
 
-<div class="grid cards" markdown="1">
+<div class="grid cards" markdown>
 
-* :material-laptop-account: **Day 0 – Environment Setup**
+-   :material-laptop-account: __Day 0 – Environment Setup__
 
-    ^^^
+    ---
 
-    Prepare **simple-ollama** and **simple-watsonx** envs; verify both. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
+    Prepare **simple-ollama** and **simple-watsonx** envs; verify both.
+    
+    [:octicons-arrow-right-16: Open](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
 
-* :material-brain: **Day 1 – LLMs & Prompting**
+-   :material-brain: __Day 1 – LLMs & Prompting__
 
-    ^^^
+    ---
 
-    LLM concepts, prompt patterns & templates, lightweight eval & safety. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/day1-llm/llm-concepts.md){ .md-button .md-button--primary }
+    LLM concepts, prompt patterns & templates, lightweight eval & safety.
+    
+    [:octicons-arrow-right-16: Open](tracks/day1-llm/llm-concepts.md){ .md-button .md-button--primary }
 
-* :material-magnify-expand: **Day 2 – RAG**
+-   :material-magnify-expand: __Day 2 – RAG__
 
-    ^^^
+    ---
 
-    Build a grounded Q&A app (Elasticsearch/Chroma + watsonx.ai), package and evaluate. <br><br>
-    [:octicons-arrow-right-16: START HERE »](tracks/day2-rag/START_HERE.md){ .md-button .md-button--primary }
+    Build a grounded Q&A app (Elasticsearch/Chroma + watsonx.ai), package and evaluate.
+    
+    [:octicons-arrow-right-16: START HERE](tracks/day2-rag/START_HERE.md){ .md-button .md-button--primary }
 
-* :material-robot-outline: **Day 3 – Orchestrate & Agents**
+-   :material-robot-outline: __Day 3 – Orchestrate & Agents__
 
-    ^^^
+    ---
 
-    Agentic AI: CrewAI/LangGraph patterns → **watsonx Orchestrate** with governance. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/day3-orchestrate/agentic-ai-overview.md){ .md-button .md-button--primary }
+    Agentic AI: CrewAI/LangGraph patterns → **watsonx Orchestrate** with governance.
+    
+    [:octicons-arrow-right-16: Open](tracks/day3-orchestrate/agentic-ai-overview.md){ .md-button .md-button--primary }
 
-* :material-rocket-launch-outline: **Capstone (Optional)**
+-   :material-rocket-launch-outline: __Capstone (Optional)__
 
-    ^^^
+    ---
 
-    Team up to ship a mini project using the accelerator & governance workflow. <br><br>
-    [:octicons-arrow-right-16: Open »](tracks/capstone/capstone-overview.md){ .md-button }
+    Team up to ship a mini project using the accelerator & governance workflow.
+    
+    [:octicons-arrow-right-16: Open](tracks/capstone/capstone-overview.md){ .md-button }
+
 </div>
+
+---
+
+## Presentation Slides
+
+Use the docs for **step-by-step labs**, and the **slides** for live delivery or sharing with participants.
+
+### HTML Decks (Interactive)
+
+<div class="grid cards" markdown>
+
+-   :material-presentation: __Day 0 – Environment Setup__
+
+    ---
+
+    Environment overview, accounts, and validation of both stacks.
+
+    [:material-monitor-dashboard: View Slides](slides/day0-prereqs-and-accounts.html){ .md-button .md-button--primary }
+
+-   :material-presentation: __Day 1 – LLMs & Prompting__
+
+    ---
+
+    LLM concepts, prompt patterns & templates, eval & safety.
+
+    [:material-monitor-dashboard: View Slides](slides/day1-llm-concepts.html){ .md-button .md-button--primary }
+
+-   :material-presentation: __Day 2 – RAG__
+
+    ---
+
+    RAG architecture, retrieval patterns, and accelerator alignment.
+
+    [:material-monitor-dashboard: View Slides](slides/day2-rag-architecture-overview.html){ .md-button .md-button--primary }
+
+-   :material-presentation: __Day 3 – Orchestrate & Agents__
+
+    ---
+
+    Agentic AI, orchestration, and governance recap.
+
+    [:material-monitor-dashboard: View Slides](slides/day3-agentic-ai-overview.html){ .md-button .md-button--primary }
+
+-   :material-presentation: __Capstone__
+
+    ---
+
+    Project overview, ideas, and framing for the final exercise.
+
+    [:material-monitor-dashboard: View Slides](slides/capstone-overview.html){ .md-button .md-button--primary }
+
+</div>
+
+!!! tip "PDF Export"
+    To export slides as PDF, open any HTML deck and use your browser's print function (Ctrl+P / Cmd+P) with "Save as PDF" option.
 
 ---
 
@@ -148,35 +213,71 @@ flowchart TD
   classDef model fill:#F3E5F5,stroke:#8E24AA,color:#4A148C,stroke-width:1px;
   classDef output fill:#E0F7FA,stroke:#00ACC1,color:#006064,stroke-width:1px;
   class A source; class B,C,D,F,G,J,K process; class E store; class H model; class I output;
-````
+```
 
 ---
 
 ## Day 3 Agent Notebooks (Reference)
 
-* `docs/assets/notebooks/day3/agent_crewai.ipynb`
-* `docs/assets/notebooks/day3/agent_langgraph.ipynb`
-* `docs/assets/notebooks/day3/agent_watsonx.ipynb`
+Agent implementation examples for different frameworks:
 
-> Use these alongside **Lab 3.1**: [Agent + Accelerator API](tracks/day3-orchestrate/lab-1-agent-watsonx.md).
+- `docs/assets/notebooks/day3/agent_crewai.ipynb` — Multi-agent collaboration
+- `docs/assets/notebooks/day3/agent_langgraph.ipynb` — Stateful workflows
+- `docs/assets/notebooks/day3/agent_watsonx.ipynb` — watsonx Orchestrate integration
+
+!!! info "Lab Integration"
+    Use these alongside **Lab 3.1**: [Agent + Accelerator API](tracks/day3-orchestrate/lab-1-agent-watsonx.md).
 
 ---
 
-## What’s Included
+## What's Included
 
-* **Production-ready samples** (FastAPI + Streamlit, CLI, Dockerfiles)
-* **Reproducible configs** (`.env.sample`, `requirements.txt` / `pyproject.toml`)
-* **Evaluation workflows** with **watsonx.governance** to compare models & parameters
+- **Production-ready samples** — FastAPI + Streamlit, CLI, Dockerfiles
+- **Reproducible configs** — `.env.sample`, `requirements.txt` / `pyproject.toml`
+- **Evaluation workflows** — watsonx.governance for model comparison
 
 !!! tip "Everything is Markdown"
-All labs are follow-along pages. Copy-paste commands and code blocks; notebooks are optional helpers.
+    All labs are follow-along pages. Copy-paste commands and code blocks; notebooks are optional helpers.
 
 ---
 
 ## Next Steps
 
-[Start → Day 0 Prereqs](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
-[Jump to Day 1 START HERE](tracks/day1-llm/README.md){ .md-button }
-[Resources](resources.md){ .md-button }
+<div class="grid cards" markdown>
 
+-   :material-play-circle: __Begin Day 0__
+    
+    ---
+    
+    Set up and verify both environments
+    
+    [:octicons-arrow-right-16: Start](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
 
+-   :material-rocket-launch: __Jump to RAG__
+    
+    ---
+    
+    Start building immediately if ready
+    
+    [:octicons-arrow-right-16: Go](tracks/day2-rag/START_HERE.md){ .md-button .md-button--primary }
+
+-   :material-book-open-variant: __Resources__
+    
+    ---
+    
+    Additional learning materials
+    
+    [:octicons-arrow-right-16: Browse](resources.md){ .md-button }
+
+</div>
+
+---
+
+<div align="center">
+  <p><strong>Built with ❤️ for the watsonx Community</strong></p>
+  <p>
+    <a href="https://github.com/ruslanmv/watsonx-workshop">⭐ Star on GitHub</a> •
+    <a href="https://github.com/ruslanmv/watsonx-workshop/issues">Report Issue</a> •
+    <a href="https://github.com/ruslanmv/watsonx-workshop/discussions">Discussions</a>
+  </p>
+</div>

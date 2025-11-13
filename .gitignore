@@ -9,6 +9,11 @@ site/
 # Some plugins create caches here
 .cache/
 
+# Generated Reveal.js slides (HTML/PDF) + DeckTape debug
+docs/slides/*.html
+docs/slides/*.pdf
+debug-slides/
+
 # Python bytecode & caches
 __pycache__/
 **/__pycache__/
@@ -46,7 +51,7 @@ MANIFEST
 pip-wheel-metadata/
 pip-log.txt
 pip-delete-this-directory.txt
-# .python-version is often user-specific; ignore if you use pyenv
+# .python-version is often user-specific; ignore if you use pyenv/uv
 .python-version
 
 # Testing & coverage
@@ -91,6 +96,7 @@ Icon?
 .Trashes
 ehthumbs.db
 Thumbs.db
+
 # Temp files
 *.swp
 *.swo
@@ -113,20 +119,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Data & large artifacts (keep examples small in repo)
+# (NOTE: we do NOT ignore *.csv/*.tsv/etc globally, so workshop datasets in docs/ are tracked)
 data/
 datasets/
-*.sqlite
-*.sqlite3
-*.db
-*.parquet
-*.feather
-*.arrow
-*.orc
-*.csv
-*.tsv
-*.xlsx
-*.xls
-
 
 # Secrets & local configs
 .env
@@ -160,4 +155,7 @@ images/generated/
 *.dSYM/
 *.stackdump
 *.crash
-/rag-accelerator/assets/.METADATA
+
+# RAG accelerator metadata (generated)
+rag-accelerator/assets/.METADATA
+/backup
