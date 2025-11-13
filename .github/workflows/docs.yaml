@@ -2,15 +2,23 @@ name: deploy-mkdocs
 
 on:
   push:
-    branches: [ 'master' ]
+    branches: [ main, master ]
   workflow_dispatch:
 
-# 👇 Add this block
+# Required permissions for GitHub Pages deployment
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent concurrent deployments to Pages
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-deploy:
+  build:
+    name: Build slides, PDFs and MkDocs site
     runs-on: ubuntu-latest
 
     steps:
@@ -84,11 +92,30 @@ jobs:
         run: mkdocs build --strict --verbose
 
       # ---------------------------
-      # 9) Deploy to GitHub Pages
+      # 9) Configure Pages
       # ---------------------------
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # ---------------------------
+      # 10) Upload Pages artifact
+      # ---------------------------
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
-          # publish_branch: gh-pages  # (optional, default is gh-pages)
+          path: ./site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    # Only deploy on push to the branches above or manual dispatch; skip for PRs
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
