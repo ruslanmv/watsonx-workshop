@@ -60,6 +60,14 @@ jobs:
           make slides
 
       # ---------------------------
+      # FIX: Ensure output directories are writable by Docker
+      # ---------------------------
+      - name: Fix permissions for PDF output
+        run: |
+          mkdir -p docs/slides
+          chmod -R 777 docs/slides
+
+      # ---------------------------
       # 6) Export PDFs (per deck + per day)
       #    make pdf   -> DeckTape for each HTML in docs/slides/
       #    make pdf-days -> merge into day0.pdf, day1.pdf, etc.
