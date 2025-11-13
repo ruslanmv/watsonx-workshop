@@ -4,7 +4,7 @@
 set -euo pipefail
 
 # ---- Config (env-overridable) -----------------------------------------------
-# Use GHCR multi-arch image by default so Apple Silicon (arm64) works
+# Default image matches the Makefile (multi-arch, works on amd64 & arm64)
 DECKTAPE_IMAGE="${DECKTAPE_IMAGE:-ghcr.io/astefanutti/decktape:3.15.0}"
 SLIDE_SIZE="${SLIDE_SIZE:-1920x1080}"
 SLIDES_RANGE="${SLIDES_RANGE:-1-100}"   # Explicit range for better compatibility
@@ -13,7 +13,13 @@ SLIDES_RANGE="${SLIDES_RANGE:-1-100}"   # Explicit range for better compatibilit
 LOAD_PAUSE="${LOAD_PAUSE:-8000}"     # Initial load: 8 seconds
 PAUSE="${PAUSE:-2000}"               # Between slides: 2 seconds
 
-# Default Docker flags (no user override, keep container defaults for Chrome)
+# Default Docker flags
+# IMPORTANT:
+# - We DO NOT set `-u $(id -u):$(id -g)` by default anymore.
+#   On GitHub Actions this was causing EACCES when DeckTape tried to
+#   write PDFs into the mounted /work directory.
+# - If you *really* want to run as host UID locally, you can override:
+#     DOCKER_RUN_EXTRA="--shm-size=2g -e HOME=/tmp -u $(id -u):$(id -g)" make pdf
 if [ -z "${DOCKER_RUN_EXTRA:-}" ]; then
   DOCKER_RUN_EXTRA="--shm-size=2g -e HOME=/tmp"
 fi
@@ -50,7 +56,7 @@ command -v docker >/dev/null 2>&1 || { echo "Docker required"; exit 1; }
 
 # Ensure the DeckTape image is present
 docker image inspect "${DECKTAPE_IMAGE}" >/dev/null 2>&1 || {
-  echo "Pulling DeckTape image (${DECKTAPE_IMAGE})..."
+  echo "Pulling DeckTape image..."
   docker pull "${DECKTAPE_IMAGE}"
 }
 
@@ -75,7 +81,7 @@ echo "  Load pause:    ${LOAD_PAUSE}ms"
 echo "  Slide pause:   ${PAUSE}ms"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# CRITICAL FIX: 'reveal' must come BEFORE other options
+# NOTE: `reveal` must come BEFORE other options
 docker run --rm -t \
   ${DOCKER_RUN_EXTRA} \
   -v "${ROOT}:${MOUNT_POINT}" \
