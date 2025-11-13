@@ -1,0 +1,3549 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Ruslan Magana">
+      
+      
+        <link rel="canonical" href="https://ruslanmv.github.io/watsonx-workshop/tracks/day2-rag/Theory_01_RAG_Architecture_Overview/">
+      
+      
+        <link rel="prev" href="../../day1-llm/day1-summary-and-schedule/">
+      
+      
+        <link rel="next" href="../START_HERE/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/watsonx-wallpaper.jpg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>2.0 RAG Architecture Overview - watsonx Workshop Series</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/wx-hero.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="2.0 RAG Architecture Overview - watsonx Workshop Series" />
+<meta property="og:image" content="https://ruslanmv.github.io/watsonx-workshop/assets/images/social/tracks/day2-rag/Theory_01_RAG_Architecture_Overview.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://ruslanmv.github.io/watsonx-workshop/tracks/day2-rag/Theory_01_RAG_Architecture_Overview/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="2.0 RAG Architecture Overview - watsonx Workshop Series" />
+<meta property="twitter:image" content="https://ruslanmv.github.io/watsonx-workshop/assets/images/social/tracks/day2-rag/Theory_01_RAG_Architecture_Overview.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-1-rag-architecture-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="watsonx Workshop Series" class="md-header__button md-logo" aria-label="watsonx Workshop Series" data-md-component="logo">
+      
+  <img src="../../../assets/images/watsonx-wallpaper.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            watsonx Workshop Series
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.0 RAG Architecture Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ruslanmv/watsonx-workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ruslanmv/watsonx-workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../day0-env/prereqs-and-accounts/" class="md-tabs__link">
+          
+  
+  
+  Workshop
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../slides/day0-prereqs-and-accounts.html" class="md-tabs__link">
+          
+  
+  
+  Slides
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../resources/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Resources
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="watsonx Workshop Series" class="md-nav__button md-logo" aria-label="watsonx Workshop Series" data-md-component="logo">
+      
+  <img src="../../../assets/images/watsonx-wallpaper.jpg" alt="logo">
+
+    </a>
+    watsonx Workshop Series
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ruslanmv/watsonx-workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ruslanmv/watsonx-workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workshop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workshop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 0 – Environment Setup (Optional, Monday)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 0 – Environment Setup (Optional, Monday)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day0-env/prereqs-and-accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.1 Prerequisites & Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day0-env/setup-simple-ollama-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2 Setup simple-ollama-environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day0-env/setup-simple-watsonx-enviroment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3 Setup simple-watsonx-enviroment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day0-env/verify-environments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4 Verify Both Environments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 1 – LLMs & Prompting (Ollama vs watsonx)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 1 – LLMs & Prompting (Ollama vs watsonx)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/llm-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.0 LLM Concepts & Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/lab-1-quickstart-two-envs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1.1 – Quickstart in Both Environments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/prompt-patterns-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 Prompt Patterns & Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/lab-2-prompt-templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1.2 – Prompt Templates in Ollama & watsonx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/eval-safety-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3 Lightweight Evaluation & Safety
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/lab-3-micro-eval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1.3 – Micro-Evaluation Exercise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1-llm/day1-summary-and-schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.4 Day 1 Summary & Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 2 – Retrieval-Augmented Generation (RAG)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 2 – Retrieval-Augmented Generation (RAG)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.0 RAG Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.0 RAG Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What is RAG?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. What is RAG?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-rag-solves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem RAG Solves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real-World Use Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-components-of-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Core Components of RAG
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Components of RAG">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-document-store-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Document Store / Corpus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-chunking-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Chunking / Preprocessing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Embeddings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-vector-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Vector Store
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-retriever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Retriever
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-llm-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 LLM + Prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-typical-rag-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Typical RAG Flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Typical RAG Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complete-rag-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete RAG Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-ingestion-one-time-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Ingestion (One-Time Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-indexing-one-time-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Indexing (One-Time Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-retrieval-per-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Retrieval (Per Query)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-generation-per-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Generation (Per Query)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-trade-offs-in-rag-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Trade-Offs in RAG Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Trade-Offs in RAG Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-latency-vs-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Latency vs Accuracy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-embedding-model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Embedding Model Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-index-size-and-refresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Index Size and Refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-rag-in-the-ai-accelerator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. RAG in the AI Accelerator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. RAG in the AI Accelerator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accelerator-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accelerator Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ingestion-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ingestion &amp; Indexing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-retrieval-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Retrieval &amp; Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-how-day-2-labs-map-to-rag-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. How Day 2 Labs Map to RAG Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. How Day 2 Labs Map to RAG Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lab-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab Progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressive-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progressive Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#papers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Papers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../START_HERE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x START HERE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SUPPLEMENTARY_QUICK_START/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x Supplementary Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Day2_RAG_Workshop_README/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x Workshop README
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Day2_RAG_Instructor_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x Instructor Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Day2_RAG_Complete_Solutions_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x Complete Solutions Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Day2_Supplementary_Material_Accelerator_IBM_Tooling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x Accelerator & IBM Tooling (Supplementary)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 3 – Orchestration, Agents & Recap
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 3 – Orchestration, Agents & Recap
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3-orchestrate/agentic-ai-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0 Orchestration & Agents Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3-orchestrate/lab-1-agent-watsonx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3.1 – Agent in simple-watsonx-enviroment + Accelerator API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3-orchestrate/bridge-orchestrate-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Bridge to watsonx Orchestrate & Governance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3-orchestrate/watsonx-orchestrate-labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 watsonx Orchestrate Labs (ADK)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3-orchestrate/recap-and-next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.4 Recap & Next Steps (2h Discussion)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optional – Capstone Projects (Friday)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optional – Capstone Projects (Friday)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/capstone-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/capstone-project-ideas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone Project Ideas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Slides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 0 – Environment Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 0 – Environment Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day0-prereqs-and-accounts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.1 Prereqs & Accounts (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day0-setup-simple-ollama-environment.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.2 Setup simple-ollama (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day0-setup-simple-watsonx-environment.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.3 Setup simple-watsonx (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day0-verify-environments.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0.4 Verify Environments (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 1 – LLMs & Prompting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 1 – LLMs & Prompting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day1-llm-concepts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.0 LLM Concepts (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day1-prompt-patterns-theory.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2 Prompt Patterns (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day1-eval-safety-theory.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3 Evaluation & Safety (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day1-summary-and-schedule.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 1 Summary (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 2 – RAG
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 2 – RAG
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day2-rag-architecture-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.0 RAG Architecture (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 3 – Orchestration & Recap
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 3 – Orchestration & Recap
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day3-agentic-ai-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.0 Orchestration Overview (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day3-bridge-orchestrate-governance.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2 Governance (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/day3-recap-and-next-steps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.4 Recap (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Capstone
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/capstone-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone Overview (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../slides/capstone-project-ideas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone Ideas (HTML)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="module-1-rag-architecture-overview">Module 1: RAG Architecture Overview<a class="headerlink" href="#module-1-rag-architecture-overview" title="Permanent link">&para;</a></h1>
+<h2 id="learning-objectives">📚 Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this module, you will be able to:
+- Define Retrieval Augmented Generation and explain its value
+- Identify the core components of a RAG system
+- Describe the typical RAG flow from ingestion to generation
+- Understand trade-offs in RAG system design
+- Map RAG concepts to the AI Accelerator framework</p>
+<hr />
+<h2 id="1-what-is-rag">1. What is RAG?<a class="headerlink" href="#1-what-is-rag" title="Permanent link">&para;</a></h2>
+<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h3>
+<p><strong>Retrieval Augmented Generation (RAG)</strong> is a technique that enhances Large Language Models (LLMs) by providing them with relevant external knowledge retrieved from a document corpus during the generation process.</p>
+<div class="highlight"><pre><span></span><code>Traditional LLM:           RAG-Enhanced LLM:
+
+User Query                User Query
+    ↓                          ↓
+   LLM  →  Answer          Retriever → Relevant Docs
+                                ↓
+                            LLM + Context  →  Grounded Answer
+</code></pre></div>
+<h3 id="the-problem-rag-solves">The Problem RAG Solves<a class="headerlink" href="#the-problem-rag-solves" title="Permanent link">&para;</a></h3>
+<p><strong>Challenge</strong>: LLMs have several limitations:
+1. <strong>Knowledge Cutoff</strong>: Training data is frozen at a point in time
+2. <strong>Hallucinations</strong>: Models may generate plausible but incorrect information
+3. <strong>Domain Specificity</strong>: Lack of specialized or proprietary knowledge
+4. <strong>Attribution</strong>: Difficulty in citing sources for generated content</p>
+<p><strong>Solution</strong>: RAG addresses these by:
+- Retrieving up-to-date, relevant information at query time
+- Grounding responses in actual source documents
+- Enabling domain-specific knowledge without retraining
+- Providing source attribution for transparency</p>
+<h3 id="real-world-use-cases">Real-World Use Cases<a class="headerlink" href="#real-world-use-cases" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Customer Support Chatbots</strong></li>
+<li>Query: "How do I reset my password?"</li>
+<li>RAG retrieves: Latest help documentation</li>
+<li>
+<p>Response: Current, accurate reset procedure</p>
+</li>
+<li>
+<p><strong>Legal Document Analysis</strong></p>
+</li>
+<li>Query: "What are precedents for contract disputes?"</li>
+<li>RAG retrieves: Relevant case law and contracts</li>
+<li>
+<p>Response: Contextual legal analysis with citations</p>
+</li>
+<li>
+<p><strong>Medical Information Systems</strong></p>
+</li>
+<li>Query: "Treatment options for condition X?"</li>
+<li>RAG retrieves: Latest medical literature and guidelines</li>
+<li>
+<p>Response: Evidence-based treatment recommendations</p>
+</li>
+<li>
+<p><strong>Enterprise Knowledge Management</strong></p>
+</li>
+<li>Query: "What's our policy on remote work?"</li>
+<li>RAG retrieves: Company policy documents</li>
+<li>Response: Accurate policy information with references</li>
+</ol>
+<hr />
+<h2 id="2-core-components-of-rag">2. Core Components of RAG<a class="headerlink" href="#2-core-components-of-rag" title="Permanent link">&para;</a></h2>
+<h3 id="21-document-store-corpus">2.1 Document Store / Corpus<a class="headerlink" href="#21-document-store-corpus" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: The knowledge base containing documents to be searched</p>
+<p><strong>Characteristics</strong>:
+- <strong>Format</strong>: PDFs, HTML, markdown, plain text, structured data
+- <strong>Scale</strong>: From hundreds to millions of documents
+- <strong>Domain</strong>: General knowledge, domain-specific, or proprietary data</p>
+<p><strong>Example</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Document structure</span>
+<span class="n">document</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;doc_12345&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Employee Handbook 2024&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Company policies and procedures...&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;HR Department&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;policies&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="22-chunking-preprocessing">2.2 Chunking / Preprocessing<a class="headerlink" href="#22-chunking-preprocessing" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Split large documents into manageable, semantic units</p>
+<p><strong>Why Chunking Matters</strong>:
+- Embedding models have token limits (e.g., 512 tokens)
+- Smaller chunks = more precise retrieval
+- Balanced chunk size improves relevance</p>
+<p><strong>Chunking Strategies</strong>:</p>
+<ol>
+<li>
+<p><strong>Fixed-Size Chunking</strong>
+   <div class="highlight"><pre><span></span><code><span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># characters or tokens</span>
+<span class="n">chunk_overlap</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># overlap for context continuity</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Semantic Chunking</strong></p>
+</li>
+<li>Split by paragraphs, sections, or sentences</li>
+<li>Preserve natural text boundaries</li>
+<li>
+<p>Better semantic coherence</p>
+</li>
+<li>
+<p><strong>Recursive Chunking</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1"># Try to split by:</span>
+<span class="c1"># 1. Double newline (paragraphs)</span>
+<span class="c1"># 2. Single newline (sentences)</span>
+<span class="c1"># 3. Spaces (words)</span>
+<span class="c1"># 4. Characters (last resort)</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p><strong>Best Practices</strong>:
+- Include some overlap between chunks
+- Preserve document metadata in each chunk
+- Test different chunk sizes for your use case</p>
+<h3 id="23-embeddings">2.3 Embeddings<a class="headerlink" href="#23-embeddings" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Convert text into dense vector representations for semantic similarity</p>
+<p><strong>How Embeddings Work</strong>:
+<div class="highlight"><pre><span></span><code>Text: &quot;The cat sat on the mat&quot;
+       ↓
+Embedding Model
+       ↓
+Vector: [0.23, -0.45, 0.67, ..., 0.12]  # 384-1536 dimensions
+</code></pre></div></p>
+<p><strong>Popular Embedding Models</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Dimensions</th>
+<th>Use Case</th>
+<th>Provider</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all-MiniLM-L6-v2</td>
+<td>384</td>
+<td>Fast, lightweight</td>
+<td>HuggingFace</td>
+</tr>
+<tr>
+<td>all-mpnet-base-v2</td>
+<td>768</td>
+<td>Balanced performance</td>
+<td>HuggingFace</td>
+</tr>
+<tr>
+<td>text-embedding-ada-002</td>
+<td>1536</td>
+<td>High quality</td>
+<td>OpenAI</td>
+</tr>
+<tr>
+<td>slate-30m-english-rtrvr</td>
+<td>384</td>
+<td>Retrieval-optimized</td>
+<td>watsonx.ai</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts</strong>:
+- <strong>Semantic Similarity</strong>: Similar meanings = similar vectors
+- <strong>Cosine Similarity</strong>: Measures angle between vectors (0-1)
+- <strong>Dense vs Sparse</strong>: Dense = all dimensions used; Sparse = mostly zeros</p>
+<h3 id="24-vector-store">2.4 Vector Store<a class="headerlink" href="#24-vector-store" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Specialized database for storing and searching embeddings</p>
+<p><strong>Why Not Regular Databases?</strong>
+- Traditional DBs: Exact match (WHERE clause)
+- Vector DBs: Similarity search (nearest neighbors)</p>
+<p><strong>Popular Vector Stores</strong>:</p>
+<ol>
+<li>
+<p><strong>Chroma</strong> - Local, lightweight
+   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_chroma</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chroma</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Elasticsearch</strong> - Enterprise, scalable
+   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_elasticsearch</span><span class="w"> </span><span class="kn">import</span> <span class="n">ElasticsearchStore</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">ElasticsearchStore</span><span class="p">(</span>
+    <span class="n">elasticsearch_url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+    <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;my_index&quot;</span>
+<span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>FAISS</strong> - High-performance, in-memory
+   <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.vectorstores</span><span class="w"> </span><span class="kn">import</span> <span class="n">FAISS</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">FAISS</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p><strong>Vector Store Operations</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Add documents</span>
+<span class="n">vectorstore</span><span class="o">.</span><span class="n">add_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># Similarity search</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">similarity_search</span><span class="p">(</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;What is the refund policy?&quot;</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">5</span>  <span class="c1"># return top 5 results</span>
+<span class="p">)</span>
+
+<span class="c1"># Similarity search with scores</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">similarity_search_with_score</span><span class="p">(</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;What is the refund policy?&quot;</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<h3 id="25-retriever">2.5 Retriever<a class="headerlink" href="#25-retriever" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Interface to query the vector store and return relevant documents</p>
+<p><strong>Retrieval Strategies</strong>:</p>
+<ol>
+<li>
+<p><strong>Similarity Search</strong>
+   <div class="highlight"><pre><span></span><code><span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span>
+    <span class="n">search_type</span><span class="o">=</span><span class="s2">&quot;similarity&quot;</span><span class="p">,</span>
+    <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>MMR (Maximum Marginal Relevance)</strong></p>
+</li>
+<li>Balances relevance and diversity</li>
+<li>
+<p>Avoids redundant results
+   <div class="highlight"><pre><span></span><code><span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span>
+    <span class="n">search_type</span><span class="o">=</span><span class="s2">&quot;mmr&quot;</span><span class="p">,</span>
+    <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;fetch_k&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Similarity with Threshold</strong>
+   <div class="highlight"><pre><span></span><code><span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span>
+    <span class="n">search_type</span><span class="o">=</span><span class="s2">&quot;similarity_score_threshold&quot;</span><span class="p">,</span>
+    <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;score_threshold&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="26-llm-prompt">2.6 LLM + Prompt<a class="headerlink" href="#26-llm-prompt" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Generate answers using retrieved context</p>
+<p><strong>Prompt Pattern</strong>:
+<div class="highlight"><pre><span></span><code><span class="n">prompt_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Use the following context to answer the question.</span>
+<span class="s2">If you don&#39;t know the answer, say you don&#39;t know.</span>
+
+<span class="s2">Context: </span><span class="si">{context}</span>
+
+<span class="s2">Question: </span><span class="si">{question}</span>
+
+<span class="s2">Answer:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div></p>
+<p><strong>LLM Options</strong>:
+- <strong>Local</strong>: Ollama (llama2, mistral)
+- <strong>Cloud</strong>: watsonx.ai (Granite), OpenAI (GPT), Anthropic (Claude)</p>
+<hr />
+<h2 id="3-typical-rag-flow">3. Typical RAG Flow<a class="headerlink" href="#3-typical-rag-flow" title="Permanent link">&para;</a></h2>
+<h3 id="complete-rag-pipeline">Complete RAG Pipeline<a class="headerlink" href="#complete-rag-pipeline" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>graph LR
+    A[Raw Documents] --&gt;|1. Extract| B[Text Content]
+    B --&gt;|2. Chunk| C[Document Chunks]
+    C --&gt;|3. Embed| D[Vectors]
+    D --&gt;|4. Index| E[Vector Store]
+
+    F[User Query] --&gt;|5. Embed| G[Query Vector]
+    G --&gt;|6. Search| E
+    E --&gt;|7. Retrieve| H[Relevant Chunks]
+    H --&gt;|8. Context| I[LLM]
+    F --&gt;|9. Question| I
+    I --&gt;|10. Generate| J[Answer]</code></pre>
+<h3 id="phase-1-ingestion-one-time-setup">Phase 1: Ingestion (One-Time Setup)<a class="headerlink" href="#phase-1-ingestion-one-time-setup" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1: Extract</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Extract text from various formats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PyPDFLoader</span><span class="p">,</span>
+    <span class="n">TextLoader</span><span class="p">,</span>
+    <span class="n">UnstructuredHTMLLoader</span>
+<span class="p">)</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">PyPDFLoader</span><span class="p">(</span><span class="s2">&quot;employee_handbook.pdf&quot;</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</code></pre></div></p>
+<p><strong>Step 2: Chunk</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.text_splitters</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">200</span>
+<span class="p">)</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="phase-2-indexing-one-time-setup">Phase 2: Indexing (One-Time Setup)<a class="headerlink" href="#phase-2-indexing-one-time-setup" title="Permanent link">&para;</a></h3>
+<p><strong>Step 3: Embed</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.embeddings</span><span class="w"> </span><span class="kn">import</span> <span class="n">HuggingFaceEmbeddings</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">HuggingFaceEmbeddings</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;all-MiniLM-L6-v2&quot;</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Step 4: Index</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_chroma</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chroma</span>
+
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span>
+    <span class="n">documents</span><span class="o">=</span><span class="n">chunks</span><span class="p">,</span>
+    <span class="n">embedding</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span>
+    <span class="n">persist_directory</span><span class="o">=</span><span class="s2">&quot;./chroma_db&quot;</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<h3 id="phase-3-retrieval-per-query">Phase 3: Retrieval (Per Query)<a class="headerlink" href="#phase-3-retrieval-per-query" title="Permanent link">&para;</a></h3>
+<p><strong>Step 5-7: Query &amp; Retrieve</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># User asks a question</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;What is the vacation policy?&quot;</span>
+
+<span class="c1"># Retrieve relevant chunks</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">relevant_docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">get_relevant_documents</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="c1"># Each doc contains:</span>
+<span class="c1"># - page_content: The text chunk</span>
+<span class="c1"># - metadata: Document info</span>
+</code></pre></div></p>
+<h3 id="phase-4-generation-per-query">Phase 4: Generation (Per Query)<a class="headerlink" href="#phase-4-generation-per-query" title="Permanent link">&para;</a></h3>
+<p><strong>Step 8-10: Generate Answer</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains</span><span class="w"> </span><span class="kn">import</span> <span class="n">RetrievalQA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_community.llms</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ollama</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">Ollama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama2&quot;</span><span class="p">)</span>
+
+<span class="n">qa_chain</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">retriever</span><span class="o">=</span><span class="n">retriever</span><span class="p">,</span>
+    <span class="n">return_source_documents</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">qa_chain</span><span class="p">({</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])</span>  <span class="c1"># Answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;source_documents&#39;</span><span class="p">])</span>  <span class="c1"># Sources</span>
+</code></pre></div></p>
+<hr />
+<h2 id="4-trade-offs-in-rag-design">4. Trade-Offs in RAG Design<a class="headerlink" href="#4-trade-offs-in-rag-design" title="Permanent link">&para;</a></h2>
+<h3 id="41-latency-vs-accuracy">4.1 Latency vs Accuracy<a class="headerlink" href="#41-latency-vs-accuracy" title="Permanent link">&para;</a></h3>
+<p><strong>Latency Factors</strong>:
+- Embedding model size
+- Vector store query time
+- Number of retrieved chunks (k)
+- LLM size and parameters</p>
+<p><strong>Optimization Strategies</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Faster (lower latency)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">HuggingFaceEmbeddings</span><span class="p">(</span><span class="s2">&quot;all-MiniLM-L6-v2&quot;</span><span class="p">)</span>  <span class="c1"># 384 dim</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># fewer chunks</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">Ollama</span><span class="p">(</span><span class="s2">&quot;llama2:7b&quot;</span><span class="p">)</span>  <span class="c1"># smaller model</span>
+
+<span class="c1"># More accurate (higher latency)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">HuggingFaceEmbeddings</span><span class="p">(</span><span class="s2">&quot;all-mpnet-base-v2&quot;</span><span class="p">)</span>  <span class="c1"># 768 dim</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># more chunks</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">WatsonxLLM</span><span class="p">(</span><span class="s2">&quot;ibm/granite-13b-chat-v2&quot;</span><span class="p">)</span>  <span class="c1"># larger model</span>
+</code></pre></div></p>
+<h3 id="42-embedding-model-selection">4.2 Embedding Model Selection<a class="headerlink" href="#42-embedding-model-selection" title="Permanent link">&para;</a></h3>
+<p><strong>Considerations</strong>:
+- <strong>Domain</strong>: General vs specialized (legal, medical, etc.)
+- <strong>Language</strong>: Multilingual support
+- <strong>Dimensions</strong>: Higher = more nuance, slower
+- <strong>License</strong>: Open-source vs proprietary</p>
+<p><strong>Comparison</strong>:
+| Criteria | Small Model | Large Model |
+|----------|-------------|-------------|
+| Speed | ⚡⚡⚡ | ⚡ |
+| Accuracy | ⭐⭐ | ⭐⭐⭐ |
+| Memory | 💾 | 💾💾💾 |
+| Cost | $ | $$$ |</p>
+<h3 id="43-index-size-and-refresh">4.3 Index Size and Refresh<a class="headerlink" href="#43-index-size-and-refresh" title="Permanent link">&para;</a></h3>
+<p><strong>Index Size Trade-offs</strong>:
+- <strong>Large Index</strong>: 
+  - ✅ More comprehensive knowledge
+  - ❌ Slower queries, more storage</p>
+<ul>
+<li><strong>Small Index</strong>:</li>
+<li>✅ Faster queries, less storage</li>
+<li>❌ May miss relevant information</li>
+</ul>
+<p><strong>Refresh Strategies</strong>:</p>
+<ol>
+<li>
+<p><strong>Batch Refresh</strong> (Daily/Weekly)
+   <div class="highlight"><pre><span></span><code><span class="c1"># Full reindex</span>
+<span class="n">vectorstore</span><span class="o">.</span><span class="n">delete_collection</span><span class="p">()</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">new_docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Incremental Updates</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1"># Add new documents</span>
+<span class="n">vectorstore</span><span class="o">.</span><span class="n">add_documents</span><span class="p">(</span><span class="n">new_docs</span><span class="p">)</span>
+
+<span class="c1"># Update existing</span>
+<span class="n">vectorstore</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;doc_123&quot;</span><span class="p">])</span>
+<span class="n">vectorstore</span><span class="o">.</span><span class="n">add_documents</span><span class="p">([</span><span class="n">updated_doc</span><span class="p">])</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Hot/Cold Separation</strong></p>
+</li>
+<li>Frequently accessed: In-memory, fast index</li>
+<li>Archival: Disk-based, slower but comprehensive</li>
+</ol>
+<hr />
+<h2 id="5-rag-in-the-ai-accelerator">5. RAG in the AI Accelerator<a class="headerlink" href="#5-rag-in-the-ai-accelerator" title="Permanent link">&para;</a></h2>
+<h3 id="accelerator-architecture">Accelerator Architecture<a class="headerlink" href="#accelerator-architecture" title="Permanent link">&para;</a></h3>
+<p>The AI Accelerator provides production-ready RAG components:</p>
+<div class="highlight"><pre><span></span><code>accelerator/
+├── tools/
+│   ├── chunk.py          # Document chunking
+│   ├── extract.py        # Text extraction
+│   └── embed_index.py    # Embedding &amp; indexing
+├── rag/
+│   ├── retriever.py      # Retrieval logic
+│   ├── pipeline.py       # End-to-end RAG
+│   └── prompt.py         # Prompt templates
+└── service/
+    └── api.py            # FastAPI endpoints
+</code></pre></div>
+<h3 id="component-details">Component Details<a class="headerlink" href="#component-details" title="Permanent link">&para;</a></h3>
+<h4 id="1-ingestion-indexing">1. Ingestion &amp; Indexing<a class="headerlink" href="#1-ingestion-indexing" title="Permanent link">&para;</a></h4>
+<p><strong><code>tools/chunk.py</code></strong> - Document Chunking
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">chunk_documents</span><span class="p">(</span>
+    <span class="n">documents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">],</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split documents into chunks&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+<p><strong><code>tools/extract.py</code></strong> - Text Extraction
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">extract_text</span><span class="p">(</span>
+    <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">file_type</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract text from PDF, HTML, etc.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+<p><strong><code>tools/embed_index.py</code></strong> - Embedding &amp; Indexing
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">embed_and_index</span><span class="p">(</span>
+    <span class="n">chunks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">],</span>
+    <span class="n">vector_store_config</span><span class="p">:</span> <span class="nb">dict</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VectorStore</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Embed chunks and store in vector DB&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+<h4 id="2-retrieval-generation">2. Retrieval &amp; Generation<a class="headerlink" href="#2-retrieval-generation" title="Permanent link">&para;</a></h4>
+<p><strong><code>rag/retriever.py</code></strong> - Retrieval Function
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">retrieve</span><span class="p">(</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">vectorstore</span><span class="p">:</span> <span class="n">VectorStore</span><span class="p">,</span>
+    <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve relevant documents&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+<p><strong><code>rag/pipeline.py</code></strong> - RAG Pipeline
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">answer_question</span><span class="p">(</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">retriever</span><span class="p">:</span> <span class="n">Retriever</span><span class="p">,</span>
+    <span class="n">llm</span><span class="p">:</span> <span class="n">BaseLLM</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;answer&quot;: str,</span>
+<span class="sd">            &quot;chunks&quot;: List[dict],</span>
+<span class="sd">            &quot;metadata&quot;: dict</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+<p><strong><code>rag/prompt.py</code></strong> - Prompt Templates
+<div class="highlight"><pre><span></span><code><span class="n">SYSTEM_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You are a helpful assistant that answers questions</span>
+<span class="s2">based on the provided context.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">USER_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Context: </span><span class="si">{context}</span>
+
+<span class="s2">Question: </span><span class="si">{question}</span>
+
+<span class="s2">Answer:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div></p>
+<h3 id="reference-notebooks">Reference Notebooks<a class="headerlink" href="#reference-notebooks" title="Permanent link">&para;</a></h3>
+<p>Located in <code>accelerator/assets/notebook/</code>:</p>
+<ol>
+<li><strong><code>Process_and_Ingest_Data_into_Vector_DB.ipynb</code></strong></li>
+<li>Complete ingestion pipeline</li>
+<li>Multiple data sources</li>
+<li>
+<p>Error handling</p>
+</li>
+<li>
+<p><strong><code>QnA_with_RAG.ipynb</code></strong></p>
+</li>
+<li>Query answering examples</li>
+<li>Different retrieval strategies</li>
+<li>
+<p>Response formatting</p>
+</li>
+<li>
+<p><strong><code>Test_Queries_for_Vector_DB.ipynb</code></strong></p>
+</li>
+<li>Testing retrieval quality</li>
+<li>Performance benchmarks</li>
+<li>Query debugging</li>
+</ol>
+<hr />
+<h2 id="6-how-day-2-labs-map-to-rag-components">6. How Day 2 Labs Map to RAG Components<a class="headerlink" href="#6-how-day-2-labs-map-to-rag-components" title="Permanent link">&para;</a></h2>
+<h3 id="lab-progression">Lab Progression<a class="headerlink" href="#lab-progression" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Lab 2.1 (Local RAG)
+    ↓
+Learn: Basic RAG flow, Ollama integration, Chroma usage
+Maps to: chunk.py, embed_index.py basics
+
+Lab 2.2 (watsonx RAG)
+    ↓
+Learn: Enterprise RAG, Elasticsearch, watsonx.ai
+Maps to: retriever.py, pipeline.py
+
+Lab 2.3 (Twin Pipelines)
+    ↓
+Learn: Multi-backend orchestration, comparison
+Maps to: Service layer design, api.py
+
+Lab 2.4 (Evaluation)
+    ↓
+Learn: Metrics, testing, optimization
+Maps to: tools/eval_small.py, monitoring
+</code></pre></div>
+<h3 id="progressive-implementation">Progressive Implementation<a class="headerlink" href="#progressive-implementation" title="Permanent link">&para;</a></h3>
+<p>Each lab builds toward a production RAG service:</p>
+<ol>
+<li><strong>Lab 2.1</strong>: Core concepts in notebook</li>
+<li><strong>Lab 2.2</strong>: Enterprise patterns</li>
+<li><strong>Lab 2.3</strong>: Service design</li>
+<li><strong>Lab 2.4</strong>: Quality assurance</li>
+</ol>
+<p>By end of Day 2:
+- ✅ Understand all RAG components
+- ✅ Implement multiple RAG backends
+- ✅ Ready to integrate into accelerator
+- ✅ Evaluate and optimize RAG systems</p>
+<hr />
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<h3 id="key-takeaways">Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>RAG = Retrieval + Generation</strong></li>
+<li>Grounds LLM responses in external knowledge</li>
+<li>
+<p>Reduces hallucinations through factual context</p>
+</li>
+<li>
+<p><strong>Core Pipeline</strong>: Ingest → Index → Retrieve → Generate</p>
+</li>
+<li>
+<p><strong>Critical Components</strong>:</p>
+</li>
+<li>Chunking strategy</li>
+<li>Embedding model</li>
+<li>Vector store</li>
+<li>Retrieval mechanism</li>
+<li>
+<p>LLM integration</p>
+</li>
+<li>
+<p><strong>Trade-offs Matter</strong>:</p>
+</li>
+<li>Latency vs accuracy</li>
+<li>Index size vs freshness</li>
+<li>
+<p>Cost vs performance</p>
+</li>
+<li>
+<p><strong>Production-Ready</strong>:</p>
+</li>
+<li>Use accelerator patterns</li>
+<li>Implement evaluation</li>
+<li>Monitor and iterate</li>
+</ol>
+<h3 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Review this theory document</li>
+<li>Explore reference notebooks</li>
+<li>Begin Lab 2.1: Local RAG implementation</li>
+<li>Map your learning to accelerator architecture</li>
+</ol>
+<hr />
+<h2 id="additional-resources">Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
+<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://python.langchain.com/docs/use_cases/question_answering/">LangChain RAG Guide</a></li>
+<li><a href="https://www.ibm.com/docs/en/watsonx-as-a-service">watsonx.ai RAG Patterns</a></li>
+<li><a href="https://benchmark.vectorview.ai/">Vector Database Comparison</a></li>
+</ul>
+<h3 id="papers">Papers<a class="headerlink" href="#papers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"</li>
+<li>"Dense Passage Retrieval for Open-Domain Question Answering"</li>
+</ul>
+<h3 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://smith.langchain.com/">LangSmith</a> - RAG debugging</li>
+<li><a href="https://wandb.ai/">Weights &amp; Biases</a> - Experiment tracking</li>
+</ul>
+<hr />
+<p><strong>Theory Module Complete!</strong> ✅</p>
+<p>Proceed to Lab 2.1 when ready.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../day1-llm/day1-summary-and-schedule/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 1.4 Day 1 Summary &amp; Schedule">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                1.4 Day 1 Summary & Schedule
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../START_HERE/" class="md-footer__link md-footer__link--next" aria-label="Next: 2.x START HERE">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                2.x START HERE
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 — Ruslan Magana
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ruslanmv/watsonx-workshop" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.footer", "navigation.instant", "navigation.tracking", "toc.integrate", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../../assets/js/wx-hero.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
