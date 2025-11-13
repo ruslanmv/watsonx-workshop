@@ -5,6 +5,10 @@ on:
     branches: [ 'master' ]
   workflow_dispatch:
 
+# 👇 Add this block
+permissions:
+  contents: write
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -40,7 +44,6 @@ jobs:
 
       # ---------------------------
       # 4) Python dependencies
-      #    (use your pyproject if present, otherwise minimal deps)
       # ---------------------------
       - name: Install Python dependencies
         run: |
@@ -53,14 +56,13 @@ jobs:
 
       # ---------------------------
       # 5) Generate Reveal.js HTML slides
-      #    (Makefile → scripts/generate_all_slides.sh → scripts/generate_slides.sh)
       # ---------------------------
       - name: Generate HTML slides (all decks)
         run: |
           make slides
 
       # ---------------------------
-      # FIX: Ensure output directories are writable by Docker
+      # 6) Fix permissions for PDF output
       # ---------------------------
       - name: Fix permissions for PDF output
         run: |
@@ -68,9 +70,7 @@ jobs:
           chmod -R 777 docs/slides
 
       # ---------------------------
-      # 6) Export PDFs (per deck + per day)
-      #    make pdf   -> DeckTape for each HTML in docs/slides/
-      #    make pdf-days -> merge into day0.pdf, day1.pdf, etc.
+      # 7) Export PDFs
       # ---------------------------
       - name: Export slide decks to PDF (per deck + per day)
         run: |
@@ -78,17 +78,17 @@ jobs:
           make pdf-days
 
       # ---------------------------
-      # 7) Build MkDocs site
-      #    docs/slides/*.html + *.pdf will be copied into site/slides/
+      # 8) Build MkDocs site
       # ---------------------------
       - name: Build MkDocs site
         run: mkdocs build --strict --verbose
 
       # ---------------------------
-      # 8) Deploy to GitHub Pages
+      # 9) Deploy to GitHub Pages
       # ---------------------------
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+          # publish_branch: gh-pages  # (optional, default is gh-pages)
