@@ -110,14 +110,14 @@ theme:
     - content.tabs.link
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: blue
+      accent: light blue
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: light indigo
+      primary: blue
+      accent: light blue
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -128,6 +128,10 @@ extra_css:
 extra_javascript:
   - assets/js/wx-hero.js
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+
+# Hooks (Python scripts that process content before rendering)
+hooks:
+  - docs/hooks/remove_speaker_notes.py
 
 # Plugins
 plugins:

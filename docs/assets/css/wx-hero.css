@@ -138,3 +138,18 @@
 /* Card grid spacing tweaks */
 .grid.cards .card .md-button { margin-top: .25rem; }
 
+/* ==================== HIDE REVEAL.JS SPEAKER NOTES ==================== */
+/* Hide speaker notes that are meant for Reveal.js presentations only */
+/* These appear as ::: notes ... ::: in the markdown and are rendered as admonitions */
+
+/* Hide notes admonition blocks (MkDocs admonition extension processes ::: notes) */
+.admonition.notes {
+  display: none !important;
+}
+
+/* Alternative class names that might be generated */
+aside.notes,
+.speaker-notes,
+[data-notes] {
+  display: none !important;
+}

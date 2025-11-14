@@ -1,0 +1,206 @@
+/**
+ * watsonx.ai Theme for Reveal.js
+ * Purple/Pink gradient inspired by IBM watsonx.ai Gen AI branding
+ * Perfect for generative AI, watsonx.ai, and modern tech courses
+ */
+
+:root {
+  /* watsonx.ai Purple/Pink Palette */
+  --watsonx-purple: #8a3ffc;
+  --watsonx-purple-light: #a56eff;
+  --watsonx-pink: #ee5396;
+  --watsonx-pink-light: #ff7eb6;
+  --watsonx-lavender: #c8b7ff;
+  --watsonx-lavender-light: #e8d9ff;
+  
+  /* IBM Blue accents */
+  --ibm-blue: #0f62fe;
+  --ibm-blue-light: #4589ff;
+  
+  /* Neutral colors */
+  --text-dark: #161616;
+  --text-medium: #525252;
+  --text-light: #f4f4f4;
+  --bg-white: #ffffff;
+  --bg-light: #f4f4f4;
+}
+
+/* Gradient background matching the uploaded image */
+.reveal {
+  background: linear-gradient(135deg, 
+    #f8f4ff 0%,
+    #f0e6ff 25%,
+    #e8d9ff 50%,
+    #f0e6ff 75%,
+    #f8f4ff 100%);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+}
+
+/* Title slides */
+.reveal h1 {
+  color: var(--watsonx-purple);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 4px rgba(138, 63, 252, 0.1);
+  margin-bottom: 0.5em;
+}
+
+.reveal h2 {
+  color: var(--watsonx-purple);
+  font-weight: 600;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.reveal h3 {
+  color: var(--watsonx-pink);
+  font-weight: 500;
+}
+
+.reveal h4 {
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+/* Links */
+.reveal a {
+  color: var(--ibm-blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.reveal a:hover {
+  color: var(--watsonx-purple);
+  text-decoration: underline;
+}
+
+/* Code blocks */
+.reveal pre {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--watsonx-lavender);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(138, 63, 252, 0.1);
+  margin: 1em 0;
+}
+
+.reveal code {
+  background: rgba(200, 183, 255, 0.2);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  color: var(--watsonx-purple);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+.reveal pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--text-dark);
+}
+
+/* Lists */
+.reveal ul, .reveal ol {
+  line-height: 1.6;
+}
+
+.reveal li {
+  margin: 0.5em 0;
+}
+
+/* Emphasis */
+.reveal strong {
+  color: var(--watsonx-purple);
+  font-weight: 600;
+}
+
+.reveal em {
+  color: var(--watsonx-pink);
+  font-style: italic;
+}
+
+/* Blockquotes */
+.reveal blockquote {
+  background: rgba(255, 255, 255, 0.9);
+  border-left: 5px solid var(--watsonx-purple);
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(138, 63, 252, 0.1);
+}
+
+/* Tables */
+.reveal table {
+  border-collapse: collapse;
+  margin: 1em auto;
+}
+
+.reveal table th {
+  background: linear-gradient(135deg, var(--watsonx-purple), var(--watsonx-purple-light));
+  color: white;
+  font-weight: 600;
+  padding: 0.75em 1em;
+}
+
+.reveal table td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid var(--watsonx-lavender);
+}
+
+.reveal table tr:nth-child(even) {
+  background: rgba(200, 183, 255, 0.1);
+}
+
+/* Progress bar */
+.reveal .progress {
+  background: rgba(138, 63, 252, 0.2);
+}
+
+.reveal .progress span {
+  background: linear-gradient(90deg, var(--watsonx-purple), var(--watsonx-pink));
+}
+
+/* Controls */
+.reveal .controls {
+  color: var(--watsonx-purple);
+}
+
+/* Slide numbers */
+.reveal .slide-number {
+  background: rgba(138, 63, 252, 0.8);
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+/* Fragment animations */
+.reveal .fragment.highlight-current-purple {
+  opacity: 1;
+}
+
+.reveal .fragment.highlight-current-purple.current-fragment {
+  color: var(--watsonx-purple);
+  font-weight: 600;
+}
+
+/* Custom watsonx.ai badge */
+.watsonx-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--watsonx-purple), var(--watsonx-pink));
+  color: white;
+  padding: 0.3em 0.8em;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.5em;
+}
+
+/* Section headers with gradient */
+.reveal .slides section[data-background-gradient] {
+  background: linear-gradient(135deg, 
+    rgba(138, 63, 252, 0.1), 
+    rgba(238, 83, 150, 0.1));
+}

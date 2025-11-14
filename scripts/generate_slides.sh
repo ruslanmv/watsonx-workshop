@@ -136,7 +136,7 @@ PANDOC_OPTS=(
   --variable overview=true
   --variable width=1920
   --variable height=1080
-  --variable margin=0.04
+  --variable margin=0.08
   --variable maxScale=2.0
   --variable minScale=0.2
   "${SYNTAX_HIGHLIGHT_OPT[@]}"
