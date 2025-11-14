@@ -1,9 +1,8 @@
 ---
 template: home.html
 title: watsonx Workshop Series
-description: Hands-on labs for LLMs, RAG, Agents, and Orchestrate — built with MkDocs Material.
+description: Enterprise-ready hands-on training for LLMs, RAG, Agents, and Orchestration with IBM watsonx
 ---
-
 
 <p align="center">
   <a href="https://www.ibm.com/products/watsonx-ai" target="_blank" rel="noopener">
@@ -28,240 +27,306 @@ description: Hands-on labs for LLMs, RAG, Agents, and Orchestrate — built with
 
 ---
 
-## Welcome
+## Welcome to the watsonx Workshop Series
 
-The **watsonx Workshop Series** is a hands-on set of tracks that show how to build with IBM watsonx:
+A comprehensive, production-ready curriculum designed for enterprise teams building AI solutions with **IBM watsonx**. This hands-on workshop series takes you from foundation to deployment across four intensive days.
 
-- **Day 0 – Environment** — local & cloud setup for the whole week
-- **Day 1 – LLMs & Prompting** — Granite concepts, patterns, and safe prompting
-- **Day 2 – RAG** — retrieval-augmented generation from zero to API & UI
-- **Day 3 – Orchestrate & Agents** — tool-using agents and governance, end-to-end
-
-!!! note "Markdown-First Approach"
-    Everything is **Markdown-first** for clean builds. Day-specific notebooks live under:
-
-    - `labs-src/` (governance & RAG examples)
-    - `docs/assets/notebooks/day3/` (agent notebooks reference)
-
----
-
-## Choose Your Path
+### What You'll Build
 
 <div class="grid cards" markdown>
 
--   :material-calendar-today: __Daily Portals (For Instructors)__
+-   :material-brain: **Enterprise LLM Applications**
 
-    ---
+    Master Granite models, prompt engineering, and safe AI deployment patterns for production environments.
 
-    Complete daily guides with theory, labs, and teaching notes
+-   :material-database-search: **Production RAG Systems**
 
-    - [Day 0 Portal - Environment Setup](portal/day0-portal.md)
-    - [Day 1 Portal - LLMs & Prompting](portal/day1-portal.md)
-    - [Day 2 Portal - RAG](portal/day2-portal.md)
-    - [Day 3 Portal - Orchestration & Agents](portal/day3-portal.md)
-    - [Capstone Portal - Build Your AI App](portal/capstone-portal.md)
+    Build retrieval-augmented generation pipelines with vector databases, embedding models, and complete API/UI implementations.
 
--   :material-book-open-variant: __Detailed Content (For Self-Paced Learning)__
+-   :material-robot: **Intelligent Agents**
 
-    ---
+    Create tool-using agents with governance, multi-agent orchestration, and enterprise integration.
 
-    Deep dive into topics with detailed guides and labs
+-   :material-cloud-check: **Cloud-Ready Solutions**
 
-    - [Day 0 - Environment Setup](tracks/day0-env/prereqs-and-accounts.md)
-    - [Day 1 - LLMs & Prompting](tracks/day1-llm/llm-concepts.md)
-    - [Day 2 - RAG](tracks/day2-rag/START_HERE.md)
-    - [Day 3 - Orchestration & Agents](tracks/day3-orchestrate/agentic-ai-overview.md)
-    - [Capstone Projects](tracks/capstone/capstone-overview.md)
+    Deploy scalable applications with FastAPI, Streamlit, and containerized workflows.
 
 </div>
+
+---
+
+## Access the Workshop Portal
+
+<div style="text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #0b62a3 0%, #1e88e5 100%); color: white; border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <h3 style="margin: 0 0 1rem 0; font-size: 1.8rem; font-weight: 700;">Ready to Begin Your Learning Journey?</h3>
+  <p style="margin: 0 0 2rem 0; font-size: 1.1rem; opacity: 0.95;">Access interactive presentations, daily guides, and comprehensive workshop materials</p>
+  <a href="portal/" class="md-button md-button--primary" style="font-size: 1.1rem; padding: 0.8rem 2rem; background: white; color: #0b62a3; font-weight: 600;">
+    Enter Workshop Portal
+  </a>
+</div>
+
+!!! tip "Two Learning Paths Available"
+    - **Instructor-Led**: Navigate through daily portals with complete teaching guides, timing recommendations, and presentation slides
+    - **Self-Paced**: Follow detailed documentation with hands-on labs at your own speed using the sidebar navigation
+
+---
+
+## Workshop Structure
+
+### 5-Day Intensive Curriculum
+
+| Day | Focus Area | Duration | Key Deliverable |
+|-----|------------|----------|-----------------|
+| **Day 0** | Environment Setup | 4 hours | Working local & cloud environments |
+| **Day 1** | LLMs & Prompting | 6 hours | Prompting playbook & safe AI patterns |
+| **Day 2** | RAG Systems | 6 hours | Production RAG API + UI with citations |
+| **Day 3** | Agents & Orchestration | 6 hours | Multi-agent system with governance |
+| **Capstone** | Applied Project | 4 hours | Portfolio-ready enterprise application |
 
 ---
 
 ## Quick Start
 
-=== "Browse the Docs"
-
-    1. Use the left sidebar to pick a **Day**.
-    2. Follow the pages top-to-bottom; theory first, then labs with solutions.
-    3. Start at **Day 0** to prepare both environments.
-
-=== "Run the Accelerator (RAG) Locally"
-
-    ```bash
-    # Minimal end-to-end run
-    cd accelerator
-    python -m venv .venv
-    source .venv/bin/activate         # Windows: .venv\Scripts\activate
-    pip install -U pip && pip install -e .
-    cp .env.sample .env               # fill watsonx + vector backend settings
-    make all                          # extract → chunk → index
-    make api                          # FastAPI at http://localhost:8001/health
-    # in a second terminal:
-    make ui                           # Streamlit at http://localhost:8501
-    ```
-
----
-
-## Presentation Slides
-
-Use the docs for **step-by-step labs**, and the **slides** for live delivery or sharing with participants.
-
-### HTML Decks (Interactive)
+Choose your preferred approach to get started:
 
 <div class="grid cards" markdown>
 
--   :material-presentation: __Day 0 – Environment Setup__
+-   :material-school: __Instructor Portal__
 
     ---
 
-    Environment overview, accounts, and validation of both stacks.
+    Access complete daily guides with presentations, labs, and teaching notes
 
-    [:material-monitor-dashboard: View Slides](slides/day0-prereqs-and-accounts.html){ .md-button .md-button--primary }
+    [:octicons-arrow-right-16: Open Portal](portal/){ .md-button .md-button--primary }
 
--   :material-presentation: __Day 1 – LLMs & Prompting__
-
-    ---
-
-    LLM concepts, prompt patterns & templates, eval & safety.
-
-    [:material-monitor-dashboard: View Slides](slides/day1-llm-concepts.html){ .md-button .md-button--primary }
-
--   :material-presentation: __Day 2 – RAG__
+-   :material-book-open-page-variant: __Documentation__
 
     ---
 
-    RAG architecture, retrieval patterns, and accelerator alignment.
+    Deep dive into detailed guides and step-by-step tutorials
 
-    [:material-monitor-dashboard: View Slides](slides/day2-rag-architecture-overview.html){ .md-button .md-button--primary }
+    [:octicons-arrow-right-16: Browse Docs](tracks/day0-env/prereqs-and-accounts/){ .md-button }
 
--   :material-presentation: __Day 3 – Orchestrate & Agents__
-
-    ---
-
-    Agentic AI, orchestration, and governance recap.
-
-    [:material-monitor-dashboard: View Slides](slides/day3-agentic-ai-overview.html){ .md-button .md-button--primary }
-
--   :material-presentation: __Capstone__
+-   :material-rocket-launch-outline: __RAG Accelerator__
 
     ---
 
-    Project overview, ideas, and framing for the final exercise.
+    Jump directly to building production RAG systems
 
-    [:material-monitor-dashboard: View Slides](slides/capstone-overview.html){ .md-button .md-button--primary }
+    [:octicons-arrow-right-16: Start Building](tracks/day2-rag/START_HERE/){ .md-button }
+
+-   :material-github: __GitHub Repository__
+
+    ---
+
+    Clone the complete workshop codebase
+
+    [:octicons-arrow-right-16: View on GitHub](https://github.com/ruslanmv/watsonx-workshop){ .md-button target="_blank" }
 
 </div>
 
-!!! tip "PDF Export"
-    To export slides as PDF, open any HTML deck and use your browser's print function (Ctrl+P / Cmd+P) with "Save as PDF" option.
+---
+
+## Run the RAG Accelerator Locally
+
+Get hands-on immediately with our production-ready RAG implementation:
+
+```bash
+# Clone and navigate to accelerator
+cd accelerator
+
+# Set up Python environment
+python -m venv .venv
+source .venv/bin/activate         # Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install -U pip && pip install -e .
+
+# Configure environment
+cp .env.sample .env               # Add your watsonx credentials
+
+# Run the pipeline
+make all                          # Extract → Chunk → Embed → Index
+
+# Start services
+make api                          # FastAPI at http://localhost:8001/health
+make ui                           # Streamlit at http://localhost:8501
+```
+
+!!! success "What You Get"
+    - **FastAPI Backend**: `/ask` endpoint with citations and source tracking
+    - **Streamlit UI**: Production-ready chat interface
+    - **Vector Store**: Elasticsearch or Chroma backend
+    - **Evaluation Tools**: Model comparison and quality metrics
 
 ---
 
-## RAG Track at a Glance
-
-- **Pre-work**: environment, credentials, and sample data  
-- **Lab 1**: end-to-end accelerator (HTML/PDF → vectors → API + Streamlit)  
-- **Lab 2** *(choose or compare)*:
-  - 2A: **Elasticsearch + LangChain**
-  - 2B: **Elasticsearch Python SDK** (no LangChain)
-  - 2C: **Chroma + LangChain** (local/dev)
-- **Lab 3**: **Packaging & Evaluation** with watsonx.governance
+## RAG Architecture Overview
 
 ```mermaid
 flowchart TD
-  subgraph ING[Ingestion]
+  subgraph ING[Ingestion Pipeline]
     direction TB
-    A[Docs: HTML • PDF] --> B[Extractor & Cleaner]
-    B --> C[Chunker]
+    A[Documents<br/>HTML • PDF • Text] --> B[Extractor & Cleaner]
+    B --> C[Smart Chunker]
   end
-  subgraph RET[Retrieval]
+
+  subgraph RET[Retrieval Layer]
     direction TB
-    C --> D[Embeddings]
-    D -->|dense vectors| E[(Vector Store ES/Chroma)]
-    E -->|top-k| F[Reranker optional]
+    C --> D[Embedding Model]
+    D -->|dense vectors| E[(Vector Store<br/>Elasticsearch/Chroma)]
+    E -->|top-k results| F[Optional Reranker]
   end
-  subgraph GEN[Generation]
+
+  subgraph GEN[Generation Layer]
     direction TB
-    F --> G[Prompt Composer]
-    G --> H[LLM on watsonx.ai]
+    F --> G[Prompt Constructor]
+    G --> H[LLM<br/>watsonx.ai]
     H --> I[Answer + Citations]
   end
-  subgraph SRV[Serving]
+
+  subgraph SRV[API Layer]
     direction TB
     I --> J[FastAPI /ask]
     J --> K[Streamlit Chat UI]
   end
-  classDef source fill:#E3F2FD,stroke:#1E88E5,color:#0D47A1,stroke-width:1px;
-  classDef process fill:#F1F8E9,stroke:#7CB342,color:#2E7D32,stroke-width:1px;
-  classDef store fill:#FFF3E0,stroke:#FB8C00,color:#E65100,stroke-width:1px;
-  classDef model fill:#F3E5F5,stroke:#8E24AA,color:#4A148C,stroke-width:1px;
-  classDef output fill:#E0F7FA,stroke:#00ACC1,color:#006064,stroke-width:1px;
-  class A source; class B,C,D,F,G,J,K process; class E store; class H model; class I output;
+
+  classDef source fill:#E3F2FD,stroke:#1E88E5,color:#0D47A1,stroke-width:2px;
+  classDef process fill:#F1F8E9,stroke:#7CB342,color:#2E7D32,stroke-width:2px;
+  classDef store fill:#FFF3E0,stroke:#FB8C00,color:#E65100,stroke-width:2px;
+  classDef model fill:#F3E5F5,stroke:#8E24AA,color:#4A148C,stroke-width:2px;
+  classDef output fill:#E0F7FA,stroke:#00ACC1,color:#006064,stroke-width:2px;
+
+  class A source;
+  class B,C,D,F,G,J,K process;
+  class E store;
+  class H model;
+  class I output;
 ```
-
----
-
-## Day 3 Agent Notebooks (Reference)
-
-Agent implementation examples for different frameworks:
-
-- `docs/assets/notebooks/day3/agent_crewai.ipynb` — Multi-agent collaboration
-- `docs/assets/notebooks/day3/agent_langgraph.ipynb` — Stateful workflows
-- `docs/assets/notebooks/day3/agent_watsonx.ipynb` — watsonx Orchestrate integration
-
-!!! info "Lab Integration"
-    Use these alongside **Lab 3.1**: [Agent + Accelerator API](tracks/day3-orchestrate/lab-1-agent-watsonx.md).
 
 ---
 
 ## What's Included
 
-- **Production-ready samples** — FastAPI + Streamlit, CLI, Dockerfiles
-- **Reproducible configs** — `.env.sample`, `requirements.txt` / `pyproject.toml`
-- **Evaluation workflows** — watsonx.governance for model comparison
-
-!!! tip "Everything is Markdown"
-    All labs are follow-along pages. Copy-paste commands and code blocks; notebooks are optional helpers.
-
----
-
-## Next Steps
-
 <div class="grid cards" markdown>
 
--   :material-play-circle: __Begin Day 0__
-    
-    ---
-    
-    Set up and verify both environments
-    
-    [:octicons-arrow-right-16: Start](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
+-   :material-file-code: **Production Code**
 
--   :material-rocket-launch: __Jump to RAG__
-    
     ---
-    
-    Start building immediately if ready
-    
-    [:octicons-arrow-right-16: Go](tracks/day2-rag/START_HERE.md){ .md-button .md-button--primary }
 
--   :material-book-open-variant: __Resources__
-    
+    - FastAPI + Streamlit applications
+    - Docker configurations
+    - CLI tools and scripts
+    - Reproducible environments
+
+-   :material-notebook: **Hands-On Labs**
+
     ---
-    
-    Additional learning materials
-    
-    [:octicons-arrow-right-16: Browse](resources.md){ .md-button }
+
+    - Step-by-step Markdown guides
+    - Reference Jupyter notebooks
+    - Complete code examples
+    - Lab solutions included
+
+-   :material-presentation: **Presentation Slides**
+
+    ---
+
+    - Interactive HTML decks
+    - Speaker notes for instructors
+    - PDF export capability
+    - Theory + practice aligned
+
+-   :material-shield-check: **Enterprise Patterns**
+
+    ---
+
+    - Security best practices
+    - Governance workflows
+    - Evaluation frameworks
+    - Deployment guides
 
 </div>
 
 ---
 
-<div align="center">
-  <p><strong>Built with ❤️ for the watsonx Community</strong></p>
-  <p>
+## Prerequisites
+
+Before starting the workshop, ensure you have:
+
+- **IBM Cloud Account** with watsonx.ai access
+- **Python 3.11+** installed
+- **Git** for repository management
+- **Docker** (optional, recommended for isolation)
+- **Elasticsearch 8.x** (for RAG labs) or use Chroma locally
+
+!!! note "Detailed Setup Instructions"
+    Complete prerequisites and environment setup are covered in [Day 0 - Environment Setup](tracks/day0-env/prereqs-and-accounts/)
+
+---
+
+## Learning Outcomes
+
+By completing this workshop series, you will:
+
+- [x] Deploy and operate Granite LLMs on watsonx.ai
+- [x] Implement enterprise-grade RAG systems with vector databases
+- [x] Build governed, tool-using AI agents
+- [x] Orchestrate multi-agent workflows
+- [x] Evaluate and compare model configurations
+- [x] Deploy production-ready APIs and UIs
+- [x] Apply security and governance best practices
+
+---
+
+## Support & Community
+
+<div class="grid cards" markdown>
+
+-   :material-chat-question: **Get Help**
+
+    ---
+
+    Questions? Join our community discussions
+
+    [:octicons-arrow-right-16: Discussions](https://github.com/ruslanmv/watsonx-workshop/discussions){ .md-button }
+
+-   :material-bug: **Report Issues**
+
+    ---
+
+    Found a bug? Let us know
+
+    [:octicons-arrow-right-16: Issues](https://github.com/ruslanmv/watsonx-workshop/issues){ .md-button }
+
+-   :material-library: **Resources**
+
+    ---
+
+    Additional learning materials
+
+    [:octicons-arrow-right-16: Resources](resources/){ .md-button }
+
+-   :material-web: **Author's Blog**
+
+    ---
+
+    Updates and related content
+
+    [:octicons-arrow-right-16: ruslanmv.com](https://ruslanmv.com){ .md-button target="_blank" }
+
+</div>
+
+---
+
+<div align="center" style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--md-default-fg-color--lightest);">
+  <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">Built with care for the watsonx Community</p>
+  <p style="color: var(--md-default-fg-color--light);">
     <a href="https://github.com/ruslanmv/watsonx-workshop">⭐ Star on GitHub</a> •
     <a href="https://github.com/ruslanmv/watsonx-workshop/issues">Report Issue</a> •
-    <a href="https://github.com/ruslanmv/watsonx-workshop/discussions">Discussions</a>
+    <a href="https://github.com/ruslanmv/watsonx-workshop/discussions">Join Discussion</a>
+  </p>
+  <p style="color: var(--md-default-fg-color--lighter); font-size: 0.9rem; margin-top: 1.5rem;">
+    Copyright © 2025 Ruslan Magana • Licensed under open-source terms
   </p>
 </div>
