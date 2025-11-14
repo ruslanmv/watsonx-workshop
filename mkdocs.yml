@@ -11,6 +11,7 @@ edit_uri: edit/main/docs/
 # Navigation
 nav:
   - Welcome: index.md
+  - Portal: portal.md
   - Workshop:
     - "Day 0 – Environment Setup (Optional, Monday)":
       - "0.1 Prerequisites & Accounts": tracks/day0-env/prereqs-and-accounts.md
@@ -36,9 +37,14 @@ nav:
     - "Day 3 – Orchestration, Agents & Recap":
       - "3.0 Orchestration & Agents Overview": tracks/day3-orchestrate/agentic-ai-overview.md
       - "Lab 3.1 – Agent in simple-watsonx-enviroment + Accelerator API": tracks/day3-orchestrate/lab-1-agent-watsonx.md
-      - "3.2 Bridge to watsonx Orchestrate & Governance": tracks/day3-orchestrate/bridge-orchestrate-governance.md
-      - "3.3 watsonx Orchestrate Labs (ADK)": tracks/day3-orchestrate/watsonx-orchestrate-labs.md
-      - "3.4 Recap & Next Steps (2h Discussion)": tracks/day3-orchestrate/recap-and-next-steps.md
+      - "3.2 Agentic Frameworks":
+        - "3.2.1 CrewAI Framework": tracks/day3-orchestrate/agentic-frameworks-crewai.md
+        - "3.2.2 LangGraph Framework": tracks/day3-orchestrate/agentic-frameworks-langgraph.md
+        - "3.2.3 Langflow Framework": tracks/day3-orchestrate/agentic-frameworks-langflow.md
+      - "3.3 Bridge to watsonx Orchestrate & Governance": tracks/day3-orchestrate/bridge-orchestrate-governance.md
+      - "3.4 watsonx Orchestrate Comprehensive Guide": tracks/day3-orchestrate/watsonx-orchestrate-comprehensive.md
+      - "3.5 watsonx Orchestrate Labs (Legacy)": tracks/day3-orchestrate/watsonx-orchestrate-labs.md
+      - "3.6 Recap & Next Steps (2h Discussion)": tracks/day3-orchestrate/recap-and-next-steps.md
     - "Optional – Capstone Projects (Friday)":
       - "Capstone Overview": tracks/capstone/capstone-overview.md
       - "Capstone Project Ideas": tracks/capstone/capstone-project-ideas.md
