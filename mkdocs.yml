@@ -12,6 +12,12 @@ edit_uri: edit/main/docs/
 nav:
   - Welcome: index.md
   - Portal: portal.md
+  - Daily Portals:
+    - "Day 0 – Environment Setup Portal": portal/day0-portal.md
+    - "Day 1 – LLMs & Prompting Portal": portal/day1-portal.md
+    - "Day 2 – RAG Portal": portal/day2-portal.md
+    - "Day 3 – Orchestration & Agents Portal": portal/day3-portal.md
+    - "Capstone Portal": portal/capstone-portal.md  
   - Workshop:
     - "Day 0 – Environment Setup (Optional, Monday)":
       - "0.1 Prerequisites & Accounts": tracks/day0-env/prereqs-and-accounts.md

@@ -32,16 +32,48 @@ description: Hands-on labs for LLMs, RAG, Agents, and Orchestrate — built with
 
 The **watsonx Workshop Series** is a hands-on set of tracks that show how to build with IBM watsonx:
 
-- **Day 0 – Environment** — local & cloud setup for the whole week  
-- **Day 1 – LLMs & Prompting** — Granite concepts, patterns, and safe prompting  
-- **Day 2 – RAG** — retrieval-augmented generation from zero to API & UI  
+- **Day 0 – Environment** — local & cloud setup for the whole week
+- **Day 1 – LLMs & Prompting** — Granite concepts, patterns, and safe prompting
+- **Day 2 – RAG** — retrieval-augmented generation from zero to API & UI
 - **Day 3 – Orchestrate & Agents** — tool-using agents and governance, end-to-end
 
 !!! note "Markdown-First Approach"
     Everything is **Markdown-first** for clean builds. Day-specific notebooks live under:
-    
+
     - `labs-src/` (governance & RAG examples)
     - `docs/assets/notebooks/day3/` (agent notebooks reference)
+
+---
+
+## Choose Your Path
+
+<div class="grid cards" markdown>
+
+-   :material-calendar-today: __Daily Portals (For Instructors)__
+
+    ---
+
+    Complete daily guides with theory, labs, and teaching notes
+
+    - [Day 0 Portal - Environment Setup](portal/day0-portal.md)
+    - [Day 1 Portal - LLMs & Prompting](portal/day1-portal.md)
+    - [Day 2 Portal - RAG](portal/day2-portal.md)
+    - [Day 3 Portal - Orchestration & Agents](portal/day3-portal.md)
+    - [Capstone Portal - Build Your AI App](portal/capstone-portal.md)
+
+-   :material-book-open-variant: __Detailed Content (For Self-Paced Learning)__
+
+    ---
+
+    Deep dive into topics with detailed guides and labs
+
+    - [Day 0 - Environment Setup](tracks/day0-env/prereqs-and-accounts.md)
+    - [Day 1 - LLMs & Prompting](tracks/day1-llm/llm-concepts.md)
+    - [Day 2 - RAG](tracks/day2-rag/START_HERE.md)
+    - [Day 3 - Orchestration & Agents](tracks/day3-orchestrate/agentic-ai-overview.md)
+    - [Capstone Projects](tracks/capstone/capstone-overview.md)
+
+</div>
 
 ---
 
@@ -67,54 +99,6 @@ The **watsonx Workshop Series** is a hands-on set of tracks that show how to bui
     # in a second terminal:
     make ui                           # Streamlit at http://localhost:8501
     ```
-
----
-
-## Choose a Track
-
-<div class="grid cards" markdown>
-
--   :material-laptop-account: __Day 0 – Environment Setup__
-
-    ---
-
-    Prepare **simple-ollama** and **simple-watsonx** envs; verify both.
-    
-    [:octicons-arrow-right-16: Open](tracks/day0-env/prereqs-and-accounts.md){ .md-button .md-button--primary }
-
--   :material-brain: __Day 1 – LLMs & Prompting__
-
-    ---
-
-    LLM concepts, prompt patterns & templates, lightweight eval & safety.
-    
-    [:octicons-arrow-right-16: Open](tracks/day1-llm/llm-concepts.md){ .md-button .md-button--primary }
-
--   :material-magnify-expand: __Day 2 – RAG__
-
-    ---
-
-    Build a grounded Q&A app (Elasticsearch/Chroma + watsonx.ai), package and evaluate.
-    
-    [:octicons-arrow-right-16: START HERE](tracks/day2-rag/START_HERE.md){ .md-button .md-button--primary }
-
--   :material-robot-outline: __Day 3 – Orchestrate & Agents__
-
-    ---
-
-    Agentic AI: CrewAI/LangGraph patterns → **watsonx Orchestrate** with governance.
-    
-    [:octicons-arrow-right-16: Open](tracks/day3-orchestrate/agentic-ai-overview.md){ .md-button .md-button--primary }
-
--   :material-rocket-launch-outline: __Capstone (Optional)__
-
-    ---
-
-    Team up to ship a mini project using the accelerator & governance workflow.
-    
-    [:octicons-arrow-right-16: Open](tracks/capstone/capstone-overview.md){ .md-button }
-
-</div>
 
 ---
 
