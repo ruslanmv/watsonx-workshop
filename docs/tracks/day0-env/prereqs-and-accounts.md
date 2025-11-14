@@ -1,297 +1,544 @@
-# 0.1 Prerequisites & Accounts
+# Day 0 · Prerequisites & Accounts
 
-Welcome to Day 0 of the **watsonx Workshop Series** 👋  
+**watsonx Workshop Series**
 
-This is our "pre-flight check" session. The goal is simple: by the end of this module, you'll know exactly what you need (laptop, software, cloud accounts, repos) so that Day 1 can be 100% hands-on instead of 100% debugging.
+Get Ready to Build with LLMs, RAG & Agents
 
----
-
-## Audience & Workshop Overview
-
-This workshop is designed for:
-
-- **Data scientists & ML engineers** who want to go from "LLM playground" to RAG and agents in production.
-- **Developers & architects** who need to connect LLMs to real systems (APIs, data stores, governance).
-- **Technical leaders** evaluating how watsonx.ai, local LLMs (Ollama), and a RAG accelerator fit into their stack.
-
-You don't need to be a deep learning researcher, but you should be comfortable with:
-
-- Basic Python (functions, virtualenvs, `pip`, Jupyter).
-- Running commands in a terminal.
-- Very basic Docker concepts (build image, run container).
-
-### Workshop structure
-
-We'll work across **3 core days** plus an optional Day 0 and optional Capstone:
-
-- **Day 0 (Monday, 2h)** – Environment setup  
-  - Install tools, clone repos, test notebooks.
-- **Day 1 (Tuesday)** – LLMs & Prompting (Ollama vs watsonx.ai)
-- **Day 2 (Wednesday)** – RAG (Retrieval-Augmented Generation)
-- **Day 3 (Thursday)** – Orchestration, Agents & Recap  
-  - Use your RAG as a service, think about governance.
-- **Optional Capstone (Friday)** – Team project & demos
-
-### Three core codebases we'll use
-
-We will spend the entire workshop inside **three** codebases:
-
-1. **`simple-ollama-environment`**  
-   Local **LLM sandbox** built around [Ollama](https://ollama.com/):
-   - Python 3.11 + Jupyter.
-   - Ollama server, running models on your machine or in Docker.
-   - Notebook: `notebooks/ollama_quickstart.ipynb`.
-
-2. **`simple-watsonx-enviroment`**  
-   watsonx.ai **sandbox** for Granite / Llama models:
-   - Python 3.11 + Jupyter.
-   - IBM watsonx.ai SDK + LangChain integration.
-   - Notebook: `notebooks/watsonx_quickstart.ipynb`.
-   - Reads credentials from a `.env` file.
-
-3. **`accelerator/` (inside `watsonx-workshop`)**  
-   A RAG **production skeleton**:
-   - API: FastAPI service in `service/` wrapping `rag/pipeline.py`.
-   - RAG core: `rag/` (`pipeline.py`, `retriever.py`, `prompt.py`).
-   - Tools: ingestion, chunking, embedding, evaluation under `tools/`.
-   - UI: Streamlit app in `ui/app.py`.
-   - Assets & notebooks under `assets/`.
-
-We start with the two env repos on Day 0 and begin "wiring in" the accelerator from Day 2 onwards.
 
 ---
 
-## Technical Prerequisites
+### Tutor
 
-Before you can follow the labs, make sure your machine meets these requirements.
+**Ruslan Idelfonso Magana Vsevolodovna**  
+*PhD in Physics · AI Engineer*  
 
-### Operating system
+📧 [contact@ruslamv.com](mailto:contact@ruslamv.com)
 
-You should be able to use any of:
+<p style="text-align:right; margin-top:1.5rem;">
+  <img
+    src="../../../themes/assets/tutor.png"
+    alt="Tutor: Ruslan Idelfonso Magana Vsevolodovna"
+    style="
+      border-radius:50%;
+      width:130px;
+      height:130px;
+      object-fit:cover;
+      box-shadow:0 12px 30px rgba(0,0,0,0.45);
+      border:3px solid rgba(248,250,252,0.9);
+    "
+  >
+</p>
 
-- **Windows 10+**
-- **macOS 12+**
-- **Linux** (Ubuntu 20.04+, Debian, Fedora, etc.)
+---
 
-If you're on a locked-down corporate laptop, you may need help from IT to install Docker or run containers.
+## 👋 Welcome to Day 0 {data-background-color="#0f172a"}
 
-### Minimum hardware
+::: notes
+Welcome everyone! This is our "pre-flight check" session. The goal is to get everyone set up so Day 1 can be 100% hands-on coding instead of debugging environment issues.
 
-These are not hard limits, but they're good guidelines:
+Be enthusiastic and reassuring - setup can be intimidating, but we'll walk through everything step by step.
+:::
 
-- **CPU**: 4+ cores  
-- **RAM**: 16 GB recommended (8 GB possible with smaller models)  
-- **Disk**: 20–30 GB free (Docker images + models + notebooks)
+<span class="fragment">This is your **pre-flight check** session</span>
 
+<span class="fragment">**Goal**: By the end of this module, you'll have everything you need</span>
+
+<span class="fragment">✅ Laptop ready</span>
+
+<span class="fragment">✅ Software installed</span>
+
+<span class="fragment">✅ Cloud accounts configured</span>
+
+<span class="fragment">✅ Repos cloned and tested</span>
+
+---
+
+## 🎯 Who Is This Workshop For?
+
+<span class="fragment">**Data Scientists & ML Engineers**</span>
+<span class="fragment">Go from "LLM playground" to RAG and agents in production</span>
+
+<span class="fragment">**Developers & Architects**</span>
+<span class="fragment">Connect LLMs to real systems (APIs, databases, governance)</span>
+
+<span class="fragment">**Technical Leaders**</span>
+<span class="fragment">Evaluate how watsonx.ai, local LLMs, and RAG fit your stack</span>
+
+::: notes
+Take a moment to ask the audience: "Which of these categories do you identify with?" This helps people feel seen and helps you gauge the room's experience level.
+:::
+
+---
+
+## 📚 What You Should Already Know
+
+Before we dive in, you should be comfortable with:
+
+* <span class="fragment">**Basic Python** (functions, virtualenvs, `pip`, Jupyter)</span>
+* <span class="fragment">**Terminal commands** (cd, ls, running scripts)</span>
+* <span class="fragment">**Docker basics** (build image, run container)</span>
+
+::: notes
+You don't need to be a deep learning researcher or Docker expert.
+
+If someone is completely new to Python or has never touched a terminal, recommend they pair up with someone more experienced during the workshop.
+:::
+
+---
+
+## 🗓️ Workshop Structure {data-background-color="#1e293b"}
+
+We'll work across **3 core days** + optional sessions
+
+---
+
+### Day 0 (Monday, 2h)
+
+**Environment Setup**
+
+* <span class="fragment">Install tools, clone repos</span>
+* <span class="fragment">Test notebooks</span>
+* <span class="fragment">Validate both environments</span>
+
+---
+
+### Day 1 (Tuesday)
+
+**LLMs & Prompting**
+
+* <span class="fragment">Ollama vs watsonx.ai</span>
+* <span class="fragment">Prompt engineering patterns</span>
+* <span class="fragment">Evaluation & safety</span>
+
+---
+
+### Day 2 (Wednesday)
+
+**RAG (Retrieval-Augmented Generation)**
+
+* <span class="fragment">Build a RAG pipeline</span>
+* <span class="fragment">Vector databases & embeddings</span>
+* <span class="fragment">Integrate with production code</span>
+
+---
+
+### Day 3 (Thursday)
+
+**Orchestration, Agents & Governance**
+
+* <span class="fragment">Use RAG as a service</span>
+* <span class="fragment">Build agentic workflows</span>
+* <span class="fragment">Think about governance</span>
+
+---
+
+### Optional Capstone (Friday)
+
+**Team Project & Demos**
+
+* <span class="fragment">Apply everything you've learned</span>
+* <span class="fragment">Build a real-world prototype</span>
+* <span class="fragment">Present to the group</span>
+
+---
+
+## 🧰 Three Core Codebases {data-background-color="#0f172a" data-transition="zoom"}
+
+We'll spend the entire workshop inside **three** codebases
+
+::: notes
+These three repos are the foundation of the entire workshop. Make sure everyone understands we'll be moving between them throughout the week.
+:::
+
+---
+
+### 1️⃣ `simple-ollama-environment`
+
+**Local LLM Sandbox**
+
+* <span class="fragment">Built around [Ollama](https://ollama.com/)</span>
+* <span class="fragment">Python 3.11 + Jupyter</span>
+* <span class="fragment">Run models on your machine or in Docker</span>
+* <span class="fragment">Notebook: `notebooks/ollama_quickstart.ipynb`</span>
+
+::: notes
+This is your local playground. You can experiment without internet, without cloud costs, and without rate limits.
+
+Ollama makes it trivially easy to download and run LLMs locally.
+:::
+
+---
+
+### 2️⃣ `simple-watsonx-enviroment`
+
+**watsonx.ai Sandbox**
+
+* <span class="fragment">Access Granite / Llama models via IBM Cloud</span>
+* <span class="fragment">Python 3.11 + Jupyter</span>
+* <span class="fragment">IBM watsonx.ai SDK + LangChain integration</span>
+* <span class="fragment">Notebook: `notebooks/watsonx_quickstart.ipynb`</span>
+* <span class="fragment">Reads credentials from a `.env` file</span>
+
+::: notes
+This is your cloud-based sandbox. It gives you access to enterprise-grade models with governance, audit trails, and production-ready infrastructure.
+:::
+
+---
+
+### 3️⃣ `accelerator/` (RAG Production Skeleton)
+
+**Inside `watsonx-workshop` repo**
+
+* <span class="fragment">**API**: FastAPI service wrapping RAG pipeline</span>
+* <span class="fragment">**RAG core**: retriever, pipeline, prompt templates</span>
+* <span class="fragment">**Tools**: ingestion, chunking, embedding, evaluation</span>
+* <span class="fragment">**UI**: Streamlit app</span>
+* <span class="fragment">**Assets**: notebooks and sample data</span>
+
+::: notes
+This is the "real application" - production-ready skeleton code that you can adapt for your own use cases.
+
+We start with the two sandbox environments on Day 0, then wire in the accelerator from Day 2 onwards.
+:::
+
+---
+
+## 💻 Technical Prerequisites {data-background-color="#1e293b"}
+
+Let's make sure your machine is ready
+
+---
+
+### Operating System
+
+You can use any of:
+
+* <span class="fragment">**Windows 10+**</span>
+* <span class="fragment">**macOS 12+**</span>
+* <span class="fragment">**Linux** (Ubuntu 20.04+, Debian, Fedora, etc.)</span>
+
+::: notes
+If you're on a locked-down corporate laptop, you may need help from IT to install Docker or run containers. Flag this early!
+:::
+
+---
+
+### Minimum Hardware
+
+These are guidelines, not hard limits:
+
+* <span class="fragment">**CPU**: 4+ cores</span>
+* <span class="fragment">**RAM**: 16 GB recommended (8 GB possible with smaller models)</span>
+* <span class="fragment">**Disk**: 20–30 GB free (Docker images + models + notebooks)</span>
+
+::: notes
 For local LLMs via Ollama:
+- Tiny models (0.5B–1B params) work fine on 8 GB RAM
+- 7B models are happier with ~16 GB RAM
+- Bigger models (13B+) are not recommended on small laptops
 
-- Tiny models (0.5B–1B parameters) are fine on 8 GB RAM.
-- 7B models are happier with ~16 GB RAM.
-- Bigger models (13B, 33B) are not recommended on small laptops.
-
-### Software you must have
-
-You will need:
-
-- **Git**
-- **Python 3.11**
-- **Docker** (Docker Desktop on Win/macOS, Docker Engine on Linux)
-- A modern **web browser** (Chrome, Edge, Firefox, Safari)
-
-You *can* survive without Docker, but the experience will be smoother with it, especially for Ollama.
+If you have less than this, you can still do most of the workshop using only watsonx.ai.
+:::
 
 ---
 
-## Accounts & Access
+### Required Software
 
-To use watsonx.ai you need an **IBM Cloud account** and access to the watsonx services.
+You **must** have:
 
-### IBM Cloud
+* <span class="fragment">**Git**</span>
+* <span class="fragment">**Python 3.11**</span>
+* <span class="fragment">**Docker** (Desktop on Win/macOS, Engine on Linux)</span>
+* <span class="fragment">**Modern web browser** (Chrome, Edge, Firefox, Safari)</span>
 
-1. Create or use an existing IBM Cloud account.
-2. Ensure you have access to:
-   - **watsonx.ai**
-   - (Optional, but recommended) **watsonx.governance**
-   - (Optional) **watsonx.orchestrate**
+::: notes
+You *can* survive without Docker, but the experience will be much smoother with it, especially for Ollama.
 
-Your instructor / organizer should tell you:
+We'll walk through installation in the next modules.
+:::
 
-- Which **region** to use (e.g., `us-south`).
-- Whether you'll use a shared project or create your own.
-- If there is a pre-configured resource group.
+---
 
-### watsonx project information
+## ☁️ Accounts & Access {data-background-color="#0f172a"}
 
-You will need:
+To use watsonx.ai you need IBM Cloud access
 
-- **IBM Cloud API key**
-- **watsonx endpoint URL**  
-  e.g. `https://us-south.ml.cloud.ibm.com`
-- **Project or space ID**  
-  (depending on how your environment is configured)
+---
 
-These values go into `.env` for `simple-watsonx-enviroment`:
+### IBM Cloud Account
+
+You need:
+
+1. <span class="fragment">Create or use an existing **IBM Cloud account**</span>
+2. <span class="fragment">Ensure you have access to **watsonx.ai**</span>
+3. <span class="fragment">(Optional) **watsonx.governance**</span>
+4. <span class="fragment">(Optional) **watsonx.orchestrate**</span>
+
+::: notes
+Your instructor or organizer should tell you:
+- Which region to use (e.g., us-south)
+- Whether you'll use a shared project or create your own
+- If there's a pre-configured resource group
+
+Make sure everyone has this information before Day 1!
+:::
+
+---
+
+### Required Credentials
+
+You will need three key values:
 
 ```bash
-IBM_CLOUD_API_KEY=...
+IBM_CLOUD_API_KEY=your_api_key_here
 IBM_CLOUD_URL=https://us-south.ml.cloud.ibm.com
-IBM_CLOUD_PROJECT_ID=...
+IBM_CLOUD_PROJECT_ID=your_project_id_here
 ```
 
-or, using the compatibility names:
+::: notes
+We'll walk through exactly where to find these values in the next module (Setup watsonx environment).
 
-```bash
-WATSONX_APIKEY=...
-WATSONX_URL=https://us-south.ml.cloud.ibm.com
-PROJECT_ID=...
-```
-
-We'll walk through this again in **0.3 Setup `simple-watsonx-enviroment`**.
+For now, just be aware you'll need them.
+:::
 
 ---
 
-## Tools to Install Before Day 0 (Optional but strongly recommended)
+### Where to Find These Values
 
-If you have time *before* the workshop, install these locally so Day 0 is just validation.
+* <span class="fragment">**IBM_CLOUD_API_KEY**: IBM Cloud console → Manage → Access (IAM) → API keys</span>
+* <span class="fragment">**IBM_CLOUD_URL**: Typically `https://<region>.ml.cloud.ibm.com`</span>
+* <span class="fragment">**IBM_CLOUD_PROJECT_ID**: From your watsonx.ai project details in the UI</span>
 
-### Git
+::: notes
+These values will go into a `.env` file in the `simple-watsonx-enviroment` repo.
 
-* **Windows**:
-  Download Git for Windows from the official site and follow the installer.
-* **macOS**:
-  Git usually comes via Xcode Command Line Tools:
+Treat this file as a secret - never commit it to git!
+:::
 
-  ```bash
-  xcode-select --install
-  ```
-* **Linux** (Ubuntu example):
+---
 
-  ```bash
-  sudo apt-get update
-  sudo apt-get install -y git
-  ```
+## 🛠️ Tools to Install (Optional Pre-Work) {data-background-color="#1e293b"}
 
-### Python 3.11
+If you have time *before* the workshop, install these
 
-* **Windows**:
-  Install from python.org and check "Add to PATH".
-* **macOS (Homebrew)**:
+This makes Day 0 just validation instead of installation
 
-  ```bash
-  brew install python@3.11
-  ```
-* **Linux (Ubuntu 22.04 example)**:
+---
 
-  ```bash
-  sudo apt-get update
-  sudo apt-get install -y python3.11 python3.11-venv python3.11-dev
-  ```
+### Installing Git
 
-Verify:
+**Windows:**
+
+```bash
+# Download from git-scm.com and run installer
+```
+
+**macOS:**
+
+```bash
+xcode-select --install
+```
+
+**Linux (Ubuntu):**
+
+```bash
+sudo apt-get update
+sudo apt-get install -y git
+```
+
+::: notes
+Most developers already have Git installed. This is a quick sanity check.
+:::
+
+---
+
+### Installing Python 3.11
+
+**Windows:**
+
+* <span class="fragment">Download from python.org</span>
+* <span class="fragment">✅ Check "Add to PATH" during installation</span>
+
+**macOS (Homebrew):**
+
+```bash
+brew install python@3.11
+```
+
+**Linux (Ubuntu 22.04):**
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3.11 python3.11-venv python3.11-dev
+```
+
+---
+
+### Verify Python Installation
+
+Run this command to check:
 
 ```bash
 python3.11 --version
 ```
 
-### Docker
+<span class="fragment">You should see: `Python 3.11.x`</span>
 
-* **Windows / macOS**:
-  Install **Docker Desktop** from docker.com and enable WSL2/backing engine as needed.
-* **Linux (Ubuntu)**:
-  Follow the official Docker Engine docs, or something like:
+::: notes
+If this doesn't work, Python might not be in your PATH, or you might need to use `python` or `python3` instead of `python3.11`.
 
-  ```bash
-  curl -fsSL https://get.docker.com | sh
-  sudo usermod -aG docker "$USER"
-  ```
+Common issue on Windows: forgetting to check "Add to PATH" during installation.
+:::
 
-  Then log out & back in so your user is in the `docker` group.
+---
 
-### Jupyter (optional)
+### Installing Docker
 
-We install Jupyter via the project `Makefile`, but if you want a global install:
+**Windows / macOS:**
+
+* <span class="fragment">Install **Docker Desktop** from docker.com</span>
+* <span class="fragment">Enable WSL2 backend (Windows)</span>
+
+**Linux (Ubuntu):**
 
 ```bash
-pip install jupyter
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker "$USER"
+# Log out and back in
 ```
 
----
+::: notes
+On Linux, make sure to add your user to the docker group so you don't need sudo for every docker command.
 
-## Reference Repositories & Assets
-
-During the workshop you will clone and/or have access to:
-
-### Repositories
-
-* **`simple-ollama-environment`**
-  Minimal Python 3.11 + Jupyter + Ollama setup, with:
-
-  * Docker support.
-  * `notebooks/ollama_quickstart.ipynb`.
-
-* **`simple-watsonx-enviroment`**
-  Minimal Python 3.11 + Jupyter + watsonx.ai integration:
-
-  * `.env.sample` for credentials.
-  * `notebooks/watsonx_quickstart.ipynb`.
-  * Dockerfile + Makefile for easy setup.
-
-* **`watsonx-workshop`**
-  The repository that hosts:
-
-  * This documentation.
-  * The **`accelerator/`** folder:
-
-    * `rag/` – retrieval + pipeline code.
-    * `service/` – FastAPI API.
-    * `tools/` – ingestion & evaluation scripts.
-    * `ui/` – Streamlit UI.
-  * `labs-src/` – reference notebooks for RAG & governance.
-
-### Notebook galleries
-
-We won't run all of these line-by-line, but they are **excellent reference implementations** you can borrow from.
-
-#### `labs-src/` – RAG & governance examples
-
-* `use-watsonx-elasticsearch-and-langchain-to-answer-questions-rag.ipynb`
-* `use-watsonx-and-elasticsearch-python-sdk-to-answer-questions-rag.ipynb`
-* `use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb`
-* `ibm-watsonx-governance-evaluation-studio-getting-started.ipynb`
-* `ibm-watsonx-governance-governed-agentic-catalog.ipynb`
-
-#### `accelerator/assets/notebook/` – RAG production workflow
-
-* `notebook:Process_and_Ingest_Data_into_Vector_DB.ipynb`
-* `notebook:Process_and_Ingest_Data_from_COS_into_vector_DB.ipynb`
-* `notebook:Ingestion_of_Expert_Profile_data_to_Vector_DB.ipynb`
-* `notebook:QnA_with_RAG.ipynb`
-* `notebook:Create_and_Deploy_QnA_AI_Service.ipynb`
-* `notebook:Test_Queries_for_Vector_DB.ipynb`
-* `notebook:Analyze_Log_and_Feedback.ipynb`
-
-These will show you:
-
-* How to go from raw documents → chunks → embeddings → vector DB.
-* How to implement a Q&A RAG pipeline.
-* How to package and deploy a Q&A service.
-* How to analyze logs and feedback.
+On Windows/Mac, Docker Desktop handles most of the complexity.
+:::
 
 ---
 
-## What You Will Have After Day 0
+## 📦 Reference Repositories {data-background-color="#0f172a"}
 
-By the end of Day 0, you should have:
+During the workshop you'll work with these repos
 
-* ✅ **Cloned**:
+---
 
-  * `simple-ollama-environment`
-  * `simple-watsonx-enviroment`
-  * `watsonx-workshop` (with `accelerator/` and `labs-src/`)
-* ✅ **Working Jupyter** in both env repos.
-* ✅ A basic **Ollama chat** running from `ollama_quickstart.ipynb`.
-* ✅ A basic **Granite / watsonx.ai call** running from `watsonx_quickstart.ipynb`.
-* ✅ The `accelerator/` folder available locally.
-* ✅ All reference notebooks (`labs-src/` and accelerator notebooks) opening in Jupyter.
+### Repository Overview
 
-When those boxes are ticked, you're ready to hit the ground running on **Day 1**.
+* <span class="fragment">**`simple-ollama-environment`** - Local LLM sandbox</span>
+* <span class="fragment">**`simple-watsonx-enviroment`** - watsonx.ai sandbox</span>
+* <span class="fragment">**`watsonx-workshop`** - Main repo with accelerator & docs</span>
+
+::: notes
+You'll clone all three of these during Day 0.
+
+The watsonx-workshop repo is the "home base" - it contains this documentation plus the production RAG accelerator.
+:::
+
+---
+
+### Notebook Galleries
+
+We have **excellent reference implementations** you can borrow from:
+
+* <span class="fragment">**`labs-src/`** - RAG & governance examples</span>
+* <span class="fragment">**`accelerator/assets/notebook/`** - Production workflow notebooks</span>
+
+::: notes
+We won't run all of these line-by-line during the workshop, but they're incredibly valuable reference material.
+
+Encourage students to explore them during breaks or after the workshop.
+:::
+
+---
+
+### Key Reference Notebooks
+
+**RAG Examples:**
+
+* <span class="fragment">`use-watsonx-elasticsearch-and-langchain-to-answer-questions-rag.ipynb`</span>
+* <span class="fragment">`use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb`</span>
+
+**Governance Examples:**
+
+* <span class="fragment">`ibm-watsonx-governance-evaluation-studio-getting-started.ipynb`</span>
+* <span class="fragment">`ibm-watsonx-governance-governed-agentic-catalog.ipynb`</span>
+
+::: notes
+These show you how to integrate watsonx with popular vector databases and how to use governance features.
+:::
+
+---
+
+### Accelerator Production Notebooks
+
+**End-to-end workflow notebooks:**
+
+* <span class="fragment">`Process_and_Ingest_Data_into_Vector_DB.ipynb`</span>
+* <span class="fragment">`QnA_with_RAG.ipynb`</span>
+* <span class="fragment">`Create_and_Deploy_QnA_AI_Service.ipynb`</span>
+* <span class="fragment">`Analyze_Log_and_Feedback.ipynb`</span>
+
+::: notes
+These notebooks show the complete journey:
+- Raw documents → chunks → embeddings → vector DB
+- Implement a Q&A RAG pipeline
+- Package and deploy as a service
+- Analyze logs and user feedback
+
+This is production-ready code you can adapt.
+:::
+
+---
+
+## ✅ What You'll Have After Day 0 {data-background-color="#1e293b" data-transition="fade"}
+
+By the end of today's session
+
+---
+
+### Your Checklist
+
+* <span class="fragment">✅ **Cloned**: All three repos</span>
+* <span class="fragment">✅ **Working Jupyter** in both env repos</span>
+* <span class="fragment">✅ **Ollama chat** running from `ollama_quickstart.ipynb`</span>
+* <span class="fragment">✅ **Granite call** working from `watsonx_quickstart.ipynb`</span>
+* <span class="fragment">✅ **Accelerator folder** available locally</span>
+* <span class="fragment">✅ **Reference notebooks** opening in Jupyter</span>
+
+::: notes
+When all these boxes are ticked, you're ready to hit the ground running on Day 1.
+
+If someone is stuck on any of these, they should raise their hand now or during breaks.
+:::
+
+---
+
+## 🚀 Ready to Get Started? {data-background-color="#0f172a"}
+
+Next up: **Setup `simple-ollama-environment`**
+
+We'll get your local LLM sandbox running
+
+::: notes
+Take a quick break if needed, then dive into the hands-on setup!
+
+Remind everyone they can ask questions at any time.
+:::
+
+---
+
+## 💡 Live Environment Links
+
+Want to explore before installing locally?
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ruslanmv/simple-ollama-environment/main?filepath=notebooks/ollama_quickstart.ipynb)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ruslanmv/simple-watsonx-enviroment/blob/main/notebooks/watsonx_quickstart.ipynb)
+
+::: notes
+These badges link to live, interactive environments where students can try notebooks without any local setup.
+
+MyBinder is great for Ollama (though it won't have GPU access).
+Google Colab works well for the watsonx notebooks if students have their credentials ready.
+
+Make sure to update ruslanmv with the actual GitHub usernames once the repos are public.
+:::
