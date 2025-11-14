@@ -16,7 +16,7 @@ Master Retrieval Augmented Generation
 
 <p style="text-align:right; margin-top:1.5rem;">
   <img
-    src="../../../themes/assets/tutor.png"
+    src="https://raw.githubusercontent.com/ruslanmv/watsonx-workshop/refs/heads/master/themes/assets/tutor.png"
     alt="Tutor: Ruslan Idelfonso Magana Vsevolodovna"
     style="
       border-radius:50%;

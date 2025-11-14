@@ -1,5 +1,10 @@
 # watsonx Orchestrate: Enterprise Agent Platform {data-background-color="#1e3a8a"}
 
+::: notes
+Comprehensive workshop on building production-grade AI agents with watsonx Orchestrate Agent Developer Kit (ADK).
+:::
+
+---
 
 ### Tutor
 
@@ -10,7 +15,7 @@
 
 <p style="text-align:right; margin-top:1.5rem;">
   <img
-    src="../../../themes/assets/tutor.png"
+    src="https://raw.githubusercontent.com/ruslanmv/watsonx-workshop/refs/heads/master/themes/assets/tutor.png"
     alt="Tutor: Ruslan Idelfonso Magana Vsevolodovna"
     style="
       border-radius:50%;
@@ -22,11 +27,10 @@
     "
   >
 </p>
-::: notes
-Comprehensive workshop on building production-grade AI agents with watsonx Orchestrate Agent Developer Kit (ADK).
-:::
 
 ---
+
+
 
 ## Table of Contents {data-transition="slide"}
 

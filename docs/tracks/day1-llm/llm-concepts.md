@@ -8,6 +8,31 @@ Welcome students warmly. Set the tone for an engaging day. Mention that by the e
 
 ---
 
+### Tutor
+
+**Ruslan Idelfonso Magana Vsevolodovna**  
+*PhD in Physics · AI Engineer*  
+
+📧 [contact@ruslamv.com](mailto:contact@ruslamv.com)
+
+<p style="text-align:right; margin-top:1.5rem;">
+  <img
+    src="https://raw.githubusercontent.com/ruslanmv/watsonx-workshop/refs/heads/master/themes/assets/tutor.png"
+    alt="Tutor: Ruslan Idelfonso Magana Vsevolodovna"
+    style="
+      border-radius:50%;
+      width:130px;
+      height:130px;
+      object-fit:cover;
+      box-shadow:0 12px 30px rgba(0,0,0,0.45);
+      border:3px solid rgba(248,250,252,0.9);
+    "
+  >
+</p>
+
+---
+
+
 ## 🎯 Learning Objectives {data-background-color="#0f172a"}
 
 By the end of this module, you will:
