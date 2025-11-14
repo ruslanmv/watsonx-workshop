@@ -80,10 +80,10 @@ jobs:
       # ---------------------------
       # 7) Export PDFs
       # ---------------------------
-      #- name: Export slide decks to PDF (per deck + per day)
-      #  run: |
-      #    make pdf
-      #    make pdf-days
+      - name: Export slide decks to PDF (per deck + per day)
+        run: |
+          make pdf
+          make pdf-days
 
       # ---------------------------
       # 8) Build MkDocs site
