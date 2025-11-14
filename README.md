@@ -4,7 +4,6 @@
   <a href="https://www.ibm.com/products/watsonx-ai" target="_blank"><img src="https://img.shields.io/badge/built%20for-watsonx.ai-0b62a3?logo=ibm&logoColor=white" alt="watsonx.ai"></a>
   <a href="https://www.python.org" target="_blank"><img src="https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.11+" /></a>
   <a href="https://ruslanmv.com/watsonx-workshop/" target="_blank"><img src="https://img.shields.io/badge/docs-MkDocs%20Material-000000?logo=markdown" alt="MkDocs Material" /></a>
-  <a href="https://github.com/ruslanmv/watsonx-workshop/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-Open%20Source-success" alt="License" /></a>
 </p>
 
 <div align="center">
@@ -12,214 +11,220 @@
   <a href="https://jupyter.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/jupyter/jupyter-original-wordmark.svg" alt="Jupyter" width="64" height="64"/></a>
 </div>
 
-<p align="center">
-  <strong>Enterprise-ready hands-on training for building AI solutions with IBM watsonx</strong>
-</p>
+---
+
+## Purpose & Scope
+
+**This repository is a practical, enterprise-minded curriculum for IBM watsonx.**  
+It focuses on the *essential knowledge and patterns* you need to design **stable, production-ready solutions** for IBM clients operating at **high enterprise scale**.
+
+We guide you along a clear path:
+
+1. **Granite** — learn the model families, prompting patterns, local runs, and the watsonx.ai SDK  
+2. **RAG** — build Retrieval-Augmented Generation systems with clean ingestion, robust retrieval, and grounded answering  
+3. **Agents** — use CrewAI / LangGraph and **watsonx.governance** to build governed, tool-using agents and evaluate them  
+4. **Orchestrate** — combine components into **multi-agent** workflows for end-to-end business solutions
+
+Throughout, you’ll see **industry best practices**: configuration hygiene, reproducibility, observability hooks, evaluation workflows, and guidance for secure deployment.
+
+> For background and updates from the author, visit **[ruslanmv.com](https://ruslanmv.com)**.
 
 ---
 
-## Overview
+## What You’ll Learn
 
-A comprehensive, production-ready workshop curriculum designed for enterprise teams building AI applications with **IBM watsonx**. Master LLMs, RAG systems, AI agents, and orchestration through hands-on labs and real-world patterns.
+- Selecting and operating **Granite** models for enterprise use cases  
+- End-to-end **RAG**: extraction → chunking → embeddings → vector stores (Elasticsearch/Chroma) → LLM answering with citations  
+- Building **governed agents** with **CrewAI / LangGraph** + **watsonx.governance** (Evaluation Studio)  
+- Packaging and deploying **CLIs, APIs (FastAPI), and UIs (Streamlit)**  
+- **Evaluation** and comparison of model configurations to support evidence-based choices
 
-### 🎯 What You'll Build
-
-- **Enterprise LLM Applications** — Master Granite models and prompt engineering
-- **Production RAG Systems** — Build retrieval-augmented generation pipelines with vector databases
-- **Intelligent Agents** — Create tool-using agents with governance and orchestration
-- **Complete APIs & UIs** — Deploy FastAPI backends and Streamlit interfaces
-
----
-
-## 🚀 Quick Links
-
-| Resource | Description | Link |
-|----------|-------------|------|
-| **📚 Documentation** | Complete workshop materials and guides | [View Docs](https://ruslanmv.com/watsonx-workshop/) |
-| **🎓 Workshop Portal** | Interactive daily guides and presentations | [Enter Portal](https://ruslanmv.com/watsonx-workshop/portal/) |
-| **🏗️ RAG Accelerator** | Production-ready RAG implementation | [Start Here](docs/tracks/day2-rag/START_HERE.md) |
-| **💬 Discussions** | Community Q&A and support | [Join Discussion](https://github.com/ruslanmv/watsonx-workshop/discussions) |
-| **🐛 Issues** | Report bugs or request features | [Report Issue](https://github.com/ruslanmv/watsonx-workshop/issues) |
+> The site is **Markdown-first** for reliability. Notebooks live under references (`labs-src/`, `docs/assets/notebooks/day3/`) so `mkdocs build --strict` stays clean.
 
 ---
 
-## 📖 Workshop Structure
+## Who Is This For?
 
-| Day | Focus Area | Duration | Key Deliverable |
-|-----|------------|----------|-----------------|
-| **[Day 0](docs/tracks/day0-env/prereqs-and-accounts.md)** | Environment Setup | 4 hours | Working local & cloud environments |
-| **[Day 1](docs/tracks/day1-llm/llm-concepts.md)** | LLMs & Prompting | 6 hours | Prompting playbook & safe AI patterns |
-| **[Day 2](docs/tracks/day2-rag/START_HERE.md)** | RAG Systems | 6 hours | Production RAG API + UI with citations |
-| **[Day 3](docs/tracks/day3-orchestrate/agentic-ai-overview.md)** | Agents & Orchestration | 6 hours | Multi-agent system with governance |
-| **[Capstone](docs/tracks/capstone/capstone-overview.md)** | Applied Project | 4 hours | Portfolio-ready enterprise application |
-
----
-
-## ⚡ Quick Start
-
-### Prerequisites
-
-- IBM Cloud account with watsonx.ai access
-- Python 3.11+
-- Git and Docker (optional)
-- Elasticsearch 8.x (for RAG) or Chroma locally
-
-### Run the RAG Accelerator
-
-```bash
-# Clone repository
-git clone https://github.com/ruslanmv/watsonx-workshop.git
-cd watsonx-workshop/accelerator
-
-# Set up environment
-python -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
-pip install -U pip && pip install -e .
-
-# Configure credentials
-cp .env.sample .env               # Add your watsonx credentials
-
-# Run the complete pipeline
-make all                          # Extract → Chunk → Embed → Index
-
-# Start services
-make api                          # FastAPI at http://localhost:8001
-make ui                           # Streamlit at http://localhost:8501
-```
-
-### View Documentation Locally
-
-```bash
-# From repository root
-pip install mkdocs-material
-mkdocs serve
-# Open http://127.0.0.1:8000
-```
+| Role | You’ll Gain |
+|---|---|
+| **Developers & ML Engineers** | Reproducible pipelines, clean APIs, and hands-on patterns you can ship |
+| **Architects & Tech Leads** | Reference designs for secure, governed, and scalable LLM systems |
+| **Data Scientists** | Prompting strategies, evaluation harnesses, and experiment discipline |
+| **Consultants** | Client-ready accelerators and workshop materials for rapid value delivery |
 
 ---
 
-## 🎓 Learning Paths
+## Curriculum Overview
 
-### For Instructors
-
-- 📋 **[Workshop Portal](https://ruslanmv.com/watsonx-workshop/portal/)** — Complete daily guides with presentations and timing
-- 🎬 **Interactive Slides** — HTML presentations with speaker notes
-- 📝 **Instructor Notes** — Teaching tips and common troubleshooting
-
-### For Self-Paced Learners
-
-- 📚 **[Full Documentation](https://ruslanmv.com/watsonx-workshop/)** — Comprehensive written guides
-- 💻 **Hands-On Labs** — Step-by-step tutorials with code examples
-- 📓 **Reference Notebooks** — Jupyter notebooks for exploration
+| Day | Theme | Theory (≈4h) | Labs (≈4h) | Key Deliverable |
+|---|---|---|---|---|
+| **Day 0** | Environment Setup | Repos, environments, credentials | Verify *simple-ollama* & *simple-watsonx* | Two working environments |
+| **Day 1** | LLMs & Prompting | Granite models, prompting patterns, safety | Multi-env quickstart + prompt templates + micro-eval | Prompting playbook |
+| **Day 2** | Retrieval-Augmented Generation | RAG architecture, design trade-offs | Local RAG, Twin pipelines, Eval harness | Grounded Q&A + API/UI |
+| **Day 3** | Orchestrate & Agents | Agentic patterns, governance, orchestration | Agent + Accelerator tool, Orchestrate ADK labs | Orchestrated agent demo |
+| **Capstone** *(optional)* | Ship It! | Team planning | Build, test, demo | Portfolio-ready mini-project |
 
 ---
 
-## 🏗️ Repository Structure
+## Tracks (at a glance)
+
+| | |
+|---|---|
+| 🔥 **Granite**<br>*Models & Prompting*<br><br>Explore Granite model families, prompting techniques, and the watsonx.ai SDK. Learn safe defaults, context windows, and token budgeting.<br><br>[**➡️ Open »**](docs/tracks/day1-llm/llm-concepts.md) | 🔎 **RAG**<br>*Grounded Q&A from your data*<br><br>Build a clean ingestion pipeline for HTML/PDF, create embeddings, index in **Elasticsearch/Chroma**, and serve grounded answers with **Granite** on watsonx.ai.<br><br>[**➡️ START HERE »**](docs/tracks/day2-rag/START_HERE.md) |
+| 🤖 **Agents**<br>*Governed, tool-using agents*<br><br>Use CrewAI / LangGraph patterns and **watsonx.governance** to build and evaluate agents safely.<br><br>[**➡️ Open »**](docs/tracks/day3-orchestrate/agentic-ai-overview.md) | ⚙️ **Orchestrate**<br>*Multi-agent solutions*<br><br>Bridge your agent + RAG service into **watsonx Orchestrate** with connections, knowledge bases, and flows.<br><br>[**➡️ Open »**](docs/tracks/day3-orchestrate/watsonx-orchestrate-labs.md) |
+
+---
+
+## Prerequisites
+
+- **IBM Cloud** account with **watsonx.ai** access and a Project  
+- **Python 3.11**, **git**, and **Make** (or Docker)  
+- (For RAG+ES) a reachable **Elasticsearch 8.x** instance — or use **Chroma** locally
+
+> Everything can be run locally. Docker workflows are provided if you prefer isolated, reproducible environments.
+
+---
+
+## Repo Layout (high-level)
 
 ```text
-watsonx-workshop/
-├── accelerator/              # Production RAG service (FastAPI + Streamlit)
-├── docs/
-│   ├── portal/              # Daily workshop portals
-│   ├── tracks/              # Detailed guides by day
-│   ├── slides/              # Presentation slides (HTML)
-│   └── assets/              # Images, CSS, reference notebooks
-├── labs-src/                # Additional lab notebooks
-├── mkdocs.yml               # Documentation configuration
-└── README.md                # This file
+.
+├── accelerator/                 # Production-minded RAG service (FastAPI + Streamlit + tools)
+├── docs/                        # MkDocs site content (Markdown-first)
+│   ├── assets/                  # CSS/JS/images + reference notebooks
+│   │   └── notebooks/day3/      # agent_crewai.ipynb, agent_langgraph.ipynb, agent_watsonx.ipynb
+│   ├── blog/                    # Articles (optional)
+│   └── tracks/
+│       ├── day0-env/            # Day 0 – setup & verification
+│       ├── day1-llm/            # Day 1 – LLM & prompting
+│       ├── day2-rag/            # Day 2 – RAG (theory + labs)
+│       ├── day3-orchestrate/    # Day 3 – Orchestration & agents
+│       └── capstone/            # Optional project day
+├── labs-src/                    # Reference notebooks (governance & RAG examples)
+├── rag-app/                     # Minimal standalone RAG demo app (for comparison)
+├── mkdocs.yml                   # Site config
+└── site/                        # Built static site (generated)
+````
+
+---
+
+## Run the Docs Locally
+
+```bash
+# from repo root
+pip install mkdocs-material
+mkdocs serve
+# open http://127.0.0.1:8000
+```
+
+Build static site:
+
+```bash
+mkdocs build --strict
 ```
 
 ---
 
-## 🛠️ What's Included
+## Quick Start — RAG Accelerator (Lab 1)
 
-- ✅ **Production Code** — FastAPI + Streamlit applications, CLIs, Dockerfiles
-- ✅ **Hands-On Labs** — Step-by-step Markdown guides with solutions
-- ✅ **Presentation Slides** — Interactive HTML decks with PDF export
-- ✅ **Enterprise Patterns** — Security, governance, and deployment best practices
-- ✅ **Reference Notebooks** — Jupyter notebooks for RAG, agents, and governance
-- ✅ **Evaluation Tools** — Model comparison and quality metrics
+```bash
+# minimal local run
+cd accelerator
+python -m venv .venv
+source .venv/bin/activate       # on Windows: .venv\Scripts\activate
+pip install -U pip && pip install -e .
+cp .env.sample .env             # set watsonx + backend (ES or Chroma)
+make all                        # extract → chunk → index
+make api                        # FastAPI at http://localhost:8001/health
+# in another terminal
+make ui                         # Streamlit UI at http://localhost:8501
+```
 
----
+**Makefile targets (most used)**
 
-## 🎯 Learning Outcomes
-
-By completing this workshop, you will:
-
-- ✓ Deploy and operate Granite LLMs on watsonx.ai
-- ✓ Implement enterprise-grade RAG systems with vector databases
-- ✓ Build governed, tool-using AI agents
-- ✓ Orchestrate multi-agent workflows with watsonx Orchestrate
-- ✓ Evaluate and compare model configurations
-- ✓ Deploy production-ready APIs and UIs
-- ✓ Apply security and governance best practices
-
----
-
-## 👥 Who Is This For?
-
-| Role | Benefits |
-|------|----------|
-| **Developers & ML Engineers** | Reproducible pipelines, clean APIs, production-ready patterns |
-| **Architects & Tech Leads** | Reference designs for secure, governed, scalable LLM systems |
-| **Data Scientists** | Prompting strategies, evaluation frameworks, experiment workflows |
-| **Consultants** | Client-ready accelerators for rapid value delivery |
+| Target       | What it does                                    |
+| ------------ | ----------------------------------------------- |
+| `make all`   | Runs extraction → chunking → embeddings → index |
+| `make api`   | Launches FastAPI service (`/ask`, `/health`)    |
+| `make ui`    | Launches Streamlit chat UI                      |
+| `make clean` | Removes temporary artifacts and caches          |
 
 ---
 
-## 🔧 Key Technologies
+## Day 3 — Agentic AI (Reference Notebooks)
 
-- **IBM watsonx.ai** — Enterprise AI platform for LLMs and governance
-- **Granite Models** — IBM's family of enterprise-grade language models
-- **Elasticsearch/Chroma** — Vector databases for RAG
-- **LangChain/CrewAI/LangGraph** — Agent frameworks and orchestration
-- **FastAPI** — Modern Python API framework
-- **Streamlit** — Interactive UI for AI applications
+Use these along with **Lab 3.1** (Agent + Accelerator API):
 
----
+* `docs/assets/notebooks/day3/agent_crewai.ipynb`
+* `docs/assets/notebooks/day3/agent_langgraph.ipynb`
+* `docs/assets/notebooks/day3/agent_watsonx.ipynb`
 
-## 📊 Production Patterns
+**Bridge to Orchestrate:**
+Map the accelerator `/ask` endpoint and your agent’s tools to **watsonx Orchestrate** actions and knowledge bases. See:
 
-This workshop emphasizes enterprise-ready practices:
-
-- **Configuration Hygiene** — Environment-driven settings with `.env` files
-- **Evaluation First** — Model comparison with watsonx.governance
-- **Observability** — Logging, metrics, and experiment tracking
-- **Security** — Secret management, rate limiting, secure deployment
-- **Portability** — Docker support for reproducible environments
+* [Agentic AI Overview](docs/tracks/day3-orchestrate/agentic-ai-overview.md)
+* [Lab 3.1 – Agent in simple-watsonx-enviroment + Accelerator API](docs/tracks/day3-orchestrate/lab-1-agent-watsonx.md)
+* [watsonx Orchestrate Labs (ADK)](docs/tracks/day3-orchestrate/watsonx-orchestrate-labs.md)
 
 ---
 
-## 🤝 Contributing
+## Production-Minded Patterns
 
-We welcome contributions! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request with clear description
-
-For bugs or feature requests, please [open an issue](https://github.com/ruslanmv/watsonx-workshop/issues).
+* **Config hygiene** — `.env.sample`, `es.env.sample`, environment-driven settings, sensible defaults
+* **Evaluation first** — tiny harnesses + **Evaluation Studio** comparisons (temperature, model choice, retriever `k`)
+* **Observability** — log prompts/latency and store experiment metadata for reproducibility
+* **Secure by design** — avoid leaking secrets; choose private networks and TLS for ES; rate-limit APIs
+* **Portability** — Dockerfiles and `requirements.txt`/`pyproject.toml` for deterministic builds
 
 ---
 
-## 📄 License
+## Success Outcomes (why teams love this course)
 
-This project is distributed under an open-source license. See [LICENSE](LICENSE) for details.
-
-> IBM, watsonx, and other product names are trademarks of their respective owners. Use of marks in this repository is for identification purposes only and does not imply endorsement.
-
----
-
-## 📬 Contact & Support
-
-- **Author**: Ruslan Magaña
-- **Website**: [ruslanmv.com](https://ruslanmv.com)
-- **Discussions**: [GitHub Discussions](https://github.com/ruslanmv/watsonx-workshop/discussions)
-- **Issues**: [GitHub Issues](https://github.com/ruslanmv/watsonx-workshop/issues)
+| Outcome                        | Measure                                                       |
+| ------------------------------ | ------------------------------------------------------------- |
+| Working RAG service (API + UI) | `/ask` endpoint + Streamlit demo with citations               |
+| Faster iteration cycles        | Saved experiment configs, evaluation runs, and logs           |
+| Better decisions               | Side-by-side model/retriever comparisons in Evaluation Studio |
+| Production readiness           | Clean config, minimal attack surface, build & deploy scripts  |
+| Team enablement                | Reusable patterns and reference notebooks for future projects |
 
 ---
 
-<div align="center">
-  <p><strong>⭐ If you find this workshop helpful, please star the repository!</strong></p>
-  <p>Built with care for the watsonx Community</p>
-</div>
+## FAQ
+
+**Q: Can I run everything without Elasticsearch?**
+Yes. Use the **Chroma** path (local, persistent) and switch to ES later by changing `.env` and re-indexing.
+
+**Q: Which Granite model should I start with?**
+Begin with a smaller **Granite Instruct** model for iteration. Compare against larger variants in Evaluation Studio.
+
+**Q: How do I keep costs predictable?**
+Use smaller models during development, reduce `max_new_tokens`, and evaluate retrieval quality before long prompts.
+
+**Q: Where are the notebooks?**
+
+* RAG & governance examples: `labs-src/`
+* Agent references: `docs/assets/notebooks/day3/`
+
+---
+
+## Contributing
+
+We welcome issues and improvements!
+Please open a discussion or PR with a clear description, repro steps (if applicable), and proposed changes.
+
+---
+
+## License
+
+This project is distributed under an open-source license. See **[LICENSE](LICENSE)**.
+
+> IBM, watsonx, and other product names are trademarks or registered trademarks of IBM or their respective owners. Use of marks in this repository is solely for identification and does not imply endorsement.
+
+---
+
+## Acknowledgments & Contact
+
+Created and maintained by **Ruslan Magaña**.
+For updates, articles, and related projects, visit **[ruslanmv.com](https://ruslanmv.com)**.
+

@@ -1,0 +1,434 @@
+/**
+ * watsonx.ai Professional Enterprise Theme for MkDocs Material
+ * Soft lilac/lavender palette with excellent contrast and readability
+ * Inspired by enterprise-grade Generative AI branding
+ */
+
+/* ============================================================================
+   COLOR PALETTE - Enterprise watsonx Colors
+   ============================================================================ */
+:root {
+  /* Primary Enterprise Palette - Soft Lilac/Lavender */
+  --watsonx-lilac-dark: #8b7a99;        /* Deep muted purple for headers */
+  --watsonx-lilac-mid: #b0a3b7;         /* Mid-tone for accents */
+  --watsonx-lilac-light: #d1c5d3;       /* Soft for borders/backgrounds */
+  --watsonx-lilac-pale: #e8dfea;        /* Very light for subtle backgrounds */
+  
+  /* Accent Colors - Complementary purples */
+  --watsonx-purple-accent: #6f5d7e;     /* Darker purple for emphasis */
+  --watsonx-pink-accent: #c08db5;       /* Soft pink for highlights */
+  
+  /* IBM Blue (subdued for enterprise) */
+  --ibm-blue: #4a76a8;                  /* Muted IBM blue */
+  --ibm-blue-light: #6b95c4;            /* Lighter variant */
+  
+  /* Neutral Enterprise Background */
+  --bg-primary: #f5f2f3;                /* Very light warm grey */
+  --bg-secondary: #ffffff;               /* Clean white */
+  --bg-subtle: #e8e4e5;                 /* Subtle grey for cards */
+  
+  /* Text Colors - High Contrast */
+  --text-primary: #1a1a1a;              /* Near black */
+  --text-secondary: #4a4a4a;            /* Medium grey */
+  --text-tertiary: #6b6b6b;             /* Light grey */
+  
+  /* Soft Gradients */
+  --watsonx-gradient-subtle: linear-gradient(135deg, #d1c5d3 0%, #e8dfea 100%);
+  --watsonx-gradient-header: linear-gradient(135deg, #8b7a99 0%, #b0a3b7 100%);
+  --watsonx-gradient-accent: linear-gradient(135deg, #6f5d7e 0%, #8b7a99 100%);
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] {
+  --watsonx-lilac-dark: #b0a3b7;
+  --watsonx-lilac-mid: #9986a3;
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2a2a2a;
+  --text-primary: #e8e8e8;
+  --text-secondary: #c0c0c0;
+}
+
+/* ============================================================================
+   GLOBAL BACKGROUND
+   ============================================================================ */
+.md-main {
+  background-color: var(--bg-primary);
+}
+
+.md-content {
+  background-color: var(--bg-primary);
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+.md-typeset h1 {
+  color: var(--watsonx-lilac-dark);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.8em;
+}
+
+.md-typeset h2 {
+  color: var(--watsonx-purple-accent);
+  font-weight: 600;
+  border-bottom: 2px solid var(--watsonx-lilac-light);
+  padding-bottom: 0.4em;
+  margin-top: 1.5em;
+}
+
+.md-typeset h3 {
+  color: var(--watsonx-lilac-dark);
+  font-weight: 600;
+}
+
+.md-typeset h4 {
+  color: var(--ibm-blue);
+  font-weight: 500;
+}
+
+.md-typeset p {
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+/* ============================================================================
+   LINKS & BUTTONS
+   ============================================================================ */
+.md-typeset a {
+  color: var(--ibm-blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.md-typeset a:hover {
+  color: var(--watsonx-purple-accent);
+  text-decoration: underline;
+}
+
+/* Primary buttons - Soft gradient */
+.md-button.md-button--primary {
+  background: var(--watsonx-gradient-header);
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(139, 122, 153, 0.25);
+}
+
+.md-button.md-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 122, 153, 0.35);
+  filter: brightness(1.08);
+}
+
+/* Secondary buttons */
+.md-button {
+  border: 2px solid var(--watsonx-lilac-mid);
+  color: var(--watsonx-purple-accent);
+  background-color: var(--bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.md-button:hover {
+  background: var(--watsonx-lilac-pale);
+  border-color: var(--watsonx-lilac-dark);
+}
+
+/* ============================================================================
+   CODE BLOCKS & SYNTAX
+   ============================================================================ */
+.md-typeset code {
+  background: var(--watsonx-lilac-pale);
+  color: var(--watsonx-purple-accent);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+  border: 1px solid var(--watsonx-lilac-light);
+}
+
+.md-typeset pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--watsonx-lilac-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre {
+  background: var(--bg-secondary);
+  border-color: var(--watsonx-lilac-mid);
+}
+
+.md-typeset pre code {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+}
+
+/* ============================================================================
+   ADMONITIONS (Note, Warning, Tip, etc.)
+   ============================================================================ */
+.md-typeset .admonition {
+  border-left: 4px solid var(--watsonx-lilac-mid);
+  border-radius: 6px;
+  background: rgba(209, 197, 211, 0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.md-typeset .admonition.tip {
+  border-left-color: var(--watsonx-pink-accent);
+  background: rgba(192, 141, 181, 0.1);
+}
+
+.md-typeset .admonition.warning {
+  border-left-color: #d68a2e;
+  background: rgba(214, 138, 46, 0.1);
+}
+
+.md-typeset .admonition-title {
+  background: rgba(139, 122, 153, 0.15);
+  font-weight: 600;
+  color: var(--watsonx-purple-accent);
+}
+
+/* ============================================================================
+   TABLES
+   ============================================================================ */
+.md-typeset table {
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: var(--bg-secondary);
+}
+
+.md-typeset table th {
+  background: var(--watsonx-gradient-header);
+  color: white;
+  font-weight: 600;
+  padding: 0.9em 1.2em;
+  text-align: left;
+}
+
+.md-typeset table td {
+  padding: 0.8em 1.2em;
+  border-bottom: 1px solid var(--watsonx-lilac-light);
+  color: var(--text-primary);
+}
+
+.md-typeset table tr:nth-child(even) {
+  background: var(--watsonx-lilac-pale);
+}
+
+.md-typeset table tr:hover {
+  background: rgba(209, 197, 211, 0.2);
+  transition: background 0.2s ease;
+}
+
+/* ============================================================================
+   NAVIGATION
+   ============================================================================ */
+.md-header {
+  background: var(--watsonx-gradient-header);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.md-tabs {
+  background: var(--watsonx-lilac-mid);
+}
+
+.md-tabs__link--active {
+  color: white;
+  font-weight: 600;
+}
+
+/* Progress bar */
+.md-progress {
+  background: rgba(139, 122, 153, 0.2);
+}
+
+.md-progress__indicator {
+  background: var(--watsonx-gradient-accent);
+}
+
+/* ============================================================================
+   CARDS & GRIDS
+   ============================================================================ */
+.md-typeset .grid.cards > ol > li,
+.md-typeset .grid.cards > ul > li {
+  border: 1px solid var(--watsonx-lilac-light);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: var(--bg-secondary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.md-typeset .grid.cards > ol > li:hover,
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--watsonx-lilac-mid);
+  box-shadow: 0 6px 12px rgba(139, 122, 153, 0.2);
+  transform: translateY(-3px);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ol > li,
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li {
+  background: var(--bg-secondary);
+}
+
+/* ============================================================================
+   BADGES & PILLS
+   ============================================================================ */
+.watsonx-badge,
+.badge {
+  display: inline-block;
+  background: var(--watsonx-gradient-header);
+  color: white;
+  padding: 0.4em 1em;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.3em;
+  box-shadow: 0 2px 4px rgba(139, 122, 153, 0.25);
+}
+
+/* ============================================================================
+   PORTAL BOX (Enterprise Professional)
+   ============================================================================ */
+.portal-box,
+.workshop-portal {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--watsonx-gradient-subtle);
+  border: 2px solid var(--watsonx-lilac-mid);
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(139, 122, 153, 0.2);
+}
+
+.portal-box h3,
+.workshop-portal h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--watsonx-purple-accent);
+  background: none;
+}
+
+.portal-box p,
+.workshop-portal p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.portal-box .md-button,
+.workshop-portal .md-button {
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  background: var(--watsonx-gradient-header);
+  color: white;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.portal-box .md-button:hover,
+.workshop-portal .md-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(139, 122, 153, 0.35);
+}
+
+/* ============================================================================
+   BLOCKQUOTES
+   ============================================================================ */
+.md-typeset blockquote {
+  background: var(--bg-secondary);
+  border-left: 5px solid var(--watsonx-lilac-mid);
+  padding: 1.2em 1.5em;
+  margin: 1.5em 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  background: var(--bg-secondary);
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+.md-footer {
+  background: var(--watsonx-lilac-dark);
+}
+
+.md-footer-meta {
+  background: var(--watsonx-purple-accent);
+}
+
+/* ============================================================================
+   CUSTOM UTILITIES
+   ============================================================================ */
+.gradient-text {
+  background: var(--watsonx-gradient-header);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.highlight-purple {
+  color: var(--watsonx-purple-accent);
+  font-weight: 600;
+}
+
+.highlight-lilac {
+  color: var(--watsonx-lilac-dark);
+  font-weight: 600;
+}
+
+/* Badge container alignment */
+p[align="center"] img[alt*="badge"] {
+  display: inline-block;
+  margin: 0.25rem;
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+@media screen and (max-width: 76em) {
+  .portal-box,
+  .workshop-portal {
+    padding: 1.75rem 1.25rem;
+    margin: 1.5rem auto;
+  }
+
+  .portal-box h3,
+  .workshop-portal h3 {
+    font-size: 1.4rem;
+  }
+
+  .portal-box p,
+  .workshop-portal p {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================================================ */
+.md-typeset :focus-visible {
+  outline: 2px solid var(--watsonx-lilac-dark);
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient contrast for all interactive elements */
+.md-nav__link:focus,
+.md-nav__link:hover {
+  color: var(--watsonx-purple-accent);
+}

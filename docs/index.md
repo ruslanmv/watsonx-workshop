@@ -57,10 +57,10 @@ A comprehensive, production-ready curriculum designed for enterprise teams build
 
 ## Access the Workshop Portal
 
-<div style="text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #0b62a3 0%, #1e88e5 100%); color: white; border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-  <h3 style="margin: 0 0 1rem 0; font-size: 1.8rem; font-weight: 700;">Ready to Begin Your Learning Journey?</h3>
-  <p style="margin: 0 0 2rem 0; font-size: 1.1rem; opacity: 0.95;">Access interactive presentations, daily guides, and comprehensive workshop materials</p>
-  <a href="portal/" class="md-button md-button--primary" style="font-size: 1.1rem; padding: 0.8rem 2rem; background: white; color: #0b62a3; font-weight: 600;">
+<div class="portal-box">
+  <h3>Ready to Begin Your Learning Journey?</h3>
+  <p>Access interactive presentations, daily guides, and comprehensive workshop materials</p>
+  <a href="portal/" class="md-button md-button--primary">
     Enter Workshop Portal
   </a>
 </div>
