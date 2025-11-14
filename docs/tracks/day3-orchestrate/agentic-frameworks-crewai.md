@@ -1,28 +1,18 @@
-# CrewAI Framework for Multi-Agent Systems {data-background-color="#1e3a8a"}
+# 👥 CrewAI Framework for Multi-Agent Systems {data-background-color="#1e3a8a"}
 
 ::: notes
-This section covers CrewAI, a Python library for building multi-agent systems with collaborative AI agents.
+This section covers CrewAI, a Python library for building multi-agent systems with collaborative AI agents. CrewAI makes multi-agent orchestration intuitive and accessible.
 :::
 
 ---
 
-## What is CrewAI? {data-transition="slide"}
+## 🎯 What is CrewAI? {data-transition="slide"}
 
-<div class="fragment">
+<span class="fragment">**CrewAI** is a Python framework for orchestrating **role-playing, autonomous AI agents**</span>
 
-**CrewAI** is a Python framework for orchestrating **role-playing, autonomous AI agents**.
+<span class="fragment">Think of it as building a **team** of AI specialists</span>
 
-</div>
-
-<div class="fragment">
-
-### Core Philosophy
-
-- Agents work together as a **crew** to accomplish complex tasks
-- Each agent has a specific **role**, **goal**, and **backstory**
-- Agents use **tools** to perform actions and gather information
-
-</div>
+<span class="fragment">Each agent has its own **role**, **expertise**, and **tools**</span>
 
 ::: notes
 CrewAI makes it easy to create multi-agent systems where each agent has specialized capabilities and they collaborate to solve complex problems.
@@ -30,53 +20,85 @@ CrewAI makes it easy to create multi-agent systems where each agent has speciali
 
 ---
 
-## CrewAI Core Components {data-transition="fade"}
+## Core Philosophy {data-transition="fade"}
 
-### Agent
+<span class="fragment">Agents work together as a **crew** to accomplish complex tasks</span>
 
-<div class="fragment">
+<span class="fragment">Each agent has a specific **role**, **goal**, and **backstory**</span>
 
-An autonomous unit with:
+<span class="fragment">Agents use **tools** to perform actions and gather information</span>
 
-- **Role**: The agent's function (e.g., "Research Analyst")
-- **Goal**: What the agent aims to achieve
-- **Backstory**: Context that shapes the agent's behavior
-- **Tools**: Functions the agent can execute
-
-</div>
-
-### Task
-
-<div class="fragment">
-
-Work to be performed:
-
-- **Description**: What needs to be done
-- **Expected Output**: Desired result format
-- **Agent**: Which agent performs this task
-
-</div>
+<span class="fragment">Collaboration patterns mirror **human teams**</span>
 
 ::: notes
-The Agent and Task are the fundamental building blocks. Agents have personalities and capabilities, while Tasks define the work to be done.
+CrewAI's strength is making multi-agent systems feel natural and intuitive, like managing a human team.
 :::
 
 ---
 
-## CrewAI Core Components (Continued) {data-transition="fade"}
+## 🧩 CrewAI Core Components {data-background-color="#064e3b"}
 
-### Crew
+### Three Building Blocks
 
-<div class="fragment">
+<span class="fragment">**Agent** - An autonomous unit with specialized capabilities</span>
+
+<span class="fragment">**Task** - Work to be performed</span>
+
+<span class="fragment">**Crew** - The orchestrator that manages agents and tasks</span>
+
+::: notes
+These three components are all you need to build sophisticated multi-agent systems.
+:::
+
+---
+
+## Component 1: Agent {data-transition="slide"}
+
+An autonomous unit with:
+
+<span class="fragment">**Role** - The agent's function (e.g., "Research Analyst")</span>
+
+<span class="fragment">**Goal** - What the agent aims to achieve</span>
+
+<span class="fragment">**Backstory** - Context that shapes the agent's behavior</span>
+
+<span class="fragment">**Tools** - Functions the agent can execute</span>
+
+::: notes
+The Agent is the fundamental building block. Agents have personalities and capabilities just like human team members.
+:::
+
+---
+
+## Component 2: Task {data-transition="fade"}
+
+Work to be performed:
+
+<span class="fragment">**Description** - What needs to be done</span>
+
+<span class="fragment">**Expected Output** - Desired result format</span>
+
+<span class="fragment">**Agent** - Which agent performs this task</span>
+
+<span class="fragment">**Context** - Dependencies on other tasks</span>
+
+::: notes
+Tasks define the work. Clear task descriptions lead to better agent performance.
+:::
+
+---
+
+## Component 3: Crew {data-transition="slide"}
 
 The orchestrator that manages:
 
-- **Agents**: Collection of agents working together
-- **Tasks**: List of tasks to accomplish
-- **Process**: How tasks are executed (`sequential` or `hierarchical`)
-- **Manager LLM**: (Optional) LLM for task delegation in hierarchical mode
+<span class="fragment">**Agents** - Collection of agents working together</span>
 
-</div>
+<span class="fragment">**Tasks** - List of tasks to accomplish</span>
+
+<span class="fragment">**Process** - How tasks are executed (`sequential` or `hierarchical`)</span>
+
+<span class="fragment">**Manager LLM** - (Optional) LLM for task delegation in hierarchical mode</span>
 
 ::: notes
 The Crew brings everything together and manages how agents collaborate to complete tasks.
@@ -84,45 +106,52 @@ The Crew brings everything together and manages how agents collaborate to comple
 
 ---
 
-## CrewAI Process Types {data-background-color="#064e3b"}
+## ⚙️ CrewAI Process Types {data-background-color="#7c2d12"}
 
 ### Sequential Process
-
-<div class="fragment">
 
 ```python
 Process.sequential
 ```
 
-Tasks executed one after another in order
+<span class="fragment">Tasks executed **one after another** in order</span>
 
-</div>
+<span class="fragment">Output of one task feeds into the next</span>
 
-### Hierarchical Process
+<span class="fragment">Best for **linear workflows**</span>
 
-<div class="fragment">
+::: notes
+Sequential is the simplest process type. Use it when tasks have a clear order.
+:::
+
+---
+
+## Hierarchical Process {data-transition="fade"}
 
 ```python
 Process.hierarchical
 ```
 
-A manager agent delegates tasks to other agents dynamically
+<span class="fragment">A **manager agent** delegates tasks to other agents dynamically</span>
 
-</div>
+<span class="fragment">Manager decides **who does what** and **when**</span>
+
+<span class="fragment">Best for **complex multi-agent coordination**</span>
 
 ::: notes
-Choose sequential for simple linear workflows, hierarchical for complex multi-agent coordination.
+Hierarchical mode adds a layer of intelligence to task delegation.
 :::
 
 ---
 
-## CrewAI Example: Basic Agent {data-transition="slide"}
+## 🚀 CrewAI Example: Basic Agent {data-transition="slide"}
 
-```python
+### Step 1: Define a Tool
+
+```python {data-line-numbers="1-3|5-11"}
 from crewai import Agent, Task, Crew, Process
 from crewai_tools import tool
 
-# Define a simple tool
 @tool("calculator")
 def calculator(expression: str) -> str:
     """Evaluate a mathematical expression"""
@@ -133,11 +162,15 @@ def calculator(expression: str) -> str:
         return f"Error: {str(e)}"
 ```
 
-<span class="fragment">
+::: notes
+The @tool decorator makes any Python function available to agents. This is how you give agents capabilities.
+:::
 
-Create an agent:
+---
 
-```python
+## Step 2: Create an Agent {data-transition="fade"}
+
+```python {data-line-numbers="1-7"}
 math_agent = Agent(
     role="Math Expert",
     goal="Solve mathematical problems accurately",
@@ -147,24 +180,41 @@ math_agent = Agent(
 )
 ```
 
-</span>
+<span class="fragment">Role defines the agent's **identity**</span>
+
+<span class="fragment">Goal defines the agent's **purpose**</span>
+
+<span class="fragment">Backstory provides **context** for behavior</span>
 
 ::: notes
-This shows how to create a simple tool and agent. The @tool decorator makes any Python function available to agents.
+Notice how we're giving the agent a personality and purpose, not just a function to execute.
 :::
 
 ---
 
-## CrewAI Example: Task & Crew {data-transition="fade"}
+## Step 3: Define a Task {data-transition="slide"}
 
-```python
-# Define the task
+```python {data-line-numbers="1-5"}
 math_task = Task(
     description="Calculate the result of (15 + 25) * 3",
     expected_output="The numerical result",
     agent=math_agent
 )
+```
 
+<span class="fragment">Task description tells the agent **what to do**</span>
+
+<span class="fragment">Expected output sets **quality expectations**</span>
+
+::: notes
+Clear task descriptions lead to better results. Be specific about what you want.
+:::
+
+---
+
+## Step 4: Create and Run Crew {data-transition="fade"}
+
+```python {data-line-numbers="1-5|7-9"}
 # Create the crew
 crew = Crew(
     agents=[math_agent],
@@ -177,17 +227,21 @@ result = crew.kickoff()
 print(result)
 ```
 
+<span class="fragment">The crew orchestrates execution</span>
+
+<span class="fragment">`kickoff()` starts the process and returns final output</span>
+
 ::: notes
-The crew orchestrates the execution. kickoff() starts the process and returns the final output.
+The crew manages the entire workflow. You just need to define the pieces and kick it off!
 :::
 
 ---
 
-## CrewAI with RAG Integration {data-background-color="#1e3a8a"}
+## 🔗 CrewAI with RAG Integration {data-background-color="#1e3a8a"}
 
 ### Building a RAG Tool
 
-```python
+```python {data-line-numbers="1-3|5-16"}
 import requests
 from crewai_tools import tool
 
@@ -208,14 +262,16 @@ def rag_service_tool(question: str) -> str:
 ```
 
 ::: notes
-This tool integrates your RAG accelerator from Day 2 into CrewAI agents.
+This tool integrates your RAG accelerator from Day 2 into CrewAI agents. Your RAG service becomes a tool!
 :::
 
 ---
 
-## Multi-Agent Example: Research Team {data-transition="slide"}
+## 👥 Multi-Agent Example: Research Team {data-transition="slide"}
 
-```python
+### Creating Specialized Agents
+
+```python {data-line-numbers="1-7|9-15"}
 # Researcher Agent
 researcher = Agent(
     role="Research Analyst",
@@ -235,9 +291,15 @@ writer = Agent(
 )
 ```
 
-<span class="fragment">
+::: notes
+Notice how each agent has a distinct role and goal. The researcher has the RAG tool, the writer doesn't need it.
+:::
 
-```python
+---
+
+## Add Reviewer Agent {data-transition="fade"}
+
+```python {data-line-numbers="1-7"}
 # Reviewer Agent
 reviewer = Agent(
     role="Quality Reviewer",
@@ -248,17 +310,19 @@ reviewer = Agent(
 )
 ```
 
-</span>
+<span class="fragment">This creates a **three-agent team**: research → write → review</span>
+
+<span class="fragment">Each agent specializes in one aspect of the workflow</span>
 
 ::: notes
-This creates a three-agent team: one researches, one writes, one reviews.
+Division of labor allows each agent to focus on what it does best.
 :::
 
 ---
 
-## Multi-Agent Example: Tasks {data-transition="fade"}
+## Define Team Tasks {data-transition="slide"}
 
-```python
+```python {data-line-numbers="1-5|7-11|13-17"}
 # Research task
 research_task = Task(
     description="Research the topic: {topic}",
@@ -282,14 +346,14 @@ review_task = Task(
 ```
 
 ::: notes
-Each task is assigned to the appropriate specialist agent.
+Each task is assigned to the appropriate specialist agent. Output flows from one task to the next.
 :::
 
 ---
 
-## Multi-Agent Example: Crew Execution {data-transition="fade"}
+## Execute Multi-Agent Workflow {data-transition="fade"}
 
-```python
+```python {data-line-numbers="1-6|8-11"}
 # Create the crew
 content_crew = Crew(
     agents=[researcher, writer, reviewer],
@@ -306,53 +370,59 @@ result = content_crew.kickoff(
 print(result)
 ```
 
+<span class="fragment">The crew executes tasks **sequentially**: research → write → review</span>
+
 ::: notes
-The crew executes tasks sequentially: research → write → review.
+With just a few lines of code, you've created a sophisticated content creation pipeline!
 :::
 
 ---
 
-## CrewAI Best Practices {data-background-color="#7c2d12"}
-
-<div class="fragment">
+## ✅ CrewAI Best Practices {data-background-color="#064e3b"}
 
 ### 1. Clear Role Definition
-- Give agents specific, well-defined roles
-- Avoid overlapping responsibilities
 
-</div>
+<span class="fragment">Give agents **specific, well-defined roles**</span>
 
-<div class="fragment">
+<span class="fragment">Avoid **overlapping responsibilities**</span>
+
+<span class="fragment">Think like you're hiring a human team</span>
 
 ### 2. Tool Specialization
-- Assign tools to agents that need them
-- Keep tool functions focused and simple
 
-</div>
+<span class="fragment">Assign tools to agents that **actually need them**</span>
 
-<div class="fragment">
-
-### 3. Effective Task Descriptions
-- Be specific about what each task should accomplish
-- Define clear expected outputs
-
-</div>
-
-<div class="fragment">
-
-### 4. Process Selection
-- Use `sequential` for linear workflows
-- Use `hierarchical` for complex, dynamic coordination
-
-</div>
+<span class="fragment">Keep tool functions **focused and simple**</span>
 
 ::: notes
-Following these practices will help you build more effective multi-agent systems.
+Good design practices lead to more effective and maintainable multi-agent systems.
 :::
 
 ---
 
-## Lab Exercise: CrewAI Customer Support System {data-background-color="#581c87"}
+## Best Practices (Continued) {data-transition="slide"}
+
+### 3. Effective Task Descriptions
+
+<span class="fragment">Be **specific** about what each task should accomplish</span>
+
+<span class="fragment">Define **clear expected outputs**</span>
+
+<span class="fragment">Include **context** when tasks depend on each other</span>
+
+### 4. Process Selection
+
+<span class="fragment">Use `sequential` for **linear workflows**</span>
+
+<span class="fragment">Use `hierarchical` for **complex, dynamic coordination**</span>
+
+::: notes
+The right process type makes your workflow more efficient and easier to debug.
+:::
+
+---
+
+## 🧪 Lab Exercise: Customer Support System {data-background-color="#581c87"}
 
 ### Objective
 
@@ -360,33 +430,37 @@ Build a customer support system with specialized agents
 
 ### Requirements
 
-<div class="fragment">
+<span class="fragment">Create **3 Agents**: Support (RAG tool), Technical (calculator tool), Manager (routes requests)</span>
 
-**Create 3 Agents:**
-1. **Support Agent** - Handles general inquiries (with RAG tool)
-2. **Technical Agent** - Solves technical issues (with calculator tool)
-3. **Manager Agent** - Routes requests to the right specialist
+<span class="fragment">Define appropriate **tasks** for each agent</span>
 
-</div>
-
-<div class="fragment">
-
-**Test Cases:**
-- "What is the return policy?" (Support)
-- "Calculate discount: $100 - 20%" (Technical)
-- "I need help with my order" (Manager delegates)
-
-</div>
+<span class="fragment">Use **sequential or hierarchical** process</span>
 
 ::: notes
-This exercise reinforces multi-agent patterns and tool integration.
+This exercise reinforces multi-agent patterns and tool integration in a realistic scenario.
 :::
 
 ---
 
-## Lab Exercise: Solution Structure {data-transition="fade"}
+## Lab Test Cases {data-transition="slide"}
 
-```python
+Test your system with:
+
+<span class="fragment">"What is the return policy?" → Should route to **Support Agent**</span>
+
+<span class="fragment">"Calculate discount: $100 - 20%" → Should route to **Technical Agent**</span>
+
+<span class="fragment">"I need help with my order" → **Manager delegates** appropriately</span>
+
+::: notes
+Testing different types of queries ensures your routing logic works correctly.
+:::
+
+---
+
+## Lab Solution Structure {data-transition="fade"}
+
+```python {data-line-numbers="1-8|10-14|16-17"}
 # 1. Define tools
 @tool("rag_support_tool")
 def rag_support_tool(question: str) -> str:
@@ -408,16 +482,14 @@ manager_agent = Agent(...)
 ```
 
 ::: notes
-Students should implement this based on previous examples.
+Students should implement this based on the previous examples. The structure is the same.
 :::
 
 ---
 
-## CrewAI Advanced Features {data-transition="slide"}
+## 🔧 CrewAI Advanced Features {data-background-color="#1e3a8a"}
 
 ### Memory
-
-<div class="fragment">
 
 ```python
 crew = Crew(
@@ -427,13 +499,17 @@ crew = Crew(
 )
 ```
 
-Agents can remember context from previous interactions
+<span class="fragment">Agents can **remember context** from previous interactions</span>
 
-</div>
+<span class="fragment">Enables **multi-turn conversations**</span>
 
-### Delegation
+::: notes
+Memory makes agents more contextually aware and conversational.
+:::
 
-<div class="fragment">
+---
+
+## Delegation {data-transition="slide"}
 
 ```python
 agent = Agent(
@@ -442,21 +518,19 @@ agent = Agent(
 )
 ```
 
-Agents can ask other agents for help
+<span class="fragment">Agents can **ask other agents for help**</span>
 
-</div>
+<span class="fragment">Creates **dynamic collaboration** patterns</span>
 
 ::: notes
-These features enable more sophisticated agent behaviors.
+Delegation enables more flexible and adaptive workflows.
 :::
 
 ---
 
-## CrewAI Advanced Features (Continued) {data-transition="fade"}
+## Custom LLM Configuration {data-transition="fade"}
 
-### Custom LLM Configuration
-
-```python
+```python {data-line-numbers="1-5|7-10"}
 from langchain_openai import ChatOpenAI
 
 custom_llm = ChatOpenAI(
@@ -470,11 +544,17 @@ agent = Agent(
 )
 ```
 
-<span class="fragment">
+<span class="fragment">Different agents can use **different LLMs**</span>
 
-### Callbacks
+::: notes
+You might want a powerful model for complex reasoning and a faster model for simple tasks.
+:::
 
-```python
+---
+
+## Callbacks {data-transition="slide"}
+
+```python {data-line-numbers="1-2|4-7"}
 def task_callback(output):
     print(f"Task completed: {output}")
 
@@ -484,49 +564,61 @@ task = Task(
 )
 ```
 
-</span>
+<span class="fragment">Callbacks enable **monitoring and logging**</span>
+
+<span class="fragment">Track progress in **long-running workflows**</span>
 
 ::: notes
-Customize the LLM and add callbacks for monitoring and logging.
+Callbacks are useful for debugging and monitoring production systems.
 :::
 
 ---
 
-## When to Use CrewAI {data-background-color="#064e3b"}
+## 🎯 When to Use CrewAI {data-background-color="#064e3b"}
 
 ### Ideal Use Cases ✓
 
-<div class="fragment">
+<span class="fragment">**Multi-agent collaboration** scenarios</span>
 
-- Multi-agent collaboration scenarios
-- Role-based task decomposition
-- Sequential or hierarchical workflows
-- Rapid prototyping of agent systems
+<span class="fragment">**Role-based task decomposition**</span>
 
-</div>
+<span class="fragment">**Sequential or hierarchical** workflows</span>
 
-### Less Ideal ×
-
-<div class="fragment">
-
-- Simple single-agent tasks
-- Complex state management requirements
-- Fine-grained control over execution flow
-- Production systems requiring strict guarantees
-
-</div>
+<span class="fragment">**Rapid prototyping** of agent systems</span>
 
 ::: notes
-CrewAI excels at multi-agent orchestration but isn't always the right choice.
+CrewAI excels when you need teams of specialized agents working together.
 :::
 
 ---
 
-## CrewAI Resources {data-transition="zoom"}
+## Less Ideal Use Cases {data-transition="fade"}
+
+### When NOT to Use CrewAI ✗
+
+<span class="fragment">Simple **single-agent** tasks</span>
+
+<span class="fragment">Complex **state management** requirements</span>
+
+<span class="fragment">Need **fine-grained control** over execution flow</span>
+
+<span class="fragment">Production systems requiring **strict guarantees**</span>
+
+::: notes
+For these cases, LangGraph or watsonx Orchestrate might be better choices.
+:::
+
+---
+
+## 📚 CrewAI Resources {data-background-color="#1e3a8a"}
 
 ### Documentation
-- Official Docs: [docs.crewai.com](https://docs.crewai.com)
-- GitHub: [github.com/joaomdmoura/crewAI](https://github.com/joaomdmoura/crewAI)
+
+<span class="fragment">Official Docs: [docs.crewai.com](https://docs.crewai.com)</span>
+
+<span class="fragment">GitHub: [github.com/joaomdmoura/crewAI](https://github.com/joaomdmoura/crewAI)</span>
+
+<span class="fragment">Examples: [CrewAI Examples Repository](https://github.com/joaomdmoura/crewAI-examples)</span>
 
 ### Getting Started
 
@@ -534,37 +626,30 @@ CrewAI excels at multi-agent orchestration but isn't always the right choice.
 pip install crewai crewai-tools
 ```
 
-### Community Examples
-- [CrewAI Examples Repository](https://github.com/joaomdmoura/crewAI-examples)
-
 ::: notes
 These resources will help you continue learning beyond this workshop.
 :::
 
 ---
 
-## Summary: CrewAI {data-background-color="#1e3a8a"}
-
-<div class="fragment">
+## 🎯 Summary: CrewAI {data-background-color="#1e3a8a"}
 
 ### Key Takeaways
 
-1. CrewAI enables **multi-agent orchestration** with role-playing
-2. Core components: **Agents**, **Tasks**, **Crews**
-3. Processes: **Sequential** and **Hierarchical**
-4. Easy **tool integration** for capabilities
-5. Great for **rapid prototyping** of agent systems
+<span class="fragment">CrewAI enables **multi-agent orchestration** with role-playing</span>
 
-</div>
+<span class="fragment">Core components: **Agents**, **Tasks**, **Crews**</span>
 
-<div class="fragment">
+<span class="fragment">Processes: **Sequential** and **Hierarchical**</span>
+
+<span class="fragment">Easy **tool integration** for capabilities</span>
+
+<span class="fragment">Great for **rapid prototyping** of agent systems</span>
 
 ### Next Steps
 
-→ Explore **LangGraph** for more complex state management and flows
-
-</div>
+<span class="fragment">Explore **Langflow** for visual workflow building</span>
 
 ::: notes
-CrewAI provides an intuitive way to build multi-agent systems. Next, we'll see how LangGraph offers more control.
+CrewAI provides an intuitive way to build multi-agent systems. Next, we'll see how Langflow makes agent building even more accessible.
 :::

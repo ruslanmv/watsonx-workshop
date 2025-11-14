@@ -1,29 +1,18 @@
-# Langflow: Visual Agent Workflow Builder {data-background-color="#581c87"}
+# 🎨 Langflow: Visual Agent Workflow Builder {data-background-color="#581c87"}
 
 ::: notes
-This section covers Langflow, a visual tool for building LangChain-based AI applications without extensive coding.
+This section covers Langflow, a visual tool for building LangChain-based AI applications without extensive coding. Perfect for experimentation, teaching, and rapid prototyping.
 :::
 
 ---
 
-## What is Langflow? {data-transition="slide"}
+## 🎯 What is Langflow? {data-transition="slide"}
 
-<div class="fragment">
+<span class="fragment">**Langflow** is a **visual, low-code** platform for building LangChain applications</span>
 
-**Langflow** is a **visual, low-code** platform for building LangChain applications.
+<span class="fragment">**Drag-and-drop** interface for AI workflows</span>
 
-</div>
-
-<div class="fragment">
-
-### Core Philosophy
-
-- **Drag-and-drop** interface for building AI workflows
-- **Visual representation** of complex agent logic
-- **Export to code** for production deployment
-- **Rapid prototyping** for both developers and non-developers
-
-</div>
+<span class="fragment">No coding required (but export to code available!)</span>
 
 ::: notes
 Langflow makes LangChain accessible through a visual interface, perfect for experimentation and teaching.
@@ -31,29 +20,49 @@ Langflow makes LangChain accessible through a visual interface, perfect for expe
 
 ---
 
-## Why Langflow? {data-transition="fade"}
+## Core Philosophy {data-transition="fade"}
+
+<span class="fragment">**Visual representation** of complex agent logic</span>
+
+<span class="fragment">**Rapid prototyping** for both developers and non-developers</span>
+
+<span class="fragment">**Export to code** for production deployment</span>
+
+<span class="fragment">Bridge the gap between **visual design** and **code implementation**</span>
+
+::: notes
+Langflow democratizes agent building - you don't need to be a Python expert to create sophisticated workflows.
+:::
+
+---
+
+## 🤔 Why Langflow? {data-background-color="#1e3a8a"}
 
 ### Challenges with Code-First Approaches
 
-<div class="fragment">
+<span class="fragment">**Steep learning curve** for non-developers</span>
 
-- Steep learning curve for non-developers
-- Hard to visualize complex workflows
-- Slow iteration for experimentation
+<span class="fragment">**Hard to visualize** complex workflows</span>
 
-</div>
+<span class="fragment">**Slow iteration** for experimentation</span>
 
-<div class="fragment">
+::: notes
+Traditional code-first approaches have barriers that Langflow removes.
+:::
 
-### Langflow Solutions
+---
 
-- **Visual Interface**: See your workflow as you build
-- **Component Library**: Pre-built LangChain components
-- **Live Testing**: Test flows immediately
-- **Export Options**: Python code, JSON, or API
-- **Collaboration**: Share flows with team members
+## Langflow Solutions {data-transition="zoom"}
 
-</div>
+<span class="fragment">**Visual Interface** - See your workflow as you build</span>
+
+<span class="fragment">**Component Library** - Pre-built LangChain components</span>
+
+<span class="fragment">**Live Testing** - Test flows immediately</span>
+
+<span class="fragment">**Export Options** - Python code, JSON, or API</span>
+
+<span class="fragment">**Collaboration** - Share flows with team members</span>
 
 ::: notes
 Langflow bridges the gap between visual design and code implementation.
@@ -61,7 +70,7 @@ Langflow bridges the gap between visual design and code implementation.
 
 ---
 
-## Langflow Architecture {data-background-color="#1e3a8a"}
+## 🏗️ Langflow Architecture {data-background-color="#064e3b"}
 
 ```mermaid
 graph TB
@@ -85,31 +94,17 @@ Langflow provides a complete ecosystem for visual AI workflow development.
 
 ---
 
-## Langflow Core Components {data-transition="slide"}
+## 🧩 Langflow Core Components {data-transition="slide"}
 
 ### LLMs
 
-<div class="fragment">
-
-Language model providers:
-- OpenAI
-- Anthropic
-- HuggingFace
-- Ollama
-- Watsonx.ai
-
-</div>
+<span class="fragment">OpenAI, Anthropic, HuggingFace, Ollama, **Watsonx.ai**</span>
 
 ### Prompts
 
-<div class="fragment">
+<span class="fragment">Prompt templates, few-shot examples, system messages</span>
 
-- Prompt templates
-- Few-shot examples
-- System messages
-- Variable substitution
-
-</div>
+<span class="fragment">Variable substitution</span>
 
 ::: notes
 Langflow supports all major LLM providers and prompt engineering patterns.
@@ -117,105 +112,103 @@ Langflow supports all major LLM providers and prompt engineering patterns.
 
 ---
 
-## Langflow Core Components (Continued) {data-transition="fade"}
-
-### Chains
-
-<div class="fragment">
+## Chains {data-transition="fade"}
 
 Pre-built LangChain patterns:
-- LLMChain
-- Sequential Chain
-- Router Chain
-- RAG Chain
 
-</div>
+<span class="fragment">**LLMChain** - Simple LLM + prompt</span>
 
-### Agents
+<span class="fragment">**Sequential Chain** - Multiple steps</span>
 
-<div class="fragment">
+<span class="fragment">**Router Chain** - Conditional routing</span>
 
-Agent types:
-- Zero-shot ReAct
-- Conversational
-- OpenAI Functions
-- Custom agents
-
-</div>
+<span class="fragment">**RAG Chain** - Retrieval-augmented generation</span>
 
 ::: notes
-Chains compose components, agents add reasoning and tool-use capabilities.
+Chains compose components into reusable patterns.
 :::
 
 ---
 
-## Langflow Core Components (Continued) {data-transition="fade"}
+## Agents {data-transition="slide"}
 
-### Tools
+Agent types available:
 
-<div class="fragment">
+<span class="fragment">**Zero-shot ReAct** - Reasoning and acting</span>
+
+<span class="fragment">**Conversational** - Multi-turn conversations</span>
+
+<span class="fragment">**OpenAI Functions** - Function calling</span>
+
+<span class="fragment">**Custom agents** - Your own logic</span>
+
+::: notes
+Agents add reasoning and tool-use capabilities to your workflows.
+:::
+
+---
+
+## Tools {data-transition="fade"}
 
 Built-in tools:
-- Search (Google, Bing, DuckDuckGo)
-- Calculator
-- Python REPL
-- API calls
-- Custom Python tools
 
-</div>
+<span class="fragment">**Search** - Google, Bing, DuckDuckGo</span>
 
-### Memory
+<span class="fragment">**Calculator** - Math operations</span>
 
-<div class="fragment">
+<span class="fragment">**Python REPL** - Code execution</span>
 
-Conversation memory types:
-- Buffer memory
-- Summary memory
-- Vector store memory
+<span class="fragment">**API calls** - Custom integrations</span>
 
-</div>
+<span class="fragment">**Custom Python tools** - Your own functions</span>
 
 ::: notes
-Tools extend agent capabilities, memory enables multi-turn conversations.
+Tools extend agent capabilities beyond just LLM knowledge.
 :::
 
 ---
 
-## Langflow Core Components (Continued) {data-transition="fade"}
+## Memory & Vector Stores {data-background-color="#1e3a8a"}
 
-### Vector Stores
+### Memory Types
 
-<div class="fragment">
+<span class="fragment">**Buffer memory** - Recent messages</span>
 
-Supported vector databases:
-- Chroma
-- Pinecone
-- Weaviate
-- Milvus
-- Qdrant
+<span class="fragment">**Summary memory** - Condensed history</span>
 
-</div>
+<span class="fragment">**Vector store memory** - Semantic search</span>
 
-### Document Loaders
+### Vector Databases
 
-<div class="fragment">
+<span class="fragment">Chroma, Pinecone, Weaviate, Milvus, Qdrant</span>
+
+::: notes
+Memory enables multi-turn conversations. Vector stores enable RAG.
+:::
+
+---
+
+## Document Loaders {data-transition="slide"}
 
 Load data from:
-- PDF
-- CSV
-- Web pages
-- APIs
-- Databases
 
-</div>
+<span class="fragment">**PDF** - Document files</span>
+
+<span class="fragment">**CSV** - Tabular data</span>
+
+<span class="fragment">**Web pages** - URLs</span>
+
+<span class="fragment">**APIs** - External services</span>
+
+<span class="fragment">**Databases** - SQL/NoSQL</span>
 
 ::: notes
-Vector stores and loaders enable RAG applications in Langflow.
+Document loaders make it easy to ingest data from various sources.
 :::
 
 ---
 
-## Getting Started with Langflow {data-background-color="#064e3b"}
+## 🚀 Getting Started with Langflow {data-background-color="#064e3b"}
 
 ### Installation
 
@@ -227,17 +220,7 @@ pip install langflow
 langflow run
 ```
 
-<span class="fragment">
-
-### Access the UI
-
-```
-http://localhost:7860
-```
-
-</span>
-
-<div class="fragment">
+<span class="fragment">**Access the UI:** `http://localhost:7860`</span>
 
 ### Docker Alternative
 
@@ -245,50 +228,49 @@ http://localhost:7860
 docker run -p 7860:7860 langflowai/langflow
 ```
 
-</div>
-
 ::: notes
 Langflow is easy to install and run locally or in containers.
 :::
 
 ---
 
-## Building Your First Flow {data-transition="slide"}
+## 🎨 Building Your First Flow {data-transition="slide"}
 
 ### Example: Simple Q&A Bot
 
-<div class="fragment">
-
 **Components Needed:**
-1. Chat Input
-2. Prompt Template
-3. OpenAI LLM
-4. Chat Output
 
-</div>
+<span class="fragment">1. **Chat Input** - User questions</span>
+
+<span class="fragment">2. **Prompt Template** - Format the prompt</span>
+
+<span class="fragment">3. **OpenAI LLM** - Generate responses</span>
+
+<span class="fragment">4. **Chat Output** - Display results</span>
 
 ::: notes
-Let's walk through creating a basic chatbot flow.
+Let's walk through creating a basic chatbot flow step by step.
 :::
 
 ---
 
-## Simple Q&A Flow: Step-by-Step {data-transition="fade"}
+## Step 1: Add Components {data-transition="fade"}
 
-### Step 1: Add Components
+<span class="fragment">1. Drag **Chat Input** to canvas</span>
 
-<div class="fragment">
+<span class="fragment">2. Drag **Prompt Template** to canvas</span>
 
-1. Drag **Chat Input** to canvas
-2. Drag **Prompt Template** to canvas
-3. Drag **OpenAI** to canvas
-4. Drag **Chat Output** to canvas
+<span class="fragment">3. Drag **OpenAI** to canvas</span>
 
-</div>
+<span class="fragment">4. Drag **Chat Output** to canvas</span>
 
-### Step 2: Configure Prompt
+::: notes
+The visual interface makes it easy to see all the pieces of your workflow.
+:::
 
-<div class="fragment">
+---
+
+## Step 2: Configure Prompt {data-transition="slide"}
 
 ```
 You are a helpful assistant.
@@ -298,138 +280,132 @@ User question: {question}
 Provide a clear, concise answer.
 ```
 
-</div>
+<span class="fragment">Use `{question}` as a **variable** placeholder</span>
+
+<span class="fragment">This will be filled from the Chat Input</span>
 
 ::: notes
-The visual interface makes it easy to see how components connect.
+The prompt template defines how the LLM should respond.
 :::
 
 ---
 
-## Simple Q&A Flow: Step-by-Step (Continued) {data-transition="fade"}
+## Step 3: Connect Components {data-transition="fade"}
 
-### Step 3: Connect Components
+<span class="fragment">1. Connect **Chat Input** → **Prompt Template** (question)</span>
 
-<div class="fragment">
+<span class="fragment">2. Connect **Prompt Template** → **OpenAI** (prompt)</span>
 
-1. Connect **Chat Input** → **Prompt Template** (question)
-2. Connect **Prompt Template** → **OpenAI** (prompt)
-3. Connect **OpenAI** → **Chat Output** (response)
+<span class="fragment">3. Connect **OpenAI** → **Chat Output** (response)</span>
 
-</div>
-
-### Step 4: Test
-
-<div class="fragment">
-
-1. Click **Run** button
-2. Enter question in chat input
-3. See response from LLM
-
-</div>
+<span class="fragment">Connections define **data flow**</span>
 
 ::: notes
-Connections define data flow. Test immediately to verify behavior.
+Connections are intuitive - just drag from one component's output to another's input.
 :::
 
 ---
 
-## Building a RAG Flow {data-background-color="#7c2d12"}
+## Step 4: Test {data-transition="slide"}
 
-### RAG Components
+<span class="fragment">1. Click **Run** button</span>
 
-<div class="fragment">
+<span class="fragment">2. Enter question in chat input</span>
+
+<span class="fragment">3. See response from LLM</span>
+
+<span class="fragment">**Iterate** and refine immediately!</span>
+
+::: notes
+Instant testing is one of Langflow's biggest advantages.
+:::
+
+---
+
+## 📚 Building a RAG Flow {data-background-color="#7c2d12"}
+
+### Two Phases
 
 **Data Ingestion:**
-1. Document Loader (PDF, web, etc.)
-2. Text Splitter
-3. Embedding Model
-4. Vector Store
 
-</div>
-
-<div class="fragment">
+<span class="fragment">1. Document Loader → 2. Text Splitter → 3. Embedding Model → 4. Vector Store</span>
 
 **Query Pipeline:**
-1. Question Input
-2. Vector Store Retriever
-3. Prompt Template (with context)
-4. LLM
-5. Output
 
-</div>
+<span class="fragment">1. Question Input → 2. Vector Store Retriever → 3. Prompt + Context → 4. LLM → 5. Output</span>
 
 ::: notes
-RAG requires two phases: ingestion and querying.
+RAG requires two phases: ingestion (process documents) and querying (answer questions).
 :::
 
 ---
 
 ## RAG Flow: Data Ingestion {data-transition="slide"}
 
-### Components
+### Step 1: File Loader
 
-<div class="fragment">
+<span class="fragment">Upload **PDFs or text files**</span>
 
-1. **File Loader**
-   - Upload PDFs or text files
-   - Configure file path
+<span class="fragment">Configure file path</span>
 
-</div>
+### Step 2: Text Splitter
 
-<div class="fragment">
+<span class="fragment">Choose: **RecursiveCharacterTextSplitter**</span>
 
-2. **Text Splitter**
-   - Choose: RecursiveCharacterTextSplitter
-   - Set chunk_size: 1000
-   - Set chunk_overlap: 200
+<span class="fragment">Set `chunk_size`: **1000**</span>
 
-</div>
-
-<div class="fragment">
-
-3. **Embedding Model**
-   - OpenAI Embeddings
-   - Or: HuggingFace Embeddings
-
-</div>
-
-<div class="fragment">
-
-4. **Vector Store**
-   - Choose: Chroma
-   - Connect documents and embeddings
-
-</div>
+<span class="fragment">Set `chunk_overlap`: **200**</span>
 
 ::: notes
-Set up the ingestion pipeline to process and store documents.
+The text splitter breaks documents into manageable chunks for embedding.
 :::
 
 ---
 
-## RAG Flow: Query Pipeline {data-transition="fade"}
+## Ingestion (Continued) {data-transition="fade"}
 
-### Components
+### Step 3: Embedding Model
 
-<div class="fragment">
+<span class="fragment">**OpenAI Embeddings** or **HuggingFace Embeddings**</span>
 
-1. **Chat Input**
-   - User question
+<span class="fragment">Converts text to vectors</span>
 
-</div>
+### Step 4: Vector Store
 
-<div class="fragment">
+<span class="fragment">Choose: **Chroma** (or Pinecone, Weaviate, etc.)</span>
 
-2. **Vector Store Retriever**
-   - Use the same vector store from ingestion
-   - Set k=5 (retrieve top 5 chunks)
+<span class="fragment">Connect documents and embeddings</span>
 
-</div>
+<span class="fragment">Stores vectors for retrieval</span>
 
-<div class="fragment">
+::: notes
+The vector store enables semantic search over your documents.
+:::
 
-3. **Prompt Template**
+---
+
+## RAG Flow: Query Pipeline {data-transition="slide"}
+
+### Step 1: Chat Input
+
+<span class="fragment">User enters a question</span>
+
+### Step 2: Vector Store Retriever
+
+<span class="fragment">Use the **same vector store** from ingestion</span>
+
+<span class="fragment">Set `k=5` (retrieve top 5 chunks)</span>
+
+::: notes
+The retriever searches the vector store for relevant chunks.
+:::
+
+---
+
+## Query Pipeline (Continued) {data-transition="fade"}
+
+### Step 3: Prompt Template
+
 ```
 Context: {context}
 
@@ -438,40 +414,33 @@ Question: {question}
 Answer based on the context above:
 ```
 
-</div>
+<span class="fragment">Combines retrieved context with user question</span>
 
-<div class="fragment">
+### Step 4: LLM → Chat Output
 
-4. **LLM** → **Chat Output**
-
-</div>
+<span class="fragment">Generate answer and display</span>
 
 ::: notes
-The query pipeline retrieves relevant context and generates answers.
+The LLM uses the retrieved context to generate accurate answers.
 :::
 
 ---
 
-## RAG Flow: Connections {data-transition="fade"}
-
-### Wire the Components
-
-<div class="fragment">
+## RAG Flow: Connections {data-transition="slide"}
 
 **Ingestion:**
-- File → Text Splitter → Embeddings → Vector Store
 
-</div>
-
-<div class="fragment">
+<span class="fragment">File → Text Splitter → Embeddings → Vector Store</span>
 
 **Query:**
-- Chat Input → Vector Store (query)
-- Vector Store (results) → Prompt Template (context)
-- Chat Input → Prompt Template (question)
-- Prompt Template → LLM → Chat Output
 
-</div>
+<span class="fragment">Chat Input → Vector Store (query)</span>
+
+<span class="fragment">Vector Store (results) → Prompt Template (context)</span>
+
+<span class="fragment">Chat Input → Prompt Template (question)</span>
+
+<span class="fragment">Prompt Template → LLM → Chat Output</span>
 
 ::: notes
 Proper connections ensure data flows correctly through the pipeline.
@@ -479,20 +448,21 @@ Proper connections ensure data flows correctly through the pipeline.
 
 ---
 
-## Agent Flow with Tools {data-background-color="#1e3a8a"}
+## 🤖 Agent Flow with Tools {data-background-color="#1e3a8a"}
 
 ### Create a Tool-Using Agent
 
-<div class="fragment">
+**Components:**
 
-**Components Needed:**
-1. Chat Input
-2. Agent (Zero-shot ReAct)
-3. Tools (Calculator, Search)
-4. LLM
-5. Chat Output
+<span class="fragment">1. **Chat Input** - User questions</span>
 
-</div>
+<span class="fragment">2. **Agent** (Zero-shot ReAct) - Decision maker</span>
+
+<span class="fragment">3. **Tools** - Calculator, Search</span>
+
+<span class="fragment">4. **LLM** - Powers the agent</span>
+
+<span class="fragment">5. **Chat Output** - Display results</span>
 
 ::: notes
 Agents can decide which tools to use based on the user's question.
@@ -500,26 +470,21 @@ Agents can decide which tools to use based on the user's question.
 
 ---
 
-## Agent Flow: Configuration {data-transition="slide"}
+## Agent Flow: Add Tools {data-transition="slide"}
 
-### Step 1: Add Tools
+### Calculator Tool
 
-<div class="fragment">
+<span class="fragment">Drag **Calculator** component</span>
 
-**Calculator Tool:**
-- Drag Calculator component
-- No configuration needed
+<span class="fragment">No configuration needed</span>
 
-</div>
+### Search Tool
 
-<div class="fragment">
+<span class="fragment">Drag **Search** component</span>
 
-**Search Tool:**
-- Drag Search component
-- Choose provider (DuckDuckGo)
-- Add API key if required
+<span class="fragment">Choose provider: **DuckDuckGo**</span>
 
-</div>
+<span class="fragment">Add API key if required</span>
 
 ::: notes
 Tools extend the agent's capabilities beyond just LLM knowledge.
@@ -529,20 +494,16 @@ Tools extend the agent's capabilities beyond just LLM knowledge.
 
 ## Agent Flow: Configure Agent {data-transition="fade"}
 
-### Step 2: Set Up Agent
+### Agent Settings
 
-<div class="fragment">
+<span class="fragment">Type: **Zero-shot ReAct Description**</span>
 
-**Agent Configuration:**
-- Type: Zero-shot ReAct Description
-- Connect LLM (OpenAI GPT-4)
-- Connect Tools (Calculator, Search)
+<span class="fragment">Connect **LLM** (OpenAI GPT-4)</span>
 
-</div>
+<span class="fragment">Connect **Tools** (Calculator, Search)</span>
 
-<div class="fragment">
+### Agent Prompt
 
-**Agent Prompt:**
 ```
 You are a helpful assistant with access to tools.
 
@@ -552,73 +513,59 @@ Use search for current information.
 Explain your reasoning step-by-step.
 ```
 
-</div>
-
 ::: notes
 The agent will use ReAct pattern: Reason, Act, Observe.
 :::
 
 ---
 
-## Agent Flow: Complete {data-transition="fade"}
+## Agent Flow: Test {data-transition="slide"}
 
-### Step 3: Connect and Test
+**Connect and Test:**
 
-<div class="fragment">
-
-**Connections:**
-- Chat Input → Agent
-- Agent → Chat Output
-
-</div>
-
-<div class="fragment">
+<span class="fragment">Chat Input → Agent → Chat Output</span>
 
 **Test Questions:**
-1. "What is 127 * 49?" (uses calculator)
-2. "Who won the latest Nobel Prize in Physics?" (uses search)
-3. "Calculate 25% of $450 and search for investment tips" (uses both)
 
-</div>
+<span class="fragment">1. "What is 127 * 49?" (uses **calculator**)</span>
+
+<span class="fragment">2. "Who won the latest Nobel Prize in Physics?" (uses **search**)</span>
+
+<span class="fragment">3. "Calculate 25% of $450 and search for investment tips" (uses **both**)</span>
 
 ::: notes
-The agent will automatically choose the right tool based on the question.
+The agent will automatically choose the right tool based on the question. This is the power of agentic AI!
 :::
 
 ---
 
-## Custom API Integration {data-background-color="#581c87"}
+## 🔗 Custom API Integration {data-background-color="#064e3b"}
 
 ### Connect to Your RAG Service
 
-<div class="fragment">
+Use **API Request Component**:
 
-**Use API Request Component:**
+<span class="fragment">1. Drag **API Request** to canvas</span>
 
-1. Drag **API Request** to canvas
-2. Configure:
-   - URL: `http://localhost:8000/ask`
-   - Method: POST
-   - Headers: `{"Content-Type": "application/json"}`
-   - Body: `{"question": "{question}"}`
+<span class="fragment">2. Configure URL: `http://localhost:8000/ask`</span>
 
-</div>
+<span class="fragment">3. Method: **POST**</span>
+
+<span class="fragment">4. Headers: `{"Content-Type": "application/json"}`</span>
+
+<span class="fragment">5. Body: `{"question": "{question}"}`</span>
 
 ::: notes
-Langflow can call any HTTP API, including your RAG accelerator.
+Langflow can call any HTTP API, including your RAG accelerator from Day 2!
 :::
 
 ---
 
-## Custom API Integration (Continued) {data-transition="fade"}
+## Custom Python Tool {data-transition="slide"}
 
-### Create Custom Tool
+### Python Tool Component
 
-<div class="fragment">
-
-**Python Tool Component:**
-
-```python
+```python {data-line-numbers="1-2|4-14|16-19"}
 from langchain.tools import Tool
 
 def rag_search(question: str) -> str:
@@ -637,35 +584,23 @@ def rag_search(question: str) -> str:
 # Tool will be automatically created
 ```
 
-</div>
-
 ::: notes
 Custom Python tools give you full flexibility to integrate any service.
 :::
 
 ---
 
-## Langflow Best Practices {data-transition="slide"}
-
-<div class="fragment">
+## ✅ Langflow Best Practices {data-transition="fade"}
 
 ### 1. Organization
-- Group related components
-- Use clear naming conventions
-- Add comments to complex flows
-- Create reusable sub-flows
 
-</div>
+<span class="fragment">**Group** related components</span>
 
-<div class="fragment">
+<span class="fragment">Use **clear naming** conventions</span>
 
-### 2. Testing
-- Test each component individually
-- Validate connections
-- Use sample inputs
-- Check error handling
+<span class="fragment">Add **comments** to complex flows</span>
 
-</div>
+<span class="fragment">Create **reusable sub-flows**</span>
 
 ::: notes
 Good organization makes flows easier to understand and maintain.
@@ -673,70 +608,62 @@ Good organization makes flows easier to understand and maintain.
 
 ---
 
-## Langflow Best Practices (Continued) {data-transition="fade"}
+## Best Practices (Continued) {data-transition="slide"}
 
-<div class="fragment">
+### 2. Testing
+
+<span class="fragment">Test each component **individually**</span>
+
+<span class="fragment">Validate **connections**</span>
+
+<span class="fragment">Use **sample inputs**</span>
+
+<span class="fragment">Check **error handling**</span>
 
 ### 3. Performance
-- Cache embeddings when possible
-- Limit retrieval results (k parameter)
-- Use appropriate chunk sizes
-- Monitor API costs
 
-</div>
+<span class="fragment">**Cache embeddings** when possible</span>
 
-<div class="fragment">
+<span class="fragment">**Limit retrieval** results (k parameter)</span>
 
-### 4. Security
-- Never hardcode API keys
-- Use environment variables
-- Validate user inputs
-- Sanitize outputs
-
-</div>
+<span class="fragment">Use appropriate **chunk sizes**</span>
 
 ::: notes
-Performance and security are crucial for production deployments.
+Testing and performance optimization are crucial for production deployments.
 :::
 
 ---
 
-## Export and Deployment {data-background-color="#064e3b"}
+## Best Practices (Continued) {data-transition="fade"}
+
+### 4. Security
+
+<span class="fragment">Never **hardcode API keys**</span>
+
+<span class="fragment">Use **environment variables**</span>
+
+<span class="fragment">**Validate** user inputs</span>
+
+<span class="fragment">**Sanitize** outputs</span>
+
+::: notes
+Security is critical, especially when deploying to production.
+:::
+
+---
+
+## 📤 Export and Deployment {data-background-color="#1e3a8a"}
 
 ### Export Options
 
-<div class="fragment">
+<span class="fragment">**1. Python Code** - Export as Python script for your applications</span>
 
-**1. Python Code**
-```bash
-# Export as Python script
-# Use in your applications
-```
+<span class="fragment">**2. JSON** - Export flow configuration to share or import later</span>
 
-</div>
-
-<div class="fragment">
-
-**2. JSON**
-```bash
-# Export flow configuration
-# Share with team or import later
-```
-
-</div>
-
-<div class="fragment">
-
-**3. API Endpoint**
-```bash
-# Langflow creates a REST API
-# Call from any application
-```
-
-</div>
+<span class="fragment">**3. API Endpoint** - Langflow creates a REST API automatically</span>
 
 ::: notes
-Langflow flows can be deployed in multiple ways.
+Langflow flows can be deployed in multiple ways, from code to APIs.
 :::
 
 ---
@@ -745,16 +672,7 @@ Langflow flows can be deployed in multiple ways.
 
 ### Call Flow via API
 
-<div class="fragment">
-
-**Get Flow ID:**
-- Copy from Langflow UI
-
-</div>
-
-<div class="fragment">
-
-**Make API Request:**
+Get Flow ID from Langflow UI, then:
 
 ```python
 import requests
@@ -771,40 +689,25 @@ result = response.json()
 print(result)
 ```
 
-</div>
-
 ::: notes
 The API allows you to integrate Langflow flows into any application.
 :::
 
 ---
 
-## Lab Exercise: RAG + Agent Flow {data-background-color="#7c2d12"}
+## 🧪 Lab Exercise: RAG + Agent Flow {data-background-color="#581c87"}
 
 ### Objective
 
 Build a complete application that combines RAG and agent capabilities
 
-### Requirements
+### Part 1: RAG Pipeline
 
-<div class="fragment">
+<span class="fragment">1. Load documents (use sample PDFs)</span>
 
-**Part 1: RAG Pipeline**
-1. Load documents (use sample PDFs)
-2. Create vector store
-3. Build retrieval chain
+<span class="fragment">2. Create vector store</span>
 
-</div>
-
-<div class="fragment">
-
-**Part 2: Agent Layer**
-1. Create agent with two tools:
-   - RAG search tool (from Part 1)
-   - Calculator tool
-2. Test with mixed questions
-
-</div>
+<span class="fragment">3. Build retrieval chain</span>
 
 ::: notes
 This exercise combines everything you've learned about Langflow.
@@ -812,37 +715,31 @@ This exercise combines everything you've learned about Langflow.
 
 ---
 
-## Lab Exercise: Test Scenarios {data-transition="fade"}
+## Lab Exercise (Continued) {data-transition="slide"}
 
-### Test Your Flow
+### Part 2: Agent Layer
 
-<div class="fragment">
+<span class="fragment">1. Create agent with **two tools**:</span>
 
-**Scenario 1: Pure RAG**
-```
-"What is the company's refund policy?"
-```
+<span class="fragment">   - RAG search tool (from Part 1)</span>
 
-</div>
+<span class="fragment">   - Calculator tool</span>
 
-<div class="fragment">
+<span class="fragment">2. Test with **mixed questions**</span>
 
-**Scenario 2: Pure Calculation**
-```
-"Calculate 15% discount on $299.99"
-```
+::: notes
+The agent should intelligently decide when to use each tool.
+:::
 
-</div>
+---
 
-<div class="fragment">
+## Lab Test Scenarios {data-transition="fade"}
 
-**Scenario 3: Mixed**
-```
-"What's the return window and calculate
- the refund for a $150 item with 10% restocking fee"
-```
+<span class="fragment">**Scenario 1: Pure RAG** - "What is the company's refund policy?"</span>
 
-</div>
+<span class="fragment">**Scenario 2: Pure Calculation** - "Calculate 15% discount on $299.99"</span>
+
+<span class="fragment">**Scenario 3: Mixed** - "What's the return window and calculate the refund for a $150 item with 10% restocking fee"</span>
 
 ::: notes
 The agent should intelligently use both tools to answer the mixed question.
@@ -850,91 +747,99 @@ The agent should intelligently use both tools to answer the mixed question.
 
 ---
 
-## Advanced: Multi-Agent Workflows {data-transition="slide"}
+## 🔄 Advanced: Multi-Agent Workflows {data-background-color="#064e3b"}
 
-### Supervisor Pattern in Langflow
-
-<div class="fragment">
+### Supervisor Pattern
 
 **Components:**
-1. Supervisor Agent (coordinates)
-2. Specialist Agent 1 (research)
-3. Specialist Agent 2 (calculation)
-4. Specialist Agent 3 (writing)
 
-</div>
+<span class="fragment">1. **Supervisor Agent** - Coordinates</span>
 
-<div class="fragment">
+<span class="fragment">2. **Specialist Agent 1** - Research</span>
 
-**Flow:**
-- User question → Supervisor
-- Supervisor → Routes to specialist(s)
-- Specialist(s) → Returns to supervisor
-- Supervisor → Synthesizes final answer
+<span class="fragment">3. **Specialist Agent 2** - Calculation</span>
 
-</div>
+<span class="fragment">4. **Specialist Agent 3** - Writing</span>
 
 ::: notes
-Multi-agent patterns are possible but require careful flow design.
+Multi-agent patterns are possible in Langflow but require careful flow design.
 :::
 
 ---
 
-## Langflow vs Code-First Approaches {data-background-color="#1e3a8a"}
+## Supervisor Flow {data-transition="slide"}
+
+**Flow:**
+
+<span class="fragment">User question → **Supervisor**</span>
+
+<span class="fragment">Supervisor → Routes to **specialist(s)**</span>
+
+<span class="fragment">Specialist(s) → Returns to **supervisor**</span>
+
+<span class="fragment">Supervisor → Synthesizes **final answer**</span>
+
+::: notes
+This pattern enables sophisticated multi-agent coordination.
+:::
+
+---
+
+## 🆚 Langflow vs Code-First {data-background-color="#1e3a8a"}
 
 ### When to Use Langflow
 
-<div class="fragment">
+<span class="fragment">**Rapid prototyping** and experimentation</span>
 
-✓ Rapid prototyping and experimentation
-✓ Teaching and demonstrations
-✓ Non-developer participation
-✓ Visual workflow documentation
-✓ Quick iterations on prompts/chains
+<span class="fragment">**Teaching** and demonstrations</span>
 
-</div>
+<span class="fragment">**Non-developer** participation</span>
 
-### When to Use Code (LangChain/LangGraph)
+<span class="fragment">**Visual workflow** documentation</span>
 
-<div class="fragment">
-
-✓ Complex state management
-✓ Advanced control flow
-✓ Unit testing and CI/CD
-✓ Custom components
-✓ Production applications at scale
-
-</div>
+<span class="fragment">**Quick iterations** on prompts/chains</span>
 
 ::: notes
-Langflow excels at certain use cases; code-first is better for others. Often both are used together.
+Langflow excels at certain use cases.
 :::
 
 ---
 
-## Integration with Other Tools {data-transition="fade"}
+## When to Use Code (LangChain/LangGraph) {data-transition="fade"}
+
+<span class="fragment">**Complex state management**</span>
+
+<span class="fragment">**Advanced control flow**</span>
+
+<span class="fragment">**Unit testing** and CI/CD</span>
+
+<span class="fragment">**Custom components**</span>
+
+<span class="fragment">**Production applications** at scale</span>
+
+::: notes
+Code-first is better for complex production systems. Often both approaches are used together.
+:::
+
+---
+
+## 🔌 Integration with Other Tools {data-background-color="#064e3b"}
 
 ### Langflow + LangSmith
 
-<div class="fragment">
+<span class="fragment">**Trace** flow executions</span>
 
-- Trace flow executions
-- Debug issues
-- Monitor performance
-- Analyze costs
+<span class="fragment">**Debug** issues</span>
 
-</div>
+<span class="fragment">**Monitor** performance</span>
+
+<span class="fragment">**Analyze** costs</span>
 
 ### Langflow + LangServe
 
-<div class="fragment">
+<span class="fragment">**Deploy** flows as production APIs</span>
 
-- Deploy flows as production APIs
-- Auto-generated OpenAPI docs
-- Async support
-- Batch processing
-
-</div>
+<span class="fragment">**Auto-generated** OpenAPI docs</span>
 
 ::: notes
 Langflow integrates well with the broader LangChain ecosystem.
@@ -942,34 +847,23 @@ Langflow integrates well with the broader LangChain ecosystem.
 
 ---
 
-## Real-World Use Cases {data-background-color="#581c87"}
-
-<div class="fragment">
+## 🌍 Real-World Use Cases {data-transition="slide"}
 
 ### 1. Customer Support Bot
-- RAG over knowledge base
-- Multi-language support
-- Escalation routing
 
-</div>
+<span class="fragment">RAG over knowledge base</span>
 
-<div class="fragment">
+<span class="fragment">Multi-language support</span>
+
+<span class="fragment">Escalation routing</span>
 
 ### 2. Research Assistant
-- Multi-source document search
-- Summarization
-- Citation tracking
 
-</div>
+<span class="fragment">Multi-source document search</span>
 
-<div class="fragment">
+<span class="fragment">Summarization</span>
 
-### 3. Data Analysis Helper
-- Natural language to SQL
-- Chart generation
-- Report creation
-
-</div>
+<span class="fragment">Citation tracking</span>
 
 ::: notes
 These use cases demonstrate Langflow's versatility across domains.
@@ -977,11 +871,33 @@ These use cases demonstrate Langflow's versatility across domains.
 
 ---
 
-## Langflow Resources {data-transition="zoom"}
+## Use Cases (Continued) {data-transition="fade"}
 
-### Documentation
-- [Langflow Docs](https://docs.langflow.org/)
-- [GitHub Repository](https://github.com/logspace-ai/langflow)
+### 3. Data Analysis Helper
+
+<span class="fragment">Natural language to SQL</span>
+
+<span class="fragment">Chart generation</span>
+
+<span class="fragment">Report creation</span>
+
+::: notes
+Langflow can power sophisticated business applications.
+:::
+
+---
+
+## 📚 Langflow Resources {data-background-color="#1e3a8a"}
+
+### Documentation & Community
+
+<span class="fragment">[Langflow Docs](https://docs.langflow.org/)</span>
+
+<span class="fragment">[GitHub Repository](https://github.com/logspace-ai/langflow)</span>
+
+<span class="fragment">Discord community</span>
+
+<span class="fragment">Example flows repository</span>
 
 ### Installation
 
@@ -990,39 +906,30 @@ pip install langflow
 langflow run
 ```
 
-### Community
-- Discord community
-- Example flows repository
-- Video tutorials
-
 ::: notes
 Active community and good documentation make learning Langflow easier.
 :::
 
 ---
 
-## Summary: Langflow {data-background-color="#581c87"}
-
-<div class="fragment">
+## 🎯 Summary: Langflow {data-background-color="#581c87"}
 
 ### Key Takeaways
 
-1. **Visual interface** for building LangChain applications
-2. **Drag-and-drop** components for LLMs, agents, tools
-3. **RAG pipelines** easily constructed
-4. **Export options**: Python, JSON, API
-5. Great for **prototyping** and **collaboration**
+<span class="fragment">**Visual interface** for building LangChain applications</span>
 
-</div>
+<span class="fragment">**Drag-and-drop** components for LLMs, agents, tools</span>
 
-<div class="fragment">
+<span class="fragment">**RAG pipelines** easily constructed</span>
+
+<span class="fragment">**Export options**: Python, JSON, API</span>
+
+<span class="fragment">Great for **prototyping** and **collaboration**</span>
 
 ### Next Steps
 
-→ Explore **watsonx Orchestrate** for enterprise-grade agent deployment
-
-</div>
+<span class="fragment">Explore **watsonx Orchestrate** for enterprise-grade agent deployment</span>
 
 ::: notes
-Langflow provides an accessible entry point to agent development, while enterprise solutions like watsonx Orchestrate offer production-grade features.
+Langflow provides an accessible entry point to agent development. For enterprise production, watsonx Orchestrate offers governance, security, and scale.
 :::

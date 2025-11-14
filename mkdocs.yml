@@ -117,7 +117,7 @@ theme:
         name: Switch to dark mode
     - scheme: slate
       primary: indigo
-      accent: indigo
+      accent: light indigo
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode

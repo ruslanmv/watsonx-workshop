@@ -1,89 +1,285 @@
-# Day 2 RAG Workshop - Instructor Guide & Quick Reference
+# Day 2 RAG Workshop
+## Instructor Guide & Quick Reference
 
-## 🎯 Workshop Overview for Instructors
+---
+
+## 🎯 Workshop Overview for Instructors {data-background-color="#0f172a"}
+
+Your complete teaching guide
+
+::: notes
+Everything you need to deliver an excellent workshop
+:::
+
+---
 
 ### Target Audience
-- Software engineers with Python experience
-- Data scientists exploring LLM applications
-- AI engineers building production systems
-- Technical professionals interested in RAG
+
+<span class="fragment">Software engineers with Python experience</span>
+
+<span class="fragment">Data scientists exploring LLM applications</span>
+
+<span class="fragment">AI engineers building production systems</span>
+
+<span class="fragment">Technical professionals interested in RAG</span>
+
+::: notes
+Diverse audience. Adjust pace and depth accordingly.
+:::
+
+---
 
 ### Prerequisites Check (Day 1)
-- ✅ Students completed Day 1: LLM basics, prompting, basic API usage
-- ✅ Python 3.10+ installed
-- ✅ Jupyter notebooks working
-- ✅ Basic understanding of embeddings and vectors
+
+<span class="fragment">✅ Students completed Day 1: LLM basics, prompting, API usage</span>
+
+<span class="fragment">✅ Python 3.10+ installed</span>
+
+<span class="fragment">✅ Jupyter notebooks working</span>
+
+<span class="fragment">✅ Basic understanding of embeddings and vectors</span>
+
+::: notes
+Verify prerequisites before starting. Saves time later.
+:::
 
 ---
 
-## 📅 Daily Schedule
+## 📅 Daily Schedule {data-background-color="#1e1e1e"}
 
-### Morning Session: Theory (4 hours)
-
-**9:00 - 10:00: Module 1 - RAG Architecture Overview (60 min)**
-- Introduction to RAG (15 min)
-  - Definition and motivation
-  - Real-world use cases
-  - Demo: Show working RAG system
-  
-- Core Components (30 min)
-  - Document store
-  - Chunking strategies
-  - Embeddings and vector stores
-  - Retriever and LLM integration
-  
-- RAG Pipeline Flow (15 min)
-  - Live diagram walkthrough
-  - Ingestion → Indexing → Retrieval → Generation
-  
-**10:00 - 10:45: Module 2 - Embedding Models (45 min)**
-- Understanding embeddings (20 min)
-  - Dense vector representations
-  - Semantic similarity
-  - Demo: Visualize embeddings in 2D
-  
-- Model comparison (25 min)
-  - sentence-transformers vs commercial
-  - Dimensions and trade-offs
-  - Hands-on: Test different models
-
-**10:45 - 11:00: ☕ Break (15 min)**
-
-**11:00 - 12:00: Module 3 - Vector Databases (60 min)**
-- Introduction to vector stores (20 min)
-  - Why specialized databases?
-  - Similarity search algorithms
-  
-- Tool comparison (30 min)
-  - Chroma: Local and simple
-  - Elasticsearch: Production-grade
-  - FAISS: High-performance
-  - Pinecone: Managed service
-  
-- Hands-on demo (10 min)
-  - Build a simple vector store
-  - Run similarity searches
-
-**12:00 - 1:00: Module 4 - Accelerator Architecture (60 min)**
-- Accelerator components (30 min)
-  - Code walkthrough
-  - tools/ directory overview
-  - rag/ directory overview
-  
-- Production patterns (20 min)
-  - API design
-  - Error handling
-  - Monitoring considerations
-  
-- Q&A and prep for labs (10 min)
+Detailed timing guide
 
 ---
 
-### Afternoon Session: Labs (4 hours)
+### Morning Session Overview
 
-**2:00 - 3:00: Lab 2.1 - Local RAG with Ollama (60 min)**
+**9:00 - 10:00:** Module 1 - RAG Architecture (60 min)
 
-**Instructor Prep:**
+**10:00 - 10:45:** Module 2 - Embeddings (45 min)
+
+**10:45 - 11:00:** ☕ Break (15 min)
+
+**11:00 - 12:00:** Module 3 - Vector Stores (60 min)
+
+**12:00 - 1:00:** Module 4 - Accelerator (60 min)
+
+::: notes
+Stick to this schedule. Builds proper foundation.
+:::
+
+---
+
+### Module 1: RAG Architecture (60 min) {data-background-color="#0f172a"}
+
+Introduction to RAG
+
+---
+
+#### Module 1 Breakdown
+
+**9:00 - 9:15:** Introduction to RAG (15 min)
+<span class="fragment">Definition and motivation</span>
+<span class="fragment">Real-world use cases</span>
+<span class="fragment">**Demo:** Show working RAG system</span>
+
+::: notes
+Hook students with working demo first. Build excitement.
+:::
+
+---
+
+#### Module 1: Core Components (30 min)
+
+**9:15 - 9:45:**
+
+<span class="fragment">Document store</span>
+
+<span class="fragment">Chunking strategies</span>
+
+<span class="fragment">Embeddings and vector stores</span>
+
+<span class="fragment">Retriever and LLM integration</span>
+
+::: notes
+Use diagrams heavily. Visual learning matters.
+:::
+
+---
+
+#### Module 1: RAG Pipeline (15 min)
+
+**9:45 - 10:00:**
+
+<span class="fragment">Live diagram walkthrough</span>
+
+<span class="fragment">Ingestion → Indexing → Retrieval → Generation</span>
+
+::: notes
+Draw the flow live on whiteboard. Students follow along.
+:::
+
+---
+
+### Module 2: Embedding Models (45 min) {data-background-color="#1e1e1e"}
+
+Understanding embeddings
+
+---
+
+#### Module 2 Breakdown
+
+**10:00 - 10:20:** Understanding embeddings (20 min)
+<span class="fragment">Dense vector representations</span>
+<span class="fragment">Semantic similarity</span>
+<span class="fragment">**Demo:** Visualize embeddings in 2D</span>
+
+::: notes
+Show actual vector visualizations. Makes abstract concrete.
+:::
+
+---
+
+#### Module 2: Model Comparison (25 min)
+
+**10:20 - 10:45:**
+
+<span class="fragment">sentence-transformers vs commercial</span>
+
+<span class="fragment">Dimensions and trade-offs</span>
+
+<span class="fragment">**Hands-on:** Test different models</span>
+
+::: notes
+Let students experiment. Quick 5-minute exercise.
+:::
+
+---
+
+### ☕ Break (15 min)
+
+**10:45 - 11:00**
+
+<span class="fragment">Essential for retention!</span>
+
+::: notes
+Enforce the break. Brain needs rest.
+:::
+
+---
+
+### Module 3: Vector Databases (60 min) {data-background-color="#0f172a"}
+
+Specialized storage
+
+---
+
+#### Module 3 Breakdown
+
+**11:00 - 11:20:** Introduction to vector stores (20 min)
+<span class="fragment">Why specialized databases?</span>
+<span class="fragment">Similarity search algorithms</span>
+
+::: notes
+Theory first, then tools. Build understanding.
+:::
+
+---
+
+#### Module 3: Tool Comparison (30 min)
+
+**11:20 - 11:50:**
+
+<span class="fragment">**Chroma:** Local and simple</span>
+
+<span class="fragment">**Elasticsearch:** Production-grade</span>
+
+<span class="fragment">**FAISS:** High-performance</span>
+
+<span class="fragment">**Pinecone:** Managed service</span>
+
+::: notes
+Compare and contrast. Help students choose wisely.
+:::
+
+---
+
+#### Module 3: Hands-on Demo (10 min)
+
+**11:50 - 12:00:**
+
+<span class="fragment">Build a simple vector store</span>
+
+<span class="fragment">Run similarity searches</span>
+
+::: notes
+Quick demo. Students see it working.
+:::
+
+---
+
+### Module 4: Accelerator Architecture (60 min) {data-background-color="#1e1e1e"}
+
+Production patterns
+
+---
+
+#### Module 4 Breakdown
+
+**12:00 - 12:30:** Accelerator components (30 min)
+<span class="fragment">Code walkthrough</span>
+<span class="fragment">tools/ directory overview</span>
+<span class="fragment">rag/ directory overview</span>
+
+::: notes
+Show actual production code. Bridge to reality.
+:::
+
+---
+
+#### Module 4: Production Patterns (20 min)
+
+**12:30 - 12:50:**
+
+<span class="fragment">API design</span>
+
+<span class="fragment">Error handling</span>
+
+<span class="fragment">Monitoring considerations</span>
+
+::: notes
+Real production concerns. Set proper expectations.
+:::
+
+---
+
+#### Module 4: Q&A and Lab Prep (10 min)
+
+**12:50 - 1:00:**
+
+<span class="fragment">Answer questions</span>
+
+<span class="fragment">Preview afternoon labs</span>
+
+::: notes
+Clear any confusion before lunch. Fresh start for labs.
+:::
+
+---
+
+## Afternoon Session: Labs (4 hours) {data-background-color="#0f172a"}
+
+Hands-on practice
+
+---
+
+### Lab 2.1: Local RAG with Ollama (60 min)
+
+**2:00 - 3:00**
+
+---
+
+#### Lab 2.1: Instructor Prep
+
 ```bash
 # Test Ollama is running
 ollama serve
@@ -96,41 +292,122 @@ ls data/corpus/
 jupyter nbconvert --execute lab_2.1_solution.ipynb
 ```
 
-**Walkthrough (15 min):**
-1. Show completed notebook running
-2. Explain key sections
-3. Point out common pitfalls
-4. Answer setup questions
+::: notes
+Test everything before students arrive. Be ready for issues.
+:::
 
-**Independent Work (35 min):**
-- Students work through lab
-- Circulate to help with issues
-- Monitor for blockers
+---
 
-**Review (10 min):**
-- Show solution
-- Discuss variations
-- Preview next lab
+#### Lab 2.1: Walkthrough (15 min)
 
-**Common Issues:**
+**2:00 - 2:15:**
+
+<span class="fragment">1. Show completed notebook running</span>
+
+<span class="fragment">2. Explain key sections</span>
+
+<span class="fragment">3. Point out common pitfalls</span>
+
+<span class="fragment">4. Answer setup questions</span>
+
+::: notes
+Don't code it live yet. Just explain the structure.
+:::
+
+---
+
+#### Lab 2.1: Independent Work (35 min)
+
+**2:15 - 2:50:**
+
+<span class="fragment">Students work through lab</span>
+
+<span class="fragment">Circulate to help with issues</span>
+
+<span class="fragment">Monitor for blockers</span>
+
+::: notes
+Be proactive. Don't wait for students to ask.
+:::
+
+---
+
+#### Lab 2.1: Review (10 min)
+
+**2:50 - 3:00:**
+
+<span class="fragment">Show solution</span>
+
+<span class="fragment">Discuss variations</span>
+
+<span class="fragment">Preview next lab</span>
+
+::: notes
+Quick recap. Keep momentum going.
+:::
+
+---
+
+### Lab 2.1: Common Issues {data-background-color="#1e1e1e"}
+
+Be ready for these
+
+---
+
+#### Issue: Ollama Not Starting
+
 ```python
-# Ollama not starting
 # Solution: Check if port 11434 is free
 lsof -i :11434
+```
 
-# Slow embedding
-# Solution: Reduce chunk count or use GPU
+<span class="fragment">Kill existing process if needed</span>
+
+::: notes
+Most common issue. Have solution ready.
+:::
+
+---
+
+#### Issue: Slow Embedding
+
+```python
+# Solution: Reduce chunk count
 CONFIG["chunk_size"] = 500  # Smaller chunks
+```
 
-# Out of memory
+<span class="fragment">Or use GPU if available</span>
+
+::: notes
+Performance issue on older laptops
+:::
+
+---
+
+#### Issue: Out of Memory
+
+```python
 # Solution: Process in batches
 for batch in chunks[::100]:
     vectorstore.add_documents(batch)
 ```
 
-**3:00 - 4:00: Lab 2.2 - RAG with watsonx.ai (60 min)**
+::: notes
+Common with large corpora
+:::
 
-**Instructor Prep:**
+---
+
+### Lab 2.2: RAG with watsonx.ai (60 min) {data-background-color="#0f172a"}
+
+**3:00 - 4:00**
+
+Enterprise RAG
+
+---
+
+#### Lab 2.2: Instructor Prep
+
 ```bash
 # Verify credentials work
 export WATSONX_APIKEY="your_key"
@@ -139,204 +416,370 @@ export PROJECT_ID="your_project_id"
 # Test API connection
 python test_watsonx_connection.py
 
-# Prepare Elasticsearch alternative if needed
+# Prepare Elasticsearch alternative
 docker run -p 9200:9200 elasticsearch:8.11.0
 ```
 
-**Walkthrough (15 min):**
-1. Credentials setup walkthrough
-2. Show Granite model in action
-3. Explain watsonx-specific patterns
-4. Elasticsearch optional setup
+::: notes
+Enterprise setup more complex. Test thoroughly.
+:::
 
-**Independent Work (35 min):**
-- Students implement enterprise RAG
-- Help with credentials
-- Troubleshoot API issues
+---
 
-**Review (10 min):**
-- Compare Ollama vs watsonx
-- Discuss production considerations
+#### Lab 2.2: Walkthrough (15 min)
 
-**Common Issues:**
+**3:00 - 3:15:**
+
+<span class="fragment">1. Credentials setup walkthrough</span>
+
+<span class="fragment">2. Show Granite model in action</span>
+
+<span class="fragment">3. Explain watsonx-specific patterns</span>
+
+<span class="fragment">4. Elasticsearch optional setup</span>
+
+::: notes
+Credentials are often the biggest hurdle
+:::
+
+---
+
+#### Lab 2.2: Independent Work (35 min)
+
+**3:15 - 3:50:**
+
+<span class="fragment">Students implement enterprise RAG</span>
+
+<span class="fragment">Help with credentials</span>
+
+<span class="fragment">Troubleshoot API issues</span>
+
+::: notes
+Credential issues will happen. Be patient.
+:::
+
+---
+
+#### Lab 2.2: Review (10 min)
+
+**3:50 - 4:00:**
+
+<span class="fragment">Compare Ollama vs watsonx</span>
+
+<span class="fragment">Discuss production considerations</span>
+
+::: notes
+Highlight differences. When to use each.
+:::
+
+---
+
+### Lab 2.2: Common Issues {data-background-color="#1e1e1e"}
+
+Authentication and performance
+
+---
+
+#### Issue: Authentication Errors
+
 ```python
-# Authentication errors
 # Check: API key format, project permissions
+# Verify: len(WATSONX_APIKEY) > 20
+# Verify: len(PROJECT_ID) == 36
+```
 
-# Slow responses
+::: notes
+Format validation catches most issues
+:::
+
+---
+
+#### Issue: Slow Responses
+
+```python
 # Solution: Reduce max_new_tokens
 parameters = {
     GenParams.MAX_NEW_TOKENS: 100  # Instead of 500
 }
-
-# Elasticsearch connection timeout
-# Solution: Use Chroma fallback
-if USE_ELASTICSEARCH:
-    try:
-        vectorstore = ElasticsearchStore(...)
-    except:
-        vectorstore = Chroma.from_documents(...)
 ```
 
-**4:00 - 4:15: ☕ Break (15 min)**
-
-**4:15 - 5:15: Lab 2.3 - Twin RAG Pipelines (60 min)**
-
-**Instructor Prep:**
-```bash
-# Ensure both RAG systems are working
-python -c "from lab_2_1_solution import qa_chain_ollama"
-python -c "from lab_2_2_solution import qa_chain_granite"
-
-# Prepare comparison template
-jupyter notebook lab_2.3_starter.ipynb
-```
-
-**Walkthrough (10 min):**
-1. Show comparison framework
-2. Explain metrics
-3. Demonstrate visualization
-
-**Independent Work (40 min):**
-- Students build comparison
-- Collect results
-- Analyze differences
-
-**Review (10 min):**
-- Discuss findings
-- Identify patterns
-- Production insights
-
-**5:15 - 6:00: Lab 2.4 - Evaluation Harness (45 min)**
-
-**Instructor Prep:**
-```bash
-# Prepare ground truth data
-cat > ground_truth.csv << EOF
-query,gold_answer,relevant_docs
-"What is RAG?","RAG enhances LLMs...","rag_overview.txt"
-EOF
-
-# Test evaluation functions
-python test_evaluation.py
-```
-
-**Walkthrough (10 min):**
-1. Importance of evaluation
-2. Metrics explanation
-3. Ground truth creation
-
-**Independent Work (25 min):**
-- Implement eval functions
-- Run evaluations
-- Visualize results
-
-**Review (10 min):**
-- Discuss metrics
-- eval_small.py design
-- Governance integration
+::: notes
+Trade quality for speed if needed
+:::
 
 ---
 
-## 🎓 Learning Objectives Checklist
+### ☕ Break (15 min)
 
-### Knowledge (Can explain)
-- [ ] What is RAG and why it's useful
-- [ ] How embeddings represent semantic meaning
-- [ ] Difference between vector stores
-- [ ] Trade-offs in RAG design
+**4:00 - 4:15**
 
-### Skills (Can implement)
-- [ ] Load and chunk documents
-- [ ] Create embeddings and vector stores
-- [ ] Build retrieval functions
-- [ ] Integrate LLMs into RAG
-- [ ] Evaluate RAG systems
+<span class="fragment">Second wind needed!</span>
 
-### Application (Can build)
-- [ ] Working local RAG pipeline
-- [ ] Enterprise RAG with watsonx
-- [ ] Comparison framework
-- [ ] Evaluation harness
+::: notes
+Critical break. Students are tired.
+:::
 
 ---
 
-## 📊 Assessment & Grading
+### Lab 2.3: Twin RAG Pipelines (60 min) {data-background-color="#0f172a"}
+
+**4:15 - 5:15**
+
+Comparison framework
+
+---
+
+#### Lab 2.3: Walkthrough (10 min)
+
+**4:15 - 4:25:**
+
+<span class="fragment">1. Show comparison framework</span>
+
+<span class="fragment">2. Explain metrics</span>
+
+<span class="fragment">3. Demonstrate visualization</span>
+
+::: notes
+This lab builds on previous two. Quick intro.
+:::
+
+---
+
+#### Lab 2.3: Independent Work (40 min)
+
+**4:25 - 5:05:**
+
+<span class="fragment">Students build comparison</span>
+
+<span class="fragment">Collect results</span>
+
+<span class="fragment">Analyze differences</span>
+
+::: notes
+Students are tired. More time for this lab.
+:::
+
+---
+
+#### Lab 2.3: Review (10 min)
+
+**5:05 - 5:15:**
+
+<span class="fragment">Discuss findings</span>
+
+<span class="fragment">Identify patterns</span>
+
+<span class="fragment">Production insights</span>
+
+::: notes
+Group discussion. Share learnings.
+:::
+
+---
+
+### Lab 2.4: Evaluation Harness (45 min) {data-background-color="#1e1e1e"}
+
+**5:15 - 6:00**
+
+Final lab - shorter
+
+---
+
+#### Lab 2.4: Walkthrough (10 min)
+
+**5:15 - 5:25:**
+
+<span class="fragment">1. Importance of evaluation</span>
+
+<span class="fragment">2. Metrics explanation</span>
+
+<span class="fragment">3. Ground truth creation</span>
+
+::: notes
+Critical concept. Don't skip this.
+:::
+
+---
+
+#### Lab 2.4: Independent Work (25 min)
+
+**5:25 - 5:50:**
+
+<span class="fragment">Implement eval functions</span>
+
+<span class="fragment">Run evaluations</span>
+
+<span class="fragment">Visualize results</span>
+
+::: notes
+Compressed lab. Focus on key concepts.
+:::
+
+---
+
+#### Lab 2.4: Review (10 min)
+
+**5:50 - 6:00:**
+
+<span class="fragment">Discuss metrics</span>
+
+<span class="fragment">eval_small.py design</span>
+
+<span class="fragment">Governance integration</span>
+
+::: notes
+Wrap up day. Preview Day 3.
+:::
+
+---
+
+## 🎓 Learning Objectives Checklist {data-background-color="#0f172a"}
+
+Track student progress
+
+---
+
+### Knowledge (Can Explain)
+
+<span class="fragment">☐ What is RAG and why it's useful</span>
+
+<span class="fragment">☐ How embeddings represent semantic meaning</span>
+
+<span class="fragment">☐ Difference between vector stores</span>
+
+<span class="fragment">☐ Trade-offs in RAG design</span>
+
+::: notes
+Conceptual understanding. Test with questions.
+:::
+
+---
+
+### Skills (Can Implement)
+
+<span class="fragment">☐ Load and chunk documents</span>
+
+<span class="fragment">☐ Create embeddings and vector stores</span>
+
+<span class="fragment">☐ Build retrieval functions</span>
+
+<span class="fragment">☐ Integrate LLMs into RAG</span>
+
+<span class="fragment">☐ Evaluate RAG systems</span>
+
+::: notes
+Practical skills. Verify through labs.
+:::
+
+---
+
+### Application (Can Build)
+
+<span class="fragment">☐ Working local RAG pipeline</span>
+
+<span class="fragment">☐ Enterprise RAG with watsonx</span>
+
+<span class="fragment">☐ Comparison framework</span>
+
+<span class="fragment">☐ Evaluation harness</span>
+
+::: notes
+Complete systems. Portfolio pieces.
+:::
+
+---
+
+## 📊 Assessment & Grading {data-background-color="#1e1e1e"}
+
+Evaluation rubric
+
+---
 
 ### Lab Completion (40 points)
-- Lab 2.1: 10 points (notebook runs, answers correct)
-- Lab 2.2: 10 points (watsonx integration works)
-- Lab 2.3: 10 points (comparison complete)
-- Lab 2.4: 10 points (evaluation implemented)
+
+<span class="fragment">Lab 2.1: 10 points (notebook runs, answers correct)</span>
+
+<span class="fragment">Lab 2.2: 10 points (watsonx integration works)</span>
+
+<span class="fragment">Lab 2.3: 10 points (comparison complete)</span>
+
+<span class="fragment">Lab 2.4: 10 points (evaluation implemented)</span>
+
+::: notes
+Basic functionality. Must work to pass.
+:::
+
+---
 
 ### Quality (30 points)
-- Code organization and comments: 10 points
-- Error handling: 10 points
-- Documentation: 10 points
+
+<span class="fragment">Code organization and comments: 10 points</span>
+
+<span class="fragment">Error handling: 10 points</span>
+
+<span class="fragment">Documentation: 10 points</span>
+
+::: notes
+Production quality matters
+:::
+
+---
 
 ### Understanding (30 points)
-- Wrap-up questions: 15 points
-- Accelerator mapping: 15 points
+
+<span class="fragment">Wrap-up questions: 15 points</span>
+
+<span class="fragment">Accelerator mapping: 15 points</span>
+
+::: notes
+Can they explain their choices?
+:::
+
+---
+
+### Grading Scale
 
 **Total: 100 points**
 
-**Grading Rubric:**
-- 90-100: Excellent - All labs working, clear understanding
-- 80-89: Good - Minor issues, solid grasp of concepts
-- 70-79: Satisfactory - Some components working, basic understanding
-- 60-69: Needs Improvement - Significant gaps
-- <60: Not Passing - Incomplete work
+<span class="fragment">90-100: Excellent - All labs working, clear understanding</span>
+
+<span class="fragment">80-89: Good - Minor issues, solid grasp</span>
+
+<span class="fragment">70-79: Satisfactory - Some components working</span>
+
+<span class="fragment">60-69: Needs Improvement - Significant gaps</span>
+
+<span class="fragment"><60: Not Passing - Incomplete work</span>
+
+::: notes
+Clear expectations. Transparent grading.
+:::
 
 ---
 
-## 🔧 Technical Setup Verification
+## 💡 Teaching Tips {data-background-color="#0f172a"}
 
-### Pre-Workshop Checklist
-
-**Send to students 1 week before:**
-```bash
-# Install Python packages
-pip install -r requirements.txt
-
-# Install Ollama
-curl https://ollama.ai/install.sh | sh
-ollama pull llama2
-
-# Test imports
-python -c "import langchain; import chromadb; import sentence_transformers"
-
-# Verify watsonx credentials (share template)
-python verify_credentials.py
-```
-
-**Day-of setup (30 minutes before):**
-```bash
-# Start Ollama
-ollama serve &
-
-# Verify all systems
-./verify_workshop_setup.sh
-
-# Create sample data
-python create_sample_corpus.py
-
-# Test reference solutions
-pytest test_lab_solutions.py
-```
+Proven strategies
 
 ---
 
-## 💡 Teaching Tips
+### Tip 1: Start with "Why"
 
-### For Each Module
+<span class="fragment">Don't jump into code</span>
 
-**1. Start with "Why"**
-- Don't jump into code
-- Explain the problem being solved
-- Show real-world example first
+<span class="fragment">Explain the problem being solved</span>
 
-**2. Use Progressive Disclosure**
-```python
+<span class="fragment">Show real-world example first</span>
+
+::: notes
+Motivation before mechanics. Build context.
+:::
+
+---
+
+### Tip 2: Use Progressive Disclosure
+
+```python {data-line-numbers="1-2|4-9"}
 # First show simple version
 vectorstore = Chroma.from_documents(docs, embeddings)
 
@@ -344,313 +787,284 @@ vectorstore = Chroma.from_documents(docs, embeddings)
 vectorstore = Chroma.from_documents(
     documents=docs,
     embedding=embeddings,
-    persist_directory="./db",
-    collection_metadata={"hnsw:space": "cosine"}
+    persist_directory="./db"
 )
 ```
 
-**3. Encourage Experimentation**
-- "What happens if you change chunk_size to 500?"
-- "Try different embedding models"
-- "Compare with/without overlap"
-
-**4. Relate to Accelerator**
-- "This notebook code will become retriever.py"
-- "Notice how we're separating concerns"
-- "Think about error handling for production"
-
-### Handling Questions
-
-**Common Questions & Answers:**
-
-Q: "Why not just use GPT-4 for everything?"
-A: "Cost, latency, privacy, and control over knowledge"
-
-Q: "When should I use RAG vs fine-tuning?"
-A: "RAG: frequently updated info. Fine-tuning: style/behavior"
-
-Q: "Which vector store should I use?"
-A: "Dev: Chroma. Production: Elasticsearch/Pinecone"
-
-Q: "How do I handle multi-language?"
-A: "Use multilingual embedding models or separate stores"
-
-Q: "What about images/tables?"
-A: "Multi-modal RAG - covered in advanced topics"
-
-### Pacing Strategies
-
-**If Running Behind:**
-- Skip optional demos
-- Provide pre-built components
-- Focus on key concepts
-- Extend lab time, reduce review
-
-**If Running Ahead:**
-- Deep dive into advanced topics
-- Extra optimization exercises
-- Production deployment discussion
-- Preview Day 3 content
+::: notes
+Layer complexity. Don't overwhelm at start.
+:::
 
 ---
 
-## 🐛 Troubleshooting Guide for Instructors
+### Tip 3: Encourage Experimentation
 
-### Student Environment Issues
+<span class="fragment">"What happens if you change chunk_size to 500?"</span>
 
-**Issue: "Ollama won't start"**
-```bash
-# Check if already running
-ps aux | grep ollama
+<span class="fragment">"Try different embedding models"</span>
 
-# Check port availability
-lsof -i :11434
+<span class="fragment">"Compare with/without overlap"</span>
 
-# Kill existing process
-pkill ollama
-
-# Restart
-ollama serve
-```
-
-**Issue: "Out of memory during indexing"**
-```python
-# Solution: Batch processing
-batch_size = 100
-for i in range(0, len(chunks), batch_size):
-    batch = chunks[i:i+batch_size]
-    vectorstore.add_documents(batch)
-```
-
-**Issue: "watsonx authentication fails"**
-```python
-# Debug credentials
-print(f"API Key length: {len(WATSONX_APIKEY)}")
-print(f"Project ID format: {len(PROJECT_ID) == 36}")
-
-# Test simple call
-from ibm_watsonx_ai import APIClient
-client = APIClient(credentials, project_id)
-print(client.foundation_models.get_model_specs()[:2])
-```
-
-**Issue: "Elasticsearch connection timeout"**
-```python
-# Provide Chroma fallback
-print("Elasticsearch unavailable, using Chroma...")
-vectorstore = Chroma.from_documents(
-    documents=chunks,
-    embedding=embeddings
-)
-```
-
-### Content Delivery Issues
-
-**Students Lost in Theory:**
-- Pause for questions every 10 minutes
-- Use more diagrams/visualizations
-- Relate to familiar concepts
-- Provide analogy: "Like a librarian finding relevant books"
-
-**Labs Too Fast/Slow:**
-- Have extension exercises ready
-- Provide partial solutions for struggling students
-- Pair programming for mixed skill levels
-
-**Technical Difficulties:**
-- Always have backup: cloud notebooks (Colab/SageMaker)
-- Pre-recorded demos as fallback
-- Offline documentation
+::: notes
+Active learning beats passive consumption
+:::
 
 ---
 
-## 📚 Additional Resources for Instructors
+### Tip 4: Relate to Accelerator
 
-### Reference Materials
+<span class="fragment">"This notebook code will become retriever.py"</span>
 
-**Papers:**
-1. "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (Lewis et al., 2020)
-2. "Dense Passage Retrieval for Open-Domain Question Answering" (Karpukhin et al., 2020)
+<span class="fragment">"Notice how we're separating concerns"</span>
 
-**Documentation:**
-- LangChain RAG Guide: https://python.langchain.com/docs/use_cases/question_answering/
-- watsonx.ai Docs: https://www.ibm.com/docs/en/watsonx-as-a-service
-- Chroma Docs: https://docs.trychroma.com/
+<span class="fragment">"Think about error handling for production"</span>
 
-**Videos (for students):**
-- "RAG Explained" - Andrej Karpathy
-- "Building Production RAG Systems" - LangChain YouTube
-
-### Extension Activities
-
-**For Advanced Students:**
-1. **Hybrid Search Implementation**
-   - Combine keyword and semantic search
-   - Implement BM25 + vector similarity
-
-2. **Multi-Query RAG**
-   - Generate multiple versions of query
-   - Retrieve from each, combine results
-
-3. **Agentic RAG**
-   - Add routing logic
-   - Implement query planning
-   - Self-correction loops
-
-4. **Custom Evaluators**
-   - Domain-specific metrics
-   - Human-in-the-loop evaluation
-   - A/B testing framework
+::: notes
+Connect to production. Build professional thinking.
+:::
 
 ---
 
-## 🎬 Workshop Closing (5:45 - 6:00 PM)
+## Common Questions & Answers {data-background-color="#1e1e1e"}
+
+Be ready for these
+
+---
+
+### Q: "Why not just use GPT-4 for everything?"
+
+**A:** "Cost, latency, privacy, and control over knowledge"
+
+::: notes
+Common question. Clear business answer.
+:::
+
+---
+
+### Q: "When should I use RAG vs fine-tuning?"
+
+**A:** "RAG: frequently updated info. Fine-tuning: style/behavior"
+
+::: notes
+Different tools for different problems
+:::
+
+---
+
+### Q: "Which vector store should I use?"
+
+**A:** "Dev: Chroma. Production: Elasticsearch/Pinecone"
+
+::: notes
+Context-dependent answer
+:::
+
+---
+
+### Q: "How do I handle multi-language?"
+
+**A:** "Use multilingual embedding models or separate stores"
+
+::: notes
+Design decision with trade-offs
+:::
+
+---
+
+## Pacing Strategies {data-background-color="#0f172a"}
+
+Adapt to your audience
+
+---
+
+### If Running Behind
+
+<span class="fragment">Skip optional demos</span>
+
+<span class="fragment">Provide pre-built components</span>
+
+<span class="fragment">Focus on key concepts</span>
+
+<span class="fragment">Extend lab time, reduce review</span>
+
+::: notes
+Flexibility matters. Preserve core content.
+:::
+
+---
+
+### If Running Ahead
+
+<span class="fragment">Deep dive into advanced topics</span>
+
+<span class="fragment">Extra optimization exercises</span>
+
+<span class="fragment">Production deployment discussion</span>
+
+<span class="fragment">Preview Day 3 content</span>
+
+::: notes
+Reward fast learners with depth
+:::
+
+---
+
+## 🎬 Workshop Closing (5:45 - 6:00) {data-background-color="#1e1e1e"}
+
+End strong
+
+---
 
 ### Wrap-Up Activity (10 min)
 
 **Quick Reflection:**
-1. "What was the most surprising thing you learned?"
-2. "What will you try in your work?"
-3. "What questions remain?"
 
-**Key Takeaways Reinforcement:**
-- RAG = Retrieval + Generation for grounded answers
-- Components: Docs → Chunks → Embeddings → Vector Store → Retriever → LLM
-- Evaluation is critical for production systems
-- Accelerator provides production patterns
+<span class="fragment">1. "What was the most surprising thing you learned?"</span>
+
+<span class="fragment">2. "What will you try in your work?"</span>
+
+<span class="fragment">3. "What questions remain?"</span>
+
+::: notes
+Group discussion. Consolidate learning.
+:::
+
+---
+
+### Key Takeaways Reinforcement
+
+<span class="fragment">RAG = Retrieval + Generation for grounded answers</span>
+
+<span class="fragment">Components: Docs → Chunks → Embeddings → Vector Store → Retriever → LLM</span>
+
+<span class="fragment">Evaluation is critical for production</span>
+
+<span class="fragment">Accelerator provides production patterns</span>
+
+::: notes
+Repeat core concepts. Reinforce learning.
+:::
+
+---
 
 ### Preview Day 3 (5 min)
-- Agentic AI systems
-- Governed AI tooling
-- Advanced evaluation
-- Deployment and monitoring
+
+<span class="fragment">Agentic AI systems</span>
+
+<span class="fragment">Governed AI tooling</span>
+
+<span class="fragment">Advanced evaluation</span>
+
+<span class="fragment">Deployment and monitoring</span>
+
+::: notes
+Build excitement for next day
+:::
+
+---
 
 ### Logistics
-- Share: Completion certificates
-- Collect: Feedback surveys
-- Provide: Additional resources document
-- Remind: Office hours schedule
+
+<span class="fragment">Share: Completion certificates</span>
+
+<span class="fragment">Collect: Feedback surveys</span>
+
+<span class="fragment">Provide: Additional resources document</span>
+
+<span class="fragment">Remind: Office hours schedule</span>
+
+::: notes
+Administrative wrap-up
+:::
 
 ---
 
-## 📝 Post-Workshop Instructor Checklist
+## 🎯 Success Metrics {data-background-color="#0f172a"}
 
-### Immediate (Same Day)
-- [ ] Collect attendance
-- [ ] Grade lab submissions (if applicable)
-- [ ] Note common issues for next time
-- [ ] Share solution notebooks
-- [ ] Send follow-up email with resources
-
-### Within Week
-- [ ] Review feedback surveys
-- [ ] Update materials based on feedback
-- [ ] Grade final submissions
-- [ ] Provide individual feedback
-- [ ] Schedule follow-up office hours
-
-### For Next Workshop
-- [ ] Update prerequisites based on issues
-- [ ] Refine pacing based on feedback
-- [ ] Add/remove content as needed
-- [ ] Update code for latest library versions
-- [ ] Create FAQ document
+Track workshop effectiveness
 
 ---
 
-## 🎯 Success Metrics
+### Workshop is Successful If:
 
-**Workshop is Successful If:**
-- ✅ 80%+ students complete all labs
-- ✅ 90%+ understand RAG concepts
-- ✅ 70%+ can build basic RAG pipeline independently
-- ✅ Average satisfaction score > 4/5
-- ✅ Students can explain trade-offs in RAG design
+<span class="fragment">✅ 80%+ students complete all labs</span>
 
-**Track These Metrics:**
-- Completion rates per lab
-- Time spent per module
-- Number of questions per topic
-- Common error patterns
-- Post-workshop survey results
+<span class="fragment">✅ 90%+ understand RAG concepts</span>
 
----
+<span class="fragment">✅ 70%+ can build basic RAG independently</span>
 
-## 📞 Support Resources
+<span class="fragment">✅ Average satisfaction score > 4/5</span>
 
-**During Workshop:**
-- Slack: #day2-rag-workshop
-- TA support: 2-3 TAs for 20+ students
-- Backup instructor for technical issues
+<span class="fragment">✅ Students can explain trade-offs</span>
 
-**After Workshop:**
-- Office hours: 2x per week for 2 weeks
-- Discussion forum: for ongoing questions
-- Code review: optional for project work
+::: notes
+Measurable success criteria
+:::
 
 ---
 
-## 🏆 Bonus: Quick Command Reference
+### Track These Metrics
 
-```bash
-# === Environment Setup ===
-# Install all dependencies
-pip install -r requirements.txt
+<span class="fragment">Completion rates per lab</span>
 
-# Start Ollama
-ollama serve
+<span class="fragment">Time spent per module</span>
 
-# Pull models
-ollama pull llama2
-ollama pull mistral
+<span class="fragment">Number of questions per topic</span>
 
-# === Data Preparation ===
-# Create sample corpus
-python scripts/create_sample_corpus.py
+<span class="fragment">Common error patterns</span>
 
-# Download workshop data
-wget https://raw.github.com/.../data.zip
-unzip data.zip
+<span class="fragment">Post-workshop survey results</span>
 
-# === Testing ===
-# Test all labs
-pytest tests/test_labs.py
-
-# Test specific lab
-pytest tests/test_lab_2_1.py -v
-
-# Run solution notebook
-jupyter nbconvert --execute lab_2_1_solution.ipynb
-
-# === Common Fixes ===
-# Reset Chroma database
-rm -rf ./chroma_db
-
-# Clear Python cache
-find . -type d -name __pycache__ -exec rm -r {} +
-
-# Restart Jupyter kernel
-# Kernel > Restart & Clear Output
-
-# === Monitoring ===
-# Watch Ollama logs
-ollama logs -f
-
-# Check vector store size
-du -sh ./chroma_db
-
-# Monitor memory usage
-watch -n 1 free -h
-```
+::: notes
+Data drives improvement
+:::
 
 ---
 
-**Good luck with the workshop! 🚀**
+## 📞 Support Resources {data-background-color="#1e1e1e"}
 
-*Remember: The goal is learning, not perfection. Encourage experimentation and questions!*
+Help for instructors
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: January 2025  
+### During Workshop
+
+<span class="fragment">Slack: #day2-rag-workshop</span>
+
+<span class="fragment">TA support: 2-3 TAs for 20+ students</span>
+
+<span class="fragment">Backup instructor for technical issues</span>
+
+::: notes
+Don't teach alone. Have support ready.
+:::
+
+---
+
+### After Workshop
+
+<span class="fragment">Office hours: 2x per week for 2 weeks</span>
+
+<span class="fragment">Discussion forum: for ongoing questions</span>
+
+<span class="fragment">Code review: optional for project work</span>
+
+::: notes
+Extended support. Learning continues.
+:::
+
+---
+
+## Good luck with the workshop! 🚀 {data-background-color="#0f172a" data-transition="zoom"}
+
+*Remember: The goal is learning, not perfection.*
+
+*Encourage experimentation and questions!*
+
+**Document Version**: 1.0
+**Last Updated**: January 2025
 **Contact**: workshop-support@example.com
+
+::: notes
+Final encouragement. You're ready to teach!
+:::

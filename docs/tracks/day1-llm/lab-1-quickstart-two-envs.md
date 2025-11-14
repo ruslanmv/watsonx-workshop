@@ -1,63 +1,86 @@
-# Lab 1.1 – Quickstart in Both Environments
+# 🧪 Lab 1.1 – Quickstart in Both Environments
 
-**Duration**: 45 minutes  
-**Difficulty**: Beginner
+Get hands-on with Ollama and watsonx.ai
 
----
+**Duration**: 45 minutes | **Difficulty**: Beginner
 
-## Lab Overview
-
-In this lab, you'll get hands-on experience with LLMs in both local (Ollama) and managed (watsonx.ai) environments. The goal is to become comfortable switching between repos, sending prompts, and observing differences in outputs.
-
----
-
-## Learning Objectives
-
-By the end of this lab, you will be able to:
-
-- Send basic prompts to both Ollama and watsonx.ai
-- Modify key parameters (temperature, max_tokens)
-- Compare outputs and latency between backends
-- Understand where the accelerator fits in
+::: notes
+This is the first hands-on lab. Make sure all students have their environments set up before starting. Walk around and help those who encounter issues.
+:::
 
 ---
 
-## Prerequisites
+## 🎯 Lab Overview {data-background-color="#0f172a"}
 
-**Required** (from Day 0):
-- ✅ `simple-ollama-environment` set up and working
-- ✅ `simple-watsonx-enviroment` set up with valid credentials
-- ✅ Both Jupyter environments accessible
+<span class="fragment">🔹 Send basic prompts to **Ollama** and **watsonx.ai**</span>
 
-**Optional but recommended**:
-- Basic familiarity with Python and Jupyter notebooks
-- `watsonx-workshop` repo cloned (for accelerator reference)
+<span class="fragment">🔹 Modify key parameters (temperature, max_tokens)</span>
+
+<span class="fragment">🔹 Compare outputs and latency</span>
+
+<span class="fragment">🔹 Understand accelerator integration</span>
+
+::: notes
+By the end of this lab, students will be comfortable switching between environments and understanding the trade-offs.
+:::
 
 ---
 
-## Step 1 – Quick Warm-Up with Ollama
+## ✅ Prerequisites Check
 
-### 1.1 Open the Ollama Notebook
+Before starting, ensure:
 
-Navigate to your `simple-ollama-environment` repo:
+<span class="fragment">✅ `simple-ollama-environment` set up and working</span>
+
+<span class="fragment">✅ `simple-watsonx-enviroment` set up with valid credentials</span>
+
+<span class="fragment">✅ Both Jupyter environments accessible</span>
+
+<span class="fragment">✅ Ollama has a model pulled (e.g., `qwen2.5:0.5b-instruct`)</span>
+
+::: notes
+Pause here and ask students to confirm their setups are working. Don't proceed until everyone is ready.
+:::
+
+---
+
+## 🚀 Step 1: Ollama Warm-Up {data-transition="zoom"}
+
+Let's start with the local environment
+
+::: notes
+Ollama is simpler to start with—no credentials needed. Success here builds confidence.
+:::
+
+---
+
+## 📂 Open Ollama Notebook
+
+Navigate to your Ollama environment:
 
 ```bash
 cd ~/projects/watsonx-workshop/simple-ollama-environment
 jupyter notebook
 ```
 
-Open `notebooks/ollama_quickstart.ipynb` (or create a new notebook if you prefer).
+<span class="fragment">Open `notebooks/ollama_quickstart.ipynb`</span>
 
-### 1.2 Run a Simple "Hello" Prompt
+<span class="fragment">(Or create a new notebook)</span>
 
-Add and run this cell:
+::: notes
+Give students 2-3 minutes to navigate to the notebook. Help anyone who gets stuck.
+:::
 
-```python
+---
+
+## 👋 Simple "Hello" Prompt
+
+```python {data-line-numbers="1-11"}
 import ollama
 
 # Simple greeting
 response = ollama.chat(
-    model="qwen2.5:0.5b-instruct",  # or your preferred small model
+    model="qwen2.5:0.5b-instruct",
     messages=[
         {"role": "user", "content": "Hello! Who are you?"}
     ]
@@ -66,21 +89,22 @@ response = ollama.chat(
 print(response["message"]["content"])
 ```
 
-**Expected output**: The model should introduce itself.
+<span class="fragment">**Run this cell and observe the response**</span>
 
-**Note the**:
-- Response time (how fast was it?)
-- Response style (casual, formal, verbose?)
+::: notes
+Have students run this cell. Ask them to note the response time and style. Is it casual or formal? Fast or slow?
+:::
 
-### 1.3 Run a Short Reasoning Prompt
+---
 
-Now try a more challenging prompt:
+## 🧠 Mini Exercise: Reasoning Prompt
 
-```python
+```python {data-line-numbers="1-17"}
 import ollama
 import time
 
-prompt = """A farmer has 17 sheep, and all but 9 die. How many are left?
+prompt = """A farmer has 17 sheep, and all but 9 die.
+How many are left?
 
 Let's think step by step:"""
 
@@ -97,31 +121,56 @@ print(f"Response (took {elapsed:.2f}s):\n")
 print(response["message"]["content"])
 ```
 
-**Questions to consider**:
-- Did the model reason correctly? (Answer should be 9 sheep)
-- How long did it take?
-- Was the reasoning process clear?
+::: notes
+The answer should be 9 sheep. "All but 9" means 9 survived. See if the model gets it right. Discuss any errors.
+:::
 
 ---
 
-## Step 2 – Warm-Up with watsonx.ai
+## 💭 Reflection Questions
 
-### 2.1 Open the watsonx Notebook
+<span class="fragment">❓ Did the model reason correctly?</span>
 
-Navigate to your `simple-watsonx-enviroment` repo:
+<span class="fragment">❓ How long did it take?</span>
+
+<span class="fragment">❓ Was the reasoning process clear?</span>
+
+::: notes
+Encourage students to share their results. Different models may give different answers. This is a good learning moment about model variability.
+:::
+
+---
+
+## ☁️ Step 2: watsonx.ai Warm-Up {data-background-color="#1e293b"}
+
+Now let's try the managed environment
+
+::: notes
+watsonx requires more setup (credentials) but offers enterprise features.
+:::
+
+---
+
+## 📂 Open watsonx Notebook
+
+Navigate to watsonx environment:
 
 ```bash
 cd ~/projects/watsonx-workshop/simple-watsonx-enviroment
 jupyter notebook
 ```
 
-Open `notebooks/watsonx_quickstart.ipynb`.
+<span class="fragment">Open `notebooks/watsonx_quickstart.ipynb`</span>
 
-### 2.2 Verify Credentials
+::: notes
+Again, give students time to navigate. Check that everyone has credentials configured.
+:::
 
-Make sure your `.env` file is properly loaded:
+---
 
-```python
+## 🔐 Verify Credentials
+
+```python {data-line-numbers="1-13"}
 import os
 from dotenv import load_dotenv
 
@@ -137,11 +186,17 @@ print(f"URL: {url}")
 print(f"Project ID: {'✓ Set' if project_id else '✗ Missing'}")
 ```
 
-All three should show as set.
+<span class="fragment">**All three should show as set**</span>
 
-### 2.3 Run the Same "Hello" Prompt
+::: notes
+If anyone sees "Missing", help them fix their .env file before proceeding.
+:::
 
-```python
+---
+
+## 👋 watsonx "Hello" Prompt
+
+```python {data-line-numbers="1-26"}
 import os
 import time
 from dotenv import load_dotenv
@@ -151,23 +206,19 @@ from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
 
 load_dotenv()
 
-# Setup
 api_key = os.getenv("IBM_CLOUD_API_KEY") or os.getenv("WATSONX_APIKEY")
 url = os.getenv("IBM_CLOUD_URL") or os.getenv("WATSONX_URL")
 project_id = os.getenv("IBM_CLOUD_PROJECT_ID") or os.getenv("PROJECT_ID")
 
 credentials = Credentials(url=url, api_key=api_key)
 
-# Create model instance
 model = ModelInference(
     model_id="ibm/granite-13b-instruct-v2",
     credentials=credentials,
     project_id=project_id,
 )
 
-# Simple greeting
 prompt = "Hello! Who are you?"
-
 params = {
     GenParams.DECODING_METHOD: "greedy",
     GenParams.MAX_NEW_TOKENS: 100,
@@ -181,15 +232,31 @@ print(f"Response (took {elapsed:.2f}s):\n")
 print(response)
 ```
 
-**Compare to Ollama**:
-- How does the response differ in style?
-- Which was faster?
-- Which feels more "polished"?
+::: notes
+More verbose setup than Ollama, but this is production-grade code. Run the cell and compare results.
+:::
 
-### 2.4 Run the Reasoning Prompt
+---
 
-```python
-prompt = """A farmer has 17 sheep, and all but 9 die. How many are left?
+## 🔍 Compare: Ollama vs watsonx
+
+<span class="fragment">❓ How does the response differ in style?</span>
+
+<span class="fragment">❓ Which was faster?</span>
+
+<span class="fragment">❓ Which feels more "polished"?</span>
+
+::: notes
+Facilitate discussion. There's no single right answer. Trade-offs exist. Ollama is often faster for small models. watsonx responses may be more refined.
+:::
+
+---
+
+## 🧠 watsonx Reasoning Prompt
+
+```python {data-line-numbers="1-13"}
+prompt = """A farmer has 17 sheep, and all but 9 die.
+How many are left?
 
 Let's think step by step:"""
 
@@ -206,22 +273,25 @@ print(f"Response (took {elapsed:.2f}s):\n")
 print(response)
 ```
 
-**Compare**:
-- Did Granite reason correctly?
-- Was the reasoning clearer than Ollama's?
-- Latency difference?
+::: notes
+Compare Granite's reasoning to Qwen's. Which was more accurate? Which showed clearer reasoning steps?
+:::
 
 ---
 
-## Step 3 – Modify Basic Parameters
+## 🎛️ Step 3: Parameter Experiments {data-transition="zoom"}
 
-Now let's see how parameters affect outputs.
+See how parameters affect outputs
 
-### 3.1 Temperature Experiment (Ollama)
+::: notes
+This is where the learning deepens. Students will see firsthand how temperature and max_tokens change behavior.
+:::
 
-Run the same prompt with different temperatures:
+---
 
-```python
+## 🌡️ Temperature Experiment (Ollama)
+
+```python {data-line-numbers="1-15"}
 import ollama
 
 prompt = "Write a creative opening line for a sci-fi novel."
@@ -230,106 +300,156 @@ for temp in [0.0, 0.5, 1.0, 1.5]:
     print(f"\n{'='*60}")
     print(f"Temperature: {temp}")
     print(f"{'='*60}")
-    
+
     response = ollama.chat(
         model="qwen2.5:0.5b-instruct",
         messages=[{"role": "user", "content": prompt}],
         options={"temperature": temp}
     )
-    
+
     print(response["message"]["content"])
 ```
 
-**Observations**:
-- At temp=0.0, do you get the same response every time?
-- At temp=1.5, how much does the creativity increase?
+::: notes
+Run this and observe. At temp=0.0, you'll get the same response every time. At temp=1.5, responses are much more varied.
+:::
 
-### 3.2 Temperature Experiment (watsonx.ai)
+---
 
-```python
+## 🔎 Observations
+
+<span class="fragment">❓ At temp=0.0, do you get the same response every time?</span>
+
+<span class="fragment">❓ At temp=1.5, how much does creativity increase?</span>
+
+<span class="fragment">❓ Which temperature is best for this task?</span>
+
+::: notes
+Creative writing benefits from higher temperature. Factual Q&A needs lower temperature. Discuss when to use which.
+:::
+
+---
+
+## 🌡️ Temperature Experiment (watsonx)
+
+```python {data-line-numbers="1-16"}
 prompt = "Write a creative opening line for a sci-fi novel."
 
 for temp in [0.0, 0.5, 1.0, 1.5]:
     print(f"\n{'='*60}")
     print(f"Temperature: {temp}")
     print(f"{'='*60}")
-    
+
     params = {
         GenParams.DECODING_METHOD: "sample",  # Note: sample, not greedy
         GenParams.TEMPERATURE: temp,
         GenParams.MAX_NEW_TOKENS: 50,
     }
-    
+
     response = model.generate_text(prompt=prompt, params=params)
     print(response)
 ```
 
-**Note**: For temperature > 0, use `DECODING_METHOD: "sample"` (not "greedy").
+<span class="fragment">**Note**: Use `"sample"` not `"greedy"` for temperature > 0</span>
 
-### 3.3 Max Tokens Experiment
+::: notes
+Important: greedy ignores temperature. Must use sample decoding. This is a common mistake.
+:::
 
-See what happens when you limit output length:
+---
 
-**Ollama**:
-```python
+## 📏 Max Tokens Experiment (Ollama)
+
+```python {data-line-numbers="1-15"}
 prompt = "Explain quantum computing in detail."
 
 for max_tokens in [20, 50, 100]:
     print(f"\n{'='*40}")
     print(f"Max Tokens: {max_tokens}")
     print(f"{'='*40}")
-    
+
     response = ollama.chat(
         model="qwen2.5:0.5b-instruct",
         messages=[{"role": "user", "content": prompt}],
         options={"num_predict": max_tokens}  # Ollama uses 'num_predict'
     )
-    
+
     print(response["message"]["content"])
 ```
 
-**watsonx.ai**:
-```python
+::: notes
+At 20 tokens, the response will be cut off. At 100, much more complete. Discuss the trade-off: completeness vs. cost/latency.
+:::
+
+---
+
+## 📏 Max Tokens Experiment (watsonx)
+
+```python {data-line-numbers="1-14"}
 prompt = "Explain quantum computing in detail."
 
 for max_tokens in [20, 50, 100]:
     print(f"\n{'='*40}")
     print(f"Max Tokens: {max_tokens}")
     print(f"{'='*40}")
-    
+
     params = {
         GenParams.DECODING_METHOD: "greedy",
         GenParams.MAX_NEW_TOKENS: max_tokens,
     }
-    
+
     response = model.generate_text(prompt=prompt, params=params)
     print(response)
 ```
 
-**Observations**:
-- At 20 tokens, is the response complete?
-- At 100 tokens, is there a noticeable quality difference?
+::: notes
+Same experiment, different backend. Compare quality at different token limits.
+:::
 
 ---
 
-## Step 4 (Optional) – Peek at Accelerator Pipeline
+## 💡 Key Insights
 
-This step is **read-only**—just to see where we're headed on Day 2.
+<span class="fragment">🔑 Temperature controls **randomness**: 0.0 = deterministic, 1.5 = creative</span>
 
-### 4.1 Open accelerator/rag/pipeline.py
+<span class="fragment">🔑 Max tokens controls **length**: Set appropriately for task</span>
 
-Navigate to the `watsonx-workshop` repo and open `accelerator/rag/pipeline.py` in a text editor or Jupyter:
+<span class="fragment">🔑 Trade-offs exist: **Quality vs. Speed vs. Cost**</span>
+
+::: notes
+These parameters are levers you'll use constantly. Understanding them deeply is critical for production systems.
+:::
+
+---
+
+## 🏗️ Step 4 (Optional): Peek at Accelerator {data-background-color="#0f172a"}
+
+See where we're headed on Day 2
+
+::: notes
+This is optional but valuable. It shows students the bigger picture.
+:::
+
+---
+
+## 📁 Open accelerator/rag/pipeline.py
 
 ```bash
 cd ~/projects/watsonx-workshop/accelerator
 cat rag/pipeline.py  # or open in your editor
 ```
 
-**Look for**:
-- A function like `answer_question(question: str) -> str`
-- Currently, it might be a **placeholder**:
+<span class="fragment">Look for: **`answer_question(question: str) -> str`**</span>
 
-```python
+::: notes
+This file might be a placeholder on Day 1. That's okay. The point is to see the structure.
+:::
+
+---
+
+## 🔍 Current Placeholder
+
+```python {data-line-numbers="1-5"}
 def answer_question(question: str) -> str:
     """Answer a question (placeholder for now)"""
     # TODO: Add retrieval
@@ -338,50 +458,81 @@ def answer_question(question: str) -> str:
     return "This is a placeholder response."
 ```
 
-### 4.2 Mental Mapping Exercise
-
-Think about how the single LLM call you just made maps to the accelerator:
-
-**Your notebook** (today):
-```python
-response = model.generate_text(prompt="What is RAG?")
-```
-
-**Accelerator** (Day 2):
-```python
-def answer_question(question: str) -> str:
-    # 1. Retrieve relevant docs
-    docs = retriever.search(question)
-    
-    # 2. Build prompt with context
-    prompt = prompt_template.format(question=question, context=docs)
-    
-    # 3. Generate answer (same call you just learned!)
-    response = model.generate_text(prompt=prompt)
-    
-    return response
-```
-
-**Key insight**: The LLM call is the same—RAG just adds context retrieval beforehand.
+::: notes
+Today it's simple. Tomorrow you'll add retrieval. The LLM call you just learned is the core building block.
+:::
 
 ---
 
-## Step 5 (Optional) – Peek at Reference Notebooks
+## 🔮 Day 2 Preview
 
-### 5.1 Open a RAG Notebook
+```python {data-line-numbers="1-13"}
+def answer_question(question: str) -> str:
+    # 1. Retrieve relevant docs
+    docs = retriever.search(question)
 
-Navigate to `labs-src/` and open:
+    # 2. Build prompt with context
+    prompt = prompt_template.format(
+        question=question,
+        context=docs
+    )
+
+    # 3. Generate answer (same call you just learned!)
+    response = model.generate_text(prompt=prompt)
+
+    return response
+```
+
+::: notes
+The LLM call is the same. RAG just adds context retrieval beforehand. Simple but powerful.
+:::
+
+---
+
+## 🎯 Key Insight
+
+**The LLM call you just learned is the same in RAG**
+
+<span class="fragment">RAG = Retrieval + Prompt + LLM</span>
+
+<span class="fragment">You've mastered the **LLM** part today</span>
+
+<span class="fragment">Tomorrow: Add **Retrieval** and smarter **Prompts**</span>
+
+::: notes
+This connection is important. Students should see that today's work isn't throwaway—it's foundational.
+:::
+
+---
+
+## 📚 Step 5 (Optional): Reference Notebooks
+
+Check out production examples
+
+::: notes
+Again optional, but opening these notebooks shows real-world usage.
+:::
+
+---
+
+## 📘 Open a RAG Notebook
+
+Navigate to `labs-src/`:
 
 ```
 labs-src/use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb
 ```
 
-**Don't run it all**—just:
-- Scroll to the section with the LLM call
-- Notice how context is injected into the prompt
-- Compare to your simple prompts above
+<span class="fragment">**Don't run it all**—just scroll to the LLM call section</span>
 
-**Example structure** you'll see:
+::: notes
+These notebooks are comprehensive. Students shouldn't run them end-to-end today. Just peek at the LLM integration.
+:::
+
+---
+
+## 🔍 What to Look For
+
 ```python
 context = "...retrieved documents..."
 prompt = f"""Based on this context:
@@ -395,50 +546,86 @@ Answer:"""
 response = llm.generate(prompt)
 ```
 
----
+<span class="fragment">Notice: **Context is injected before the question**</span>
 
-## Reflection Questions
-
-Take a few minutes to think about and discuss (if in a group):
-
-1. **What did you notice about differences between Ollama and watsonx?**
-   - Speed?
-   - Answer quality?
-   - Ease of use?
-
-2. **Which one feels faster / more flexible?**
-   - Local = faster for small models?
-   - Managed = faster for large models?
-
-3. **When would you choose one over the other?**
-   - Privacy concerns → Ollama
-   - Production scale → watsonx.ai
-   - Prototyping → Either!
-
-4. **How did parameter changes affect outputs?**
-   - Temperature impact on creativity?
-   - Max tokens impact on completeness?
+::: notes
+This is the RAG pattern. Context first, then question. This structure will become familiar on Day 2.
+:::
 
 ---
 
-## Checkpoint
+## 💭 Reflection Time {data-background-color="#1e293b"}
+
+Take a few minutes to discuss
+
+::: notes
+Facilitate a brief discussion. Encourage students to share what surprised them or what clicked.
+:::
+
+---
+
+## 💬 Discussion Questions
+
+<span class="fragment">❓ What differences did you notice between Ollama and watsonx?</span>
+
+<span class="fragment">❓ Which felt faster? More flexible? Easier to use?</span>
+
+<span class="fragment">❓ When would you choose one over the other?</span>
+
+<span class="fragment">❓ How did parameter changes affect outputs?</span>
+
+::: notes
+No wrong answers. This is about building intuition. Local vs managed is a real architectural decision teams face.
+:::
+
+---
+
+## 💡 Typical Answers
+
+<span class="fragment">⚡ **Ollama**: Faster for small models, easier setup, works offline</span>
+
+<span class="fragment">☁️ **watsonx**: More polished outputs, enterprise features, better for scale</span>
+
+<span class="fragment">🎯 **Choice depends on**: Privacy needs, scale, team expertise, budget</span>
+
+::: notes
+There's no universal answer. Both have valid use cases. Production systems might even use both: Ollama for dev, watsonx for prod.
+:::
+
+---
+
+## ✅ Checkpoint {data-background-color="#0f172a"}
 
 Before moving on, confirm:
 
-- ✅ You can run notebooks in both `simple-ollama-environment` and `simple-watsonx-enviroment`
-- ✅ You successfully generated responses from both backends
-- ✅ You experimented with temperature and max_tokens
-- ✅ You've seen where the production pipeline (`accelerator/rag/pipeline.py`) will call the LLM
+<span class="fragment">✅ You can run notebooks in **both environments**</span>
 
-If all boxes are checked, you're ready for **Lab 1.2 – Prompt Templates**!
+<span class="fragment">✅ You successfully generated responses from **both backends**</span>
+
+<span class="fragment">✅ You experimented with **temperature and max_tokens**</span>
+
+<span class="fragment">✅ You've seen where the **accelerator calls the LLM**</span>
+
+::: notes
+Pause here. Make sure everyone checks all boxes. Those who finish early can explore additional prompts or help peers.
+:::
 
 ---
 
-## Troubleshooting
+## 🚧 Troubleshooting
 
-### Ollama Issues
+Common issues and solutions
 
-**"Connection refused"**:
+::: notes
+Have these solutions ready for common problems.
+:::
+
+---
+
+### 🔧 Ollama Issues
+
+**"Connection refused":**
+
 ```bash
 # Check if Ollama is running
 curl http://localhost:11434/api/tags
@@ -447,31 +634,55 @@ curl http://localhost:11434/api/tags
 ollama serve  # or restart Docker container
 ```
 
-**"Model not found"**:
+**"Model not found":**
+
 ```bash
-# Pull the model
 ollama pull qwen2.5:0.5b-instruct
 ```
 
-### watsonx.ai Issues
-
-**"Invalid API key"**:
-- Check your `.env` file
-- Verify the key in IBM Cloud console
-- Ensure no extra spaces in the `.env` file
-
-**"Project not found"**:
-- Verify the `PROJECT_ID` in IBM Cloud
-- Ensure you have access to the project
-
-**"Rate limit exceeded"**:
-- Wait a few seconds between requests
-- If persistent, check your IBM Cloud quota
+::: notes
+Most Ollama issues are either service not running or model not pulled. These two fixes solve 90% of problems.
+:::
 
 ---
 
-## Next Steps
+### 🔧 watsonx Issues
 
-Great work! You've completed Lab 1.1. 
+**"Invalid API key":**
+- Check your `.env` file
+- Verify key in IBM Cloud console
+- Ensure no extra spaces
 
-**Next**: Move on to **Lab 1.2 – Prompt Templates** to learn how to build reusable prompt patterns.
+**"Project not found":**
+- Verify `PROJECT_ID` in IBM Cloud
+- Ensure you have project access
+
+::: notes
+Credential issues are the most common watsonx problems. Double-check .env formatting—no quotes, no extra whitespace.
+:::
+
+---
+
+## 🎉 Lab 1.1 Complete!
+
+<span class="fragment">✅ You've run prompts in **both environments**</span>
+
+<span class="fragment">✅ You understand **key parameters**</span>
+
+<span class="fragment">✅ You can **compare outputs** systematically</span>
+
+<span class="fragment">✅ You've seen the **accelerator structure**</span>
+
+::: notes
+Congratulations! This foundation is critical for everything that follows.
+:::
+
+---
+
+## 🚀 Next: Lab 1.2 – Prompt Templates
+
+Build reusable prompt patterns
+
+::: notes
+Take a short break (5 minutes), then move on to Lab 1.2. The momentum should carry forward nicely.
+:::

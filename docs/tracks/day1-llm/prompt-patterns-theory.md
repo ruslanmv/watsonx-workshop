@@ -1,32 +1,57 @@
-# 1.2 Prompt Patterns & Templates
+# 🎨 Prompt Patterns & Templates
 
-Understanding how to structure prompts effectively is crucial for getting reliable, high-quality outputs from LLMs. This module covers common prompt patterns and how to build reusable templates.
+Understanding effective prompts is crucial for reliable, high-quality outputs
+
+::: notes
+Welcome to the prompt engineering module. This is where art meets science. We'll teach you proven patterns that work across different models and tasks.
+:::
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives {data-background-color="#0f172a"}
 
 By the end of this module, you will:
 
-- Recognize common prompt patterns and when to use them
-- Understand why structure matters in prompt engineering
-- Know how to create reusable prompt templates
-- See how the accelerator uses prompts in production
+<span class="fragment">✅ Recognize common prompt patterns and when to use them</span>
+
+<span class="fragment">✅ Understand why structure matters in prompt engineering</span>
+
+<span class="fragment">✅ Know how to create reusable prompt templates</span>
+
+<span class="fragment">✅ See how the accelerator uses prompts in production</span>
+
+::: notes
+Prompt engineering is a skill that improves with practice. Today you'll learn the patterns; in the labs, you'll apply them.
+:::
 
 ---
 
-## Core Prompt Patterns
+## 📋 Core Prompt Patterns {data-transition="zoom"}
 
-### 1. Instruction Prompts
+Five fundamental patterns you'll use daily
 
-The simplest pattern: give the model a clear instruction.
+::: notes
+These patterns are battle-tested. They work across different models and use cases. Master these five and you'll handle 90% of scenarios.
+:::
 
-**Structure**:
+---
+
+## 1️⃣ Instruction Prompts
+
+The simplest pattern: **give the model a clear instruction**
+
 ```
 [Instruction]
 ```
 
-**Examples**:
+::: notes
+Start simple. Many tasks only need a clear instruction. Don't over-engineer when simplicity works.
+:::
+
+---
+
+## 📝 Instruction Examples
+
 ```
 Summarize this text in 3 sentences.
 
@@ -35,21 +60,32 @@ Extract all email addresses from the following document.
 Translate this paragraph to French.
 ```
 
-**Best for**:
-- Simple, well-defined tasks
-- When the model already knows what to do
-- Single-step operations
+<span class="fragment">**Best for**: Simple, well-defined tasks</span>
 
-**Tips**:
-- Be specific and direct
-- Use action verbs (summarize, extract, translate, list)
-- Specify output format if needed
+::: notes
+Notice the pattern: action verb + specification. "Summarize in 3 sentences" is better than "Summarize this text."
+:::
 
-### 2. Few-Shot Examples
+---
 
-Provide examples of the task before asking the model to do it.
+## 💡 Instruction Prompt Tips
 
-**Structure**:
+<span class="fragment">✅ Be **specific and direct**</span>
+
+<span class="fragment">✅ Use **action verbs** (summarize, extract, translate, list)</span>
+
+<span class="fragment">✅ **Specify output format** if needed</span>
+
+::: notes
+Vague instructions lead to vague outputs. "Tell me about AI" is too broad. "Explain the difference between supervised and unsupervised learning in 2 paragraphs" is much better.
+:::
+
+---
+
+## 2️⃣ Few-Shot Examples
+
+Provide **examples of the task** before asking the model to do it
+
 ```
 [Instruction]
 
@@ -62,7 +98,14 @@ Provide examples of the task before asking the model to do it.
 [Your Input]
 ```
 
-**Example**:
+::: notes
+Few-shot learning is powerful. The model learns the pattern from your examples. This is especially useful for structured outputs like JSON.
+:::
+
+---
+
+## 📊 Few-Shot Example
+
 ```
 Extract key entities from product reviews.
 
@@ -76,32 +119,63 @@ Review: "The Dell XPS has excellent build quality but the trackpad could be bett
 Entities:
 ```
 
-**Best for**:
-- Tasks where the model needs clarification
-- Structured outputs (JSON, CSV)
-- Domain-specific tasks
-- Reducing hallucinations
+::: notes
+The model will follow the pattern you've shown. Notice how we use consistent JSON formatting in both examples. The model will continue that pattern.
+:::
 
-**Tips**:
-- Use 2-5 examples (more isn't always better)
-- Make examples diverse but representative
-- Ensure examples match your desired output format exactly
+---
 
-### 3. Chain-of-Thought (CoT)
+## 🎯 Few-Shot Best Practices
 
-Encourage the model to reason step-by-step before answering.
+<span class="fragment">📏 Use **2-5 examples** (more isn't always better)</span>
 
-**Structure**:
+<span class="fragment">🎨 Make examples **diverse but representative**</span>
+
+<span class="fragment">✅ Ensure examples match your **desired output format exactly**</span>
+
+::: notes
+Too many examples waste tokens and can confuse the model. Two or three well-chosen examples are usually sufficient. Quality over quantity.
+:::
+
+---
+
+## 🎯 Few-Shot Use Cases
+
+<span class="fragment">✅ Tasks where the model needs clarification</span>
+
+<span class="fragment">✅ Structured outputs (JSON, CSV)</span>
+
+<span class="fragment">✅ Domain-specific tasks</span>
+
+<span class="fragment">✅ Reducing hallucinations</span>
+
+::: notes
+Few-shot is especially valuable for reducing hallucinations. By showing what "good" looks like, you guide the model away from making things up.
+:::
+
+---
+
+## 3️⃣ Chain-of-Thought (CoT)
+
+Encourage the model to **reason step-by-step** before answering
+
 ```
 [Problem]
 
 Let's think step by step:
 ```
 
-**Example**:
+::: notes
+CoT is powerful but use it judiciously. It increases token usage and latency. Reserve it for tasks that truly need reasoning.
+:::
+
+---
+
+## 🧮 CoT Example
+
 ```
-Question: A store has 42 apples. They sell 15 in the morning and 8 in the afternoon. 
-How many apples are left?
+Question: A store has 42 apples. They sell 15 in the morning
+and 8 in the afternoon. How many apples are left?
 
 Let's think step by step:
 1. Started with: 42 apples
@@ -113,200 +187,268 @@ Let's think step by step:
 Answer: 19 apples
 ```
 
-**Best for**:
-- Math problems
-- Logical reasoning
-- Complex multi-step tasks
-- When you need to audit the reasoning process
+::: notes
+CoT breaks down complex problems into manageable steps. This improves accuracy on multi-step reasoning tasks.
+:::
 
-**⚠️ Workshop Note**:
-- We use CoT judiciously (it's powerful but can increase latency)
-- For production, consider whether you need the reasoning or just the answer
-- CoT uses more tokens = higher cost
+---
 
-### 4. Style Transfer
+## 🎯 CoT Use Cases
 
-Ask the model to rewrite content in a different style or tone.
+<span class="fragment">✅ Math problems</span>
 
-**Structure**:
+<span class="fragment">✅ Logical reasoning</span>
+
+<span class="fragment">✅ Complex multi-step tasks</span>
+
+<span class="fragment">✅ When you need to **audit the reasoning process**</span>
+
+::: notes
+The audit benefit is underrated. CoT lets you see WHERE the model went wrong, not just THAT it was wrong. This helps with debugging and improvement.
+:::
+
+---
+
+## ⚠️ CoT Trade-offs
+
+<span class="fragment">🔴 Uses more tokens = **higher cost**</span>
+
+<span class="fragment">🔴 Increases **latency**</span>
+
+<span class="fragment">⚖️ **Trade-off**: Accuracy vs. Speed/Cost</span>
+
+::: notes
+In production, consider whether you need the reasoning or just the answer. If you're doing sentiment analysis on 10,000 tweets, CoT is overkill. But for medical diagnosis support, it's essential.
+:::
+
+---
+
+## 4️⃣ Style Transfer
+
+Ask the model to **rewrite content** in a different style or tone
+
 ```
 Rewrite the following [current style] text in a [target style] style:
 
 [Original text]
 ```
 
-**Examples**:
-```
-Rewrite this technical documentation in a casual, beginner-friendly style:
-
-Original: "The API implements RESTful principles with JWT-based authentication..."
-Casual: "Our API is super easy to use! You just need to get a token first..."
+::: notes
+Style transfer is incredibly useful for content adaptation. Same information, different audiences.
+:::
 
 ---
 
-Rewrite this casual email in a formal business tone:
+## ✍️ Style Transfer Examples
 
+**Technical → Casual:**
+```
+Original: "The API implements RESTful principles with JWT-based authentication..."
+Casual: "Our API is super easy to use! You just need to get a token first..."
+```
+
+**Casual → Formal:**
+```
 Original: "Hey! Can you check out that bug? It's kinda urgent."
 Formal: "Good afternoon. I would appreciate your prompt attention to the defect..."
 ```
 
-**Best for**:
-- Content adaptation
-- Marketing copy variations
-- Documentation at different reading levels
-
-### 5. Summarization / Rewrite
-
-Ask the model to condense or reformulate content.
-
-**Common variants**:
-
-**Abstractive summary**:
-```
-Summarize the following article in 3 sentences:
-
-[Article text]
-```
-
-**Extractive summary**:
-```
-Extract the 5 most important sentences from this document:
-
-[Document text]
-```
-
-**Length-constrained**:
-```
-Summarize this in exactly 50 words:
-
-[Text]
-```
-
-**Audience-specific**:
-```
-Summarize this technical paper for a non-technical executive audience (2 paragraphs):
-
-[Paper]
-```
-
-**Best for**:
-- Long documents
-- Content curation
-- Executive summaries
-- Social media posts from longer content
+::: notes
+Notice how the core information stays the same but the tone changes dramatically. This is powerful for marketing and documentation.
+:::
 
 ---
 
-## Prompt Design Principles
+## 🎯 Style Transfer Use Cases
 
-### 1. Clarity and Specificity
+<span class="fragment">✅ Content adaptation for different audiences</span>
 
-**Bad**:
+<span class="fragment">✅ Marketing copy variations</span>
+
+<span class="fragment">✅ Documentation at different reading levels</span>
+
+::: notes
+One piece of technical documentation can become three: expert guide, beginner tutorial, and executive summary. All from style transfer.
+:::
+
+---
+
+## 5️⃣ Summarization
+
+Ask the model to **condense or reformulate** content
+
+::: notes
+Summarization is one of the most common LLM use cases. Let's explore different variants.
+:::
+
+---
+
+## 📝 Summarization Variants
+
+<span class="fragment">**Abstractive**: Rewrite in your own words</span>
+
+<span class="fragment">**Extractive**: Pull out key sentences</span>
+
+<span class="fragment">**Length-constrained**: "Exactly 50 words"</span>
+
+<span class="fragment">**Audience-specific**: "For executives" or "For technical teams"</span>
+
+::: notes
+Different summarization styles for different needs. Abstractive is more flexible but can introduce errors. Extractive is safer but less concise.
+:::
+
+---
+
+## 📝 Summarization Examples
+
+```
+Summarize the following article in 3 sentences:
+[Article text]
+```
+
+```
+Extract the 5 most important sentences from this document:
+[Document text]
+```
+
+```
+Summarize this technical paper for a non-technical executive audience (2 paragraphs):
+[Paper]
+```
+
+::: notes
+Always specify length and audience. "Summarize this" is too vague. "Summarize in 2 sentences for a non-technical audience" is precise.
+:::
+
+---
+
+## 🎨 Prompt Design Principles {data-background-color="#1e293b"}
+
+Universal principles that apply to all patterns
+
+::: notes
+These principles transcend specific patterns. They're the foundation of good prompt engineering.
+:::
+
+---
+
+## 1️⃣ Clarity and Specificity
+
+**Bad:**
 ```
 Tell me about AI.
 ```
 
-**Good**:
+**Good:**
 ```
-Explain the difference between supervised and unsupervised machine learning 
-in 3 paragraphs, with one example of each.
+Explain the difference between supervised and unsupervised
+machine learning in 3 paragraphs, with one example of each.
 ```
 
-**Why it matters**: Vague prompts lead to vague, unfocused responses.
+::: notes
+Vague prompts lead to vague responses. Be specific about what you want, how you want it, and why.
+:::
 
-### 2. Role and Persona
+---
 
-Give the model a role to frame its responses.
+## 2️⃣ Role and Persona
 
-**Structure**:
+Give the model a **role** to frame its responses
+
 ```
 You are a [role] with expertise in [domain].
 
 [Task]
 ```
 
-**Examples**:
-```
-You are a senior software architect with 15 years of experience in distributed systems.
-
-Design a scalable architecture for a real-time chat application.
+::: notes
+Personas work surprisingly well. They help the model access the right "mental model" from its training data.
+:::
 
 ---
 
+## 🎭 Persona Examples
+
+```
+You are a senior software architect with 15 years of experience
+in distributed systems.
+
+Design a scalable architecture for a real-time chat application.
+```
+
+```
 You are a friendly customer support agent for a SaaS product.
 
 Help the user understand why their payment failed.
 ```
 
-**Best for**:
-- Setting the right tone
-- Accessing domain-specific knowledge
-- Consistency across conversations
-
-### 3. Constraints and Formatting
-
-Explicitly state output requirements.
-
-**Examples**:
-```
-List 5 key findings. Use bullet points. Keep each point under 20 words.
+::: notes
+The persona sets expectations for tone, depth, and perspective. A "friendly support agent" will explain differently than a "senior architect."
+:::
 
 ---
 
-Respond in valid JSON format with keys: title, summary, tags (array).
+## 3️⃣ Constraints and Formatting
+
+**Explicitly state output requirements**
+
+<span class="fragment">📏 "List 5 key findings. Use bullet points. Keep each under 20 words."</span>
+
+<span class="fragment">📋 "Respond in valid JSON format with keys: title, summary, tags (array)."</span>
+
+<span class="fragment">🎯 "Your response must be under 100 words and appropriate for a general audience."</span>
+
+::: notes
+LLMs will follow format constraints if clearly stated. Don't assume it knows what you want—tell it explicitly.
+:::
 
 ---
 
-Your response must be under 100 words and appropriate for a general audience.
-```
+## 4️⃣ Providing Context
 
-**Why it matters**: LLMs will follow format constraints if clearly stated.
+**More context = better responses**
 
-### 4. Providing Context and Examples
+<span class="fragment">❌ "Fix this bug."</span>
 
-More context = better responses.
+<span class="fragment">✅ "I have a Python function that's supposed to calculate discounts but returns negative values. Here's the code... Expected: 0-100. Actual: -25. Please identify the bug."</span>
 
-**Insufficient context**:
-```
-Fix this bug.
-```
-
-**Better**:
-```
-I have a Python function that's supposed to calculate discounts but returns negative values.
-Here's the code:
-
-[code]
-
-Expected behavior: discount should be between 0-100.
-Actual behavior: discount is -25.
-
-Please identify the bug and provide a corrected version.
-```
-
-**When to provide context**:
-- Always for technical tasks
-- When the model needs background information
-- For domain-specific questions
+::: notes
+Context is king. The more relevant information you provide, the better the model can help. But don't waste tokens on irrelevant context.
+:::
 
 ---
 
-## Prompt Templates
+## 🏗️ Prompt Templates {data-transition="zoom"}
 
-### What is a Template?
+Reusable patterns with placeholders for variable content
 
-A **prompt template** is a reusable pattern with placeholders for variable content.
+::: notes
+Templates are the key to scaling prompt engineering. Write once, use everywhere.
+:::
 
-**Benefits**:
-- **Consistency**: Same structure every time
-- **Maintainability**: Update once, apply everywhere
-- **Testability**: Easier to evaluate prompt changes
-- **Scalability**: Supports batch processing
+---
 
-### Simple Python Templates
+## 💡 Why Templates Matter
 
-**Using f-strings**:
-```python
+<span class="fragment">✅ **Consistency**: Same structure every time</span>
+
+<span class="fragment">✅ **Maintainability**: Update once, apply everywhere</span>
+
+<span class="fragment">✅ **Testability**: Easier to evaluate prompt changes</span>
+
+<span class="fragment">✅ **Scalability**: Supports batch processing</span>
+
+::: notes
+Without templates, you'll have prompt logic scattered everywhere. Templates centralize your prompt engineering.
+:::
+
+---
+
+## 🐍 Simple Python Templates
+
+**Using f-strings:**
+
+```python {data-line-numbers="1-7"}
 def summarize(text: str, length: int = 3) -> str:
     prompt = f"""Summarize the following text in {length} sentences:
 
@@ -316,8 +458,15 @@ Summary:"""
     return llm.generate(prompt)
 ```
 
-**Using str.format()**:
-```python
+::: notes
+F-strings are the simplest approach. Good for straightforward templates with a few variables.
+:::
+
+---
+
+## 🐍 String Formatting
+
+```python {data-line-numbers="1-13"}
 TEMPLATE = """You are a helpful assistant.
 
 Task: {task}
@@ -334,11 +483,15 @@ prompt = TEMPLATE.format(
 )
 ```
 
-### LangChain Templates
+::: notes
+str.format() is more readable for longer templates with many variables. It separates the template definition from usage.
+:::
 
-LangChain provides more sophisticated templating:
+---
 
-```python
+## 🔗 LangChain Templates
+
+```python {data-line-numbers="1-15"}
 from langchain.prompts import PromptTemplate
 
 template = PromptTemplate(
@@ -360,8 +513,15 @@ prompt = template.format(
 )
 ```
 
-**Advanced: ChatPromptTemplate**:
-```python
+::: notes
+LangChain provides more sophisticated templating with validation. It ensures you don't forget required variables.
+:::
+
+---
+
+## 💬 Chat Templates
+
+```python {data-line-numbers="1-11"}
 from langchain.prompts import ChatPromptTemplate
 
 template = ChatPromptTemplate.from_messages([
@@ -375,15 +535,25 @@ messages = template.format_messages(
 )
 ```
 
+::: notes
+Chat templates handle multi-turn conversations properly, with system and user messages. Essential for chatbot applications.
+:::
+
 ---
 
-## How the Accelerator Uses Prompts
+## 🏗️ Accelerator Prompt Structure {data-background-color="#0f172a"}
 
-The accelerator centralizes prompt logic in `rag/prompt.py`:
+How the accelerator centralizes prompt logic
 
-### Current Structure
+::: notes
+Let's see how templates are used in the production codebase you'll work with.
+:::
 
-```python
+---
+
+## 📁 Accelerator: Current Structure
+
+```python {data-line-numbers="1-9"}
 # accelerator/rag/prompt.py
 
 SYSTEM = """You are a careful and accurate assistant.
@@ -398,11 +568,17 @@ Question: {question}
 Answer:"""
 ```
 
-### On Day 2-3, You'll Extend This
+::: notes
+Simple but effective. The accelerator separates system prompts from user prompts. You'll extend this on Day 2-3.
+:::
 
-**Multi-turn conversations**:
-```python
-CHAT_TEMPLATE = """You are a helpful assistant. Use the following context to answer questions.
+---
+
+## 📋 Day 2-3: Multi-turn Conversations
+
+```python {data-line-numbers="1-12"}
+CHAT_TEMPLATE = """You are a helpful assistant.
+Use the following context to answer questions.
 
 Context:
 {context}
@@ -414,8 +590,15 @@ User: {question}
 Assistant:"""
 ```
 
-**Citation formatting**:
-```python
+::: notes
+Tomorrow, you'll add conversation history to maintain context across multiple turns. This template structure makes it easy.
+:::
+
+---
+
+## 📎 Day 2-3: Citations
+
+```python {data-line-numbers="1-10"}
 USER_TEMPLATE_WITH_CITATIONS = """Context:
 {context}
 
@@ -426,8 +609,15 @@ Answer the question and cite your sources using [1], [2], etc.
 Answer:"""
 ```
 
-**Safety guidance**:
-```python
+::: notes
+Citations build trust. Users can verify the information. This template instructs the model to add citation markers.
+:::
+
+---
+
+## 🛡️ Day 2-3: Safety Guidance
+
+```python {data-line-numbers="1-12"}
 SYSTEM_WITH_SAFETY = """You are a helpful and safe assistant.
 - Base answers on provided context only
 - Do not generate harmful, biased, or inappropriate content
@@ -442,74 +632,86 @@ Question: {question}
 Answer:"""
 ```
 
-### Integration Points
+::: notes
+Safety first. This template includes explicit safety guidelines. We'll cover safety in more depth in the next module.
+:::
 
-**In `pipeline.py`**:
-```python
+---
+
+## 🔌 Integration in pipeline.py
+
+```python {data-line-numbers="1-18"}
 from .prompt import SYSTEM, USER_TEMPLATE
 
 def answer_question(question: str, context: List[str]) -> str:
     # Format context
-    context_str = "\n\n".join([f"[{i+1}] {doc}" for i, doc in enumerate(context)])
-    
+    context_str = "\n\n".join(
+        [f"[{i+1}] {doc}" for i, doc in enumerate(context)]
+    )
+
     # Build prompt
     user_prompt = USER_TEMPLATE.format(
         context=context_str,
         question=question
     )
-    
+
     # Generate
     response = llm.generate(
         system=SYSTEM,
         prompt=user_prompt
     )
-    
+
     return response
 ```
 
----
-
-## Reference Notebooks
-
-### RAG Prompt Examples
-
-**`use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb`**:
-```python
-# Example from the notebook
-from langchain.prompts import PromptTemplate
-
-rag_prompt = PromptTemplate(
-    template="""Use the following pieces of context to answer the question at the end.
-If you don't know the answer, just say that you don't know, don't try to make up an answer.
-
-{context}
-
-Question: {question}
-Helpful Answer:""",
-    input_variables=["context", "question"],
-)
-```
-
-**`QnA_with_RAG.ipynb`** (accelerator):
-- Shows how context is concatenated
-- Demonstrates citation patterns
-- Includes error handling for edge cases
-
-### Key Observations
-
-1. **Context injection**: Always happens before the question
-2. **Structured formats**: JSON/XML for tool calling
-3. **Safety prompts**: Explicitly state boundaries
-4. **Few-shot in RAG**: Sometimes examples are included to show citation format
+::: notes
+This is the actual pattern you'll use. Templates are imported from prompt.py, filled with data, then passed to the LLM. Clean separation of concerns.
+:::
 
 ---
 
-## Examples to Reuse in Lab 1.2
+## 📓 Reference Notebooks
 
-### Example 1: Summarization
+**Key notebook:**
+`use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb`
 
-**Template**:
-```python
+Shows real prompt structure for RAG
+
+::: notes
+The notebooks in labs-src/ show these patterns in action. Don't run them today, but do open them to see real examples.
+:::
+
+---
+
+## 🧪 Lab 1.2 Preview {data-background-color="#1e293b"}
+
+What you'll build in the lab
+
+::: notes
+Let's preview what you'll do in Lab 1.2 to cement these concepts.
+:::
+
+---
+
+## 📝 Lab 1.2: Your Tasks
+
+<span class="fragment">🎯 Create templates for: Summarization, Style rewrite, Q&A with context</span>
+
+<span class="fragment">🎯 Implement in both Ollama and watsonx</span>
+
+<span class="fragment">🎯 Compare results across backends</span>
+
+<span class="fragment">🎯 Measure quality and consistency</span>
+
+::: notes
+You'll take the patterns we've discussed and implement them yourself. This hands-on practice is where the learning really happens.
+:::
+
+---
+
+## 🎯 Template 1: Summarization
+
+```python {data-line-numbers="1-8"}
 SUMMARIZE_TEMPLATE = """Summarize the following text in {num_sentences} sentences.
 Focus on the main points and key takeaways.
 
@@ -519,18 +721,15 @@ Text:
 Summary:"""
 ```
 
-**Usage**:
-```python
-prompt = SUMMARIZE_TEMPLATE.format(
-    num_sentences=3,
-    text="[Your long text here]"
-)
-```
+::: notes
+Start with this template in Lab 1.2. It's simple but teaches the pattern.
+:::
 
-### Example 2: Style Transfer
+---
 
-**Template**:
-```python
+## 🎯 Template 2: Style Transfer
+
+```python {data-line-numbers="1-6"}
 REWRITE_TEMPLATE = """Rewrite the following text in a {target_tone} tone:
 
 Original text:
@@ -539,18 +738,15 @@ Original text:
 Rewritten text:"""
 ```
 
-**Usage**:
-```python
-prompt = REWRITE_TEMPLATE.format(
-    target_tone="formal business",
-    original="Hey, can you check that out?"
-)
-```
+::: notes
+Style transfer template. You'll experiment with different tones: formal, casual, technical, beginner-friendly.
+:::
 
-### Example 3: Q&A with Context
+---
 
-**Template**:
-```python
+## 🎯 Template 3: Q&A with Context
+
+```python {data-line-numbers="1-9"}
 QA_TEMPLATE = """Based on the following information, answer the question.
 If the information doesn't contain the answer, say "I don't have enough information."
 
@@ -562,68 +758,92 @@ Question: {question}
 Answer:"""
 ```
 
-**Usage**:
-```python
-prompt = QA_TEMPLATE.format(
-    context="watsonx.ai was released by IBM in 2023...",
-    question="When was watsonx.ai released?"
-)
-```
+::: notes
+This is a mini-RAG prompt. You're providing context manually now. Tomorrow, you'll retrieve it automatically.
+:::
 
 ---
 
-## Connection to Labs
-
-### Lab 1.2: Prompt Templates
-
-In this lab, you'll:
-
-1. **Create templates** for:
-   - Summarization
-   - Style rewrite
-   - Q&A with context
-
-2. **Implement in both environments**:
-   - `prompt_patterns_ollama.ipynb` (local)
-   - `prompt_patterns_watsonx.ipynb` (managed)
-
-3. **Compare results**:
-   - Same template, different models
-   - Measure quality and consistency
-
-### Looking Ahead
+## 🔮 Looking Ahead
 
 **Day 2**: These templates become the foundation for RAG prompts
+
 **Day 3**: Templates extended for multi-turn agents and tool calling
 
----
-
-## Best Practices Summary
-
-### ✅ Do
-
-- Start with simple, clear instructions
-- Use few-shot examples for structured outputs
-- Specify output format explicitly
-- Test prompts with edge cases
-- Version control your templates
-- Measure prompt performance systematically
-
-### ❌ Don't
-
-- Use vague or ambiguous language
-- Mix multiple tasks in one prompt
-- Assume the model knows your context
-- Forget to handle error cases
-- Over-engineer prompts prematurely
+::: notes
+Everything you learn today compounds. Master these basics and the advanced topics will be much easier.
+:::
 
 ---
 
-## Key Takeaways
+## ✅ Best Practices Summary {data-background-color="#0f172a"}
 
-- **Prompts are code**: Treat them with the same rigor as application code
-- **Structure matters**: Well-structured prompts are more reliable
-- **Templates enable scale**: Reusable patterns save time and improve consistency
-- **Test and iterate**: Prompt engineering is empirical—what works for one task may not work for another
+What to do and what to avoid
 
-**Next**: Time to build these patterns hands-on in Lab 1.2!
+::: notes
+Let's wrap up with a clear dos and don'ts list.
+:::
+
+---
+
+## ✅ Do
+
+<span class="fragment">✅ Start with simple, clear instructions</span>
+
+<span class="fragment">✅ Use few-shot examples for structured outputs</span>
+
+<span class="fragment">✅ Specify output format explicitly</span>
+
+<span class="fragment">✅ Test prompts with edge cases</span>
+
+<span class="fragment">✅ Version control your templates</span>
+
+<span class="fragment">✅ Measure prompt performance systematically</span>
+
+::: notes
+Version control is underrated. Treat prompts like code. Track changes, test before deployment, and review changes carefully.
+:::
+
+---
+
+## ❌ Don't
+
+<span class="fragment">❌ Use vague or ambiguous language</span>
+
+<span class="fragment">❌ Mix multiple tasks in one prompt</span>
+
+<span class="fragment">❌ Assume the model knows your context</span>
+
+<span class="fragment">❌ Forget to handle error cases</span>
+
+<span class="fragment">❌ Over-engineer prompts prematurely</span>
+
+::: notes
+Start simple. Many developers over-engineer prompts, adding complexity that doesn't help. Begin with the simplest prompt that might work, then iterate.
+:::
+
+---
+
+## 🎯 Key Takeaways
+
+<span class="fragment">🔑 **Prompts are code**: Treat them with the same rigor</span>
+
+<span class="fragment">🔑 **Structure matters**: Well-structured prompts are more reliable</span>
+
+<span class="fragment">🔑 **Templates enable scale**: Reusable patterns save time</span>
+
+<span class="fragment">🔑 **Test and iterate**: Prompt engineering is empirical</span>
+
+::: notes
+What works for one task may not work for another. Always test. Always iterate. Prompt engineering is a skill that improves with practice.
+:::
+
+---
+
+## 🚀 Next: Lab 1.2
+
+Time to build these patterns hands-on!
+
+::: notes
+You've learned the theory. Now apply it. Lab 1.2 is where you'll build real templates and see how they perform across different models.
+:::

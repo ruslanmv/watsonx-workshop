@@ -1,5 +1,27 @@
 # watsonx Orchestrate: Enterprise Agent Platform {data-background-color="#1e3a8a"}
 
+
+### Tutor
+
+**Ruslan Idelfonso Magana Vsevolodovna**  
+*PhD in Physics · AI Engineer*  
+
+📧 [contact@ruslamv.com](mailto:contact@ruslamv.com)
+
+<p style="text-align:right; margin-top:1.5rem;">
+  <img
+    src="../../../themes/assets/tutor.png"
+    alt="Tutor: Ruslan Idelfonso Magana Vsevolodovna"
+    style="
+      border-radius:50%;
+      width:130px;
+      height:130px;
+      object-fit:cover;
+      box-shadow:0 12px 30px rgba(0,0,0,0.45);
+      border:3px solid rgba(248,250,252,0.9);
+    "
+  >
+</p>
 ::: notes
 Comprehensive workshop on building production-grade AI agents with watsonx Orchestrate Agent Developer Kit (ADK).
 :::

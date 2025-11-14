@@ -1,74 +1,143 @@
-# 1.3 Lightweight Evaluation & Safety
+# 📊 Lightweight Evaluation & Safety
 
-As LLMs become central to your applications, you need ways to measure their performance and ensure they behave safely. This module covers practical evaluation strategies and responsible AI considerations.
+Measuring performance and ensuring safe behavior
+
+::: notes
+As LLMs become central to applications, we need systematic ways to measure quality and ensure safety. This module covers practical evaluation and responsible AI.
+:::
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives {data-background-color="#0f172a"}
 
 By the end of this module, you will:
 
-- Understand why evaluation matters for LLM applications
-- Know basic evaluation signals for assessing LLM outputs
-- Be aware of safety and responsible use considerations
-- Understand how evaluation integrates with the accelerator
+<span class="fragment">✅ Understand why evaluation matters for LLM applications</span>
+
+<span class="fragment">✅ Know basic evaluation signals for assessing outputs</span>
+
+<span class="fragment">✅ Be aware of safety and responsible use considerations</span>
+
+<span class="fragment">✅ Understand how evaluation integrates with the accelerator</span>
+
+::: notes
+Evaluation isn't optional in production. It's the difference between shipping something that works and shipping something that breaks in production.
+:::
 
 ---
 
-## Why Evaluation Matters
+## ⚠️ Why Evaluation Matters {data-transition="zoom"}
 
-### The Problem
+The problem with deploying LLMs without evaluation
 
-LLMs are powerful but unpredictable. Without evaluation, you risk:
+::: notes
+Let's start by understanding what goes wrong when you don't evaluate.
+:::
 
-**Hallucinations**: Model generates plausible but false information
+---
+
+## 🔴 Problem 1: Hallucinations
+
+Model generates **plausible but false** information
+
 ```
 Q: "What is IBM's revenue in 2025?"
-Bad Answer: "IBM's revenue in 2025 was $87.4 billion." [Made up number]
+Bad Answer: "IBM's revenue in 2025 was $87.4 billion."
 ```
 
-**Inconsistent Answers**: Same question, different responses
+<span class="fragment">**Made up number!**</span>
+
+::: notes
+Hallucinations are dangerous because they sound confident and plausible. Users can't tell the difference without fact-checking.
+:::
+
+---
+
+## 🔴 Problem 2: Inconsistency
+
+Same question, different responses
+
 ```
 Monday: "The capital of Australia is Sydney."
 Tuesday: "The capital of Australia is Canberra." [Correct]
 ```
 
-**Business Impact**: Wrong answers can lead to:
-- Lost customer trust
-- Compliance violations
-- Financial losses
-- Reputational damage
-
-### The Solution
-
-**Systematic evaluation** helps you:
-- Catch problems before they reach users
-- Compare different models or prompts
-- Track quality over time
-- Build confidence in your system
+::: notes
+Without evaluation, you won't know your system gives inconsistent answers. This erodes user trust quickly.
+:::
 
 ---
 
-## Simple Evaluation Signals
+## 💼 Business Impact
 
-### 1. Correctness (Ground Truth Comparison)
+Wrong answers lead to:
 
-**What it is**: Does the answer match known correct information?
+<span class="fragment">🔴 Lost customer trust</span>
 
-**How to measure**:
-```python
+<span class="fragment">🔴 Compliance violations</span>
+
+<span class="fragment">🔴 Financial losses</span>
+
+<span class="fragment">🔴 Reputational damage</span>
+
+::: notes
+In regulated industries like healthcare and finance, wrong answers can have legal consequences. Evaluation isn't just nice to have—it's required.
+:::
+
+---
+
+## ✅ The Solution
+
+**Systematic evaluation** helps you:
+
+<span class="fragment">🎯 Catch problems before they reach users</span>
+
+<span class="fragment">🎯 Compare different models or prompts</span>
+
+<span class="fragment">🎯 Track quality over time</span>
+
+<span class="fragment">🎯 Build confidence in your system</span>
+
+::: notes
+Think of evaluation as your QA process for AI. You wouldn't ship code without tests. Don't ship LLMs without evaluation.
+:::
+
+---
+
+## 📏 Simple Evaluation Signals {data-background-color="#1e293b"}
+
+Five practical metrics you can implement today
+
+::: notes
+Let's explore five evaluation signals that are easy to measure and highly informative.
+:::
+
+---
+
+## 1️⃣ Correctness
+
+Does the answer match **known correct information**?
+
+```python {data-line-numbers="1-7"}
 def evaluate_correctness(model_answer: str, ground_truth: str) -> int:
     """Returns 1 if correct, 0 if incorrect"""
     # Simple exact match
     if model_answer.strip().lower() == ground_truth.strip().lower():
         return 1
-    
+
     # Or use semantic similarity
     similarity = compute_similarity(model_answer, ground_truth)
     return 1 if similarity > 0.8 else 0
 ```
 
-**Example**:
+::: notes
+Correctness is the most objective metric. If you have ground truth, use it. When you don't have ground truth, you need human evaluators or more sophisticated metrics.
+:::
+
+---
+
+## ✅ Correctness Example
+
 ```
 Question: "What year was IBM founded?"
 Model Answer: "1911"
@@ -83,22 +152,31 @@ Ground Truth: "1911"
 Score: 0 (Incorrect)
 ```
 
-**When to use**: When you have known correct answers (test sets, benchmarks)
+::: notes
+Binary scoring is simple and clear. You either got it right or you didn't.
+:::
 
-### 2. Coherence and Relevance
+---
 
-**What it is**: Is the answer logically sound and on-topic?
+## 2️⃣ Coherence and Relevance
 
-**How to measure (manual rubric)**:
-```
-5 - Highly coherent, directly addresses the question
-4 - Mostly coherent, relevant but may have minor issues
-3 - Somewhat coherent, partially relevant
-2 - Incoherent or largely irrelevant
-1 - Nonsensical or completely off-topic
-```
+Is the answer **logically sound** and **on-topic**?
 
-**Example**:
+**Manual rubric:**
+<span class="fragment">5 - Highly coherent, directly addresses the question</span>
+<span class="fragment">4 - Mostly coherent, relevant but minor issues</span>
+<span class="fragment">3 - Somewhat coherent, partially relevant</span>
+<span class="fragment">2 - Incoherent or largely irrelevant</span>
+<span class="fragment">1 - Nonsensical or completely off-topic</span>
+
+::: notes
+When there's no ground truth, coherence and relevance become your primary metrics. This requires human judgment but is still systematic.
+:::
+
+---
+
+## 🎯 Coherence Examples
+
 ```
 Question: "How do I reset my password?"
 Answer: "To reset your password, click 'Forgot Password' on the login page..."
@@ -111,14 +189,17 @@ Answer: "Our company was founded in 2010 and has grown significantly..."
 Score: 1 (Off-topic)
 ```
 
-**When to use**: For open-ended questions without clear ground truth
+::: notes
+Extreme cases are easy to score. The middle ground requires more judgment. That's where evaluation becomes an art.
+:::
 
-### 3. Style/Format Adherence
+---
 
-**What it is**: Does the output follow specified formatting?
+## 3️⃣ Style/Format Adherence
 
-**How to measure**:
-```python
+Does the output follow **specified formatting**?
+
+```python {data-line-numbers="1-17"}
 def evaluate_format(response: str, expected_format: str) -> int:
     """Check if response matches expected format"""
     if expected_format == "json":
@@ -127,16 +208,24 @@ def evaluate_format(response: str, expected_format: str) -> int:
             return 1
         except:
             return 0
-    
+
     elif expected_format == "bullet_points":
         lines = response.split('\n')
-        bullet_lines = [l for l in lines if l.strip().startswith(('-', '*', '•'))]
+        bullet_lines = [l for l in lines
+                       if l.strip().startswith(('-', '*', '•'))]
         return 1 if len(bullet_lines) >= 3 else 0
-    
+
     # Add more format checks as needed
 ```
 
-**Example**:
+::: notes
+Format checking can be automated. This is especially important for API responses where downstream systems expect specific formats.
+:::
+
+---
+
+## 📋 Format Example
+
 ```
 Instruction: "List 3 benefits of cloud computing in bullet points."
 
@@ -151,29 +240,37 @@ Bad response:
 Score: 0 (Not in bullet format)
 ```
 
-**When to use**: For structured outputs, API responses, report generation
+::: notes
+Clear pass/fail. Either it followed the format or it didn't.
+:::
 
-### 4. Completeness
+---
 
-**What it is**: Does the answer address all parts of the question?
+## 4️⃣ Completeness
 
-**How to measure**:
-```
-Question has 3 sub-parts:
-- Answers all 3: Score = 1.0
-- Answers 2 of 3: Score = 0.66
-- Answers 1 of 3: Score = 0.33
-- Answers 0: Score = 0
-```
+Does the answer address **all parts** of the question?
 
-**Example**:
+<span class="fragment">Question has 3 sub-parts:</span>
+<span class="fragment">- Answers all 3: Score = 1.0</span>
+<span class="fragment">- Answers 2 of 3: Score = 0.66</span>
+<span class="fragment">- Answers 1 of 3: Score = 0.33</span>
+<span class="fragment">- Answers 0: Score = 0</span>
+
+::: notes
+Partial credit reflects partial completeness. This metric catches models that answer only the easy parts of complex questions.
+:::
+
+---
+
+## 📊 Completeness Example
+
 ```
 Question: "What is RAG, how does it work, and what are its benefits?"
 
 Full Answer:
-"RAG stands for Retrieval-Augmented Generation. It works by first retrieving 
-relevant documents, then using them as context for the LLM. Benefits include 
-reduced hallucinations and up-to-date information."
+"RAG stands for Retrieval-Augmented Generation. It works by first
+retrieving relevant documents, then using them as context for the LLM.
+Benefits include reduced hallucinations and up-to-date information."
 Score: 1.0 (Addresses all 3 parts)
 
 Partial Answer:
@@ -181,12 +278,17 @@ Partial Answer:
 Score: 0.66 (Only 2 of 3 parts)
 ```
 
-### 5. Latency
+::: notes
+This encourages thoroughness. Models that skip parts of complex questions get penalized.
+:::
 
-**What it is**: How long does the model take to respond?
+---
 
-**How to measure**:
-```python
+## 5️⃣ Latency
+
+How long does the model take to respond?
+
+```python {data-line-numbers="1-15"}
 import time
 
 start = time.time()
@@ -204,46 +306,45 @@ else:
     score = 0.25  # Too slow
 ```
 
-**When to use**: Always, especially for user-facing applications
+::: notes
+Latency matters. Users abandon slow applications. Set latency thresholds based on your use case. Chatbots need sub-second responses. Batch processing can tolerate minutes.
+:::
 
 ---
 
-## Safety & Responsible Use
+## 🛡️ Safety & Responsible Use {data-background-color="#0f172a" data-transition="zoom"}
 
-### Potential Risky Categories
+Potential risks and mitigation strategies
 
-LLMs can potentially generate harmful content in these categories:
+::: notes
+LLMs are powerful but can generate harmful content. Let's discuss the categories of risk and how to mitigate them.
+:::
 
-1. **Personal Information (PII)**
-   - Social security numbers, credit cards, passwords
-   - Addresses, phone numbers, email addresses
+---
 
-2. **Harmful Content**
-   - Hate speech, discrimination, harassment
-   - Violence, self-harm, dangerous activities
-   - Illegal activities, fraud schemes
+## ⚠️ Risk Categories
 
-3. **Misinformation**
-   - Medical advice without disclaimers
-   - Financial advice as fact
-   - False claims about public figures
+<span class="fragment">🔴 **1. Personal Information (PII)**: SSNs, credit cards, passwords</span>
 
-4. **Bias and Fairness**
-   - Stereotyping based on protected attributes
-   - Unfair treatment of groups
-   - Lack of representation
+<span class="fragment">🔴 **2. Harmful Content**: Hate speech, violence, self-harm</span>
 
-5. **Privacy Violations**
-   - Exposing training data
-   - Re-identifying anonymized data
-   - Leaking confidential business information
+<span class="fragment">🔴 **3. Misinformation**: Medical/financial advice as fact</span>
 
-### Mitigation Strategies
+<span class="fragment">🔴 **4. Bias and Fairness**: Stereotyping, unfair treatment</span>
 
-#### 1. Clear Instructions to the Model
+<span class="fragment">🔴 **5. Privacy Violations**: Exposing training data</span>
 
-**Example system prompt**:
-```python
+::: notes
+These risks are real. Every production LLM system needs safeguards against them. The good news: there are proven mitigation strategies.
+:::
+
+---
+
+## 🛡️ Mitigation Strategy 1: Clear Instructions
+
+**Example system prompt:**
+
+```python {data-line-numbers="1-12"}
 SAFE_SYSTEM_PROMPT = """You are a helpful assistant. Follow these guidelines:
 
 1. Do not generate, process, or request personal information (PII)
@@ -256,23 +357,35 @@ SAFE_SYSTEM_PROMPT = """You are a helpful assistant. Follow these guidelines:
 Now, assist the user with their request."""
 ```
 
-#### 2. Proper Context & Scope
+::: notes
+Clear guidelines in the system prompt are your first line of defense. Models generally follow them, though not perfectly.
+:::
 
-**Limit the model's role**:
-```python
-# Instead of:
-"You are an AI that can do anything."
+---
 
-# Use:
-"You are a customer support assistant for [Product]. 
+## 🛡️ Mitigation Strategy 2: Limit Scope
+
+**Define boundaries:**
+
+```
+You are a customer support assistant for [Product].
 You help with account issues, billing questions, and basic troubleshooting.
-For technical issues, escalate to the engineering team."
+For technical issues, escalate to the engineering team.
 ```
 
-#### 3. Guardrails and Review
+<span class="fragment">❌ Not: "You are an AI that can do anything."</span>
 
-**Pre-processing** (before sending to LLM):
-```python
+::: notes
+Limit what the model can do. If it's a support bot, it shouldn't give medical advice. Narrow scope reduces risk.
+:::
+
+---
+
+## 🛡️ Mitigation Strategy 3: Guardrails
+
+**Pre-processing** (before LLM):
+
+```python {data-line-numbers="1-12"}
 def check_input_safety(user_input: str) -> bool:
     """Screen user input for harmful content"""
     harmful_patterns = [
@@ -280,199 +393,221 @@ def check_input_safety(user_input: str) -> bool:
         r'(bomb|weapon) (instructions|recipe)',
         # ... more patterns
     ]
-    
+
     for pattern in harmful_patterns:
         if re.search(pattern, user_input, re.IGNORECASE):
             return False  # Block request
-    
+
     return True  # Allow request
 ```
 
-**Post-processing** (after LLM generates response):
-```python
+::: notes
+Catch harmful requests before they reach the LLM. Simple pattern matching can catch obvious abuse.
+:::
+
+---
+
+## 🛡️ Guardrails: Post-processing
+
+**After LLM generates response:**
+
+```python {data-line-numbers="1-14"}
 def check_output_safety(response: str) -> bool:
     """Screen LLM output for harmful content"""
     # Check for PII patterns
     if re.search(r'\d{3}-\d{2}-\d{4}', response):  # SSN pattern
         return False
-    
+
     # Check for hate speech indicators
     # Use a library like Detoxify or Perspective API
     toxicity_score = check_toxicity(response)
     if toxicity_score > 0.7:
         return False
-    
+
     return True
 ```
 
-**Fallback responses**:
-```python
-SAFETY_FALLBACK = """I'm not able to help with that request. 
-If you need assistance with [product/service], please contact [appropriate channel]."""
-```
+::: notes
+Even good models occasionally slip. Post-processing catches outputs that violate your policies before they reach users.
+:::
 
-#### 4. Human-in-the-Loop
+---
+
+## 🛡️ Mitigation Strategy 4: Human-in-the-Loop
 
 For high-stakes applications:
-- **Preview before send**: Show user what the model will say
-- **Feedback mechanisms**: Allow users to report issues
-- **Audit trails**: Log all interactions for review
-- **Manual review**: Have humans spot-check outputs
 
-#### 5. Model Choice and Configuration
+<span class="fragment">✅ **Preview before send**: Show user what model will say</span>
 
-**Choose appropriate models**:
-- Models trained with safety alignment (e.g., Granite's built-in guardrails)
-- Avoid models fine-tuned on unfiltered web data for sensitive applications
+<span class="fragment">✅ **Feedback mechanisms**: Allow users to report issues</span>
 
-**Configure safely**:
-```python
-# Lower temperature for factual tasks (more deterministic, less creative)
+<span class="fragment">✅ **Audit trails**: Log all interactions for review</span>
+
+<span class="fragment">✅ **Manual review**: Have humans spot-check outputs</span>
+
+::: notes
+In healthcare, finance, or legal domains, consider human review of critical responses. Automation is great, but some decisions need human oversight.
+:::
+
+---
+
+## 🛡️ Mitigation Strategy 5: Model Choice
+
+**Choose appropriate models:**
+
+<span class="fragment">✅ Models trained with safety alignment (e.g., Granite's built-in guardrails)</span>
+
+<span class="fragment">✅ Avoid models fine-tuned on unfiltered web data for sensitive applications</span>
+
+::: notes
+Not all models are created equal for safety. Granite models, for example, have safety alignment built in. Choose models appropriate for your risk tolerance.
+:::
+
+---
+
+## 🛡️ Safe Configuration
+
+```python {data-line-numbers="1-5"}
+# Lower temperature for factual tasks (less creativity = less risk)
 params = {
-    "temperature": 0.2,  # Less randomness
+    "temperature": 0.2,  # More deterministic
     "top_p": 0.1,        # More focused
     "max_tokens": 200,   # Limit response length
 }
 ```
 
+::: notes
+Conservative parameter settings reduce risk. Lower temperature means fewer surprises. Max tokens prevents extremely long (potentially problematic) responses.
+:::
+
 ---
 
-## How This Ties into the Accelerator
+## 🏗️ Accelerator Integration {data-background-color="#1e293b"}
 
-### Evaluation Entry Points
+How evaluation fits into the production pipeline
 
-#### 1. `tools/eval_small.py`
+::: notes
+Let's connect evaluation to the actual codebase you'll work with.
+:::
 
-**Purpose**: Run a small evaluation dataset through your RAG system
+---
 
-**What you'll implement on Day 2-3**:
-```python
-# tools/eval_small.py
+## 📁 Accelerator: tools/eval_small.py
 
-import pandas as pd
-from accelerator.rag.pipeline import RAGPipeline
+**Purpose:** Run a small evaluation dataset through your RAG system
 
+<span class="fragment">**You'll implement on Day 2-3**</span>
+
+::: notes
+This is where your evaluation code lives. You'll build a mini version in Lab 1.3 today, then extend it for RAG on Day 2.
+:::
+
+---
+
+## 🔬 eval_small.py Structure
+
+```python {data-line-numbers="1-20"}
 def evaluate_rag_system(test_file: str, output_file: str):
     """
     Evaluate RAG system on a test set
-    
+
     Args:
         test_file: CSV with columns [question, ground_truth, category]
         output_file: Where to save results
     """
     # Load test data
     df = pd.read_csv(test_file)
-    
+
     # Initialize pipeline
     pipeline = RAGPipeline()
-    
+
     results = []
     for idx, row in df.iterrows():
         # Generate answer
         response = pipeline.answer_question(row['question'])
-        
+
         # Evaluate
         correctness = evaluate_correctness(response, row['ground_truth'])
         relevance = evaluate_relevance(response, row['question'])
-        
-        results.append({
-            'question': row['question'],
-            'model_answer': response,
-            'ground_truth': row['ground_truth'],
-            'correctness': correctness,
-            'relevance': relevance,
-            'category': row['category']
-        })
-    
-    # Save results
-    results_df = pd.DataFrame(results)
-    results_df.to_csv(output_file, index=False)
-    
-    # Summary stats
-    print(f"Overall Correctness: {results_df['correctness'].mean():.2%}")
-    print(f"Overall Relevance: {results_df['relevance'].mean():.2%}")
+
+        results.append({...})
+
+    # Save results and compute stats
 ```
 
-#### 2. `accelerator/assets/notebook/Analyze_Log_and_Feedback.ipynb`
+::: notes
+This is the pattern you'll follow. Load test data, generate responses, evaluate, save results. Simple but powerful.
+:::
 
-**Purpose**: Analyze logs and user feedback from the production service
+---
 
-**What it does**:
-- Load logs from `service/api.py`
-- Analyze patterns:
-  - Most common questions
-  - Average response time
-  - User feedback ratings
-  - Error rates
-- Generate insights for improvement
+## 📊 Production Logging
 
-**Example log entry**:
-```json
+**What gets logged** (in `service/api.py`):
+
+```json {data-line-numbers="1-12"}
 {
   "timestamp": "2025-01-15T10:30:00Z",
   "question": "How do I reset my password?",
   "answer": "To reset your password...",
   "retrieved_docs": ["doc_123", "doc_456"],
   "latency_ms": 1250,
+  "model": "granite-13b-instruct-v2",
   "user_feedback": "helpful",
-  "model": "granite-13b-instruct"
+  "correctness": null,  # Filled by evaluator
+  "notes": ""
 }
 ```
 
-### Your Manual Rubric Influences:
-
-**What you log** (in `service/api.py`):
-```python
-@app.post("/ask")
-async def ask_question(request: QuestionRequest):
-    start_time = time.time()
-    
-    # Generate answer
-    response = pipeline.answer_question(request.question)
-    
-    # Log for later evaluation
-    log_entry = {
-        "timestamp": datetime.now().isoformat(),
-        "question": request.question,
-        "answer": response.answer,
-        "retrieved_docs": response.source_ids,
-        "latency_ms": (time.time() - start_time) * 1000,
-        "model": config.model_id,
-        # Evaluation placeholders
-        "user_feedback": None,  # Filled in later
-        "correctness": None,    # Can be auto-evaluated if ground truth available
-    }
-    
-    logger.info(log_entry)
-    return response
-```
-
-**What metrics you compute** (in `eval_small.py`):
-```python
-# Metrics derived from your rubric
-metrics = {
-    "correctness": df['correctness'].mean(),
-    "relevance": df['relevance'].mean(),
-    "format_adherence": df['format_ok'].mean(),
-    "avg_latency_ms": df['latency_ms'].mean(),
-    "p95_latency_ms": df['latency_ms'].quantile(0.95),
-}
-```
+::: notes
+Every request is logged. This creates an audit trail and enables continuous evaluation. You can re-evaluate past responses as your metrics improve.
+:::
 
 ---
 
-## How This Connects to Lab 1.3
+## 📈 Analysis Notebook
 
-### What You'll Build
+**Notebook:** `Analyze_Log_and_Feedback.ipynb`
 
-In Lab 1.3, you'll create a **micro-evaluation framework**:
+**What it does:**
+<span class="fragment">📊 Analyze patterns in logs</span>
+<span class="fragment">📊 Track metrics over time</span>
+<span class="fragment">📊 Identify common failure modes</span>
+<span class="fragment">📊 Generate improvement recommendations</span>
 
-1. **Test set**: 5-10 diverse prompts
-2. **Data collection**: Run prompts through Ollama and watsonx
-3. **Rating rubric**: Apply manual ratings (correctness, clarity, style)
-4. **Analysis**: Compare backends, identify patterns
+::: notes
+The analysis notebook turns logs into insights. Which questions fail most often? What's the average latency? Are users giving thumbs up or thumbs down?
+:::
 
-### Example Output (DataFrame)
+---
+
+## 🧪 Lab 1.3 Preview {data-background-color="#0f172a"}
+
+What you'll build this afternoon
+
+::: notes
+Let's preview Lab 1.3, where you'll implement a micro-evaluation framework.
+:::
+
+---
+
+## 📝 Lab 1.3: Your Tasks
+
+<span class="fragment">1️⃣ Create a **test set** of 5-10 diverse prompts</span>
+
+<span class="fragment">2️⃣ Collect outputs from **Ollama and watsonx**</span>
+
+<span class="fragment">3️⃣ Apply **manual rubric** (correctness, clarity, style)</span>
+
+<span class="fragment">4️⃣ **Analyze results** comparatively</span>
+
+::: notes
+This is a mini version of production evaluation. The skills you learn here scale directly to production.
+:::
+
+---
+
+## 📊 Lab 1.3: Example Output
 
 | prompt | backend | answer | correctness | clarity | style_match |
 |--------|---------|--------|-------------|---------|-------------|
@@ -480,101 +615,170 @@ In Lab 1.3, you'll create a **micro-evaluation framework**:
 | "Summarize AI..." | watsonx | "Artificial..." | 5 | 5 | 5 |
 | "Extract emails..." | ollama | "john@..." | 5 | 4 | 5 |
 
-### Skills You'll Develop
-
-- Programmatic evaluation loops
-- Rating rubric design
-- Comparative analysis
-- Data-driven decision making
-
-### Connection to Production
-
-This micro-framework is a **prototype** for:
-- `tools/eval_small.py` (automated evaluation)
-- `Analyze_Log_and_Feedback.ipynb` (production analytics)
-- Continuous monitoring dashboards
+::: notes
+You'll create a structured DataFrame like this. It enables systematic comparison and analysis.
+:::
 
 ---
 
-## Reference Notebooks
+## 🔗 Connection to Production
 
-### Governance & Evaluation
+**Your micro-framework is a prototype for:**
 
-**`ibm-watsonx-governance-evaluation-studio-getting-started.ipynb`**:
-- Shows watsonx.governance evaluation features
-- Demonstrates automated evaluation at scale
-- Connects to compliance tracking
+<span class="fragment">✅ `tools/eval_small.py` (automated evaluation)</span>
 
-**From this, you'll learn**:
-- How to structure evaluation datasets
-- Metrics that matter for enterprise applications
-- Integration with governance workflows
+<span class="fragment">✅ `Analyze_Log_and_Feedback.ipynb` (production analytics)</span>
 
-**Progression**:
-```
-Lab 1.3 (Manual, 10 questions)
-    ↓
-eval_small.py (Automated, 100 questions)
-    ↓
-Evaluation Studio (Continuous, production scale)
-```
+<span class="fragment">✅ Continuous monitoring dashboards</span>
+
+::: notes
+Start small, scale up. The patterns you learn with 10 prompts work with 10,000 prompts. Only the automation and scale change.
+:::
 
 ---
 
-## Best Practices for Evaluation
+## 📈 Evaluation Maturity Model {data-transition="zoom"}
 
-### ✅ Do
+Where are you in the evaluation journey?
 
-1. **Start simple**: Don't over-engineer evaluation initially
-2. **Automate what you can**: Manual review doesn't scale
-3. **Track over time**: Evaluation is ongoing, not one-time
-4. **Test edge cases**: Don't just test happy paths
-5. **Involve stakeholders**: Domain experts should validate quality
-6. **Version everything**: Track prompts, models, and test sets
-
-### ❌ Don't
-
-1. **Skip evaluation**: "It looks good" isn't enough
-2. **Rely solely on accuracy**: Context matters (latency, safety, cost)
-3. **Forget about drift**: Models and data change over time
-4. **Ignore user feedback**: Real usage reveals issues testing doesn't
-5. **Over-optimize for metrics**: Gaming metrics != real quality
+::: notes
+Let's contextualize where you'll be after today versus where you're heading.
+:::
 
 ---
 
-## Evaluation Maturity Model
+## 📊 Level 1: Ad Hoc
 
-### Level 1: Ad Hoc
-- Manual testing with a few examples
-- "Looks good to me" approval
-- No systematic tracking
+<span class="fragment">❌ Manual testing with few examples</span>
 
-### Level 2: Basic (← Lab 1.3 targets this)
-- Small test set (10-50 examples)
-- Manual rubric
-- Occasional re-evaluation
+<span class="fragment">❌ "Looks good to me" approval</span>
 
-### Level 3: Systematic (← `eval_small.py` targets this)
-- Curated test set (100-500 examples)
-- Automated metrics where possible
-- Regular evaluation runs
-- Version control for prompts and results
+<span class="fragment">❌ No systematic tracking</span>
 
-### Level 4: Continuous (← Production goal)
-- Large test set + production monitoring
-- Automated evaluation pipeline
-- A/B testing framework
-- Real-time alerting on quality degradation
-- Integration with CI/CD
+::: notes
+Most teams start here. It's better than nothing but doesn't scale.
+:::
 
 ---
 
-## Key Takeaways
+## 📊 Level 2: Basic ← Lab 1.3 targets this
 
-- **Evaluation is essential**: Don't deploy LLMs without systematic quality checks
-- **Start simple**: Basic metrics beat no metrics
-- **Safety first**: Proactively mitigate risks with guardrails
-- **Iterate**: Evaluation frameworks evolve with your application
-- **Automate**: Scale evaluation as your system scales
+<span class="fragment">✅ Small test set (10-50 examples)</span>
 
-**Next**: Let's build your first evaluation framework in Lab 1.3!
+<span class="fragment">✅ Manual rubric</span>
+
+<span class="fragment">✅ Occasional re-evaluation</span>
+
+::: notes
+Lab 1.3 gets you to Level 2. This is the minimum for responsible development.
+:::
+
+---
+
+## 📊 Level 3: Systematic ← eval_small.py targets this
+
+<span class="fragment">✅ Curated test set (100-500 examples)</span>
+
+<span class="fragment">✅ Automated metrics where possible</span>
+
+<span class="fragment">✅ Regular evaluation runs</span>
+
+<span class="fragment">✅ Version control for prompts and results</span>
+
+::: notes
+Day 2-3 gets you to Level 3. This is production-ready evaluation.
+:::
+
+---
+
+## 📊 Level 4: Continuous ← Production goal
+
+<span class="fragment">✅ Large test set + production monitoring</span>
+
+<span class="fragment">✅ Automated evaluation pipeline</span>
+
+<span class="fragment">✅ A/B testing framework</span>
+
+<span class="fragment">✅ Real-time alerting on quality degradation</span>
+
+<span class="fragment">✅ Integration with CI/CD</span>
+
+::: notes
+Level 4 is the gold standard. Evaluation runs automatically on every change. Quality issues trigger alerts. This is where mature teams operate.
+:::
+
+---
+
+## ✅ Best Practices {data-background-color="#1e293b"}
+
+Evaluation dos and don'ts
+
+::: notes
+Let's wrap up with clear guidance on evaluation best practices.
+:::
+
+---
+
+## ✅ Do
+
+<span class="fragment">✅ **Start simple**: Don't over-engineer initially</span>
+
+<span class="fragment">✅ **Automate what you can**: Manual review doesn't scale</span>
+
+<span class="fragment">✅ **Track over time**: Evaluation is ongoing</span>
+
+<span class="fragment">✅ **Test edge cases**: Don't just test happy paths</span>
+
+<span class="fragment">✅ **Involve stakeholders**: Domain experts validate quality</span>
+
+<span class="fragment">✅ **Version everything**: Track prompts, models, test sets</span>
+
+::: notes
+Treat evaluation as a first-class development activity. It's not an afterthought—it's central to quality.
+:::
+
+---
+
+## ❌ Don't
+
+<span class="fragment">❌ **Skip evaluation**: "It looks good" isn't enough</span>
+
+<span class="fragment">❌ **Rely solely on accuracy**: Context matters (latency, safety, cost)</span>
+
+<span class="fragment">❌ **Forget about drift**: Models and data change</span>
+
+<span class="fragment">❌ **Ignore user feedback**: Real usage reveals issues testing doesn't</span>
+
+<span class="fragment">❌ **Over-optimize for metrics**: Gaming metrics ≠ real quality</span>
+
+::: notes
+Goodhart's Law: When a measure becomes a target, it ceases to be a good measure. Don't game your metrics. Focus on real quality.
+:::
+
+---
+
+## 🎯 Key Takeaways
+
+<span class="fragment">🔑 **Evaluation is essential**: Don't deploy without systematic checks</span>
+
+<span class="fragment">🔑 **Start simple**: Basic metrics beat no metrics</span>
+
+<span class="fragment">🔑 **Safety first**: Proactively mitigate risks with guardrails</span>
+
+<span class="fragment">🔑 **Iterate**: Evaluation frameworks evolve with your application</span>
+
+<span class="fragment">🔑 **Automate**: Scale evaluation as your system scales</span>
+
+::: notes
+Evaluation and safety are not optional. They're the foundation of responsible LLM deployment. Start simple, but start now.
+:::
+
+---
+
+## 🚀 Next: Lab 1.3
+
+Let's build your first evaluation framework!
+
+::: notes
+You've learned the theory. Now it's time to apply it. Lab 1.3 is where you'll implement these evaluation signals and see them in action.
+:::
