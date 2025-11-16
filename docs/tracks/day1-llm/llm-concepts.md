@@ -778,10 +778,145 @@ Congratulations! You've completed the LLM concepts module. Take a short break, t
 
 ---
 
-## 🚀 Next: Lab 1.1
+## 🚀 Next: Lab 1.1 {data-background-color="#0f172a"}
 
 Let's get hands-on and actually run some prompts!
 
 ::: notes
 Transition to the lab. Make sure everyone has their environments set up before starting.
+:::
+
+---
+
+## 🔗 Navigation & Resources {data-background-color="#0f172a"}
+
+**Navigate the workshop:**
+
+### 🏠 [Workshop Portal Home](https://ruslanmv.com/watsonx-workshop/portal/)
+Interactive daily guides and presentations
+
+### 📚 [Return to Day 1 Overview](./README.md)
+Review Day 1 schedule and learning objectives
+
+### ▶️ [Next: Prompt Patterns Theory](./prompt-patterns-theory.md)
+Learn effective prompt engineering patterns
+
+### 🧪 [Jump to Lab 1.1: Quickstart](./lab-1-quickstart-two-envs.md)
+Start hands-on work with Ollama and watsonx.ai
+
+### 📖 [All Workshop Materials](../../portal.md)
+Access complete workshop resources
+
+::: notes
+**Instructor guidance:**
+- Remind students to bookmark the workshop portal
+- Ensure all students have completed environment setup
+- Take questions before proceeding to labs
+- Emphasize that concepts from this module underpin everything in Days 2-3
+
+**If students want to go deeper:**
+- Explore the reference notebooks in `labs-src/`
+- Read the Granite model documentation
+- Experiment with different context window sizes
+- Research token optimization techniques
+
+**Before proceeding to labs:**
+- Verify everyone can access Jupyter notebooks
+- Confirm Ollama and watsonx environments are functional
+- Quick poll: "Any questions on LLM concepts before we code?"
+:::
+
+---
+
+## 📖 Additional Learning Resources
+
+**Deepen your understanding of LLMs:**
+
+### Core LLM Concepts
+- 📘 **[Attention Is All You Need](https://arxiv.org/abs/1706.03762)** – The foundational transformer paper
+- 📘 **[LLM Visualization](https://bbycroft.net/llm)** – Interactive 3D visualization of how LLMs work
+- 📘 **[The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)** – Visual guide to transformer architecture
+
+### IBM watsonx Platform
+- 📘 **[IBM Granite Models Documentation](https://www.ibm.com/granite/docs)** – Official Granite model family docs
+- 📘 **[watsonx.ai Python SDK](https://ibm.github.io/watsonx-ai-python-sdk/)** – Complete API reference
+- 📘 **[watsonx.ai Getting Started](https://www.ibm.com/docs/en/watsonx-as-a-service)** – Platform overview and tutorials
+
+### Local LLM Development
+- 📘 **[Ollama Documentation](https://ollama.com/docs)** – Complete Ollama reference
+- 📘 **[Ollama Model Library](https://ollama.com/library)** – Browse available models
+- 📘 **[Running LLMs Locally](https://www.promptingguide.ai/models/running-llms-locally)** – Comprehensive guide
+
+### Token Optimization
+- 🔧 **[OpenAI Tokenizer](https://platform.openai.com/tokenizer)** – Visualize how text is tokenized
+- 🔧 **[tiktoken Library](https://github.com/openai/tiktoken)** – Fast BPE tokenizer from OpenAI
+- 🔧 **[Token Counting Best Practices](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)** – Practical tips
+
+::: notes
+Share these resources in the workshop chat/LMS. Students often want to dive deeper into the technical details after understanding the basics.
+
+The LLM Visualization link is particularly valuable—it shows how tokens flow through the model in an intuitive 3D interface.
+:::
+
+---
+
+## 💡 Practical Tips for Working with LLMs
+
+**Lessons from production experience:**
+
+<span class="fragment">**💰 Cost Management**
+Always set `max_tokens` limits. Track token usage per request. Implement caching for common queries.</span>
+
+<span class="fragment">**⚡ Performance Optimization**
+Use smaller models when appropriate. Batch requests when possible. Consider async processing for non-real-time use cases.</span>
+
+<span class="fragment">**🔍 Debugging**
+Log prompts and responses. Use temperature=0 for reproducibility during debugging. Test with edge cases.</span>
+
+<span class="fragment">**🛡️ Error Handling**
+Always handle timeout errors. Implement retry logic with exponential backoff. Validate responses before using them.</span>
+
+<span class="fragment">**📊 Monitoring**
+Track latency percentiles (p50, p95, p99). Monitor token usage trends. Set up alerts for quality degradation.</span>
+
+::: notes
+These tips come from hard-won production experience. Share war stories if you have them:
+- A case where lack of max_tokens limits caused runaway costs
+- An example of how caching reduced API bills by 80%
+- A situation where async processing improved UX
+
+Make these lessons stick by connecting them to real-world consequences.
+:::
+
+---
+
+## 🙏 Thank You!
+
+**Questions before we move to labs?**
+
+Remember:
+- LLMs are powerful tools, but understanding their fundamentals is key
+- The concepts learned here apply across all LLM providers
+- Tomorrow's RAG techniques build directly on today's foundation
+- Keep experimenting and asking questions!
+
+**Let's put this knowledge into practice!** 🚀
+
+<div style="margin-top: 40px; text-align: center;">
+<a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Workshop Portal</a>
+<a href="./lab-1-quickstart-two-envs.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.1</a>
+</div>
+
+::: notes
+**For instructors:**
+Before transitioning to labs, ask:
+- "What surprised you most about LLM architecture?"
+- "Any concerns about token limits or costs for your use cases?"
+- "Questions on local vs. managed deployment?"
+- "Everyone ready to code?"
+
+**Transition smoothly:**
+"Great! You now understand the foundational concepts. Let's apply them hands-on. Open your Ollama environment and let's send our first LLM call!"
+
+Take note of any common questions for future workshop improvements.
 :::

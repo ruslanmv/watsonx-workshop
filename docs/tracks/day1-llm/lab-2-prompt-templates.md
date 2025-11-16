@@ -1,11 +1,39 @@
-# 🎨 Lab 1.2 – Prompt Templates
+# 🎨 Lab 1.2 – Building Production-Ready Prompt Templates
 
-Build reusable prompt patterns across both environments
+**Master the art of creating reusable, maintainable prompt patterns for enterprise AI applications**
 
-**Duration**: 60 minutes | **Difficulty**: Intermediate
+**Duration**: 60-75 minutes | **Difficulty**: Intermediate | **Prerequisites**: Lab 1.1 completed
 
 ::: notes
-This lab puts theory into practice. Students will create actual templates they can reuse in production.
+This lab transforms theoretical knowledge into practical skills. Students will create actual templates they can reuse in production systems. This is where the magic of prompt engineering becomes systematic and scalable.
+
+Key focus: Students should leave this lab with working code they can adapt for their own projects. Emphasize that prompt templates are one of the most valuable deliverables from any AI project—they embody domain knowledge and best practices.
+:::
+
+---
+
+## 🎓 What You'll Learn in This Lab {data-background-color="#0f172a"}
+
+By the end of this hands-on session, you will be able to:
+
+<span class="fragment">📌 **Design reusable prompt templates** that work across different backends (Ollama, watsonx, OpenAI, etc.)</span>
+
+<span class="fragment">📌 **Implement three essential patterns**: summarization, style transfer, and context-based Q&A</span>
+
+<span class="fragment">📌 **Compare outputs systematically** across local and cloud environments using structured evaluation</span>
+
+<span class="fragment">📌 **Architect production-ready code** with proper separation of concerns and maintainability</span>
+
+<span class="fragment">📌 **Plan integration strategies** for incorporating templates into larger RAG applications</span>
+
+::: notes
+These learning objectives map directly to real-world AI engineering responsibilities. Students who master this lab can:
+- Build template libraries for their organizations
+- Create consistent AI experiences across products
+- Maintain and version control prompt engineering knowledge
+- Switch between LLM providers without rewriting application logic
+
+Emphasize that prompt templates are IP—they represent valuable domain knowledge that should be version-controlled and shared across teams.
 :::
 
 ---
@@ -607,10 +635,198 @@ These aren't just lab exercises—they're real skills for production LLM systems
 
 ---
 
-## 🚀 Next: Lab 1.3 – Micro-Evaluation
+## 🎉 Congratulations! Lab 1.2 Complete! {data-background-color="#0f172a"}
 
-Build a systematic evaluation framework
+**You've mastered production-ready prompt template engineering!**
+
+<span class="fragment">✅ **Built three core template patterns** that work across multiple LLM backends</span>
+
+<span class="fragment">✅ **Implemented systematic comparison** framework for evaluating outputs</span>
+
+<span class="fragment">✅ **Analyzed quality-performance trade-offs** between local and cloud environments</span>
+
+<span class="fragment">✅ **Designed production architecture** for template management and integration</span>
+
+<span class="fragment">✅ **Created reusable code assets** you can apply to real-world projects immediately</span>
 
 ::: notes
-Take a short break (5-10 minutes), then proceed to Lab 1.3 to learn how to evaluate LLM outputs systematically.
+Excellent work! Prompt templates are one of the most valuable and reusable components of any LLM application. The templates students built today are production-ready and can be adapted for countless use cases.
+
+Students have now created:
+- Reusable functions with clear interfaces
+- Backend-agnostic design patterns
+- Systematic evaluation methodology
+- Foundation for RAG integration
+
+These are resume-worthy skills!
+:::
+
+---
+
+## 📊 What You've Accomplished {data-background-color="#1e293b"}
+
+**Professional skills you can apply immediately:**
+
+<span class="fragment">🎯 **Template Engineering**: Design prompts as reusable, parameterized functions instead of hardcoded strings</span>
+
+<span class="fragment">🎯 **Backend Abstraction**: Write code that works across Ollama, watsonx, OpenAI, and other providers</span>
+
+<span class="fragment">🎯 **Systematic Evaluation**: Compare LLM outputs using structured data and metrics</span>
+
+<span class="fragment">🎯 **Production Architecture**: Separate template definitions from application logic for maintainability</span>
+
+<span class="fragment">🎯 **Data-Driven Decisions**: Use empirical testing to choose the right LLM for each use case</span>
+
+::: notes
+These aren't just lab exercises—they're the exact patterns used by AI engineering teams at leading companies:
+- Template libraries in version control
+- A/B testing different providers
+- Centralized prompt management
+- Systematic quality evaluation
+
+Students can now confidently discuss these topics in job interviews and implement them in their organizations.
+:::
+
+---
+
+## 💡 Key Insights from This Lab
+
+**Critical lessons for production LLM applications:**
+
+<span class="fragment">🔑 **Templates are code assets** – Version control them, test them, document them like any other critical code</span>
+
+<span class="fragment">🔑 **Backend agnosticism is valuable** – Don't lock yourself into a single provider; abstract the interface</span>
+
+<span class="fragment">🔑 **Quality varies by task** – No single LLM is best for everything; test systematically for your use cases</span>
+
+<span class="fragment">🔑 **Prompts embody domain knowledge** – Your templates represent your understanding of the problem domain</span>
+
+<span class="fragment">🔑 **Evaluation must be systematic** – Anecdotes aren't enough; measure performance consistently</span>
+
+::: notes
+These insights come from hard-won experience in production AI systems. Share war stories if you have them:
+- A critical product launch where template quality mattered
+- A case where switching providers required minimal code changes due to good abstractions
+- An example of how systematic evaluation caught a quality regression
+
+Make these lessons stick by connecting them to real-world consequences.
+:::
+
+---
+
+## 🔗 Navigation & Next Steps {data-background-color="#0f172a"}
+
+**Where to go from here:**
+
+### 🏠 [Return to Workshop Home](../../portal.md)
+Access all workshop materials, labs, and resources
+
+### 📚 [Day 1 Overview](./README.md)
+Review Day 1 schedule and learning objectives
+
+### ⬅️ [Previous: Lab 1.1 – Quickstart](./lab-1-quickstart-two-envs.md)
+Review basics of working with Ollama and watsonx.ai
+
+### ▶️ [Next: Lab 1.3 – Micro-Evaluation](./lab-3-micro-eval.md)
+Build a systematic evaluation framework for LLM outputs
+
+### 🔄 [Alternative: Prompt Patterns Theory](./prompt-patterns-theory.md)
+Deep dive into advanced prompt engineering patterns
+
+::: notes
+**Instructor guidance:**
+- Take a 5-10 minute break before Lab 1.3
+- Check in with students about their comparison results
+- Encourage sharing interesting findings from their experiments
+- Remind everyone to save their notebooks and CSV results
+
+**If students want to go deeper:**
+- Add more template types (classification, extraction, translation)
+- Experiment with system prompts and few-shot examples
+- Try chain-of-thought reasoning templates
+- Build a template library module they can import
+
+**Next lab preview:**
+Lab 1.3 introduces systematic evaluation frameworks—you'll learn to measure quality, not just observe it subjectively. This is crucial for production AI!
+:::
+
+---
+
+## 📖 Additional Resources
+
+**Deepen your prompt engineering skills:**
+
+- 📘 **[Prompt Engineering Guide](https://www.promptingguide.ai/)** – Comprehensive guide to advanced techniques
+- 📘 **[OpenAI Prompt Engineering Best Practices](https://platform.openai.com/docs/guides/prompt-engineering)** – Industry-standard patterns
+- 📘 **[Anthropic Prompt Library](https://docs.anthropic.com/claude/prompt-library)** – Real-world prompt examples
+- 📘 **[LangChain Prompt Templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/)** – Framework integration patterns
+
+**Template Design Patterns:**
+- 🎨 [Few-Shot Learning](https://www.promptingguide.ai/techniques/fewshot) – Improve accuracy with examples
+- 🎨 [Chain-of-Thought](https://www.promptingguide.ai/techniques/cot) – Enhance reasoning capabilities
+- 🎨 [ReAct Pattern](https://www.promptingguide.ai/techniques/react) – Combine reasoning and actions
+
+**Workshop Materials:**
+- 🔧 [Lab 1.1 – Quickstart](./lab-1-quickstart-two-envs.md) – Review the basics
+- 🔧 [Complete Notebooks](../../labs-src/) – Full working examples with solutions
+- 🔧 [Day 1 Theory Slides](./prompt-patterns-theory.md) – Theoretical foundations
+
+::: notes
+Share these resources in the workshop chat/LMS. Students who enjoyed this lab will appreciate the deep dives into advanced prompt engineering.
+
+The Anthropic Prompt Library is especially valuable—it's full of production-tested prompts for common tasks.
+:::
+
+---
+
+## 💾 Save Your Work!
+
+**Before moving on, make sure you've saved:**
+
+<span class="fragment">📁 **Notebook files** – `prompt_patterns_ollama.ipynb` and `prompt_patterns_watsonx.ipynb`</span>
+
+<span class="fragment">📁 **Comparison results** – `lab1_2_comparison_results.csv`</span>
+
+<span class="fragment">📁 **Your template functions** – Copy to a reusable module for future projects</span>
+
+<span class="fragment">📁 **Notes on integration** – Document your architectural decisions</span>
+
+**Pro tip:** Create a `my_prompt_library.py` file with your best templates for reuse across projects!
+
+::: notes
+Encourage students to build their personal prompt library. Many successful AI engineers maintain a collection of tested templates they can quickly adapt.
+
+Suggest creating a GitHub repo for their prompt library—it's great portfolio material and incredibly useful for future projects.
+:::
+
+---
+
+## 🙏 Thank You!
+
+**Questions? Feedback? Insights to share?**
+
+Feel free to:
+- Discuss your comparison results with classmates
+- Share interesting findings in the workshop chat
+- Experiment with additional template variations
+- Build on these patterns for your own projects
+
+**Remember:** Great prompts are discovered through iteration. Keep experimenting! 🚀
+
+<div style="margin-top: 40px; text-align: center;">
+<a href="../../README.md" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Back to Workshop Home</a>
+<a href="./lab-3-micro-eval.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">▶️ Next Lab: Micro-Evaluation</a>
+</div>
+
+::: notes
+End on an encouraging note. Students have built something valuable today—templates they can use in real projects.
+
+**For instructors:**
+Before dismissing to break, ask:
+- "What were your most interesting comparison findings?"
+- "Which backend performed better for which tasks?"
+- "Anyone discover a surprising result?"
+- "Questions before we move to evaluation?"
+
+Collect feedback for improving the lab in future workshops.
 :::

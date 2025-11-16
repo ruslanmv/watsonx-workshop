@@ -817,12 +817,12 @@ You now have access to **enterprise-grade AI models**
 
 Try watsonx.ai in Google Colab (bring your credentials):
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/simple-watsonx-enviroment/blob/main/notebooks/watsonx_quickstart.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ruslanmv/simple-watsonx-enviroment/blob/main/notebooks/watsonx_quickstart.ipynb)
 
 ::: notes
 This Colab link lets students run the notebook in the cloud.
 
 They'll still need to provide their own IBM Cloud credentials.
 
-Update YOUR_USERNAME with the actual GitHub username.
+Update ruslanmv with the actual GitHub username.
 :::

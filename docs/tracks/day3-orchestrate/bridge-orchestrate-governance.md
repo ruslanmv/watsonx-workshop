@@ -408,6 +408,29 @@ Capture these ideas - they're great seeds for the capstone day and follow-up pro
 
 <span class="fragment">**Real use cases** need both automation and quality control</span>
 
+---
+
+## Navigation & Next Steps {data-background-color="#064e3b"}
+
+### 🏠 Workshop Portal
+
+**[Workshop Home](https://ruslanmv.com/watsonx-workshop/portal/)** | **[Day 3 Overview](../../portal/day3-portal.md)**
+
+### Related Content
+
+<span class="fragment">← [Agentic AI Overview](./agentic-ai-overview.md)</span>
+<span class="fragment">← [CrewAI Framework](./agentic-frameworks-crewai.md)</span>
+<span class="fragment">← [Langflow Framework](./agentic-frameworks-langflow.md)</span>
+<span class="fragment">← [LangGraph Framework](./agentic-frameworks-langgraph.md)</span>
+
+### Resources
+
+<span class="fragment">📚 watsonx.ai: https://www.ibm.com/products/watsonx-ai</span>
+<span class="fragment">⚖️ watsonx.governance: https://www.ibm.com/products/watsonx-governance</span>
+<span class="fragment">🔧 watsonx Orchestrate: https://www.ibm.com/products/watsonx-orchestrate</span>
+
+**Version:** 1.0 | **Updated:** January 2025
+
 ::: notes
-The bridge from development to production is clear. You have all the pieces - now it's about putting them together for your specific needs.
+The bridge from development to production is clear. You have all the pieces!
 :::

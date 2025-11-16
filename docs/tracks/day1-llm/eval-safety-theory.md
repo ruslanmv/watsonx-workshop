@@ -775,10 +775,267 @@ Evaluation and safety are not optional. They're the foundation of responsible LL
 
 ---
 
-## 🚀 Next: Lab 1.3
+## 🚀 Next: Lab 1.3 {data-background-color="#0f172a"}
 
 Let's build your first evaluation framework!
 
 ::: notes
 You've learned the theory. Now it's time to apply it. Lab 1.3 is where you'll implement these evaluation signals and see them in action.
+:::
+
+---
+
+## 🔗 Navigation & Resources {data-background-color="#0f172a"}
+
+**Navigate the workshop:**
+
+### 🏠 [Workshop Portal Home](https://ruslanmv.com/watsonx-workshop/portal/)
+Interactive daily guides and presentations
+
+### 📚 [Return to Day 1 Overview](./README.md)
+Review Day 1 schedule and all learning objectives
+
+### ⬅️ [Previous: Prompt Patterns Theory](./prompt-patterns-theory.md)
+Review prompt engineering patterns
+
+### ▶️ [Next: Day 2 RAG Workshop](../day2-rag/START_HERE.md)
+Begin Retrieval-Augmented Generation learning
+
+### 🧪 [Jump to Lab 1.3: Micro-Evaluation](./lab-3-micro-eval.md)
+Build a systematic evaluation framework
+
+### 📖 [All Workshop Materials](../../portal.md)
+Access complete workshop resources
+
+::: notes
+**Instructor guidance:**
+- Emphasize that evaluation is not optional in production systems
+- Remind students that safety is everyone's responsibility
+- Encourage systematic thinking about quality metrics
+- Point out that Day 2's RAG evaluation builds on these foundations
+
+**If students want to go deeper:**
+- Explore the Ragas framework for RAG evaluation
+- Study the Anthropic responsible AI guidelines
+- Research LLM observability platforms
+- Read academic papers on LLM safety alignment
+
+**Before proceeding to Lab 1.3:**
+- Ensure everyone understands the five evaluation signals
+- Quick poll: "What's your biggest concern about LLM safety?"
+- Remind students to think about edge cases in their test sets
+:::
+
+---
+
+## 📖 Evaluation & Safety Resources
+
+**Build robust, responsible LLM systems:**
+
+### Evaluation Frameworks & Tools
+- 📘 **[Ragas Framework](https://github.com/explodinggradients/ragas)** – RAG-specific evaluation metrics (faithfulness, relevance, etc.)
+- 📘 **[LangChain Evaluation](https://python.langchain.com/docs/guides/evaluation/)** – Built-in evaluation tools for LLM applications
+- 📘 **[Phoenix by Arize](https://github.com/Arize-ai/phoenix)** – LLM observability and evaluation platform
+- 📘 **[Weights & Biases LLM Evaluation](https://wandb.ai/site/articles/evaluating-llms)** – Industry best practices and tools
+
+### Safety & Responsible AI
+- 🛡️ **[Anthropic Constitutional AI](https://www.anthropic.com/index/constitutional-ai-harmlessness-from-ai-feedback)** – Training safe, aligned models
+- 🛡️ **[OpenAI Safety Best Practices](https://platform.openai.com/docs/guides/safety-best-practices)** – Practical safety guidelines
+- 🛡️ **[Google Responsible AI Practices](https://ai.google/responsibility/responsible-ai-practices/)** – Enterprise AI governance
+- 🛡️ **[IBM AI Ethics](https://www.ibm.com/artificial-intelligence/ethics)** – Trustworthy AI principles
+
+### Academic Research
+- 🔬 **[Red Teaming LLMs](https://arxiv.org/abs/2209.07858)** – Adversarial testing for safety
+- 🔬 **[Evaluating LLM Hallucinations](https://arxiv.org/abs/2305.14552)** – Detecting and measuring factual errors
+- 🔬 **[Bias in LLMs](https://arxiv.org/abs/2108.07258)** – Understanding and mitigating bias
+- 🔬 **[LLM Security Risks](https://arxiv.org/abs/2302.04761)** – Prompt injection and other vulnerabilities
+
+### Monitoring & Observability
+- 🔧 **[LangSmith](https://www.langchain.com/langsmith)** – Production LLM monitoring and debugging
+- 🔧 **[Helicone](https://www.helicone.ai/)** – LLM observability and cost tracking
+- 🔧 **[Traceloop](https://www.traceloop.com/)** – OpenTelemetry for LLMs
+- 🔧 **[PromptLayer](https://promptlayer.com/)** – Prompt versioning and analytics
+
+::: notes
+Share these resources for students who want to build production-grade evaluation systems. The Ragas framework is particularly valuable for tomorrow's RAG lab.
+
+The safety resources are essential reading for anyone deploying LLMs in regulated industries or high-stakes applications.
+:::
+
+---
+
+## 💡 Production Evaluation Best Practices
+
+**Lessons from deploying LLMs at scale:**
+
+<span class="fragment">**📊 Multi-Dimensional Quality**
+Never rely on a single metric. Evaluate correctness, relevance, safety, latency, and cost together.</span>
+
+<span class="fragment">**🔄 Continuous Monitoring**
+Quality degrades over time. Set up automated evaluations that run daily/weekly on production data.</span>
+
+<span class="fragment">**👥 Human-in-the-Loop**
+Automated metrics catch 80% of issues. Human review catches the remaining 20%—the critical edge cases.</span>
+
+<span class="fragment">**📈 Trend Analysis**
+Don't just look at point-in-time metrics. Track trends. Is quality improving or degrading?</span>
+
+<span class="fragment">**🚨 Alerting Thresholds**
+Set up alerts when metrics cross thresholds. Catch quality degradation before users report it.</span>
+
+<span class="fragment">**🧪 Regression Testing**
+Build a golden test set. Every code/prompt change must pass these tests before deployment.</span>
+
+::: notes
+These practices separate toys from production systems:
+
+- **Multi-Dimensional**: Share a case where a prompt had great correctness but terrible latency
+- **Continuous Monitoring**: Demo a dashboard showing quality metrics over time
+- **Human Review**: Explain how to sample 1% of production traffic for human evaluation
+- **Trend Analysis**: Show a graph where quality degraded slowly over weeks
+- **Alerting**: Give an example alert: "Correctness dropped below 85% threshold"
+- **Regression Testing**: Explain how a 50-example golden set catches most regressions
+
+Connect each practice to a real-world consequence!
+:::
+
+---
+
+## 🛡️ Safety-First Development Checklist
+
+**Use this checklist before deploying any LLM application:**
+
+<span class="fragment">☑️ **Input Validation**
+Block or sanitize potentially harmful inputs before they reach the LLM</span>
+
+<span class="fragment">☑️ **Output Filtering**
+Screen LLM outputs for PII, toxicity, and policy violations</span>
+
+<span class="fragment">☑️ **Rate Limiting**
+Prevent abuse by limiting requests per user/IP</span>
+
+<span class="fragment">☑️ **Logging & Audit Trails**
+Log all interactions for compliance and debugging</span>
+
+<span class="fragment">☑️ **Fallback Mechanisms**
+Have a plan for when the LLM fails or is unavailable</span>
+
+<span class="fragment">☑️ **User Feedback**
+Provide thumbs up/down buttons and abuse reporting</span>
+
+<span class="fragment">☑️ **Regular Safety Audits**
+Review logs quarterly for safety issues and edge cases</span>
+
+::: notes
+This checklist is production-ready. Students can use it directly when building their own systems.
+
+**Key emphasis:**
+- Safety is layered defense—no single measure is sufficient
+- Input validation catches attacks before they happen
+- Output filtering is your last line of defense
+- Logging enables forensics when something goes wrong
+- Fallbacks prevent catastrophic failures
+- User feedback finds issues automated testing misses
+- Audits catch slow-moving problems
+
+Remind students that in regulated industries, many of these aren't optional—they're legal requirements.
+:::
+
+---
+
+## 📊 Evaluation Metrics Cheat Sheet
+
+**Quick reference for common metrics:**
+
+| Metric | Best For | How to Measure | Target |
+|--------|----------|----------------|--------|
+| **Correctness** | Factual Q&A | Exact match or semantic similarity | >90% |
+| **Relevance** | Search, RAG | Human rating (1-5 scale) | >4.0 avg |
+| **Coherence** | Long-form generation | Human rating (1-5 scale) | >4.0 avg |
+| **Format Adherence** | Structured outputs | Programmatic validation | 100% |
+| **Latency p95** | Real-time applications | Instrumentation | <2s |
+| **Toxicity** | User-facing content | Detoxify/Perspective API | <0.1 score |
+| **Hallucination Rate** | Knowledge-intensive tasks | Human fact-checking | <5% |
+| **Cost per Request** | All applications | Token usage × pricing | Varies |
+
+::: notes
+This cheat sheet summarizes Day 1 evaluation content. Students should reference this when designing their evaluation frameworks.
+
+**Target values are guidelines:**
+- Correctness: 90% is good for most tasks, but medical/legal may need 95%+
+- Latency: 2s p95 is reasonable for chat, but document processing can be slower
+- Toxicity: Use the strictest threshold for public-facing applications
+- Hallucination: 5% is acceptable for low-stakes tasks, unacceptable for high-stakes
+
+Emphasize that targets depend on use case and risk tolerance.
+:::
+
+---
+
+## 🎯 Choosing the Right Metrics for Your Use Case
+
+**Different applications need different evaluation approaches:**
+
+<span class="fragment">**Customer Support Chatbot**
+Priority: Relevance, Coherence, Safety, Latency
+Secondary: Hallucination Rate, User Satisfaction</span>
+
+<span class="fragment">**Document Summarization**
+Priority: Correctness, Completeness, Format Adherence
+Secondary: Latency, Cost</span>
+
+<span class="fragment">**Code Generation**
+Priority: Functional Correctness, Security, Format Adherence
+Secondary: Latency, Verbosity</span>
+
+<span class="fragment">**RAG Question Answering**
+Priority: Correctness, Relevance, Source Attribution
+Secondary: Latency, Cost</span>
+
+::: notes
+Help students think critically about which metrics matter for THEIR use cases.
+
+**Discussion prompts:**
+- "If you're building a medical Q&A system, what would your top 3 metrics be?"
+- "For a creative writing assistant, does correctness even matter?"
+- "In a cost-sensitive application, how do you balance quality vs. cost?"
+
+No universal answer—it depends on business requirements, risk tolerance, and user expectations.
+:::
+
+---
+
+## 🙏 Thank You!
+
+**Questions on evaluation or safety?**
+
+Remember:
+- You can't improve what you don't measure
+- Safety is not negotiable—build it in from day one
+- Start with simple metrics and evolve
+- Lab 1.3 gives you hands-on evaluation experience
+
+**Ready to build your evaluation framework?** 🚀
+
+<div style="margin-top: 40px; text-align: center;">
+<a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Workshop Portal</a>
+<a href="./lab-3-micro-eval.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.3</a>
+</div>
+
+::: notes
+**For instructors:**
+Before transitioning to Lab 1.3, ask:
+- "What safety concerns do you have for your use cases?"
+- "Which evaluation metric do you think is most important?"
+- "Anyone working in a regulated industry? What compliance requirements do you face?"
+- "Ready to build an evaluation framework?"
+
+**Transition smoothly:**
+"Excellent questions! Now you understand why evaluation and safety matter, and you know the key metrics to track. In Lab 1.3, you'll build a micro-evaluation framework with a small test set. This hands-on experience will prepare you for production-scale evaluation on Days 2-3. Let's get started!"
+
+**Important reminder:**
+Evaluation is not a one-time activity. It's an ongoing practice. The frameworks students build today will evolve as their applications mature.
+
+**Day 1 Completion:**
+After Lab 1.3, students will have completed Day 1! Celebrate this achievement—they've learned LLM fundamentals, prompt engineering, and evaluation. Tomorrow's RAG content builds on this solid foundation.
 :::

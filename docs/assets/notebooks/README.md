@@ -236,7 +236,7 @@ WATSONX_PROJECT_ID=your_project_id
 
 # Elasticsearch (optional)
 ELASTICSEARCH_URL=http://localhost:9200
-ELASTICSEARCH_USER=your_username
+ELASTICSEARCH_USER=ruslanmv
 ELASTICSEARCH_PASSWORD=your_password
 ```
 

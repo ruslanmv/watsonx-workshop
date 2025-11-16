@@ -673,7 +673,7 @@ Just remember the RAM requirements!
 
 Try Ollama in your browser (no installation):
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/YOUR_USERNAME/simple-ollama-environment/main?filepath=notebooks/ollama_quickstart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ruslanmv/simple-ollama-environment/main?filepath=notebooks/ollama_quickstart.ipynb)
 
 ::: notes
 This MyBinder link launches a temporary cloud instance with Ollama pre-installed.
@@ -682,5 +682,5 @@ Perfect for students who couldn't get Docker working locally.
 
 Note: MyBinder instances are ephemeral and have limited resources.
 
-Update YOUR_USERNAME with the actual GitHub username.
+Update ruslanmv with the actual GitHub username.
 :::

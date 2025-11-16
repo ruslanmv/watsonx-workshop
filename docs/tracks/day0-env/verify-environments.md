@@ -596,9 +596,9 @@ Students can bookmark them for later reference.
 
 **Try the environments online:**
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/YOUR_USERNAME/simple-ollama-environment/main?filepath=notebooks/ollama_quickstart.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ruslanmv/simple-ollama-environment/main?filepath=notebooks/ollama_quickstart.ipynb)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/simple-watsonx-enviroment/blob/main/notebooks/watsonx_quickstart.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ruslanmv/simple-watsonx-enviroment/blob/main/notebooks/watsonx_quickstart.ipynb)
 
 ::: notes
 These cloud environments are great for:
@@ -606,5 +606,5 @@ These cloud environments are great for:
 - Quick experimentation without installation
 - Sharing examples with others
 
-Update YOUR_USERNAME with actual GitHub usernames when repos are public.
+Update ruslanmv with actual GitHub usernames when repos are public.
 :::

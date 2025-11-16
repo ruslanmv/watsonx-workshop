@@ -7,6 +7,12 @@
 
 Master Retrieval Augmented Generation
 
+::: notes
+Welcome to Day 2. Building on Day 1 LLM foundations.
+:::
+
+---
+
 ### Tutor
 
 **Ruslan Idelfonso Magana Vsevolodovna**  
@@ -29,9 +35,7 @@ Master Retrieval Augmented Generation
   >
 </p>
 
-::: notes
-Welcome to Day 2. Building on Day 1 LLM foundations.
-:::
+---
 
 ---
 
@@ -473,7 +477,7 @@ WATSONX_URL=https://us-south.ml.cloud.ibm.com
 
 # Elasticsearch (if using)
 ELASTICSEARCH_URL=your_elasticsearch_url
-ELASTICSEARCH_USER=your_username
+ELASTICSEARCH_USER=ruslanmv
 ELASTICSEARCH_PASSWORD=your_password
 ```
 
