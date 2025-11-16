@@ -840,10 +840,214 @@ What works for one task may not work for another. Always test. Always iterate. P
 
 ---
 
-## 🚀 Next: Lab 1.2
+## 🚀 Next: Lab 1.2 {data-background-color="#0f172a"}
 
 Time to build these patterns hands-on!
 
 ::: notes
 You've learned the theory. Now apply it. Lab 1.2 is where you'll build real templates and see how they perform across different models.
+:::
+
+---
+
+## 🔗 Navigation & Resources {data-background-color="#0f172a"}
+
+**Navigate the workshop:**
+
+### 🏠 [Workshop Portal Home](https://ruslanmv.com/watsonx-workshop/portal/)
+Interactive daily guides and presentations
+
+### 📚 [Return to Day 1 Overview](./README.md)
+Review Day 1 schedule and learning objectives
+
+### ⬅️ [Previous: LLM Concepts](./llm-concepts.md)
+Review LLM fundamentals and architecture
+
+### ▶️ [Next: Evaluation & Safety Theory](./eval-safety-theory.md)
+Learn to measure quality and ensure responsible AI
+
+### 🧪 [Jump to Lab 1.2: Prompt Templates](./lab-2-prompt-templates.md)
+Build production-ready prompt patterns
+
+### 📖 [All Workshop Materials](../../README.md)
+Access complete workshop resources
+
+::: notes
+**Instructor guidance:**
+- Remind students that prompt engineering is a skill that improves with practice
+- Emphasize the connection between templates and production systems
+- Encourage students to save their best prompts for reuse
+- Point out that Day 2's RAG prompts build directly on these patterns
+
+**If students want to go deeper:**
+- Experiment with the reference notebooks
+- Try chain-of-thought prompting on complex problems
+- Build a personal prompt library
+- Study the Anthropic and OpenAI prompt libraries
+
+**Before proceeding to Lab 1.2:**
+- Ensure everyone understands the five core patterns
+- Quick poll: "Which pattern do you think you'll use most?"
+- Remind students to version control their prompts
+:::
+
+---
+
+## 📖 Prompt Engineering Resources
+
+**Master the art of prompt engineering:**
+
+### Comprehensive Guides
+- 📘 **[Prompt Engineering Guide](https://www.promptingguide.ai/)** – The most complete prompt engineering resource
+- 📘 **[OpenAI Prompt Engineering Best Practices](https://platform.openai.com/docs/guides/prompt-engineering)** – Official guidelines from OpenAI
+- 📘 **[Anthropic Prompt Engineering](https://docs.anthropic.com/claude/docs/prompt-engineering)** – Claude-specific techniques
+- 📘 **[Google Cloud Prompt Design](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/introduction-prompt-design)** – Enterprise prompt patterns
+
+### Prompt Libraries & Examples
+- 🎨 **[Anthropic Prompt Library](https://docs.anthropic.com/claude/prompt-library)** – Production-tested prompts for common tasks
+- 🎨 **[OpenAI Examples](https://platform.openai.com/examples)** – Interactive prompt examples
+- 🎨 **[LangChain Prompt Templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/)** – Framework integration patterns
+- 🎨 **[PromptBase](https://promptbase.com/)** – Marketplace for quality prompts
+
+### Advanced Techniques
+- 🔬 **[Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903)** – Research paper on CoT
+- 🔬 **[ReAct: Reasoning + Acting](https://arxiv.org/abs/2210.03629)** – Combining reasoning with actions
+- 🔬 **[Few-Shot Learning](https://arxiv.org/abs/2005.14165)** – Academic foundation for in-context learning
+- 🔬 **[Tree of Thoughts](https://arxiv.org/abs/2305.10601)** – Advanced reasoning framework
+
+### Tools & Platforms
+- 🔧 **[LangSmith](https://www.langchain.com/langsmith)** – Prompt testing and debugging platform
+- 🔧 **[PromptLayer](https://promptlayer.com/)** – Version control for prompts
+- 🔧 **[Helicone](https://www.helicone.ai/)** – LLM observability and prompt analytics
+
+::: notes
+Share these in the workshop chat for students who want to go deeper. The Anthropic Prompt Library is particularly valuable—every prompt there has been tested in production.
+
+The research papers are for students with academic interests. Don't require reading them, but make them available for those who want the theoretical foundation.
+:::
+
+---
+
+## 💡 Prompt Engineering Best Practices
+
+**Lessons from production systems:**
+
+<span class="fragment">**🎯 Iteration is Key**
+Your first prompt will rarely be your best. Plan for 3-5 iterations based on testing and feedback.</span>
+
+<span class="fragment">**📝 Document Your Prompts**
+Use comments to explain why you made specific choices. Future you (and your team) will thank you.</span>
+
+<span class="fragment">**🧪 A/B Test Prompts**
+When changing prompts in production, run A/B tests to measure impact on quality metrics.</span>
+
+<span class="fragment">**📊 Version Control Everything**
+Treat prompts like code. Use git to track changes. Tag versions deployed to production.</span>
+
+<span class="fragment">**👥 Involve Domain Experts**
+Domain experts know what "good" looks like. Have them review prompts for their area.</span>
+
+<span class="fragment">**🔄 Regularly Re-evaluate**
+Models change. User needs evolve. Re-test prompts quarterly to ensure they still perform well.</span>
+
+::: notes
+These practices separate amateur prompt engineering from professional deployment:
+
+- **Iteration**: Show a before/after example of a prompt that improved through iteration
+- **Documentation**: Share an example of a well-documented prompt template
+- **A/B Testing**: Explain how to run simple A/B tests (send 50% traffic to each variant)
+- **Version Control**: Demo a git commit message for a prompt change
+- **Domain Experts**: Give an example where expert feedback improved a medical/legal prompt
+- **Re-evaluation**: Share a case where a prompt that worked in January failed in June
+
+Make these practices stick with concrete examples!
+:::
+
+---
+
+## 🎨 Template Design Patterns
+
+**Common patterns for organizing prompt templates:**
+
+<span class="fragment">**1. Role-Context-Task Pattern**
+```python
+"""You are a [ROLE] with expertise in [DOMAIN].
+
+Context: [BACKGROUND_INFO]
+
+Task: [SPECIFIC_INSTRUCTION]
+
+Constraints: [LIMITATIONS]
+"""
+```
+Clear structure that sets expectations</span>
+
+<span class="fragment">**2. Input-Processing-Output Pattern**
+```python
+"""Given: [INPUT_DESCRIPTION]
+
+Process this input by: [STEPS]
+
+Return: [OUTPUT_FORMAT]
+"""
+```
+Explicit about what goes in and what should come out</span>
+
+<span class="fragment">**3. Example-Driven Pattern**
+```python
+"""Task: [TASK_DESCRIPTION]
+
+Examples:
+Input: [EXAMPLE_1_INPUT]
+Output: [EXAMPLE_1_OUTPUT]
+
+Input: [EXAMPLE_2_INPUT]
+Output: [EXAMPLE_2_OUTPUT]
+
+Now process: [ACTUAL_INPUT]
+"""
+```
+Let examples guide the model</span>
+
+::: notes
+These meta-patterns help organize your thinking about prompt structure. They're not rigid rules—mix and match as needed.
+
+**Pattern 1** works well for customer support and conversational agents.
+**Pattern 2** is ideal for data transformation and extraction tasks.
+**Pattern 3** shines for structured outputs like JSON generation.
+
+Have students identify which pattern each template in Lab 1.2 uses.
+:::
+
+---
+
+## 🙏 Thank You!
+
+**Questions on prompt patterns?**
+
+Remember:
+- Prompt engineering is both art and science
+- Templates save time and ensure consistency
+- The patterns you learn today work across all LLM providers
+- Lab 1.2 is where you'll practice building real templates
+
+**Ready to create some powerful prompts?** 🚀
+
+<div style="margin-top: 40px; text-align: center;">
+<a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Workshop Portal</a>
+<a href="./lab-2-prompt-templates.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.2</a>
+</div>
+
+::: notes
+**For instructors:**
+Before transitioning to Lab 1.2, ask:
+- "Which prompt pattern do you think you'll use most in your work?"
+- "Anyone have a use case they're excited to build a template for?"
+- "Questions on few-shot vs. chain-of-thought?"
+- "Ready to build some templates?"
+
+**Transition smoothly:**
+"Excellent! Now you understand the core patterns and principles. In Lab 1.2, you'll build three production-ready templates: summarization, style transfer, and Q&A with context. These will form the foundation for tomorrow's RAG prompts. Let's dive in!"
+
+Encourage students to be creative in Lab 1.2—prompt engineering has room for personal style.
 :::
