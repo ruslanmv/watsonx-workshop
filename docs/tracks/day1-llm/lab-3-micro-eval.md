@@ -776,10 +776,176 @@ Give students a sense of what's coming. They should be excited, not anxious.
 
 ---
 
-## 🙏 Great Work Today!
+## 🔗 Navigation & Next Steps {data-background-color="#0f172a"}
 
-See you tomorrow for Day 2!
+**Where to go from here:**
+
+### 🏠 [Return to Workshop Home](../../README.md)
+Access all workshop materials, labs, and resources
+
+### 📚 [Day 1 Overview](./README.md)
+Review Day 1 schedule and all completed learning objectives
+
+### ⬅️ [Previous: Lab 1.2 – Prompt Templates](./lab-2-prompt-templates.md)
+Review building reusable prompt patterns
+
+### ▶️ [Next: Day 2 – RAG Workshop](../day2-rag/START_HERE.md)
+Begin learning Retrieval-Augmented Generation
+
+### 🔄 [Alternative: Day 1 Theory Slides](./eval-safety-theory.md)
+Deep dive into evaluation and safety concepts
 
 ::: notes
-End on a positive note. Thank students for their engagement. Remind them to rest up for Day 2.
+**Instructor guidance:**
+- Congratulate students on completing Day 1!
+- Remind them to save all notebooks and CSV files
+- Preview Day 2 RAG content
+- Encourage evening reflection on what they learned
+
+**Day 1 Recap for students:**
+You've now completed all three core Day 1 labs:
+1. ✅ Lab 1.1: Connected to Ollama and watsonx.ai
+2. ✅ Lab 1.2: Built reusable prompt templates
+3. ✅ Lab 1.3: Created evaluation frameworks
+
+These skills are foundational for everything in Days 2-3!
+
+**Homework (Optional):**
+- Expand your test set to 20-30 diverse prompts
+- Try different models (ollama list shows available models)
+- Experiment with more sophisticated evaluation metrics
+- Document your findings in a blog post or presentation
+:::
+
+---
+
+## 📖 Additional Resources
+
+**Deepen your evaluation skills:**
+
+- 📘 **[LLM Evaluation Guide](https://www.promptingguide.ai/techniques/evaluation)** – Comprehensive evaluation techniques
+- 📘 **[MLOps for LLMs](https://www.databricks.com/blog/llm-mlops)** – Production monitoring patterns
+- 📘 **[Weights & Biases LLM Evaluation](https://wandb.ai/site/articles/evaluating-llms)** – Industry best practices
+- 📘 **[Human Eval Framework](https://github.com/openai/human-eval)** – Benchmark evaluation methodology
+
+**Evaluation Tools & Frameworks:**
+- 🔧 [LangChain Evaluation](https://python.langchain.com/docs/guides/evaluation/) – Built-in evaluation tools
+- 🔧 [Ragas](https://github.com/explodinggradients/ragas) – RAG evaluation framework
+- 🔧 [Phoenix](https://github.com/Arize-ai/phoenix) – LLM observability and evaluation
+
+**Workshop Materials:**
+- 🔧 [Lab 1.1 – Quickstart](./lab-1-quickstart-two-envs.md) – Review the basics
+- 🔧 [Lab 1.2 – Prompt Templates](./lab-2-prompt-templates.md) – Review template patterns
+- 🔧 [Complete Notebooks](../../labs-src/) – Full working examples with solutions
+
+::: notes
+Share these resources for students who want to dive deeper. The Ragas framework is particularly relevant for tomorrow's RAG content.
+:::
+
+---
+
+## 💾 Save Your Day 1 Work!
+
+**Before finishing Day 1, ensure you've saved:**
+
+<span class="fragment">📁 **All notebook files** from Labs 1.1, 1.2, and 1.3</span>
+
+<span class="fragment">📁 **Evaluation results** – `micro_evaluation_results.csv` and summary files</span>
+
+<span class="fragment">📁 **Comparison data** – `lab1_2_comparison_results.csv` from Lab 1.2</span>
+
+<span class="fragment">📁 **Your notes** – Document insights and questions for Day 2</span>
+
+**Pro tip:** Create a `day1-deliverables/` folder to organize all your outputs!
+
+::: notes
+Remind students to organize their work. They'll reference these files during Days 2-3. Creating a well-organized deliverables folder is a professional habit worth building.
+
+Suggested structure:
+```
+day1-deliverables/
+├── notebooks/
+│   ├── lab1_1_quickstart.ipynb
+│   ├── lab1_2_templates_ollama.ipynb
+│   ├── lab1_2_templates_watsonx.ipynb
+│   └── lab1_3_evaluation.ipynb
+├── data/
+│   ├── micro_evaluation_results.csv
+│   ├── lab1_2_comparison_results.csv
+│   └── micro_evaluation_summary.txt
+└── notes/
+    └── day1_reflections.md
+```
+:::
+
+---
+
+## 🎓 Day 1 Achievement Unlocked! {data-background-color="#0f172a"}
+
+**Celebrate what you've accomplished today!**
+
+<span class="fragment">🏆 **Mastered LLM fundamentals** – You can now work with any LLM API</span>
+
+<span class="fragment">🏆 **Built production patterns** – Reusable templates and evaluation frameworks</span>
+
+<span class="fragment">🏆 **Developed evaluation mindset** – You measure quality systematically, not subjectively</span>
+
+<span class="fragment">🏆 **Prepared for RAG** – You understand the LLM foundation; tomorrow adds retrieval</span>
+
+<span class="fragment">🏆 **Created portfolio assets** – Your templates and eval frameworks are resume-worthy</span>
+
+::: notes
+Students have genuinely accomplished a lot today! This isn't hyperbole—they've learned production-ready skills that many AI practitioners don't have. Take a moment to celebrate:
+
+**What they could do this morning:**
+- Maybe heard of LLMs, maybe not
+- No hands-on experience with APIs
+- Didn't know how to evaluate quality
+
+**What they can do now:**
+- Call LLMs programmatically in two environments
+- Build reusable prompt templates
+- Evaluate outputs systematically
+- Compare backends empirically
+- Plan production architecture
+
+This is genuine progress worth celebrating!
+:::
+
+---
+
+## 🙏 Thank You & See You Tomorrow!
+
+**Questions? Reflections? Insights to share?**
+
+Take tonight to:
+- Review your notebooks and notes
+- Reflect on what surprised you most
+- Think about how you might apply these skills
+- Rest up for Day 2's RAG deep-dive!
+
+**Remember:** Building AI systems is a journey. You've taken significant steps today! 🚀
+
+<div style="margin-top: 40px; text-align: center;">
+<a href="../../README.md" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Back to Workshop Home</a>
+<a href="../day2-rag/START_HERE.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">▶️ Day 2: RAG Workshop</a>
+</div>
+
+::: notes
+End Day 1 on an incredibly positive note. Students should feel accomplished and excited for Day 2.
+
+**For instructors:**
+Before dismissing, ask:
+- "What was your biggest 'aha!' moment today?"
+- "What are you most excited to learn tomorrow?"
+- "Any questions to carry into Day 2?"
+- "Don't forget to save your work!"
+
+**Logistics reminders:**
+- Same time tomorrow for Day 2
+- Come with questions from today
+- Bring your Day 1 notebooks for reference
+- We'll dive into RAG—the magic of retrieval-augmented generation!
+
+Give students a chance to share their wins and ask final questions. End with enthusiasm for Day 2!
 :::

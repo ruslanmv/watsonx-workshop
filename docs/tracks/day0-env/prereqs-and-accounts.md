@@ -542,3 +542,102 @@ Google Colab works well for the watsonx notebooks if students have their credent
 
 Make sure to update ruslanmv with the actual GitHub usernames once the repos are public.
 :::
+
+---
+
+## 🔗 Navigation & Next Steps {data-background-color="#0f172a"}
+
+**Where to go from here:**
+
+### 🏠 [Return to Workshop Home](../../README.md)
+Access all workshop materials and schedule
+
+### ▶️ [Next: Setup Ollama Environment](./setup-simple-ollama-environment.md)
+Install and configure your local LLM environment
+
+### ▶️ [Alternative: Setup watsonx Environment](./setup-simple-watsonx-enviroment.md)
+Configure your IBM watsonx.ai cloud environment
+
+### ▶️ [Verify Both Environments](./verify-environments.md)
+Test that everything is working correctly
+
+### 📚 [Jump to Day 1](../day1-llm/README.md)
+Begin the LLM fundamentals workshop (after setup is complete)
+
+::: notes
+**Instructor guidance:**
+- Ensure everyone has completed prerequisites before moving on
+- Take a break if needed before starting environment setup
+- Have teaching assistants available to help with installation issues
+- Remind students they can work through setup at their own pace
+
+**Setup order recommendation:**
+1. Complete this prerequisites check
+2. Set up Ollama environment first (simpler, no credentials needed)
+3. Set up watsonx environment (requires IBM Cloud account)
+4. Verify both environments are working
+5. You're ready for Day 1!
+
+**Pro tip:** Students who finish setup early can:
+- Explore the sample notebooks
+- Try the Binder/Colab links
+- Review Day 1 theory slides
+- Help classmates who are stuck
+:::
+
+---
+
+## 📖 Additional Resources
+
+**Helpful documentation and tutorials:**
+
+- 📘 **[Python Installation Guide](https://realpython.com/installing-python/)** – Comprehensive Python setup for all platforms
+- 📘 **[Git Basics Tutorial](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics)** – Learn Git fundamentals
+- 📘 **[Jupyter Notebook Guide](https://jupyter-notebook.readthedocs.io/en/stable/)** – Master Jupyter notebooks
+- 📘 **[IBM Cloud Getting Started](https://cloud.ibm.com/docs/overview)** – Navigate IBM Cloud console
+- 📘 **[Ollama Documentation](https://github.com/ollama/ollama/blob/main/README.md)** – Complete Ollama reference
+
+**Troubleshooting Resources:**
+- 🔧 [Python PATH Issues](https://realpython.com/add-python-to-path/) – Fix "command not found" errors
+- 🔧 [Git Installation Help](https://github.com/git-guides/install-git) – Platform-specific Git setup
+- 🔧 [VS Code Setup](https://code.visualstudio.com/docs/setup/setup-overview) – Configure your code editor
+
+::: notes
+Share these resources in the workshop chat/LMS. Students often need additional help with environment setup, especially if they're new to Python or Git.
+:::
+
+---
+
+## 🙏 Thank You for Preparing!
+
+**Questions about prerequisites or setup?**
+
+Remember:
+- Take your time with setup—there's no rush
+- Ask questions if you get stuck
+- Help your neighbors if you finish early
+- We're here to support you!
+
+**Environment setup can be challenging, but you've got this!** 💪
+
+<div style="margin-top: 40px; text-align: center;">
+<a href="../../README.md" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Back to Workshop Home</a>
+<a href="./setup-simple-ollama-environment.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">▶️ Setup Ollama Environment</a>
+</div>
+
+::: notes
+End on an encouraging note. Environment setup is often the hardest part of any workshop, so reassure students that:
+- It's normal to encounter issues
+- We have time allocated for troubleshooting
+- There are multiple paths to success (local install, Docker, cloud notebooks)
+- The learning starts on Day 1—setup is just preparation
+
+**For instructors:**
+Have a backup plan for students who can't get local setup working:
+- Google Colab for watsonx notebooks
+- MyBinder for Ollama notebooks (limited)
+- Shared development environment if available
+- Pairing with students who have working setups
+
+Make sure to circulate and check on everyone's progress before dismissing!
+:::
