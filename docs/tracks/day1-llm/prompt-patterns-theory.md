@@ -28,10 +28,22 @@ Prompt engineering is a skill that improves with practice. Today you'll learn th
 
 ## 📋 Core Prompt Patterns {data-transition="zoom"}
 
-Five fundamental patterns you'll use daily
+**Five fundamental patterns you'll use daily**
+
+These patterns are battle-tested and work across different models and use cases. Master these five and you'll handle 90% of real-world scenarios.
+
+| Pattern | Use Case | Complexity |
+|---------|----------|------------|
+| **Instruction Prompts** | Simple, well-defined tasks | ⭐ Low |
+| **Few-Shot Examples** | Structured outputs, domain tasks | ⭐⭐ Medium |
+| **Chain-of-Thought** | Multi-step reasoning | ⭐⭐⭐ High |
+| **Style Transfer** | Content adaptation | ⭐⭐ Medium |
+| **Summarization** | Content condensing | ⭐⭐ Medium |
+
+<span class="fragment">Each pattern has specific strengths and ideal use cases we'll explore in detail</span>
 
 ::: notes
-These patterns are battle-tested. They work across different models and use cases. Master these five and you'll handle 90% of scenarios.
+These patterns are battle-tested. They work across different models and use cases. Master these five and you'll handle 90% of scenarios. Think of them as your prompt engineering toolkit—each tool has its purpose. Start with instruction prompts (the hammer), then add specialized tools as needed.
 :::
 
 ---
@@ -141,16 +153,33 @@ Too many examples waste tokens and can confuse the model. Two or three well-chos
 
 ## 🎯 Few-Shot Use Cases
 
-<span class="fragment">✅ Tasks where the model needs clarification</span>
+**When few-shot examples shine:**
 
-<span class="fragment">✅ Structured outputs (JSON, CSV)</span>
+<span class="fragment">✅ **Structured outputs** (JSON, CSV, XML) - Show the exact format you need</span>
 
-<span class="fragment">✅ Domain-specific tasks</span>
+<span class="fragment">✅ **Domain-specific tasks** - Legal, medical, or technical terminology extraction</span>
 
-<span class="fragment">✅ Reducing hallucinations</span>
+<span class="fragment">✅ **Custom formatting** - When standard instructions aren't clear enough</span>
+
+<span class="fragment">✅ **Reducing hallucinations** - Examples ground the model in reality</span>
+
+<span class="fragment">✅ **Classification tasks** - Show examples of each category</span>
+
+**Real-world example:**
+```python
+# Instead of: "Extract product names"
+# Use few-shot to show what counts as a product:
+"""
+Text: "I used Python 3.11 with Django to build the app"
+Products: ["Python 3.11", "Django"]
+
+Text: "The MacBook runs macOS Sonoma beautifully"
+Products: ["MacBook", "macOS Sonoma"]
+"""
+```
 
 ::: notes
-Few-shot is especially valuable for reducing hallucinations. By showing what "good" looks like, you guide the model away from making things up.
+Few-shot is especially valuable for reducing hallucinations. By showing what "good" looks like, you guide the model away from making things up. In production systems, few-shot examples act as implicit validation rules—the model learns not just the format but also the quality standards you expect.
 :::
 
 ---
@@ -261,40 +290,90 @@ Notice how the core information stays the same but the tone changes dramatically
 
 ## 🎯 Style Transfer Use Cases
 
-<span class="fragment">✅ Content adaptation for different audiences</span>
+**When to use style transfer:**
 
-<span class="fragment">✅ Marketing copy variations</span>
+<span class="fragment">✅ **Content adaptation for different audiences** - Same product, different customer segments</span>
 
-<span class="fragment">✅ Documentation at different reading levels</span>
+<span class="fragment">✅ **Marketing copy variations** - A/B testing different tones</span>
+
+<span class="fragment">✅ **Documentation at different reading levels** - Technical docs for engineers, simplified for users</span>
+
+<span class="fragment">✅ **Brand voice consistency** - Align all content with your style guide</span>
+
+<span class="fragment">✅ **Localization beyond translation** - Cultural tone adjustments</span>
+
+**Real-world example:**
+```python
+# One technical blog post becomes three versions:
+# 1. Executive summary (formal, high-level)
+# 2. Developer deep-dive (technical, detailed)
+# 3. Customer FAQ (friendly, accessible)
+```
 
 ::: notes
-One piece of technical documentation can become three: expert guide, beginner tutorial, and executive summary. All from style transfer.
+One piece of technical documentation can become three: expert guide, beginner tutorial, and executive summary. All from style transfer. In production, this saves massive amounts of time—write once, adapt for multiple audiences automatically. Companies use this to maintain brand voice across thousands of pieces of content.
 :::
 
 ---
 
 ## 5️⃣ Summarization
 
-Ask the model to **condense or reformulate** content
+**Ask the model to condense or reformulate content**
+
+Summarization is one of the most widely deployed LLM patterns in production systems. It transforms long-form content into digestible insights, saving time and improving information accessibility.
+
+**Why summarization matters:**
+
+<span class="fragment">📊 **Information overload** - Humans can't read everything; summaries prioritize</span>
+
+<span class="fragment">⏱️ **Time efficiency** - 10-page report → 3 key bullets in seconds</span>
+
+<span class="fragment">🎯 **Decision support** - Executives need insights, not raw data</span>
+
+<span class="fragment">🔍 **Content discovery** - Summaries help users decide what to read in full</span>
+
+**Common business applications:**
+- Customer feedback analysis (1000s of reviews → key themes)
+- Meeting transcripts → action items
+- Research papers → executive briefings
+- Legal documents → plain-language summaries
 
 ::: notes
-Summarization is one of the most common LLM use cases. Let's explore different variants.
+Summarization is one of the most common LLM use cases. Let's explore different variants. In production, summarization is the workhorse—companies use it for customer support ticket analysis, content curation, research synthesis, and more. It's often the first LLM feature teams deploy because the value is immediate and measurable.
 :::
 
 ---
 
 ## 📝 Summarization Variants
 
-<span class="fragment">**Abstractive**: Rewrite in your own words</span>
+Different summarization approaches for different needs:
 
-<span class="fragment">**Extractive**: Pull out key sentences</span>
+<span class="fragment">**Abstractive**: Rewrite in your own words
+- Most flexible and readable
+- Model generates new sentences that capture the essence
+- Example: "The quarterly earnings exceeded expectations, with revenue up 15%" (original was 3 paragraphs of financial details)
+- Best for: Executive summaries, content marketing</span>
 
-<span class="fragment">**Length-constrained**: "Exactly 50 words"</span>
+<span class="fragment">**Extractive**: Pull out key sentences verbatim
+- More accurate, less risk of hallucination
+- Direct quotes from source material
+- Example: Selecting the 5 most important sentences from a 20-page report
+- Best for: Research synthesis, legal documents</span>
 
-<span class="fragment">**Audience-specific**: "For executives" or "For technical teams"</span>
+<span class="fragment">**Length-constrained**: "Exactly 50 words" or "3 sentences"
+- Precise control over output size
+- Useful for UI constraints (tweet length, preview cards)
+- Example: "Summarize in exactly 280 characters for Twitter"
+- Best for: Social media, email previews, mobile UIs</span>
+
+<span class="fragment">**Audience-specific**: "For executives" or "For technical teams"
+- Adjusts both length and terminology
+- Focuses on what matters to that audience
+- Example: Same product launch, different summaries for investors vs. engineers
+- Best for: Multi-stakeholder communications</span>
 
 ::: notes
-Different summarization styles for different needs. Abstractive is more flexible but can introduce errors. Extractive is safer but less concise.
+Different summarization styles for different needs. Abstractive is more flexible but can introduce errors. Extractive is safer but less concise. In production, you often combine these—use extractive for legal/compliance content where accuracy is critical, and abstractive for marketing content where readability matters more.
 :::
 
 ---
@@ -324,10 +403,24 @@ Always specify length and audience. "Summarize this" is too vague. "Summarize in
 
 ## 🎨 Prompt Design Principles {data-background-color="#1e293b"}
 
-Universal principles that apply to all patterns
+**Universal principles that apply to all patterns**
+
+Beyond the five core patterns, there are fundamental principles that make any prompt more effective. These principles transcend specific use cases and model providers.
+
+**Why structure matters:**
+
+<span class="fragment">🎯 **Consistency** - Structured prompts produce reliable outputs</span>
+
+<span class="fragment">🔍 **Debuggability** - Clear structure makes problems easier to identify</span>
+
+<span class="fragment">📈 **Scalability** - Well-structured prompts work across many inputs</span>
+
+<span class="fragment">🤝 **Team alignment** - Standard structures enable collaboration</span>
+
+Think of prompt design like API design: clear contracts, predictable behavior, and easy to maintain.
 
 ::: notes
-These principles transcend specific patterns. They're the foundation of good prompt engineering.
+These principles transcend specific patterns. They're the foundation of good prompt engineering. Just as good code follows principles like DRY and SOLID, good prompts follow these design principles. They separate amateur prompt writing from professional prompt engineering.
 :::
 
 ---
@@ -420,10 +513,31 @@ Context is king. The more relevant information you provide, the better the model
 
 ## 🏗️ Prompt Templates {data-transition="zoom"}
 
-Reusable patterns with placeholders for variable content
+**Reusable patterns with placeholders for variable content**
+
+Templates are the key to scaling prompt engineering from ad-hoc experiments to production systems. Just as you wouldn't hard-code values in your application, you shouldn't hard-code prompts.
+
+**What is a prompt template?**
+
+A prompt template is a prompt with placeholders (variables) that get filled in at runtime. Think of it like a function:
+
+```python
+# Hard-coded prompt (bad)
+prompt = "Summarize this text in 3 sentences: The quick brown fox..."
+
+# Template (good)
+def create_summary_prompt(text, num_sentences):
+    return f"Summarize this text in {num_sentences} sentences: {text}"
+```
+
+**Template ≈ Function analogy:**
+- **Input parameters** = Variables to fill in
+- **Function body** = Prompt structure
+- **Return value** = Completed prompt ready for LLM
+- **Reusability** = Call with different inputs
 
 ::: notes
-Templates are the key to scaling prompt engineering. Write once, use everywhere.
+Templates are the key to scaling prompt engineering. Write once, use everywhere. They're the difference between hobby projects and production systems. Without templates, you'll have prompt strings scattered throughout your codebase, impossible to maintain and test.
 :::
 
 ---
@@ -543,10 +657,37 @@ Chat templates handle multi-turn conversations properly, with system and user me
 
 ## 🏗️ Accelerator Prompt Structure {data-background-color="#0f172a"}
 
-How the accelerator centralizes prompt logic
+**How the accelerator centralizes prompt logic**
+
+The watsonx accelerator you'll work with in this workshop follows production best practices for organizing prompts. Understanding this structure will help you build scalable LLM applications.
+
+**What is the accelerator?**
+- A production-ready RAG (Retrieval-Augmented Generation) system
+- Built with watsonx.ai, LangChain, and ChromaDB
+- Demonstrates enterprise patterns for prompt management
+- You'll extend it throughout Days 2-3
+
+**Why centralized prompts matter:**
+
+<span class="fragment">🏗️ **Separation of concerns** - Prompts live in one place, not scattered in code</span>
+
+<span class="fragment">🔄 **Easy iteration** - Change prompts without touching business logic</span>
+
+<span class="fragment">🧪 **A/B testing** - Swap prompts to compare performance</span>
+
+<span class="fragment">👥 **Collaboration** - Subject matter experts can edit prompts without coding</span>
+
+**Architecture pattern:**
+```
+accelerator/
+├── rag/
+│   ├── prompt.py          # 👈 All prompts defined here
+│   ├── pipeline.py        # Uses prompts from prompt.py
+│   └── retriever.py       # Business logic, no prompts
+```
 
 ::: notes
-Let's see how templates are used in the production codebase you'll work with.
+Let's see how templates are used in the production codebase you'll work with. The accelerator demonstrates a key principle: treat prompts as configuration, not hard-coded strings. This architectural pattern is used by companies like OpenAI, Anthropic, and enterprises deploying LLMs at scale.
 :::
 
 ---
@@ -672,39 +813,66 @@ This is the actual pattern you'll use. Templates are imported from prompt.py, fi
 
 ## 📓 Reference Notebooks
 
-**Key notebook:**
-`use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb`
+**Key notebooks demonstrating prompt patterns:**
 
-Shows real prompt structure for RAG
+**Primary reference:**
+- 📘 `use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb`
+  - Shows real prompt structure for RAG applications
+  - Demonstrates context formatting and prompt construction
+  - Example of production-ready prompt engineering
+
+**What you'll find inside:**
+- Complete RAG pipeline with actual prompts
+- How to format retrieved documents as context
+- System vs. user prompt separation
+- Template usage with watsonx.ai
+- Error handling and fallback prompts
+
+**Additional notebooks to explore:**
+- `llama-index-demo.ipynb` - Alternative framework patterns
+- `langchain-basics.ipynb` - Template fundamentals
+
+**How to use these:**
+- Don't run them today (you'll do that in labs)
+- Open them to see real-world examples
+- Study the prompt structures used
+- Notice patterns that repeat across notebooks
 
 ::: notes
-The notebooks in labs-src/ show these patterns in action. Don't run them today, but do open them to see real examples.
+The notebooks in labs-src/ show these patterns in action. Don't run them today, but do open them to see real examples. These notebooks represent hundreds of hours of prompt engineering refinement. Study them to accelerate your learning.
 :::
 
 ---
 
 ## 🧪 Lab 1.2 Preview {data-background-color="#1e293b"}
 
-What you'll build in the lab
+**What you'll build in the hands-on lab**
+
+In Lab 1.2, you'll apply everything you've learned to build production-ready prompt templates. This is where theory becomes practice.
+
+**Lab objectives:**
+
+<span class="fragment">🎯 **Create templates** for: Summarization, Style rewrite, Q&A with context</span>
+
+<span class="fragment">🎯 **Implement in both backends**: Ollama (local) and watsonx.ai (cloud)</span>
+
+<span class="fragment">🎯 **Compare results** across different models and providers</span>
+
+<span class="fragment">🎯 **Measure quality** and consistency using evaluation metrics</span>
+
+**Why these three templates?**
+- **Summarization** - Most common enterprise use case, teaches length control
+- **Style transfer** - Shows how to adapt content, teaches tone management
+- **Q&A with context** - Foundation for RAG (tomorrow's focus), teaches context handling
+
+**What success looks like:**
+- Three working Python functions with template-based prompts
+- Consistent output formats across both backends
+- Documented trade-offs between different prompt approaches
+- A personal prompt library you can reuse in future projects
 
 ::: notes
-Let's preview what you'll do in Lab 1.2 to cement these concepts.
-:::
-
----
-
-## 📝 Lab 1.2: Your Tasks
-
-<span class="fragment">🎯 Create templates for: Summarization, Style rewrite, Q&A with context</span>
-
-<span class="fragment">🎯 Implement in both Ollama and watsonx</span>
-
-<span class="fragment">🎯 Compare results across backends</span>
-
-<span class="fragment">🎯 Measure quality and consistency</span>
-
-::: notes
-You'll take the patterns we've discussed and implement them yourself. This hands-on practice is where the learning really happens.
+You've learned the theory. Now apply it. Lab 1.2 is where you'll build real templates and see how they perform across different models. This hands-on practice is where the learning really happens. By the end, you'll have three reusable templates and the skills to create more.
 :::
 
 ---
@@ -766,22 +934,72 @@ This is a mini-RAG prompt. You're providing context manually now. Tomorrow, you'
 
 ## 🔮 Looking Ahead
 
-**Day 2**: These templates become the foundation for RAG prompts
+**How today's templates evolve into advanced patterns**
 
-**Day 3**: Templates extended for multi-turn agents and tool calling
+The templates you're learning today are the foundation for everything you'll build on Days 2 and 3. Let's see how they evolve.
+
+**Day 2: RAG (Retrieval-Augmented Generation)**
+
+<span class="fragment">The Q&A template becomes a full RAG prompt:
+- Add automatic retrieval from vector databases
+- Include relevance scoring and re-ranking
+- Implement citation tracking
+- Handle multi-document context
+
+```python
+# Today: Manual context
+context = "Some text you provide"
+
+# Tomorrow: Automatic retrieval
+context = retriever.get_relevant_docs(question, top_k=5)
+```
+</span>
+
+**Day 3: Agents and Tool Calling**
+
+<span class="fragment">Templates extend for multi-turn interactions:
+- Conversation history management
+- Tool calling and result integration
+- Multi-step reasoning chains
+- Error handling and retries
+
+```python
+# Tomorrow: Single-turn
+response = llm.generate(prompt)
+
+# Day 3: Multi-turn agent
+response = agent.run(task, tools=[search, calculator, code_runner])
+```
+</span>
 
 ::: notes
-Everything you learn today compounds. Master these basics and the advanced topics will be much easier.
+Everything you learn today compounds. Master these basics and the advanced topics will be much easier. The Q&A template you build today becomes tomorrow's RAG system. The few-shot pattern becomes agent behavior examples. The chain-of-thought becomes multi-step agent reasoning.
 :::
 
 ---
 
 ## ✅ Best Practices Summary {data-background-color="#0f172a"}
 
-What to do and what to avoid
+**What to do and what to avoid**
+
+Professional prompt engineering follows proven patterns. These practices separate prototype code from production systems.
+
+**Why best practices matter:**
+
+<span class="fragment">🎯 **Reliability** - Well-engineered prompts produce consistent results</span>
+
+<span class="fragment">💰 **Cost efficiency** - Good prompts minimize wasted tokens and retries</span>
+
+<span class="fragment">⚡ **Performance** - Optimized prompts reduce latency</span>
+
+<span class="fragment">🔒 **Safety** - Thoughtful design prevents harmful outputs</span>
+
+<span class="fragment">🤝 **Maintainability** - Future you (and your team) will appreciate clear patterns</span>
+
+Let's break down the essential dos and don'ts from production experience.
 
 ::: notes
-Let's wrap up with a clear dos and don'ts list.
+Let's wrap up with a clear dos and don'ts list. These come from real production experience—mistakes made, lessons learned, and patterns that actually work at scale.
 :::
 
 ---
@@ -836,16 +1054,6 @@ Start simple. Many developers over-engineer prompts, adding complexity that does
 
 ::: notes
 What works for one task may not work for another. Always test. Always iterate. Prompt engineering is a skill that improves with practice.
-:::
-
----
-
-## 🚀 Next: Lab 1.2 {data-background-color="#0f172a"}
-
-Time to build these patterns hands-on!
-
-::: notes
-You've learned the theory. Now apply it. Lab 1.2 is where you'll build real templates and see how they perform across different models.
 :::
 
 ---
@@ -1025,13 +1233,19 @@ Have students identify which pattern each template in Lab 1.2 uses.
 
 **Questions on prompt patterns?**
 
-Remember:
+**Remember:**
 - Prompt engineering is both art and science
 - Templates save time and ensure consistency
 - The patterns you learn today work across all LLM providers
 - Lab 1.2 is where you'll practice building real templates
 
 **Ready to create some powerful prompts?** 🚀
+
+**What's next:**
+- 🧪 **Lab 1.2** - Build three production-ready templates
+- 🎯 Apply the five core patterns hands-on
+- 📊 Compare results across Ollama and watsonx.ai
+- 🔬 Test your prompts with real data
 
 <div style="margin-top: 40px; text-align: center;">
 <a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Workshop Portal</a>
