@@ -924,10 +924,23 @@ Comprehensive documentation and examples are available to help you build more co
 
 <span class="fragment">**Fine-grained control** for complex applications</span>
 
-### Next Steps
+---
 
-<span class="fragment">Explore **Langflow** for visual workflow building</span>
+## Navigation & Next Steps {data-background-color="#0f172a"}
+
+### 🏠 Workshop Portal
+
+**[Workshop Home](https://ruslanmv.com/watsonx-workshop/portal/)** | **[Day 3 Overview](../../portal/day3-portal.md)**
+
+### Related Content
+
+<span class="fragment">← [Agentic AI Overview](./agentic-ai-overview.md)</span>
+<span class="fragment">← [CrewAI Framework](./agentic-frameworks-crewai.md)</span>
+<span class="fragment">← [Langflow Framework](./agentic-frameworks-langflow.md)</span>
+<span class="fragment">→ [watsonx Orchestrate](./bridge-orchestrate-governance.md)</span>
+
+**Version:** 1.0 | **Updated:** January 2025
 
 ::: notes
-LangGraph provides powerful primitives for building sophisticated agent applications with full control over execution.
+LangGraph provides powerful primitives for building sophisticated agent applications with full control!
 :::

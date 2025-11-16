@@ -509,6 +509,123 @@ This is the path from raw documents to production-grade AI systems with governan
 
 ---
 
+## Production Best Practices {data-background-color="#0f172a"}
+
+Real-world agent deployment
+
+---
+
+### Best Practice 1: Start Simple
+
+<span class="fragment">**Begin with single-agent, single-tool**</span>
+
+<span class="fragment">Validate the pattern works before adding complexity</span>
+
+```python
+# Simple first
+agent = create_agent(tools=[rag_tool])
+
+# Then expand
+agent = create_agent(tools=[rag_tool, calculator, api_tool])
+```
+
+::: notes
+Complexity compounds errors. Start simple, validate, then expand.
+:::
+
+---
+
+### Best Practice 2: Clear Tool Descriptions
+
+```python {data-line-numbers="1-4|6-10"}
+# Bad: Vague description
+@tool
+def search(query: str):
+    """Search"""
+
+# Good: Specific description
+@tool
+def search_knowledge_base(query: str):
+    """Search company knowledge base for HR policies,
+    benefits, and procedures. Returns excerpts with citations."""
+```
+
+::: notes
+Specific descriptions lead to better tool selection.
+:::
+
+---
+
+### Best Practice 3: Error Handling
+
+```python {data-line-numbers="1-10"}
+def safe_agent_run(query: str, max_iterations: int = 5):
+    try:
+        agent_executor = AgentExecutor(
+            agent=agent,
+            tools=tools,
+            max_iterations=max_iterations
+        )
+        return agent_executor.invoke({"input": query})
+    except Exception as e:
+        return {"error": "Agent error", "details": str(e)}
+```
+
+::: notes
+Always handle timeouts, loops, and tool failures.
+:::
+
+---
+
+## Additional Resources {data-background-color="#064e3b"}
+
+Comprehensive learning materials
+
+---
+
+### Research Papers
+
+<span class="fragment">📄 ReAct Pattern: https://arxiv.org/abs/2210.03629</span>
+<span class="fragment">📄 Tool Learning: https://arxiv.org/abs/2302.04761</span>
+<span class="fragment">📄 Multi-Agent: https://arxiv.org/abs/2307.07924</span>
+
+### Framework Documentation
+
+<span class="fragment">🔧 CrewAI: https://docs.crewai.com/</span>
+<span class="fragment">📊 LangGraph: https://langchain-ai.github.io/langgraph/</span>
+<span class="fragment">🎨 Langflow: https://docs.langflow.org/</span>
+
+::: notes
+Foundational resources for deep learning.
+:::
+
+---
+
+## Navigation & Next Steps {data-background-color="#0f172a"}
+
+Continue your journey
+
+---
+
+### 🏠 Workshop Portal
+
+**[Interactive Workshop Portal](https://ruslanmv.com/watsonx-workshop/portal/)**
+
+**[Day 3 Overview](../../portal/day3-portal.md)**
+
+**Day 3 Theory:**
+<span class="fragment">✅ Agentic AI Overview (Current)</span>
+<span class="fragment">📖 [CrewAI](./agentic-frameworks-crewai.md)</span>
+<span class="fragment">📖 [Langflow](./agentic-frameworks-langflow.md)</span>
+<span class="fragment">📖 [LangGraph](./agentic-frameworks-langgraph.md)</span>
+<span class="fragment">📖 [watsonx Bridge](./bridge-orchestrate-governance.md)</span>
+
+::: notes
+Complete Day 3 materials and navigation
+:::
+
+---
+
 ## 🚀 Summary {data-background-color="#0f172a"}
 
 ### Key Takeaways
@@ -522,6 +639,8 @@ This is the path from raw documents to production-grade AI systems with governan
 <span class="fragment">Your **RAG accelerator** becomes a reusable tool</span>
 
 <span class="fragment">Production path: **Docs → RAG → Agent → Orchestrated & Governed**</span>
+
+**Version:** 1.0 | **Updated:** January 2025 | **Part of:** watsonx AI Workshop
 
 ::: notes
 These concepts form the foundation for everything we'll build today. Let's dive into the frameworks!

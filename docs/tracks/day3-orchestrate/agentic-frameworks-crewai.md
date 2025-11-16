@@ -646,10 +646,23 @@ These resources will help you continue learning beyond this workshop.
 
 <span class="fragment">Great for **rapid prototyping** of agent systems</span>
 
-### Next Steps
+---
 
-<span class="fragment">Explore **Langflow** for visual workflow building</span>
+## Navigation & Next Steps {data-background-color="#0f172a"}
+
+### 🏠 Workshop Portal
+
+**[Workshop Home](https://ruslanmv.com/watsonx-workshop/portal/)** | **[Day 3 Overview](../../portal/day3-portal.md)**
+
+### Related Content
+
+<span class="fragment">← [Agentic AI Overview](./agentic-ai-overview.md)</span>
+<span class="fragment">→ [Langflow Framework](./agentic-frameworks-langflow.md)</span>
+<span class="fragment">→ [LangGraph Framework](./agentic-frameworks-langgraph.md)</span>
+<span class="fragment">→ [watsonx Orchestrate](./bridge-orchestrate-governance.md)</span>
+
+**Version:** 1.0 | **Updated:** January 2025
 
 ::: notes
-CrewAI provides an intuitive way to build multi-agent systems. Next, we'll see how Langflow makes agent building even more accessible.
+CrewAI provides an intuitive way to build multi-agent systems. Next, explore other frameworks!
 :::
