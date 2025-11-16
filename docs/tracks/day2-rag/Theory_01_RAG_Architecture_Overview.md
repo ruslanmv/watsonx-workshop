@@ -1225,55 +1225,809 @@ Concrete actions. Don't just consume, apply!
 
 ---
 
+## Production Best Practices {data-background-color="#0f172a"}
+
+Real-world deployment tips
+
+---
+
+### Best Practice 1: Chunking Strategy
+
+**Start with these defaults and tune:**
+
+```python
+chunk_size = 1000  # tokens
+chunk_overlap = 200  # 20% overlap
+```
+
+<span class="fragment">Monitor retrieval quality and adjust</span>
+
+<span class="fragment">Domain-specific content may need different sizes</span>
+
+<span class="fragment">Legal/medical: Larger chunks for complete context</span>
+
+<span class="fragment">FAQ/support: Smaller chunks for precision</span>
+
+::: notes
+No universal chunk size. Test with your data.
+:::
+
+---
+
+### Best Practice 2: Embedding Model Selection
+
+**Decision Matrix:**
+
+<span class="fragment">**Speed-critical apps** → all-MiniLM-L6-v2 (384d)</span>
+
+<span class="fragment">**Balanced needs** → all-mpnet-base-v2 (768d)</span>
+
+<span class="fragment">**Accuracy-critical** → text-embedding-ada-002 (1536d)</span>
+
+<span class="fragment">**Domain-specific** → Fine-tuned models or watsonx slate</span>
+
+::: notes
+Match model to use case requirements
+:::
+
+---
+
+### Best Practice 3: Vector Store Choice {data-background-color="#1e1e1e"}
+
+Production considerations
+
+---
+
+### Vector Store Selection Guide
+
+**Development/Testing:**
+```python
+# Chroma - local, simple
+vectorstore = Chroma(persist_directory="./db")
+```
+
+**Production (< 1M docs):**
+```python
+# Elasticsearch - enterprise features
+vectorstore = ElasticsearchStore(...)
+```
+
+**Production (> 1M docs):**
+```python
+# Specialized vector DB (Pinecone, Weaviate, Milvus)
+```
+
+::: notes
+Scale determines technology choice
+:::
+
+---
+
+### Best Practice 4: Retrieval Configuration
+
+**Optimize retrieval parameters:**
+
+```python {data-line-numbers="1-7|9-13"}
+# Start conservative
+retriever = vectorstore.as_retriever(
+    search_type="similarity",
+    search_kwargs={
+        "k": 5,  # Retrieve 5 chunks
+    }
+)
+
+# Add diversity if needed
+retriever = vectorstore.as_retriever(
+    search_type="mmr",
+    search_kwargs={"k": 5, "fetch_k": 20, "lambda_mult": 0.7}
+)
+```
+
+::: notes
+Balance precision and recall. Monitor metrics.
+:::
+
+---
+
+### Best Practice 5: Prompt Engineering {data-background-color="#0f172a"}
+
+Critical for quality
+
+---
+
+### Effective RAG Prompts
+
+**Include clear instructions:**
+
+```python {data-line-numbers="1-4|6-8|10-12|14-15"}
+prompt = """
+You are an assistant answering questions using
+the provided context. Follow these rules:
+
+1. Answer ONLY based on the context provided.
+2. If the answer is not in the context, say
+   "I don't have enough information to answer that."
+
+3. Cite the source document when possible.
+
+4. Be concise but complete.
+
+Context: {context}
+
+Question: {question}
+"""
+```
+
+::: notes
+Clear rules reduce hallucinations significantly
+:::
+
+---
+
+### Best Practice 6: Monitoring and Evaluation
+
+**Track these metrics:**
+
+<span class="fragment">**Retrieval Precision** - % relevant chunks retrieved</span>
+
+<span class="fragment">**Retrieval Recall** - % of all relevant chunks found</span>
+
+<span class="fragment">**Answer Correctness** - Human or LLM-based scoring</span>
+
+<span class="fragment">**Latency** - p50, p95, p99 response times</span>
+
+<span class="fragment">**Cost** - API calls, compute usage</span>
+
+::: notes
+You can't improve what you don't measure
+:::
+
+---
+
+### Best Practice 7: Metadata Filtering {data-background-color="#1e1e1e"}
+
+Improve retrieval precision
+
+---
+
+### Using Metadata Effectively
+
+```python {data-line-numbers="1-8|10-15|17-20"}
+# Add metadata during indexing
+chunks = [
+    Document(
+        page_content="Policy text...",
+        metadata={
+            "source": "employee_handbook.pdf",
+            "department": "HR",
+            "date": "2024-01-15",
+            "category": "benefits"
+        }
+    )
+]
+
+# Filter during retrieval
+results = vectorstore.similarity_search(
+    query="vacation policy",
+    filter={"department": "HR", "category": "benefits"},
+    k=5
+)
+
+# Much more precise results
+# Avoids mixing unrelated domains
+```
+
+::: notes
+Metadata filtering = surgical precision in retrieval
+:::
+
+---
+
+### Best Practice 8: Error Handling
+
+**Production code needs resilience:**
+
+```python {data-line-numbers="1-17"}
+def answer_question(query: str) -> dict:
+    try:
+        # Retrieve documents
+        docs = retriever.get_relevant_documents(query)
+
+        if not docs:
+            return {"answer": "No relevant information found.",
+                    "confidence": "low"}
+
+        # Generate answer
+        answer = qa_chain({"query": query})
+        return answer
+
+    except Exception as e:
+        logger.error(f"RAG error: {e}")
+        return {"answer": "Error processing request.",
+                "error": str(e)}
+```
+
+::: notes
+Always handle edge cases. Never crash on user input.
+:::
+
+---
+
+### Best Practice 9: Caching {data-background-color="#0f172a"}
+
+Optimize for repeated queries
+
+---
+
+### Implement Query Caching
+
+```python {data-line-numbers="1-2|4-12"}
+from functools import lru_cache
+import hashlib
+
+@lru_cache(maxsize=1000)
+def cached_retrieval(query_hash: str, k: int):
+    """Cache retrieval results for identical queries"""
+    return retriever.get_relevant_documents(query, k=k)
+
+def retrieve(query: str, k: int = 5):
+    query_hash = hashlib.md5(query.encode()).hexdigest()
+    return cached_retrieval(query_hash, k)
+```
+
+<span class="fragment">Significant speedup for common queries</span>
+
+::: notes
+Caching = free performance wins
+:::
+
+---
+
+### Best Practice 10: Version Control
+
+**Track these artifacts:**
+
+<span class="fragment">✅ Embedding model version</span>
+
+<span class="fragment">✅ Chunking configuration</span>
+
+<span class="fragment">✅ Prompt templates</span>
+
+<span class="fragment">✅ Vector store schema</span>
+
+<span class="fragment">✅ Evaluation metrics and results</span>
+
+::: notes
+RAG systems are complex. Version everything.
+:::
+
+---
+
+## RAG Architecture Cheat Sheet {data-background-color="#1e1e1e"}
+
+Quick reference guide
+
+---
+
+### Component Quick Reference
+
+| Component | Purpose | Popular Tools |
+|-----------|---------|--------------|
+| **Loader** | Extract text | PyPDF, Unstructured |
+| **Splitter** | Chunk text | RecursiveCharacterTextSplitter |
+| **Embeddings** | Vectorize | HuggingFace, OpenAI, watsonx |
+| **Vector Store** | Index & search | Chroma, Elasticsearch, FAISS |
+| **Retriever** | Query interface | LangChain retriever |
+| **LLM** | Generate answer | Ollama, watsonx, OpenAI |
+
+::: notes
+Bookmark this table. Essential component mapping.
+:::
+
+---
+
+### Typical Configuration Values
+
+```python
+# Chunking
+chunk_size = 1000
+chunk_overlap = 200
+
+# Retrieval
+k = 5  # number of chunks
+search_type = "similarity"  # or "mmr"
+
+# Embeddings
+model = "all-MiniLM-L6-v2"  # 384 dimensions
+device = "cpu"  # or "cuda"
+
+# LLM
+temperature = 0.0  # deterministic for Q&A
+max_tokens = 512  # concise answers
+```
+
+::: notes
+Copy-paste ready. Good starting defaults.
+:::
+
+---
+
+### Performance Benchmarks {data-background-color="#0f172a"}
+
+What to expect
+
+---
+
+### Latency Expectations
+
+**Local RAG (Ollama + Chroma):**
+<span class="fragment">Embedding: 50-200ms</span>
+<span class="fragment">Retrieval: 10-50ms</span>
+<span class="fragment">Generation: 2-10s (depends on model size)</span>
+<span class="fragment">**Total: 3-11 seconds**</span>
+
+**Cloud RAG (watsonx + Elasticsearch):**
+<span class="fragment">Embedding: 100-500ms (API latency)</span>
+<span class="fragment">Retrieval: 50-200ms</span>
+<span class="fragment">Generation: 1-5s</span>
+<span class="fragment">**Total: 2-6 seconds**</span>
+
+::: notes
+Ballpark numbers. Actual performance varies.
+:::
+
+---
+
+### Cost Estimation
+
+**Embedding Costs (per 1M tokens):**
+
+<span class="fragment">Local (HuggingFace): **$0** (compute only)</span>
+
+<span class="fragment">OpenAI ada-002: **$0.10**</span>
+
+<span class="fragment">watsonx slate: **Variable** (check pricing)</span>
+
+**LLM Generation Costs (per 1M tokens):**
+
+<span class="fragment">Local (Ollama): **$0** (compute only)</span>
+
+<span class="fragment">watsonx Granite: **~$0.50-2.00**</span>
+
+<span class="fragment">OpenAI GPT-4: **$10-30**</span>
+
+::: notes
+Costs add up at scale. Monitor usage.
+:::
+
+---
+
+## Common Pitfalls to Avoid {data-background-color="#1e1e1e"}
+
+Learn from others' mistakes
+
+---
+
+### Pitfall 1: Ignoring Chunk Quality
+
+**Problem:**
+```python
+# Bad: No overlap, arbitrary size
+splitter = CharacterTextSplitter(chunk_size=100)
+```
+
+**Solution:**
+```python
+# Good: Semantic boundaries, overlap
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    separators=["\n\n", "\n", ".", " "]
+)
+```
+
+::: notes
+Chunk quality directly impacts retrieval quality
+:::
+
+---
+
+### Pitfall 2: Not Validating Retrieval
+
+<span class="fragment">**Always inspect what you retrieve!**</span>
+
+```python {data-line-numbers="1-7"}
+# Add logging
+docs = retriever.get_relevant_documents(query)
+for i, doc in enumerate(docs):
+    print(f"Doc {i}: {doc.page_content[:100]}...")
+    print(f"Score: {doc.metadata.get('score', 'N/A')}")
+    print(f"Source: {doc.metadata.get('source', 'Unknown')}")
+```
+
+::: notes
+Garbage in, garbage out. Verify retrieval first.
+:::
+
+---
+
+### Pitfall 3: Overloading Context {data-background-color="#0f172a"}
+
+Too much context hurts
+
+---
+
+### Context Window Management
+
+**Problem:**
+```python
+# Retrieving too many chunks
+k = 20  # May exceed LLM context window
+```
+
+**Solution:**
+```python
+# Balance quantity and quality
+k = 5  # Usually sufficient
+
+# Or use token counting
+def fit_to_context(docs, max_tokens=2000):
+    """Select docs that fit in context"""
+    # Implementation...
+```
+
+::: notes
+More context ≠ better answers. Find the sweet spot.
+:::
+
+---
+
+### Pitfall 4: Neglecting Prompt Engineering
+
+<span class="fragment">**Generic prompts = poor results**</span>
+
+```python
+# Bad: Vague instructions
+prompt = "Answer: {question} Context: {context}"
+
+# Good: Clear, specific instructions
+prompt = """
+Answer the question using ONLY the context below.
+If the context doesn't contain the answer, say so.
+Cite the source document ID in your answer.
+
+Context: {context}
+Question: {question}
+"""
+```
+
+::: notes
+Prompt engineering is critical for RAG quality
+:::
+
+---
+
+### Pitfall 5: No Evaluation Loop
+
+<span class="fragment">**Build → Deploy → Monitor → Iterate**</span>
+
+<span class="fragment">Without evaluation, you're flying blind</span>
+
+<span class="fragment">Use Lab 2.4 patterns: correctness, relevance, latency</span>
+
+<span class="fragment">A/B test different configurations</span>
+
+::: notes
+Continuous improvement requires measurement
+:::
+
+---
+
 ## Additional Resources {data-background-color="#0f172a"}
 
-Expand your knowledge
+Comprehensive learning resources
 
 ---
 
-### Documentation
+### Essential Documentation
 
-<span class="fragment">LangChain RAG Guide: https://python.langchain.com/docs/use_cases/question_answering/</span>
+**LangChain RAG:**
+<span class="fragment">📚 Official Guide: https://python.langchain.com/docs/use_cases/question_answering/</span>
+<span class="fragment">📚 RAG Tutorial: https://python.langchain.com/docs/tutorials/rag/</span>
+<span class="fragment">📚 Vector Store Guide: https://python.langchain.com/docs/modules/data_connection/vectorstores/</span>
 
-<span class="fragment">watsonx.ai RAG Patterns: https://ibm.com/docs/watsonx-as-a-service</span>
-
-<span class="fragment">Vector Database Comparison: https://benchmark.vectorview.ai/</span>
+**watsonx.ai:**
+<span class="fragment">📚 watsonx RAG Patterns: https://ibm.com/docs/watsonx-as-a-service</span>
+<span class="fragment">📚 Granite Models: https://www.ibm.com/granite</span>
+<span class="fragment">📚 watsonx Embeddings: https://ibm.github.io/watsonx-ai-python-sdk/</span>
 
 ::: notes
-Bookmark these. Essential references.
+Official documentation is your first resource
 :::
 
 ---
 
-### Research Papers
+### Vector Databases
 
-<span class="fragment">"Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"</span>
+**Comparison & Benchmarks:**
+<span class="fragment">🔍 Vector DB Benchmark: https://benchmark.vectorview.ai/</span>
+<span class="fragment">🔍 Choosing Vector DBs: https://www.pinecone.io/learn/vector-database/</span>
 
-<span class="fragment">"Dense Passage Retrieval for Open-Domain Question Answering"</span>
+**Specific Tools:**
+<span class="fragment">🛠️ Chroma Docs: https://docs.trychroma.com/</span>
+<span class="fragment">🛠️ Elasticsearch Vector: https://www.elastic.co/elasticsearch/vector-database</span>
+<span class="fragment">🛠️ FAISS Guide: https://github.com/facebookresearch/faiss/wiki</span>
+<span class="fragment">🛠️ Pinecone: https://docs.pinecone.io/</span>
+<span class="fragment">🛠️ Weaviate: https://weaviate.io/developers/weaviate</span>
 
 ::: notes
-Read the original papers. Understand the research foundation.
+Each vector DB has trade-offs. Research before choosing.
 :::
 
 ---
 
-### Tools for RAG Development
+### Research Papers {data-background-color="#1e1e1e"}
 
-<span class="fragment">**LangSmith** - RAG debugging and tracing</span>
+Understanding the foundations
 
-<span class="fragment">**Weights & Biases** - Experiment tracking</span>
+---
+
+### Foundational Papers
+
+**Original RAG Paper:**
+<span class="fragment">📄 "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (Lewis et al., 2020)</span>
+<span class="fragment">https://arxiv.org/abs/2005.11401</span>
+
+**Dense Retrieval:**
+<span class="fragment">📄 "Dense Passage Retrieval for Open-Domain Question Answering" (Karpukhin et al., 2020)</span>
+<span class="fragment">https://arxiv.org/abs/2004.04906</span>
+
+**Advanced RAG:**
+<span class="fragment">📄 "Self-RAG: Learning to Retrieve, Generate, and Critique" (Asai et al., 2023)</span>
+<span class="fragment">https://arxiv.org/abs/2310.11511</span>
 
 ::: notes
-Production tools. Will see these in advanced topics.
+Read the papers to understand why, not just how
+:::
+
+---
+
+### Embedding Models
+
+**Model Comparison:**
+<span class="fragment">🎯 MTEB Leaderboard: https://huggingface.co/spaces/mteb/leaderboard</span>
+<span class="fragment">🎯 Sentence Transformers: https://www.sbert.net/</span>
+
+**Popular Models:**
+<span class="fragment">🤖 all-MiniLM-L6-v2: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2</span>
+<span class="fragment">🤖 all-mpnet-base-v2: https://huggingface.co/sentence-transformers/all-mpnet-base-v2</span>
+<span class="fragment">🤖 BGE Models: https://huggingface.co/BAAI/bge-large-en-v1.5</span>
+<span class="fragment">🤖 OpenAI Embeddings: https://platform.openai.com/docs/guides/embeddings</span>
+
+::: notes
+Embedding quality determines retrieval quality
+:::
+
+---
+
+### RAG Evaluation {data-background-color="#0f172a"}
+
+Measuring quality
+
+---
+
+### Evaluation Frameworks
+
+**RAGAS (RAG Assessment):**
+<span class="fragment">📊 GitHub: https://github.com/explodinggradients/ragas</span>
+<span class="fragment">📊 Docs: https://docs.ragas.io/</span>
+<span class="fragment">📊 Metrics: Context relevance, answer faithfulness, answer relevance</span>
+
+**TruLens:**
+<span class="fragment">📊 TruLens for RAG: https://www.trulens.org/</span>
+<span class="fragment">📊 Comprehensive evaluation and tracking</span>
+
+**Phoenix (Arize):**
+<span class="fragment">📊 RAG Observability: https://docs.arize.com/phoenix</span>
+<span class="fragment">📊 Trace retrieval and generation</span>
+
+::: notes
+Modern evaluation frameworks automate quality measurement
+:::
+
+---
+
+### Production Tools
+
+**Development & Debugging:**
+<span class="fragment">🔧 LangSmith: https://docs.smith.langchain.com/</span>
+<span class="fragment">🔧 RAG tracing and debugging</span>
+
+**Experiment Tracking:**
+<span class="fragment">🔬 Weights & Biases: https://wandb.ai/site/solutions/llmops</span>
+<span class="fragment">🔬 MLflow: https://mlflow.org/docs/latest/llms/rag/index.html</span>
+
+**Monitoring:**
+<span class="fragment">📈 LangFuse: https://langfuse.com/</span>
+<span class="fragment">📈 Open-source LLM observability</span>
+
+::: notes
+Production RAG needs monitoring and debugging tools
+:::
+
+---
+
+### Learning Resources {data-background-color="#1e1e1e"}
+
+Tutorials and courses
+
+---
+
+### Video Tutorials
+
+**LangChain RAG:**
+<span class="fragment">🎥 LangChain RAG Tutorial: https://www.youtube.com/watch?v=tcqEUSNCn8I</span>
+<span class="fragment">🎥 Advanced RAG Techniques: https://www.youtube.com/watch?v=sVcwVQRHIc8</span>
+
+**Enterprise RAG:**
+<span class="fragment">🎥 Building Production RAG: https://www.deeplearning.ai/short-courses/building-applications-vector-databases/</span>
+<span class="fragment">🎥 LangChain for LLM Apps: https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/</span>
+
+::: notes
+Video tutorials for visual learners
+:::
+
+---
+
+### Community Resources
+
+**Forums & Discussion:**
+<span class="fragment">💬 LangChain Discord: https://discord.gg/langchain</span>
+<span class="fragment">💬 r/LocalLLaMA: https://reddit.com/r/LocalLLaMA</span>
+<span class="fragment">💬 Hugging Face Forums: https://discuss.huggingface.co/</span>
+
+**Blogs & Articles:**
+<span class="fragment">📝 LangChain Blog: https://blog.langchain.dev/</span>
+<span class="fragment">📝 Pinecone Learning Center: https://www.pinecone.io/learn/</span>
+<span class="fragment">📝 Elasticsearch Blog: https://www.elastic.co/blog/</span>
+
+::: notes
+Community resources for ongoing learning
+:::
+
+---
+
+### IBM-Specific Resources
+
+**watsonx Resources:**
+<span class="fragment">🏢 watsonx.ai Documentation: https://www.ibm.com/docs/en/watsonx-as-a-service</span>
+<span class="fragment">🏢 IBM Granite Models: https://www.ibm.com/granite</span>
+<span class="fragment">🏢 watsonx.governance: https://www.ibm.com/docs/en/watsonx/governance</span>
+
+**Sample Code:**
+<span class="fragment">💻 watsonx Python SDK: https://ibm.github.io/watsonx-ai-python-sdk/</span>
+<span class="fragment">💻 IBM Generative AI: https://github.com/IBM/ibm-generative-ai</span>
+
+::: notes
+Enterprise-specific resources for IBM stack
+:::
+
+---
+
+## Navigation & Next Steps {data-background-color="#0f172a"}
+
+Continue your learning journey
+
+---
+
+### 🏠 Return to Workshop Portal
+
+**[Interactive Workshop Portal](https://ruslanmv.com/watsonx-workshop/portal/)**
+
+Access daily guides, presentations, and labs
+
+::: notes
+Central hub for all workshop materials
+:::
+
+---
+
+### 📚 Day 2 Materials
+
+**[Day 2 RAG Overview](../../portal/day2-portal.md)**
+
+Complete schedule and navigation for Day 2
+
+**Day 2 Theory:**
+<span class="fragment">✅ RAG Architecture Overview (Current)</span>
+<span class="fragment">📖 [Supplementary Materials](./SUPPLEMENTARY_QUICK_START.md)</span>
+
+**Day 2 Labs:**
+<span class="fragment">🧪 [Lab 2.1: Local RAG](./lab-1-intro-rag.md) - Next up!</span>
+<span class="fragment">🧪 [Lab 2.2: watsonx RAG](./lab-2-watsonx-rag.md)</span>
+<span class="fragment">🧪 [Lab 2.3: Twin Pipelines](./lab-3-dual-mode-rag.md)</span>
+<span class="fragment">🧪 [Lab 2.4: RAG Evaluation](./lab-4-compare-evals.md)</span>
+
+::: notes
+Complete Day 2 journey from theory to practice
+:::
+
+---
+
+### 🔗 Related Workshop Content
+
+**Previous Day:**
+<span class="fragment">← [Day 1: LLM Foundations](../day1-llm/README.md)</span>
+<span class="fragment">Review prompt engineering and evaluation basics</span>
+
+**Next Day:**
+<span class="fragment">→ [Day 3: Agent Orchestration](../day3-orchestrate/README.md)</span>
+<span class="fragment">Build on RAG with agentic workflows</span>
+
+**Prerequisites:**
+<span class="fragment">🔧 [Day 0: Environment Setup](../day0-env/prereqs-and-accounts.md)</span>
+
+::: notes
+Workshop builds progressively. Review previous material if needed.
+:::
+
+---
+
+### 📖 Additional Workshop Resources
+
+**Supplementary Materials:**
+<span class="fragment">📚 [Day 2 Supplementary Guide](./SUPPLEMENTARY_QUICK_START.md)</span>
+<span class="fragment">Advanced topics, IBM tooling, production patterns</span>
+
+**Accelerator Integration:**
+<span class="fragment">🏗️ Reference notebooks in `accelerator/assets/notebook/`</span>
+<span class="fragment">🏗️ Production code in `accelerator/rag/`</span>
+
+**Community:**
+<span class="fragment">💬 Workshop discussions and Q&A</span>
+<span class="fragment">💬 Share your RAG implementations</span>
+
+::: notes
+Extensive supplementary materials available
+:::
+
+---
+
+### ✅ Ready to Start Labs?
+
+**Immediate Next Steps:**
+
+<span class="fragment">1. **Review** this theory presentation</span>
+
+<span class="fragment">2. **Bookmark** the additional resources</span>
+
+<span class="fragment">3. **Begin** Lab 2.1: Build your first local RAG system</span>
+
+<span class="fragment">4. **Experiment** with different configurations</span>
+
+<span class="fragment">5. **Evaluate** your results using metrics from Lab 2.4</span>
+
+::: notes
+Theory complete. Time to build!
 :::
 
 ---
 
 ## Theory Module Complete! ✅ {data-background-color="#0f172a" data-transition="zoom"}
 
-Proceed to Lab 2.1 when ready
+**You now understand:**
+- RAG architecture and components
+- Design trade-offs and best practices
+- Production patterns and pitfalls
+- The complete RAG pipeline flow
+
+**Proceed to [Lab 2.1](./lab-1-intro-rag.md) when ready!**
+
+**Version:** 1.0
+**Last Updated:** January 2025
+**Part of:** watsonx AI Workshop Series
 
 ::: notes
 Congratulations! Solid theoretical foundation established.
-Now time to build!
+Now time to build and experiment!
 :::

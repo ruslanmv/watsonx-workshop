@@ -706,16 +706,671 @@ Get help from the community
 
 ---
 
+## Production Integration Tips {data-background-color="#0f172a"}
+
+Real-world deployment guidance
+
+---
+
+### Tip 1: Accelerator Integration Workflow
+
+**Step-by-step migration from labs to production:**
+
+```python
+# 1. Start with lab code (Lab 2.1-2.4)
+def simple_rag(query):
+    docs = vectorstore.similarity_search(query)
+    return llm(build_prompt(query, docs))
+
+# 2. Refactor to accelerator structure
+# accelerator/rag/pipeline.py
+class RAGPipeline:
+    def __init__(self, config):
+        self.retriever = self._init_retriever(config)
+        self.llm = self._init_llm(config)
+
+    def answer_question(self, query: str) -> dict:
+        # Production-ready with error handling
+        pass
+```
+
+::: notes
+Lab code teaches concepts. Accelerator code is production-ready.
+:::
+
+---
+
+### Tip 2: Environment Management
+
+**Keep environments separate:**
+
+```bash
+# Development
+.env.dev
+WATSONX_URL=https://us-south.ml.cloud.ibm.com
+WATSONX_PROJECT_ID=dev_project_123
+
+# Production
+.env.prod
+WATSONX_URL=https://eu-de.ml.cloud.ibm.com
+WATSONX_PROJECT_ID=prod_project_456
+```
+
+<span class="fragment">Never mix dev/prod credentials!</span>
+
+::: notes
+Separate credentials prevent costly mistakes
+:::
+
+---
+
+### Tip 3: Docker Best Practices {data-background-color="#1e1e1e"}
+
+Container optimization
+
+---
+
+### Optimized Dockerfile
+
+```dockerfile {data-line-numbers="1-3|5-8|10-13|15-18"}
+# Multi-stage build for smaller images
+FROM python:3.11-slim as builder
+WORKDIR /build
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir \
+    -r requirements.txt
+
+# Runtime stage
+FROM python:3.11-slim
+WORKDIR /app
+
+# Copy only what's needed
+COPY --from=builder /root/.local /root/.local
+COPY accelerator/ ./accelerator/
+ENV PATH=/root/.local/bin:$PATH
+
+CMD ["python", "-m", "accelerator.service.api"]
+```
+
+::: notes
+Multi-stage builds reduce image size by 50%+
+:::
+
+---
+
+### Tip 4: Governed Tools Best Practices
+
+**Versioning strategy:**
+
+```python
+# Register tool with version
+payload = ToolRegistrationPayload(
+    tool_name="company_search_v2",  # Include version
+    version="2.0.0",  # Semantic versioning
+    description="Enhanced search with filters",
+    code={"source_code_base64": tool_code},
+    schema=tool_schema
+)
+
+# Always specify version when loading
+tool = load_tool(
+    tool_id="company_search_v2",
+    version="2.0.0"  # Explicit version
+)
+```
+
+::: notes
+Version everything. Enables rollback and A/B testing.
+:::
+
+---
+
+### Tip 5: Evaluation Studio Integration {data-background-color="#0f172a"}
+
+Track experiments systematically
+
+---
+
+### Experiment Tracking Pattern
+
+```python {data-line-numbers="1-8|10-18"}
+from ibm_watsonx_gov.evaluators import AgenticEvaluator
+
+# Set up experiment
+experiment_config = {
+    "name": "RAG_chunking_comparison",
+    "description": "Compare 500 vs 1000 token chunks",
+    "metrics": ["correctness", "relevance", "latency"]
+}
+
+# Run evaluation
+evaluator = AgenticEvaluator(config=experiment_config)
+
+results = evaluator.evaluate(
+    test_cases=test_dataset,
+    rag_pipeline=my_pipeline
+)
+
+# Results automatically logged to Evaluation Studio
+```
+
+::: notes
+Automated tracking enables data-driven optimization
+:::
+
+---
+
+### Tip 6: FastAPI Deployment
+
+**Production API structure:**
+
+```python {data-line-numbers="1-7|9-19"}
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI(title="RAG Service")
+
+class QueryRequest(BaseModel):
+    question: str
+    max_chunks: int = 5
+
+@app.post("/answer")
+async def answer_question(request: QueryRequest):
+    try:
+        result = rag_pipeline.answer(
+            request.question,
+            k=request.max_chunks
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+::: notes
+FastAPI provides automatic API docs and validation
+:::
+
+---
+
+## Troubleshooting Guide {data-background-color="#1e1e1e"}
+
+Common issues and solutions
+
+---
+
+### Issue 1: Credential Errors
+
+**Problem:**
+```
+Error: Invalid API key
+```
+
+**Solutions:**
+
+<span class="fragment">1. Check `.env` file exists and is loaded</span>
+
+<span class="fragment">2. Verify no extra spaces in API key</span>
+
+<span class="fragment">3. Ensure API key has correct permissions</span>
+
+```python
+# Test credentials
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+print(f"API Key: {os.getenv('WATSONX_APIKEY')[:10]}...")
+```
+
+::: notes
+Most common issue. Always validate credentials first.
+:::
+
+---
+
+### Issue 2: Import Errors
+
+**Problem:**
+```
+ModuleNotFoundError: No module named 'ibm_watsonx_gov'
+```
+
+**Solution:**
+
+```bash {data-line-numbers="1-2|4-5|7-8"}
+# Verify installation
+pip list | grep watsonx
+
+# Reinstall if needed
+pip install --upgrade ibm-watsonx-ai ibm-watsonx-gov
+
+# Check Python environment
+which python
+```
+
+::: notes
+Environment mismatch is common in Jupyter notebooks
+:::
+
+---
+
+### Issue 3: Elasticsearch Connection {data-background-color="#0f172a"}
+
+Connection timeouts
+
+---
+
+### Elasticsearch Debugging
+
+**Problem:**
+```
+ConnectionError: Connection refused
+```
+
+**Solutions:**
+
+```python {data-line-numbers="1-7"}
+# Test connection
+from elasticsearch import Elasticsearch
+
+es = Elasticsearch(
+    cloud_id=os.getenv("ELASTIC_CLOUD_ID"),
+    api_key=os.getenv("ELASTIC_API_KEY")
+)
+
+print(es.info())  # Should return cluster info
+```
+
+<span class="fragment">Check firewall rules</span>
+
+<span class="fragment">Verify cloud_id format</span>
+
+<span class="fragment">Test with curl first</span>
+
+::: notes
+Network issues often masquerade as code problems
+:::
+
+---
+
+### Issue 4: Slow Queries
+
+**Problem:**
+```
+Query taking 30+ seconds
+```
+
+**Diagnostic steps:**
+
+<span class="fragment">1. Profile each component separately</span>
+
+```python
+import time
+
+start = time.time()
+docs = retriever.get_relevant_documents(query)
+print(f"Retrieval: {time.time() - start:.2f}s")
+
+start = time.time()
+answer = llm(prompt)
+print(f"Generation: {time.time() - start:.2f}s")
+```
+
+<span class="fragment">2. Optimize the slowest component first</span>
+
+::: notes
+Measure before optimizing. Don't guess!
+:::
+
+---
+
+### Issue 5: Docker Build Failures
+
+**Problem:**
+```
+ERROR: Failed building wheel for package
+```
+
+**Solutions:**
+
+```dockerfile
+# Add build dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    python3-dev
+
+# Then install Python packages
+RUN pip install -r requirements.txt
+```
+
+::: notes
+Some packages need compilation tools
+:::
+
+---
+
+## Extended Resources {data-background-color="#1e1e1e"}
+
+Beyond the basics
+
+---
+
+### Advanced RAG Patterns
+
+**Hybrid Search:**
+<span class="fragment">📚 Combining dense + sparse retrieval: https://www.elastic.co/blog/improving-information-retrieval-elastic-stack-hybrid</span>
+
+**Parent Document Retrieval:**
+<span class="fragment">📚 LangChain Parent Doc: https://python.langchain.com/docs/modules/data_connection/retrievers/parent_document_retriever</span>
+
+**Self-Querying Retrieval:**
+<span class="fragment">📚 Metadata-aware retrieval: https://python.langchain.com/docs/modules/data_connection/retrievers/self_query</span>
+
+::: notes
+Advanced techniques for complex use cases
+:::
+
+---
+
+### LangGraph Deep Dive
+
+**Official Resources:**
+<span class="fragment">🔗 LangGraph Docs: https://langchain-ai.github.io/langgraph/</span>
+<span class="fragment">🔗 LangGraph Tutorial: https://github.com/langchain-ai/langgraph/tree/main/examples</span>
+<span class="fragment">🔗 Agent Architectures: https://blog.langchain.dev/langgraph-multi-agent-workflows/</span>
+
+**Example Patterns:**
+<span class="fragment">💡 Banking Assistant (from supplementary materials)</span>
+<span class="fragment">💡 HR Assistant with tool calling</span>
+<span class="fragment">💡 Multi-step reasoning agents</span>
+
+::: notes
+LangGraph enables sophisticated agentic workflows
+:::
+
+---
+
+### watsonx.governance Deep Dive {data-background-color="#0f172a"}
+
+Enterprise governance
+
+---
+
+### Governance Resources
+
+**Official Documentation:**
+<span class="fragment">📖 watsonx.governance Guide: https://www.ibm.com/docs/en/watsonx/governance</span>
+<span class="fragment">📖 Tool Registration API: https://cloud.ibm.com/apidocs/watsonx-governance</span>
+
+**Use Cases:**
+<span class="fragment">✅ Centralized tool catalog</span>
+<span class="fragment">✅ Access control and audit logs</span>
+<span class="fragment">✅ Version management</span>
+<span class="fragment">✅ Compliance tracking</span>
+
+::: notes
+Critical for enterprise AI governance
+:::
+
+---
+
+### Docker & Kubernetes
+
+**Container Orchestration:**
+<span class="fragment">🐳 Docker Compose for local dev: https://docs.docker.com/compose/</span>
+<span class="fragment">☸️ Kubernetes deployment: https://kubernetes.io/docs/tutorials/stateless-application/</span>
+<span class="fragment">🚀 Helm charts for watsonx: Contact IBM support</span>
+
+**Monitoring:**
+<span class="fragment">📊 Prometheus + Grafana: https://prometheus.io/docs/visualization/grafana/</span>
+
+::: notes
+Production deployment needs orchestration
+:::
+
+---
+
+### Performance Optimization
+
+**Caching Strategies:**
+<span class="fragment">💾 Redis for embeddings cache: https://redis.io/docs/</span>
+<span class="fragment">💾 LangChain caching: https://python.langchain.com/docs/modules/model_io/llms/llm_caching</span>
+
+**Batching:**
+<span class="fragment">⚡ Batch embedding generation</span>
+<span class="fragment">⚡ Async processing with FastAPI</span>
+
+::: notes
+Caching and batching are low-hanging fruit
+:::
+
+---
+
+### Security Best Practices {data-background-color="#1e1e1e"}
+
+Protecting production systems
+
+---
+
+### Security Checklist
+
+**Credentials:**
+<span class="fragment">✅ Use environment variables, never hardcode</span>
+<span class="fragment">✅ Rotate API keys regularly</span>
+<span class="fragment">✅ Use secret management (Vault, Secrets Manager)</span>
+
+**API Security:**
+<span class="fragment">✅ Implement rate limiting</span>
+<span class="fragment">✅ Use HTTPS only</span>
+<span class="fragment">✅ Validate all inputs</span>
+
+**Data:**
+<span class="fragment">✅ Encrypt sensitive data at rest</span>
+<span class="fragment">✅ Sanitize logs (no PII)</span>
+
+::: notes
+Security must be baked in, not bolted on
+:::
+
+---
+
+### Testing Strategies
+
+**Unit Tests:**
+```python
+def test_retriever():
+    retriever = RAGRetriever(config)
+    docs = retriever.retrieve("test query")
+    assert len(docs) > 0
+    assert all(hasattr(d, 'page_content') for d in docs)
+```
+
+**Integration Tests:**
+```python
+def test_end_to_end():
+    result = rag_pipeline.answer("What is the policy?")
+    assert 'answer' in result
+    assert result['answer'] != ""
+```
+
+::: notes
+Test retrieval and generation separately, then together
+:::
+
+---
+
+## Navigation & Next Steps {data-background-color="#0f172a"}
+
+Continue your journey
+
+---
+
+### 🏠 Return to Workshop Portal
+
+**[Interactive Workshop Portal](https://ruslanmv.com/watsonx-workshop/portal/)**
+
+Complete workshop navigation and daily guides
+
+::: notes
+Central hub for all materials
+:::
+
+---
+
+### 📚 Day 2 Core Materials
+
+**Return to Theory:**
+<span class="fragment">📖 [RAG Architecture Overview](./Theory_01_RAG_Architecture_Overview.md)</span>
+<span class="fragment">Comprehensive RAG concepts and components</span>
+
+**Day 2 Portal:**
+<span class="fragment">🗓️ [Day 2 Schedule](../../portal/day2-portal.md)</span>
+<span class="fragment">Complete Day 2 timeline and materials</span>
+
+**Lab Sequence:**
+<span class="fragment">🧪 [Lab 2.1: Local RAG](./lab-1-intro-rag.md)</span>
+<span class="fragment">🧪 [Lab 2.2: watsonx RAG](./lab-2-watsonx-rag.md)</span>
+<span class="fragment">🧪 [Lab 2.3: Twin Pipelines](./lab-3-dual-mode-rag.md)</span>
+<span class="fragment">🧪 [Lab 2.4: RAG Evaluation](./lab-4-compare-evals.md)</span>
+
+::: notes
+Complete the core labs before diving into supplementary materials
+:::
+
+---
+
+### 🔗 Workshop Progression
+
+**Previous Content:**
+<span class="fragment">← [Day 1: LLM Foundations](../day1-llm/README.md)</span>
+<span class="fragment">Prompting, templates, and evaluation basics</span>
+
+**Current Focus:**
+<span class="fragment">📍 Day 2: RAG + Supplementary Materials</span>
+<span class="fragment">Building production-ready RAG systems</span>
+
+**Next Steps:**
+<span class="fragment">→ [Day 3: Agent Orchestration](../day3-orchestrate/README.md)</span>
+<span class="fragment">LangGraph and agentic workflows</span>
+
+**Environment Setup:**
+<span class="fragment">🔧 [Day 0: Prerequisites](../day0-env/prereqs-and-accounts.md)</span>
+
+::: notes
+Progressive learning path through the workshop
+:::
+
+---
+
+### 📦 Accelerator Integration
+
+**Production Code:**
+<span class="fragment">🏗️ Explore `accelerator/rag/` directory</span>
+<span class="fragment">🏗️ Review `accelerator/service/api.py`</span>
+<span class="fragment">🏗️ Study `accelerator/tools/` utilities</span>
+
+**Reference Notebooks:**
+<span class="fragment">📓 `accelerator/assets/notebook/Process_and_Ingest_Data_into_Vector_DB.ipynb`</span>
+<span class="fragment">📓 `accelerator/assets/notebook/QnA_with_RAG.ipynb`</span>
+<span class="fragment">📓 `accelerator/assets/notebook/Test_Queries_for_Vector_DB.ipynb`</span>
+
+::: notes
+Accelerator provides production-ready patterns
+:::
+
+---
+
+### 🎯 Recommended Learning Path
+
+**Quick Start (1 hour):**
+<span class="fragment">1. Run `watsonx_quickstart.ipynb`</span>
+<span class="fragment">2. Review one labs-src/ notebook</span>
+<span class="fragment">3. Map concepts to accelerator code</span>
+
+**Deep Dive (1 day):**
+<span class="fragment">1. Complete all Day 2 labs</span>
+<span class="fragment">2. Register custom tool</span>
+<span class="fragment">3. Set up evaluation tracking</span>
+<span class="fragment">4. Deploy FastAPI service</span>
+
+**Production Ready (1 week):**
+<span class="fragment">1. Integrate accelerator components</span>
+<span class="fragment">2. Set up Docker environment</span>
+<span class="fragment">3. Implement CI/CD pipeline</span>
+<span class="fragment">4. Deploy to production</span>
+
+::: notes
+Choose path based on your timeline and goals
+:::
+
+---
+
+### 💡 Pro Tips
+
+**Development:**
+<span class="fragment">🔸 Always use virtual environments</span>
+<span class="fragment">🔸 Pin dependency versions in production</span>
+<span class="fragment">🔸 Keep dev/prod configs separate</span>
+
+**Testing:**
+<span class="fragment">🔸 Test retrieval quality regularly</span>
+<span class="fragment">🔸 Monitor latency percentiles (p95, p99)</span>
+<span class="fragment">🔸 Use evaluation frameworks (RAGAS, TruLens)</span>
+
+**Deployment:**
+<span class="fragment">🔸 Start with Docker, scale to Kubernetes</span>
+<span class="fragment">🔸 Implement health checks and monitoring</span>
+<span class="fragment">🔸 Use managed services when possible</span>
+
+::: notes
+Hard-earned lessons from production deployments
+:::
+
+---
+
+### 📞 Getting Help
+
+**Official Support:**
+<span class="fragment">💬 IBM watsonx Community: https://community.ibm.com/watsonx/</span>
+<span class="fragment">📧 watsonx Support: https://www.ibm.com/support/</span>
+
+**Community Resources:**
+<span class="fragment">🗨️ Stack Overflow: Tag `ibm-watsonx`</span>
+<span class="fragment">🗨️ LangChain Discord: https://discord.gg/langchain</span>
+
+**Documentation:**
+<span class="fragment">📚 watsonx.ai Docs: https://www.ibm.com/docs/en/watsonx-as-a-service</span>
+<span class="fragment">📚 LangChain Docs: https://python.langchain.com/</span>
+
+::: notes
+Don't struggle alone. Community is helpful!
+:::
+
+---
+
 ## Supplementary Guide Complete! {data-background-color="#0f172a" data-transition="zoom"}
 
 **This guide complements the main Day 2 RAG workshop**
 
 **with IBM-specific tooling and production patterns**
 
-**Version:** 1.0
+**You've learned:**
+- Accelerator integration patterns
+- Docker and deployment strategies
+- Governed tools and evaluation studio
+- Production tips and troubleshooting
+- Advanced RAG techniques
+
+**Ready to build production RAG systems!**
+
+**Version:** 1.1
 **Last Updated:** January 2025
 **Maintained by:** IBM watsonx.ai Education Team
 
 ::: notes
-Advanced content for enterprise deployment
+Advanced content for enterprise deployment.
+You're now ready for production!
 :::
