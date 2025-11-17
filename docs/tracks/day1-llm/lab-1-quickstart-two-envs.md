@@ -1060,10 +1060,10 @@ Again optional, but opening these notebooks shows real-world usage.
 
 ## 📘 Open a RAG Notebook
 
-Navigate to `labs-src/`:
+Navigate to the reference notebooks in `assets/notebooks/`:
 
 ```
-labs-src/use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb
+assets/notebooks/day2/reference_notebooks/elasticsearch_watsonx_example.ipynb
 ```
 
 <span class="fragment">**Don't run it all**—just scroll to the LLM call section</span>

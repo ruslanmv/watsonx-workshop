@@ -317,6 +317,91 @@ Treat this file as a secret - never commit it to git!
 
 ---
 
+## 🌐 Network Configuration {#network-configuration}
+
+**Corporate Network & Firewall Settings**
+
+If you're working from a corporate network, you may need to configure network settings:
+
+**Common Firewall Issues:**
+
+* <span class="fragment">Ollama downloads blocked</span>
+* <span class="fragment">Docker registry access restricted</span>
+* <span class="fragment">IBM Cloud API connections timeout</span>
+
+**Solutions:**
+
+```bash
+# Configure proxy for downloads
+export HTTP_PROXY=http://proxy.company.com:8080
+export HTTPS_PROXY=http://proxy.company.com:8080
+
+# For Docker
+# Add proxy settings to ~/.docker/config.json
+```
+
+**Whitelist these domains:**
+- `ollama.ai`
+- `githubusercontent.com`
+- `cloud.ibm.com`
+- `ml.cloud.ibm.com`
+- `docker.io`
+
+::: notes
+If students are on corporate networks, have IT whitelist these domains ahead of time. VPN connections can also cause issues with local Ollama servers.
+:::
+
+---
+
+## 🐍 Python Setup {#python-setup}
+
+**Managing Python Environments**
+
+Best practices for Python setup:
+
+**Using Virtual Environments:**
+
+```bash
+# Create a virtual environment
+python3.11 -m venv .venv
+
+# Activate it
+# On macOS/Linux:
+source .venv/bin/activate
+
+# On Windows:
+.venv\Scripts\activate
+```
+
+**Using Conda (Alternative):**
+
+```bash
+# Create conda environment
+conda create -n watsonx python=3.11
+
+# Activate it
+conda activate watsonx
+```
+
+**Verify Installation:**
+
+```bash
+# Check Python version
+python --version
+
+# Check pip
+pip --version
+
+# Install workshop dependencies
+pip install ollama ibm-watsonx-ai python-dotenv jupyter
+```
+
+::: notes
+Recommend virtual environments to avoid dependency conflicts. Some students may prefer conda, which is fine. The key is isolation from system Python.
+:::
+
+---
+
 ## 🛠️ Tools to Install (Optional Pre-Work) {data-background-color="#1e293b"}
 
 If you have time *before* the workshop, install these

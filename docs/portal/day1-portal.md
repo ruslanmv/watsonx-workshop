@@ -289,13 +289,16 @@
     - [Prompt Patterns](../tracks/day1-llm/prompt-patterns-theory.md) | [Slides](../slides/day1-prompt-patterns-theory.html)
     - [Evaluation & Safety](../tracks/day1-llm/eval-safety-theory.md) | [Slides](../slides/day1-eval-safety-theory.html)
 
--   :material-flask-outline: __Labs & Solutions__
+-   :material-flask-outline: __Labs & Notebooks__
 
     ---
 
     - [Lab 1.1: Quickstart](../tracks/day1-llm/lab-1-quickstart-two-envs.md)
     - [Lab 1.2: Templates](../tracks/day1-llm/lab-2-prompt-templates.md)
     - [Lab 1.3: Evaluation](../tracks/day1-llm/lab-3-micro-eval.md)
+    - [Ollama Prompt Patterns Notebook](../assets/notebooks/day1/prompt_patterns_ollama.ipynb)
+    - [watsonx Prompt Patterns Notebook](../assets/notebooks/day1/prompt_patterns_watsonx.ipynb)
+    - [Micro Evaluation Notebook](../assets/notebooks/day1/micro_evaluation.ipynb)
 
 -   :material-file-document-outline: __Instructor Resources__
 

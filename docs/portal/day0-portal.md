@@ -326,6 +326,15 @@
     - [Environment Verification Script](../tracks/day0-env/verify-environments.md)
     - [Pre-Workshop Checklist](../tracks/day0-env/prereqs-and-accounts.md#checklist)
 
+-   :material-notebook-outline: __Quick Start Notebooks__
+
+    ---
+
+    - [Simple Ollama (Colab)](../assets/notebooks/simple/simple_ollama_environment_colab.ipynb)
+    - [Simple Ollama (Binder)](../assets/notebooks/simple/simple_ollama_environment_binder.ipynb)
+    - [Simple watsonx (Colab)](../assets/notebooks/simple/simple_watsonx_environment_colab.ipynb)
+    - [Simple watsonx (Binder)](../assets/notebooks/simple/simple_watsonx_environment_binder.ipynb)
+
 </div>
 
 ### Navigation

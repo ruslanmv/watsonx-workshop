@@ -402,13 +402,22 @@ flowchart TD
     - [RAG Architecture Overview](../tracks/day2-rag/Theory_01_RAG_Architecture_Overview.md) | [Slides](../slides/day2-rag-architecture-overview.html)
     - [Workshop README](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
 
--   :material-flask-outline: __Labs & Solutions__
+-   :material-flask-outline: __Labs & Notebooks__
 
     ---
 
     - [START HERE - Quick Start](../tracks/day2-rag/START_HERE.md)
     - [Supplementary Quick Start](../tracks/day2-rag/SUPPLEMENTARY_QUICK_START.md)
     - [Complete Solutions Guide](../tracks/day2-rag/Day2_RAG_Complete_Solutions_Guide.md)
+    - [Lab 2.1: Local RAG (Starter)](../assets/notebooks/day2/lab_2.1_local_rag_ollama/starter_notebook.ipynb)
+    - [Lab 2.1: Local RAG (Solution)](../assets/notebooks/day2/lab_2.1_local_rag_ollama/solution_notebook.ipynb)
+    - [Lab 2.2: RAG watsonx (Starter)](../assets/notebooks/day2/lab_2.2_rag_watsonx/starter_notebook.ipynb)
+    - [Lab 2.2: RAG watsonx (Solution)](../assets/notebooks/day2/lab_2.2_rag_watsonx/solution_notebook.ipynb)
+    - [Lab 2.3: Twin Pipelines (Starter)](../assets/notebooks/day2/lab_2.3_twin_pipelines/starter_notebook.ipynb)
+    - [Lab 2.3: Twin Pipelines (Solution)](../assets/notebooks/day2/lab_2.3_twin_pipelines/solution_notebook.ipynb)
+    - [Lab 2.4: Evaluation Harness (Starter)](../assets/notebooks/day2/lab_2.4_evaluation_harness/starter_notebook.ipynb)
+    - [Lab 2.4: Evaluation Harness (Solution)](../assets/notebooks/day2/lab_2.4_evaluation_harness/solution_notebook.ipynb)
+    - [Elasticsearch watsonx Example](../assets/notebooks/day2/reference_notebooks/elasticsearch_watsonx_example.ipynb)
 
 -   :material-file-document-outline: __Instructor Resources__
 
