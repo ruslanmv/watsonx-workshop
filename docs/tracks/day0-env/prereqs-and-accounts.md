@@ -317,7 +317,7 @@ Treat this file as a secret - never commit it to git!
 
 ---
 
-## 🌐 Network Configuration {#network-configuration}
+## 🌐 Network Configuration {: #network-configuration }
 
 **Corporate Network & Firewall Settings**
 
@@ -353,7 +353,7 @@ If students are on corporate networks, have IT whitelist these domains ahead of 
 
 ---
 
-## 🐍 Python Setup {#python-setup}
+## 🐍 Python Setup {: #python-setup }
 
 **Managing Python Environments**
 

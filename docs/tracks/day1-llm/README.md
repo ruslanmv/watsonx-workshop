@@ -370,7 +370,7 @@ These aren't just exercises. They're production-ready patterns you can use immed
 
 ---
 
-## 🚧 Common Issues & Solutions {#troubleshooting data-transition="zoom"}
+## 🚧 Common Issues & Solutions {: #troubleshooting data-transition="zoom" }
 
 Problems you might encounter
 
