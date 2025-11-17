@@ -1497,19 +1497,20 @@ Transition to the lab. Make sure everyone has their environments set up before s
 
 **Navigate the workshop:**
 
-### 🏠 [Workshop Portal Home](/watsonx-workshop/portal/)
+### 🏠 [Workshop Portal Home](../portal/)
 Interactive daily guides and presentations
 
-### 📚 [Return to Day 1 Overview](/watsonx-workshop/tracks/day1-llm/README/)
+### 📚 [Return to Day 1 Overview](../portal/day1-portal)
 Review Day 1 schedule and learning objectives
 
-### ▶️ [Next: Prompt Patterns Theory](/watsonx-workshop/tracks/day1-llm/prompt-patterns-theory/)
+### ▶️ [Next: Prompt Patterns Theory](../tracks/day1-llm/prompt-patterns-theory/)
 Learn effective prompt engineering patterns
 
-### 🧪 [Jump to Lab 1.1: Quickstart](/watsonx-workshop/tracks/day1-llm/lab-1-quickstart-two-envs/)
+
+### 🧪 [Jump to Lab 1.1: Quickstart](../tracks/day1-llm/lab-1-quickstart-two-envs/)
 Start hands-on work with Ollama and watsonx.ai
 
-### 📖 [All Workshop Materials](/watsonx-workshop/portal/)
+### 📖 [All Workshop Materials](../portal/)
 Access complete workshop resources
 
 ::: notes
@@ -1609,7 +1610,7 @@ Remember:
 
 <div style="margin-top: 40px; text-align: center;">
 <a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Workshop Portal</a>
-<a href="./lab-1-quickstart-two-envs.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.1</a>
+<a href="../tracks/day1-llm/lab-1-quickstart-two-envs/" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.1</a>
 </div>
 
 ::: notes

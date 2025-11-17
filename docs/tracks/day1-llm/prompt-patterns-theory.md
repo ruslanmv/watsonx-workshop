@@ -1698,22 +1698,22 @@ The goal isn't perfection—it's understanding. You'll learn more from one promp
 
 **Navigate the workshop:**
 
-### 🏠 [Workshop Portal Home](https://ruslanmv.com/watsonx-workshop/portal/)
+### 🏠 [Workshop Portal Home](../portal/)
 Interactive daily guides and presentations
 
-### 📚 [Return to Day 1 Overview](/watsonx-workshop/tracks/day1-llm/README/)
+### 📚 [Return to Day 1 Overview](../portal/day1-portal)
 Review Day 1 schedule and learning objectives
 
-### ⬅️ [Previous: LLM Concepts](/watsonx-workshop/tracks/day1-llm/llm-concepts/)
+### ⬅️ [Previous: LLM Concepts](../tracks/day1-llm/llm-concepts/)
 Review LLM fundamentals and architecture
 
-### ▶️ [Next: Evaluation & Safety Theory](/watsonx-workshop/tracks/day1-llm/eval-safety-theory/)
+### ▶️ [Next: Evaluation & Safety Theory](../tracks/day1-llm/eval-safety-theory/)
 Learn to measure quality and ensure responsible AI
 
-### 🧪 [Jump to Lab 1.2: Prompt Templates](/watsonx-workshop/tracks/day1-llm/lab-2-prompt-templates/)
+### 🧪 [Jump to Lab 1.2: Prompt Templates](../tracks/day1-llm/lab-2-prompt-templates/)
 Build production-ready prompt patterns
 
-### 📖 [All Workshop Materials](/watsonx-workshop/portal/)
+### 📖 [All Workshop Materials](../portal/)
 Access complete workshop resources
 
 ::: notes

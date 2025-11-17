@@ -1534,12 +1534,15 @@ You've learned theory. Now apply it. Lab 1.3 is where you implement these signal
 
 **Navigate the workshop:**
 
-### 🏠 [Workshop Portal](https://ruslanmv.com/watsonx-workshop/portal/)
+### 🏠 [Workshop Portal](../portal/)
 ### 📚 [Day 1 Overview](./README.md)
 ### ⬅️ [Previous: Prompt Patterns](./prompt-patterns-theory.md)
 ### ▶️ [Next: Day 2 RAG](../day2-rag/START_HERE.md)
-### 🧪 [Lab 1.3: Micro-Evaluation](/watsonx-workshop/tracks/day1-llm/lab-3-micro-eval/)
-### 📖 [All Materials](../../portal.md)
+### 🧪 [Lab 1.3: Micro-Evaluation](../tracks/day1-llm/lab-3-micro-eval/)
+### 📖 [All Materials](../portal/)
+
+
+
 
 ::: notes
 Instructor: Emphasize evaluation is not optional. Safety is everyone's responsibility. Day 2's RAG evaluation builds on these foundations.
@@ -1581,8 +1584,8 @@ Remember:
 **Ready to build your evaluation framework?** 🚀
 
 <div style="margin-top: 40px; text-align: center;">
-  <a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Portal</a>
-  <a href="https://ruslanmv.com/watsonx-workshop/tracks/day1-llm/lab-3-micro-eval/" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab</a>
+  <a href="../portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Portal</a>
+  <a href="../tracks/day1-llm/lab-3-micro-eval/" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab</a>
 </div>
 
 
