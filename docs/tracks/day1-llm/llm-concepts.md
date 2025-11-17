@@ -904,7 +904,7 @@ Remember:
 
 <div style="margin-top: 40px; text-align: center;">
 <a href="https://ruslanmv.com/watsonx-workshop/portal/" style="padding: 10px 20px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px;">🏠 Workshop Portal</a>
-<a href="./lab-1-quickstart-two-envs.md" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.1</a>
+<a href="../tracks/day1-llm/lab-1-quickstart-two-envs/" style="padding: 10px 20px; background: #00aa00; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px;">🧪 Start Lab 1.1</a>
 </div>
 
 ::: notes
