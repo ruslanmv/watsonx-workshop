@@ -609,7 +609,7 @@ Continue your journey
 
 ### 🏠 Workshop Portal
 
-**[Interactive Workshop Portal](https://ruslanmv.com/watsonx-workshop/portal/)**
+**[Interactive Workshop Portal](../../portal/)**
 
 **[Day 3 Overview](../../portal/day3-portal.md)**
 

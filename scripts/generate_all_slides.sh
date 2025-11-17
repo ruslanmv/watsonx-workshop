@@ -16,11 +16,16 @@ DECKS=(
   "docs/tracks/day0-env/setup-simple-watsonx-enviroment.md|day0-setup-simple-watsonx-environment"
   "docs/tracks/day0-env/verify-environments.md|day0-verify-environments"
 
-  # Day 1 – LLMs & prompting
+  # Day 1 – LLMs & prompting (theory)
   "docs/tracks/day1-llm/llm-concepts.md|day1-llm-concepts"
   "docs/tracks/day1-llm/prompt-patterns-theory.md|day1-prompt-patterns-theory"
   "docs/tracks/day1-llm/eval-safety-theory.md|day1-eval-safety-theory"
   "docs/tracks/day1-llm/day1-summary-and-schedule.md|day1-summary-and-schedule"
+
+  # Day 1 – Labs (new)
+  "docs/tracks/day1-llm/lab-1-quickstart-two-envs.md|day1-lab-1-quickstart-two-envs"
+  "docs/tracks/day1-llm/lab-2-prompt-templates.md|day1-lab-2-prompt-templates"
+  "docs/tracks/day1-llm/lab-3-micro-eval.md|day1-lab-3-micro-eval"
 
   # Day 2 – RAG theory
   "docs/tracks/day2-rag/Theory_01_RAG_Architecture_Overview.md|day2-rag-architecture-overview"
