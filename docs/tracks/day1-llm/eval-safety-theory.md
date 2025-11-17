@@ -1534,12 +1534,12 @@ You've learned theory. Now apply it. Lab 1.3 is where you implement these signal
 
 **Navigate the workshop:**
 
-### 🏠 [Workshop Portal](../portal/)
+### 🏠 [Workshop Portal](../../portal.md)
 ### 📚 [Day 1 Overview](./README.md)
 ### ⬅️ [Previous: Prompt Patterns](./prompt-patterns-theory.md)
 ### ▶️ [Next: Day 2 RAG](../day2-rag/START_HERE.md)
-### 🧪 [Lab 1.3: Micro-Evaluation](../tracks/day1-llm/lab-3-micro-eval/)
-### 📖 [All Materials](../portal/)
+### 🧪 [Lab 1.3: Micro-Evaluation](lab-3-micro-eval.md)
+### 📖 [All Materials](../../portal.md)
 
 
 

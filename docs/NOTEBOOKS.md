@@ -7,9 +7,9 @@ Complete guide to all Jupyter notebooks in the watsonx workshop series.
 | Workshop Day | Notebooks | Location | Status |
 |--------------|-----------|----------|--------|
 | **Day 0** | Environment Setup | External repos | ✅ Available |
-| **Day 1** | LLM & Prompting (3 notebooks) | [/docs/assets/notebooks/day1](assets/notebooks/day1/) | ✅ Complete |
-| **Day 2** | RAG Systems (9 notebooks) | [/docs/assets/notebooks/day2](assets/notebooks/day2/) | 🚧 Partial |
-| **Day 3** | Agents & Orchestration (3 notebooks) | [/docs/assets/notebooks/day3](assets/notebooks/day3/) | ✅ Complete |
+| **Day 1** | LLM & Prompting (3 notebooks) | assets/notebooks/day1 | ✅ Complete |
+| **Day 2** | RAG Systems (9 notebooks) | assets/notebooks/day2 | 🚧 Partial |
+| **Day 3** | Agents & Orchestration (3 notebooks) | assets/notebooks/day3 | ✅ Complete |
 
 ## 📚 Detailed Notebook List
 

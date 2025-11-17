@@ -836,7 +836,7 @@ These skills are foundational for everything in Days 2-3!
 **Workshop Materials:**
 - 🔧 [Lab 1.1 – Quickstart](./lab-1-quickstart-two-envs.md) – Review the basics
 - 🔧 [Lab 1.2 – Prompt Templates](./lab-2-prompt-templates.md) – Review template patterns
-- 🔧 [Complete Notebooks](../../labs-src/) – Full working examples with solutions
+- 🔧 Complete Notebooks – Full working examples are in the `labs-src/` directory in the workshop root
 
 ::: notes
 Share these resources for students who want to dive deeper. The Ragas framework is particularly relevant for tomorrow's RAG content.

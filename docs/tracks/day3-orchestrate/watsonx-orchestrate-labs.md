@@ -7,15 +7,15 @@
 
 ## Table of Contents
 
-1. [Environment Setup](#1-environment-setup)  
-2. [Introduction to AI Agents](#2-introduction-to-ai-agents)  
-3. [Building Your First Agent](#3-building-your-first-agent)  
-4. [Creating Python Tools](#4-creating-python-tools)  
-5. [Connections & Integration](#5-connections--integration)  
-6. [Knowledge Bases](#6-knowledge-bases)  
-7. [Flow Builder](#7-flow-builder)  
-8. [Multi-Agent Systems](#8-multi-agent-systems)  
-9. [Agent Protocols (MCP & A2A)](#9-agent-protocols-mcp--a2a)  
+1. [Environment Setup](#1-environment-setup)
+2. [Introduction to AI Agents](#2-introduction-to-ai-agents)
+3. [Building Your First Agent](#3-building-your-first-agent)
+4. [Creating Python Tools](#4-creating-python-tools)
+5. [Connections & Integration](#5-connections--integration)
+6. [Knowledge Bases](#6-knowledge-bases)
+7. [Flow Builder / Planner Style](#7-flow-builder--planner-style)
+8. [Multi-Agent Systems](#8-multi-agent-systems)
+9. [Agent Protocols (MCP & A2A)](#9-agent-protocols-mcp--a2a)
 10. [Production Deployment](#10-production-deployment)  
 
 ---

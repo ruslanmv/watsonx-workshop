@@ -1497,20 +1497,20 @@ Transition to the lab. Make sure everyone has their environments set up before s
 
 **Navigate the workshop:**
 
-### 🏠 [Workshop Portal Home](../portal/)
+### 🏠 [Workshop Portal Home](../../portal.md)
 Interactive daily guides and presentations
 
-### 📚 [Return to Day 1 Overview](../portal/day1-portal)
+### 📚 [Return to Day 1 Overview](../../portal/day1-portal.md)
 Review Day 1 schedule and learning objectives
 
-### ▶️ [Next: Prompt Patterns Theory](../tracks/day1-llm/prompt-patterns-theory/)
+### ▶️ [Next: Prompt Patterns Theory](prompt-patterns-theory.md)
 Learn effective prompt engineering patterns
 
 
-### 🧪 [Jump to Lab 1.1: Quickstart](../tracks/day1-llm/lab-1-quickstart-two-envs/)
+### 🧪 [Jump to Lab 1.1: Quickstart](lab-1-quickstart-two-envs.md)
 Start hands-on work with Ollama and watsonx.ai
 
-### 📖 [All Workshop Materials](../portal/)
+### 📖 [All Workshop Materials](../../portal.md)
 Access complete workshop resources
 
 ::: notes

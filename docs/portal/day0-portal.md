@@ -238,7 +238,7 @@
     - VPN conflicts
     - Timeout errors
 
-    [:octicons-arrow-right-16: Network Setup](../tracks/day0-env/prereqs-and-accounts.md#network-configuration)
+    [:octicons-arrow-right-16: Network Setup](../tracks/day0-env/prereqs-and-accounts.md)
 
 -   :material-python: __Python Environment__
 
@@ -249,7 +249,7 @@
     - Package installation errors
     - Path configuration
 
-    [:octicons-arrow-right-16: Python Setup](../tracks/day0-env/prereqs-and-accounts.md#python-setup)
+    [:octicons-arrow-right-16: Python Setup](../tracks/day0-env/prereqs-and-accounts.md)
 
 </div>
 
@@ -324,7 +324,7 @@
     ---
 
     - [Environment Verification Script](../tracks/day0-env/verify-environments.md)
-    - [Pre-Workshop Checklist](../tracks/day0-env/prereqs-and-accounts.md#checklist)
+    - [Pre-Workshop Checklist](../tracks/day0-env/prereqs-and-accounts.md)
 
 </div>
 

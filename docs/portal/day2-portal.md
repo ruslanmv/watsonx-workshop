@@ -195,7 +195,7 @@ flowchart TD
 
 - 📝 [START HERE - Quick Start Guide](../tracks/day2-rag/START_HERE.md)
 - 📖 [Detailed Accelerator Guide](../tracks/day2-rag/SUPPLEMENTARY_QUICK_START.md)
-- 💡 [Troubleshooting Common Issues](../tracks/day2-rag/Day2_RAG_Workshop_README.md#troubleshooting)
+- 💡 [Troubleshooting Common Issues](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
 
 **For Instructors Only**:
 
@@ -270,7 +270,7 @@ flowchart TD
     - LangChain integration
     - Best for: Production systems
 
-    [:octicons-arrow-right-16: Instructions](../tracks/day2-rag/Day2_RAG_Workshop_README.md#lab-2a-elasticsearch-langchain)
+    [:octicons-arrow-right-16: Instructions](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
 
 -   :material-elasticsearch: __Path B: Elasticsearch Python SDK__
 
@@ -282,7 +282,7 @@ flowchart TD
     - Full control over pipeline
     - Best for: Learning internals
 
-    [:octicons-arrow-right-16: Instructions](../tracks/day2-rag/Day2_RAG_Workshop_README.md#lab-2b-elasticsearch-python)
+    [:octicons-arrow-right-16: Instructions](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
 
 -   :material-database: __Path C: Chroma + LangChain__
 
@@ -294,19 +294,19 @@ flowchart TD
     - LangChain integration
     - Best for: Development, prototyping
 
-    [:octicons-arrow-right-16: Instructions](../tracks/day2-rag/Day2_RAG_Workshop_README.md#lab-2c-chroma-langchain)
+    [:octicons-arrow-right-16: Instructions](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
 
 </div>
 
 **Instructions**:
 
 - 📝 [Lab 2 Workshop Guide](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
-- 💡 [Vector DB Comparison](../tracks/day2-rag/Day2_RAG_Instructor_Guide.md#vector-database-comparison)
+- 💡 [Vector DB Comparison](../tracks/day2-rag/Day2_RAG_Instructor_Guide.md)
 
 **For Instructors Only**:
 
 - ✅ [Complete Solutions (All Paths)](../tracks/day2-rag/Day2_RAG_Complete_Solutions_Guide.md)
-- 🎯 [Path Selection Guidance](../tracks/day2-rag/Day2_RAG_Instructor_Guide.md#lab-path-selection)
+- 🎯 [Path Selection Guidance](../tracks/day2-rag/Day2_RAG_Instructor_Guide.md)
 
 **Success Criteria** (per path):
 
@@ -333,13 +333,13 @@ flowchart TD
 
 **Instructions**:
 
-- 📝 [Evaluation Guide](../tracks/day2-rag/Day2_RAG_Workshop_README.md#lab-3-evaluation)
+- 📝 [Evaluation Guide](../tracks/day2-rag/Day2_RAG_Workshop_README.md)
 - 💡 [watsonx.governance Integration](../tracks/day2-rag/Day2_Supplementary_Material_Accelerator_IBM_Tooling.md)
 
 **For Instructors Only**:
 
-- ✅ [Evaluation Solutions](../tracks/day2-rag/Day2_RAG_Complete_Solutions_Guide.md#lab-3-evaluation)
-- 📊 [Example Metrics Dashboard](../tracks/day2-rag/Day2_RAG_Instructor_Guide.md#evaluation-metrics)
+- ✅ [Evaluation Solutions](../tracks/day2-rag/Day2_RAG_Complete_Solutions_Guide.md)
+- 📊 [Example Metrics Dashboard](../tracks/day2-rag/Day2_RAG_Instructor_Guide.md)
 
 **Key Metrics**:
 
@@ -421,9 +421,9 @@ flowchart TD
 
     ---
 
-    - [Accelerator Repository](../../accelerator/)
-    - [FastAPI Documentation](../../accelerator/api/)
-    - [Streamlit UI Guide](../../accelerator/ui/)
+    - Accelerator Repository (see workshop root)
+    - FastAPI Documentation (see accelerator/api)
+    - Streamlit UI Guide (see accelerator/ui)
 
 </div>
 

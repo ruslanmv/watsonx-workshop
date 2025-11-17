@@ -60,7 +60,7 @@ A comprehensive, production-ready curriculum designed for enterprise teams build
 <div class="portal-box">
   <h3>Ready to Begin Your Learning Journey?</h3>
   <p>Access interactive presentations, daily guides, and comprehensive workshop materials</p>
-  <a href="portal/" class="md-button md-button--primary">
+  <a href="portal.md" class="md-button md-button--primary">
     Enter Workshop Portal
   </a>
 </div>
@@ -97,7 +97,7 @@ Choose your preferred approach to get started:
 
     Access complete daily guides with presentations, labs, and teaching notes
 
-    [:octicons-arrow-right-16: Open Portal](portal/){ .md-button .md-button--primary }
+    [:octicons-arrow-right-16: Open Portal](portal.md){ .md-button .md-button--primary }
 
 -   :material-book-open-page-variant: __Documentation__
 
@@ -105,7 +105,7 @@ Choose your preferred approach to get started:
 
     Deep dive into detailed guides and step-by-step tutorials
 
-    [:octicons-arrow-right-16: Browse Docs](tracks/day0-env/prereqs-and-accounts/){ .md-button }
+    [:octicons-arrow-right-16: Browse Docs](tracks/day0-env/prereqs-and-accounts.md){ .md-button }
 
 -   :material-rocket-launch-outline: __RAG Accelerator__
 
@@ -113,7 +113,7 @@ Choose your preferred approach to get started:
 
     Jump directly to building production RAG systems
 
-    [:octicons-arrow-right-16: Start Building](tracks/day2-rag/START_HERE/){ .md-button }
+    [:octicons-arrow-right-16: Start Building](tracks/day2-rag/START_HERE.md){ .md-button }
 
 -   :material-github: __GitHub Repository__
 
@@ -261,7 +261,7 @@ Before starting the workshop, ensure you have:
 - **Elasticsearch 8.x** (for RAG labs) or use Chroma locally
 
 !!! note "Detailed Setup Instructions"
-    Complete prerequisites and environment setup are covered in [Day 0 - Environment Setup](tracks/day0-env/prereqs-and-accounts/)
+    Complete prerequisites and environment setup are covered in [Day 0 - Environment Setup](tracks/day0-env/prereqs-and-accounts.md)
 
 ---
 
@@ -305,7 +305,7 @@ By completing this workshop series, you will:
 
     Additional learning materials
 
-    [:octicons-arrow-right-16: Resources](resources/){ .md-button }
+    [:octicons-arrow-right-16: Resources](resources.md){ .md-button }
 
 -   :material-web: **Author's Blog**
 

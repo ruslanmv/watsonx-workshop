@@ -1058,18 +1058,18 @@ Again optional, but opening these notebooks shows real-world usage.
 
 ---
 
-## 📘 Open a RAG Notebook
+## 📘 Reference Notebooks
 
-Navigate to `labs-src/`:
+Note: Full RAG example notebooks are available in the workshop root directory at `labs-src/`:
 
 ```
 labs-src/use-watsonx-chroma-and-langchain-to-answer-questions-rag.ipynb
 ```
 
-<span class="fragment">**Don't run it all**—just scroll to the LLM call section</span>
+<span class="fragment">**Note:** These reference notebooks are in the workshop root directory, not in the docs folder. They demonstrate complete RAG implementations that build on the concepts you're learning today.</span>
 
 ::: notes
-These notebooks are comprehensive. Students shouldn't run them end-to-end today. Just peek at the LLM integration.
+These notebooks are comprehensive references. Students can explore them later to see complete RAG implementations. The key today is understanding the LLM fundamentals.
 :::
 
 ---

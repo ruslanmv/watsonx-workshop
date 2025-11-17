@@ -216,7 +216,7 @@ graph TD
 **Instructions**:
 
 - 📝 [Lab 3.1: Agent + watsonx](../tracks/day3-orchestrate/lab-1-agent-watsonx.md)
-- 💡 [Agent Notebooks Reference](../assets/notebooks/day3/)
+- 💡 [Agent Notebooks Reference](../assets/notebooks/day3/agent_watsonx.ipynb)
 
 **For Instructors Only**:
 

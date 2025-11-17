@@ -422,7 +422,7 @@ End on a high note. Congratulate everyone on completing the workshop!
 
 **Complete your watsonx journey:**
 
-### 🏠 [Return to Workshop Home](../../portal/)
+### 🏠 [Return to Workshop Home](../../portal.md)
 Access all workshop materials, labs, and resources
 
 ### 📚 [Review Day 1: LLM Fundamentals](../day1-llm/README.md)

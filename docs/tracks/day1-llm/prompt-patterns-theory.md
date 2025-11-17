@@ -1698,22 +1698,22 @@ The goal isn't perfection—it's understanding. You'll learn more from one promp
 
 **Navigate the workshop:**
 
-### 🏠 [Workshop Portal Home](../portal/)
+### 🏠 [Workshop Portal Home](../../portal.md)
 Interactive daily guides and presentations
 
-### 📚 [Return to Day 1 Overview](../portal/day1-portal)
+### 📚 [Return to Day 1 Overview](../../portal/day1-portal.md)
 Review Day 1 schedule and learning objectives
 
-### ⬅️ [Previous: LLM Concepts](../tracks/day1-llm/llm-concepts/)
+### ⬅️ [Previous: LLM Concepts](llm-concepts.md)
 Review LLM fundamentals and architecture
 
-### ▶️ [Next: Evaluation & Safety Theory](../tracks/day1-llm/eval-safety-theory/)
+### ▶️ [Next: Evaluation & Safety Theory](eval-safety-theory.md)
 Learn to measure quality and ensure responsible AI
 
-### 🧪 [Jump to Lab 1.2: Prompt Templates](../tracks/day1-llm/lab-2-prompt-templates/)
+### 🧪 [Jump to Lab 1.2: Prompt Templates](lab-2-prompt-templates.md)
 Build production-ready prompt patterns
 
-### 📖 [All Workshop Materials](../portal/)
+### 📖 [All Workshop Materials](../../portal.md)
 Access complete workshop resources
 
 ::: notes

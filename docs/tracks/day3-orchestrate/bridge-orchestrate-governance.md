@@ -414,7 +414,7 @@ Capture these ideas - they're great seeds for the capstone day and follow-up pro
 
 ### 🏠 Workshop Portal
 
-**[Workshop Home](../../portal/)** | **[Day 3 Overview](../../portal/day3-portal.md)**
+**[Workshop Home](../../portal.md)** | **[Day 3 Overview](../../portal/day3-portal.md)**
 
 ### Related Content
 

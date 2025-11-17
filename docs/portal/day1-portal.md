@@ -171,8 +171,8 @@
 
 **For Instructors Only**:
 
-- ✅ [Complete Solutions (Code & Outputs)](../tracks/day1-llm/lab-1-quickstart-two-envs.md#solutions)
-- 📊 [Expected Performance Benchmarks](../tracks/day1-llm/lab-1-quickstart-two-envs.md#expected-results)
+- ✅ [Complete Solutions (Code & Outputs)](../tracks/day1-llm/lab-1-quickstart-two-envs.md)
+- 📊 [Expected Performance Benchmarks](../tracks/day1-llm/lab-1-quickstart-two-envs.md)
 
 **Success Criteria**:
 
@@ -201,12 +201,12 @@
 **Instructions**:
 
 - 📝 [Student Instructions](../tracks/day1-llm/lab-2-prompt-templates.md)
-- 💡 [Template Examples & Patterns](../tracks/day1-llm/lab-2-prompt-templates.md#examples)
+- 💡 [Template Examples & Patterns](../tracks/day1-llm/lab-2-prompt-templates.md)
 
 **For Instructors Only**:
 
-- ✅ [Complete Solutions](../tracks/day1-llm/lab-2-prompt-templates.md#solutions)
-- 🎯 [Grading Rubric (if assessing)](../tracks/day1-llm/lab-2-prompt-templates.md#rubric)
+- ✅ [Complete Solutions](../tracks/day1-llm/lab-2-prompt-templates.md)
+- 🎯 [Grading Rubric (if assessing)](../tracks/day1-llm/lab-2-prompt-templates.md)
 
 **Success Criteria**:
 
@@ -238,8 +238,8 @@
 
 **For Instructors Only**:
 
-- ✅ [Complete Solutions](../tracks/day1-llm/lab-3-micro-eval.md#solutions)
-- 📊 [Example Evaluation Report](../tracks/day1-llm/lab-3-micro-eval.md#example-report)
+- ✅ [Complete Solutions](../tracks/day1-llm/lab-3-micro-eval.md)
+- 📊 [Example Evaluation Report](../tracks/day1-llm/lab-3-micro-eval.md)
 
 **Success Criteria**:
 
@@ -303,7 +303,7 @@
 
     - [Day 1 Detailed Schedule](../tracks/day1-llm/day1-summary-and-schedule.md)
     - [Complete Instructor Guide](../tracks/day1-llm/README.md)
-    - [Troubleshooting Guide](../tracks/day1-llm/README.md#troubleshooting)
+    - [Troubleshooting Guide](../tracks/day1-llm/README.md)
 
 -   :material-check-circle-outline: __Setup & Verification__
 

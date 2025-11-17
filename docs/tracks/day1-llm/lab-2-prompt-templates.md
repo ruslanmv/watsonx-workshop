@@ -768,7 +768,7 @@ Lab 1.3 introduces systematic evaluation frameworks—you'll learn to measure qu
 
 **Workshop Materials:**
 - 🔧 [Lab 1.1 – Quickstart](./lab-1-quickstart-two-envs.md) – Review the basics
-- 🔧 [Complete Notebooks](../../labs-src/) – Full working examples with solutions
+- 🔧 Complete Notebooks – Full working examples are in the `labs-src/` directory in the workshop root
 - 🔧 [Day 1 Theory Slides](./prompt-patterns-theory.md) – Theoretical foundations
 
 ::: notes

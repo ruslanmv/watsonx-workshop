@@ -609,7 +609,7 @@ Continue your journey
 
 ### 🏠 Workshop Portal
 
-**[Interactive Workshop Portal](../../portal/)**
+**[Interactive Workshop Portal](../../portal.md)**
 
 **[Day 3 Overview](../../portal/day3-portal.md)**
 
