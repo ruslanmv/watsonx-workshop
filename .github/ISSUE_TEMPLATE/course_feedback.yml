@@ -1,0 +1,86 @@
+name: 📊 Course Quality Evaluation
+description: Evaluate the workshop quality with 5 quick questions.
+title: "[Evaluation]: Student Feedback"
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Workshop Evaluation
+        Please answer the following 5 questions to help us grade the quality of the course.
+
+  # Question 1: Overall Satisfaction
+  - type: dropdown
+    id: overall_rating
+    attributes:
+      label: "1. How would you rate the overall workshop experience?"
+      options:
+        - "5 - Excellent"
+        - "4 - Very Good"
+        - "3 - Average"
+        - "2 - Below Average"
+        - "1 - Poor"
+    validations:
+      required: true
+
+  # Question 2: Content Clarity
+  - type: dropdown
+    id: clarity
+    attributes:
+      label: "2. How clear were the instructions and concepts presented?"
+      options:
+        - "5 - Crystal Clear"
+        - "4 - Mostly Clear"
+        - "3 - Somewhat Clear"
+        - "2 - Confusing"
+        - "1 - Very Confusing"
+    validations:
+      required: true
+
+  # Question 3: Hands-on Utility
+  - type: dropdown
+    id: utility
+    attributes:
+      label: "3. How helpful were the hands-on labs/exercises?"
+      options:
+        - "5 - Extremely Helpful"
+        - "4 - Very Helpful"
+        - "3 - Moderately Helpful"
+        - "2 - Slightly Helpful"
+        - "1 - Not Helpful"
+    validations:
+      required: true
+
+  # Question 4: Pacing
+  - type: dropdown
+    id: pacing
+    attributes:
+      label: "4. How was the pacing of the workshop?"
+      options:
+        - "Just Right"
+        - "Too Fast"
+        - "Too Slow"
+    validations:
+      required: true
+
+  # Question 5: Recommendation (NPS)
+  - type: dropdown
+    id: recommend
+    attributes:
+      label: "5. Would you recommend this workshop to a colleague?"
+      options:
+        - "Yes, definitely"
+        - "Maybe"
+        - "No"
+    validations:
+      required: true
+
+  # Optional Feedback Section
+  - type: textarea
+    id: improvements
+    attributes:
+      label: "Constructive Feedback (Optional)"
+      description: "Do you have any specific suggestions on how we can improve?"
+      placeholder: "e.g., I wish we spent more time on..."
+    validations:
+      required: false
