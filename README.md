@@ -213,8 +213,13 @@ Use smaller models during development, reduce `max_new_tokens`, and evaluate ret
 We welcome issues and improvements!
 Please open a discussion or PR with a clear description, repro steps (if applicable), and proposed changes.
 
-## 📝 Course Evaluation
-[Click here to complete the 5-question Course Evaluation](https://github.com/ruslanmv/watsonx-workshop/issues/new?template=course_feedback.yml)
+## 📢 Workshop Feedback
+
+Thank you for participating in the Watsonx Workshop. We are committed to the continuous improvement of our training materials.
+
+Please take a brief moment to rate your experience and share your thoughts:
+
+👉 [**Submit Course Evaluation Form**](https://github.com/ruslanmv/watsonx-workshop/issues/new?template=course_feedback.yml)
 
 
 ---
