@@ -6,8 +6,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Workshop Evaluation
-        Please answer the following 5 questions to help us grade the quality of the course.
+        ## Thank you for participating!
+        We really appreciate you taking the time to complete the **Watsonx Workshop**. Your feedback helps us improve the experience for future students.
+        
+        Please answer the following 5 quick questions to evaluate the course quality.
 
   # Question 1: Overall Satisfaction
   - type: dropdown
